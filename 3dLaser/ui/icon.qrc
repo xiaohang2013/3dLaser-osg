@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/prefix">
+        <file>resource/fileOpen.ico</file>
+        <file>resource/fileSave.ico</file>
+        <file>resource/3DLaser.ico</file>
+        <file>resource/crystal.ico</file>
+        <file>resource/front-side.ico</file>
+        <file>resource/left-side.ico</file>
+        <file>resource/top-side.ico</file>
+        <file>resource/center-side.ico</file>
+        <file>resource/forward.ico</file>
+        <file>resource/backward.ico</file>
+        <file>resource/info.ico</file>
+        <file>resource/line.ico</file>
+        <file>resource/carve.ico</file>
+        <file>resource/parallel.ico</file>
+        <file>resource/refresh.ico</file>
+        <file>resource/b-X2Y.ico</file>
+        <file>resource/b-Y2X.ico</file>
+        <file>resource/motor.png</file>
+        <file>resource/scan.png</file>
+        <file>resource/sort.png</file>
+        <file>resource/mirror.png</file>
+    </qresource>
+</RCC>

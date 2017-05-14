@@ -1,5 +1,6 @@
 ﻿#include "macro.h"
 #include "file.h"
+
 #include <iostream>
 using namespace std;
 File::File()

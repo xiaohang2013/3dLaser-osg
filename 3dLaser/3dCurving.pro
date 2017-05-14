@@ -44,6 +44,7 @@ HEADERS  += \
     include/osgContainer.h \
     include/mytrackballmanipulator.h
 
+
 FORMS    += \
     $$PWD/ui/mainwindow.ui \
     $$PWD/ui/parawindow.ui \

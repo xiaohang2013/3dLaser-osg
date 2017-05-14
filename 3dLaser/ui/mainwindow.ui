@@ -200,7 +200,7 @@
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background-color: rgb(255, 255, 127);</string>
    </property>
   </widget>
   <widget class="QDockWidget" name="dockWidget">

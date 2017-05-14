@@ -1,13 +1,10 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <string>
+#include <QString>
 #include <QMainWindow>
-#pragma execution_character_set("utf-8")
-
-
 #include "osgContainer.h"
-
-
 #include <osg/ref_ptr>
 #include <osg/MatrixTransform>
 #include <osg/Vec3>
@@ -18,6 +15,10 @@
 #include <osgManipulator/TranslateAxisDragger>
 #include <osgManipulator/ScaleAxisDragger>
 #include <osgManipulator/CommandManager>
+
+#if _MSC_VER >= 1600
+   #pragma execution_character_set("utf-8")
+#endif
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,8 @@ private:
 
     //osgViewer
     osg::ref_ptr<osgContainer> curViewer;
+    osg::ref_ptr<osg::Switch> curRoot;
+    osg::ref_ptr<osg::Group> pointCloudGroup;
 
 
 private slots:
@@ -86,7 +89,6 @@ private slots:
 
 //private functions
 private:
-
     void init_OSG();
 };
 

@@ -1,13 +1,18 @@
-﻿#include "mainwindow.h"
+﻿#include "QMessageBox"
+#include <Windows.h>
+#include <QFileDialog>
+#include <osgDB/ReadFile>
+#include <osgDB/WriteFile>
+
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "parawindow.h"
 #include "markwindow.h"
 #include "mcurvwindow.h"
 #include "view.h"
 #include "file.h"
-#include "QMessageBox"
-#include <string>
 using namespace std;
+
 
 ParaWindow *paraw;
 MarkWindow *markw;
@@ -38,7 +43,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::slot_FileOpen()
 {
-    QMessageBox::warning(this, tr("提示"), tr("打开~文件"), QMessageBox::Yes, QMessageBox::No);
+    QStringList fPathList;
+
+    fPathList = QFileDialog::getOpenFileNames(this, tr("打开文件"), "", "", 0, 0);
+    if (!fPathList.isEmpty())
+    {
+        QString fName;
+        foreach(fName, fPathList)
+        {
+            string str = fName.toLocal8Bit().data();
+            osg::ref_ptr<osg::Node> fNode = osgDB::readNodeFile(str);
+            if(fNode)
+            {
+            }
+            else
+            {
+                QMessageBox::warning(this, tr("打开文件"), "文件打开错误", QMessageBox::Yes, QMessageBox::No);
+            }
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("打开文件"), "文件打开错误", QMessageBox::Yes, QMessageBox::No);
+    }
+
 }
 
 void MainWindow::slot_FileSave()
@@ -174,3 +202,5 @@ void MainWindow::init_OSG()
     this->setCentralWidget(curViewer);
 }
 
+
+//################Private Function#############

@@ -11,7 +11,8 @@ INCLUDEPATH += ../.. \
     $$(OSG_ROOT)/3rdParty/x86/include \
     $$(OSG_ROOT)/3rdParty/x86/include/boost \
 
-DEPENDPATH += $$(OSG_ROOT)/include
+DEPENDPATH += . \
+              $$(OSG_ROOT)/include
 
 QT       += core gui
 
@@ -19,8 +20,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = 3dCurving
 TEMPLATE = app
-DEPENDPATH += .
-
+CONFIG += console
 
 SOURCES += \
     $$PWD/source/parawindow.cpp \
@@ -30,8 +30,21 @@ SOURCES += \
     $$PWD/source/view.cpp \
     $$PWD/source/file.cpp \
     $$PWD/source/main.cpp \
-    source/osgContainer.cpp \
-    source/mytrackballmanipulator.cpp
+    $$PWD/source/osgContainer.cpp \
+    $$PWD/source/mytrackballmanipulator.cpp \
+    $$PWD/source/pcgapplication.cpp \
+    $$PWD/source/interfaces.cpp \
+    $$PWD/source/meshinterface.cpp \
+    $$PWD/source/osginterface.cpp \
+    $$PWD/source/visitor.cpp \
+    $$PWD/source/interaction.cpp \
+    $$PWD/source/geometrymath.cpp \
+    $$PWD/source/systemfontfunction.cpp \
+    $$PWD/source/mytrackballmanipulator.cpp \
+    $$PWD/source/qwidgetinosg.cpp \
+    $$PWD/source/imagemath.cpp \
+    $$PWD/source/pcgmath.cpp \
+    $$PWD/source/quadtreenode.cpp
 
 HEADERS  += \
     $$PWD/include/mainwindow.h\
@@ -41,8 +54,24 @@ HEADERS  += \
     $$PWD/include/view.h \
     $$PWD/include/file.h \
     $$PWD/include/macro.h \
-    include/osgContainer.h \
-    include/mytrackballmanipulator.h
+    $$PWD/include/osgContainer.h \
+    $$PWD/include/mytrackballmanipulator.h \
+    $$PWD/include/pcgapplication.h \
+    $$PWD/include/pcgexception.h \
+    $$PWD/include/interfaces.h \
+    $$PWD/include/meshinterface.h \
+    $$PWD/include/osginterface.h \
+    $$PWD/include/visitor.h \
+    $$PWD/include/interaction.h \
+    $$PWD/include/geometrymath.h \
+    $$PWD/include/parameter.h \
+    $$PWD/include/linefunctor.h \
+    $$PWD/include/systemfontfunction.h \
+    $$PWD/include/mytrackballmanipulator.h \
+    $$PWD/include/qwidgetinosg.h \
+    $$PWD/include/imagemath.h \
+    $$PWD/include/pcgmath.h \
+    $$PWD/include/quadtreenode.h
 
 
 FORMS    += \

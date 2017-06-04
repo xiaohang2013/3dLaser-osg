@@ -4,7 +4,7 @@
 #include <string>
 #include <QString>
 #include <QMainWindow>
-#include "osgContainer.h"
+#include <QTimer>
 #include <osg/ref_ptr>
 #include <osg/MatrixTransform>
 #include <osg/Vec3>
@@ -15,6 +15,9 @@
 #include <osgManipulator/TranslateAxisDragger>
 #include <osgManipulator/ScaleAxisDragger>
 #include <osgManipulator/CommandManager>
+
+#include "osgContainer.h"
+#include "ui_mainwindow.h"
 
 #if _MSC_VER >= 1600
    #pragma execution_character_set("utf-8")
@@ -27,25 +30,18 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-
-    //osgViewer
-    osg::ref_ptr<osgContainer> curViewer;
-    osg::ref_ptr<osg::Switch> curRoot;
-    osg::ref_ptr<osg::Group> pointCloudGroup;
+    QStringList fPathList;
 
 
 private slots:
-    void slot_FileOpen();
+    void slot_FileOpen(QString fPath);
     void slot_FileSave();
     void slot_FileRecent();
     void slot_FileExit();
+    void slot_FileClearPathList();
     void slot_LaserPara();
     void slot_LaserRegImp();
     void slot_LaserRegExp();
@@ -86,10 +82,24 @@ private slots:
     void slot_StdModSphere();
     void slot_HelpAboutMe();
     void slot_LanCHN();
+    void slot_UpdateStBar();
 
-//private functions
 private:
-    void init_OSG();
+    Ui::MainWindow *ui;
+    //mainWindow
+    QLabel *lb_StRunTime;
+    QLabel *lb_StLaserTime;
+    QTimer *timerRun;
+    //osgViewer
+    osg::ref_ptr<osgContainer> curViewer;
+    osg::ref_ptr<osg::Switch> curRoot;
+    osg::ref_ptr<osg::Group> pointCloudGroup;
+//function
+    void initTimer();
+    void initStBar();
+    void initOSG();
+    void initProjectionAsOrtho();
+
 };
 
 #endif // MAINWINDOW_H

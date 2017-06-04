@@ -6,7 +6,6 @@
 #include <osg/LightModel>
 #include "mytrackballmanipulator.h"
 
-
 class QInputEvent;
 
 class osgContainer : public QOpenGLWidget, public osgViewer::Viewer

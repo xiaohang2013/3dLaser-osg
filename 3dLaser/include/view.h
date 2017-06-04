@@ -6,6 +6,7 @@ class View
 public:
     View();
     ~View();
+
 };
 
 #endif // VIEW_H

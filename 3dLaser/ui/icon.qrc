@@ -21,5 +21,6 @@
         <file>resource/scan.png</file>
         <file>resource/sort.png</file>
         <file>resource/mirror.png</file>
+        <file>resource/right-side.ico</file>
     </qresource>
 </RCC>

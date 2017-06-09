@@ -2,9 +2,8 @@
 #define IMAGEMATH_H
 
 #include "qmath.h"
-#include "pcgmath.h"
 #include "parameter.h"
-
+#include "pcgmath.h"
 #include <osg/Image>
 #include <osg/Geometry>
 #include <osg/Array>

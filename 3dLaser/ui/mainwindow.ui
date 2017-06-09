@@ -94,7 +94,7 @@
         <number>9</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="gb_ModInfo_2">
+        <widget class="QGroupBox" name="gb_ModInfo">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -127,7 +127,7 @@
            <number>1</number>
           </property>
           <item row="4" column="1">
-           <widget class="QLabel" name="lb_PointMinValZ_2">
+           <widget class="QLabel" name="lb_PointMinValZ">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -143,7 +143,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_PointNum_2">
+           <widget class="QLabel" name="lb_PointNum">
             <property name="text">
              <string>总点数:</string>
             </property>
@@ -159,7 +159,7 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="lb_PointY_2">
+           <widget class="QLabel" name="lb_PointY">
             <property name="text">
              <string>Y:</string>
             </property>
@@ -175,7 +175,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="lb_PointX_2">
+           <widget class="QLabel" name="lb_PointX">
             <property name="text">
              <string>X:</string>
             </property>
@@ -191,7 +191,7 @@
            </widget>
           </item>
           <item row="4" column="0">
-           <widget class="QLabel" name="lb_PointZ_2">
+           <widget class="QLabel" name="lb_PointZ">
             <property name="text">
              <string>Z:</string>
             </property>
@@ -207,7 +207,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLabel" name="lb_PointMinValY_2">
+           <widget class="QLabel" name="lb_PointMinValY">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -223,7 +223,7 @@
            </widget>
           </item>
           <item row="1" column="3">
-           <widget class="QLabel" name="lb_PointLen_2">
+           <widget class="QLabel" name="lb_PointLen">
             <property name="text">
              <string>长度</string>
             </property>
@@ -239,7 +239,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="lb_PointMin_2">
+           <widget class="QLabel" name="lb_PointMin">
             <property name="text">
              <string>最小值</string>
             </property>
@@ -255,7 +255,7 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QLabel" name="lb_PointMax_2">
+           <widget class="QLabel" name="lb_PointMax">
             <property name="text">
              <string>最大值</string>
             </property>
@@ -271,7 +271,7 @@
            </widget>
           </item>
           <item row="1" column="4">
-           <widget class="QLabel" name="lb_PointObj_2">
+           <widget class="QLabel" name="lb_PointObj">
             <property name="text">
              <string>材料</string>
             </property>
@@ -287,7 +287,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="lb_PointNumVal_2">
+           <widget class="QLabel" name="lb_PointNumVal">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -303,7 +303,7 @@
            </widget>
           </item>
           <item row="2" column="2">
-           <widget class="QLabel" name="lb_PointMaxValX_2">
+           <widget class="QLabel" name="lb_PointMaxValX">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -319,7 +319,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLabel" name="lb_PointMinValX_2">
+           <widget class="QLabel" name="lb_PointMinValX">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -335,7 +335,7 @@
            </widget>
           </item>
           <item row="2" column="3">
-           <widget class="QLabel" name="lb_PointLenValX_2">
+           <widget class="QLabel" name="lb_PointLenValX">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -351,7 +351,7 @@
            </widget>
           </item>
           <item row="2" column="4">
-           <widget class="QLabel" name="lb_PointObjValX_2">
+           <widget class="QLabel" name="lb_PointObjValX">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -367,7 +367,7 @@
            </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QLabel" name="lb_PointMaxValY_2">
+           <widget class="QLabel" name="lb_PointMaxValY">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -383,7 +383,7 @@
            </widget>
           </item>
           <item row="3" column="3">
-           <widget class="QLabel" name="lb_PointLenValY_2">
+           <widget class="QLabel" name="lb_PointLenValY">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -399,7 +399,7 @@
            </widget>
           </item>
           <item row="3" column="4">
-           <widget class="QLabel" name="lb_PointObjValY_2">
+           <widget class="QLabel" name="lb_PointObjValY">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -415,7 +415,7 @@
            </widget>
           </item>
           <item row="4" column="2">
-           <widget class="QLabel" name="lb_PointMaxValZ_2">
+           <widget class="QLabel" name="lb_PointMaxValZ">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -431,7 +431,7 @@
            </widget>
           </item>
           <item row="4" column="3">
-           <widget class="QLabel" name="lb_PointLenValZ_2">
+           <widget class="QLabel" name="lb_PointLenValZ">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -447,7 +447,7 @@
            </widget>
           </item>
           <item row="4" column="4">
-           <widget class="QLabel" name="lb_PointObjValZ_2">
+           <widget class="QLabel" name="lb_PointObjValZ">
             <property name="text">
              <string>0.0</string>
             </property>
@@ -463,7 +463,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <spacer name="sp_Point4_2">
+           <spacer name="sp_Point4">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -479,7 +479,7 @@
            </spacer>
           </item>
           <item row="0" column="2">
-           <spacer name="sp_Point2_2">
+           <spacer name="sp_Point2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -495,7 +495,7 @@
            </spacer>
           </item>
           <item row="0" column="3">
-           <spacer name="sp_Point3_2">
+           <spacer name="sp_Point3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -511,7 +511,7 @@
            </spacer>
           </item>
           <item row="0" column="4">
-           <spacer name="sp_Point1_2">
+           <spacer name="sp_Point1">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -530,7 +530,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gb_CrvCtrl_2">
+        <widget class="QGroupBox" name="gb_CrvCtrl">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -557,12 +557,12 @@
            <number>3</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvTimer_2" stretch="0,0,0,0">
+           <layout class="QHBoxLayout" name="ly_CrvTimer" stretch="0,0,0,0">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_CrvT_2">
+             <widget class="QLabel" name="lb_CrvT">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                 <horstretch>0</horstretch>
@@ -575,7 +575,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lb_CrvValT_2">
+             <widget class="QLabel" name="lb_CrvValT">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -588,7 +588,7 @@
              </widget>
             </item>
             <item>
-             <spacer name="sp_Crv1_2">
+             <spacer name="sp_Crv1">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -601,7 +601,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="lb_CrvPct_2">
+             <widget class="QLabel" name="lb_CrvPct">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                 <horstretch>0</horstretch>
@@ -616,7 +616,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QProgressBar" name="pb_Crv_2">
+           <widget class="QProgressBar" name="pb_Crv">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -635,7 +635,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvBtn_2">
+           <layout class="QHBoxLayout" name="ly_CrvBtn">
             <property name="spacing">
              <number>1</number>
             </property>
@@ -643,7 +643,7 @@
              <enum>QLayout::SetDefaultConstraint</enum>
             </property>
             <item>
-             <widget class="QPushButton" name="btn_CrvStart_2">
+             <widget class="QPushButton" name="btn_CrvStart">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -656,7 +656,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_CrvPause_2">
+             <widget class="QPushButton" name="btn_CrvPause">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -669,7 +669,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_CrvStop_2">
+             <widget class="QPushButton" name="btn_CrvStop">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -682,7 +682,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_CrvClsLas_2">
+             <widget class="QPushButton" name="btn_CrvClsLas">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -709,12 +709,12 @@
            </layout>
           </item>
          </layout>
-         <zorder>pb_Crv_2</zorder>
+         <zorder>pb_Crv</zorder>
          <zorder></zorder>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gb_PlatCtrl_2">
+        <widget class="QGroupBox" name="gb_PlatCtrl">
          <property name="title">
           <string>平台控制</string>
          </property>
@@ -735,12 +735,12 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QGridLayout" name="ly_PlatCtrlBtn_2" columnstretch="1,1,1,1">
+           <layout class="QGridLayout" name="ly_PlatCtrlBtn" columnstretch="1,1,1,1">
             <property name="spacing">
              <number>1</number>
             </property>
             <item row="0" column="0">
-             <widget class="QPushButton" name="btn_PlatHome_2">
+             <widget class="QPushButton" name="btn_PlatHome">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -756,7 +756,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QPushButton" name="btn_PlatZero_2">
+             <widget class="QPushButton" name="btn_PlatZero">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -772,7 +772,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QPushButton" name="btn_PlatReset_2">
+             <widget class="QPushButton" name="btn_PlatReset">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -788,7 +788,7 @@
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QRadioButton" name="rbtn_PlatCo_2">
+             <widget class="QRadioButton" name="rbtn_PlatCo">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -801,7 +801,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btn_PlatXP_2">
+             <widget class="QPushButton" name="btn_PlatXP">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -817,7 +817,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btn_PlatYP_2">
+             <widget class="QPushButton" name="btn_PlatYP">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -833,7 +833,7 @@
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="btn_PlatZP_2">
+             <widget class="QPushButton" name="btn_PlatZP">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -849,7 +849,7 @@
              </widget>
             </item>
             <item row="1" column="3">
-             <widget class="QRadioButton" name="rbtn_PlatDe_2">
+             <widget class="QRadioButton" name="rbtn_PlatDe">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -862,7 +862,7 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QPushButton" name="btn_PlatXN_2">
+             <widget class="QPushButton" name="btn_PlatXN">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -878,7 +878,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QPushButton" name="btn_PlatYN_2">
+             <widget class="QPushButton" name="btn_PlatYN">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -894,7 +894,7 @@
              </widget>
             </item>
             <item row="2" column="2">
-             <widget class="QPushButton" name="btn_PlatZN_2">
+             <widget class="QPushButton" name="btn_PlatZN">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -910,7 +910,7 @@
              </widget>
             </item>
             <item row="2" column="3">
-             <widget class="QSpinBox" name="sb_PlatStep_2">
+             <widget class="QSpinBox" name="sb_PlatStep">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -922,7 +922,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="ly_PlatCtrlPara_2" rowstretch="0,0,0,0" columnstretch="1,1,1,1,1">
+           <layout class="QGridLayout" name="ly_PlatCtrlPara" rowstretch="0,0,0,0" columnstretch="1,1,1,1,1">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -933,119 +933,119 @@
              <number>1</number>
             </property>
             <item row="3" column="0">
-             <widget class="QLabel" name="lb_PlatZ_2">
+             <widget class="QLabel" name="lb_PlatZ">
               <property name="text">
                <string>Z:</string>
               </property>
              </widget>
             </item>
             <item row="3" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValZ_2">
+             <widget class="QLabel" name="lb_PlatAbsValZ">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLabel" name="lb_PlatRelValX_2">
+             <widget class="QLabel" name="lb_PlatRelValX">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="3" column="3">
-             <widget class="QLabel" name="lb_PlatValZ_2">
+             <widget class="QLabel" name="lb_PlatValZ">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLabel" name="lb_PlatRelValZ_2">
+             <widget class="QLabel" name="lb_PlatRelValZ">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLabel" name="lb_PlatRelValY_2">
+             <widget class="QLabel" name="lb_PlatRelValY">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="2" column="3">
-             <widget class="QLabel" name="lb_PlatValY_2">
+             <widget class="QLabel" name="lb_PlatValY">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="2" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValY_2">
+             <widget class="QLabel" name="lb_PlatAbsValY">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValX_2">
+             <widget class="QLabel" name="lb_PlatAbsValX">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="1" column="3">
-             <widget class="QLabel" name="lb_PlatValX_2">
+             <widget class="QLabel" name="lb_PlatValX">
               <property name="text">
                <string>0.0</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="lb_PlatY_2">
+             <widget class="QLabel" name="lb_PlatY">
               <property name="text">
                <string>Y:</string>
               </property>
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="lb_PlatSize">
               <property name="text">
                <string>幅面</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QLabel" name="label_9">
+             <widget class="QLabel" name="lb_PlatSet">
               <property name="text">
                <string>幅面设置</string>
               </property>
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QLabel" name="lb_PlatAbs_2">
+             <widget class="QLabel" name="lb_PlatAbs">
               <property name="text">
                <string>机械</string>
               </property>
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QLabel" name="lb_PlatAxis_2">
+             <widget class="QLabel" name="lb_PlatAxis">
               <property name="text">
                <string>轴</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="lb_PlatRel_2">
+             <widget class="QLabel" name="lb_PlatRel">
               <property name="text">
                <string>相对</string>
               </property>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="lb_PlatX_2">
+             <widget class="QLabel" name="lb_PlatX">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1058,7 +1058,7 @@
              </widget>
             </item>
             <item row="1" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValX_2">
+             <widget class="QLineEdit" name="le_PlatSetValX">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1083,7 +1083,7 @@
              </widget>
             </item>
             <item row="2" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValY_2">
+             <widget class="QLineEdit" name="le_PlatSetValY">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1108,7 +1108,7 @@
              </widget>
             </item>
             <item row="3" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValZ_2">
+             <widget class="QLineEdit" name="le_PlatSetValZ">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1135,19 +1135,19 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_PlatCtrlMotion_2" stretch="0,0,0,0,0,0">
+           <layout class="QHBoxLayout" name="ly_PlatCtrlMotion" stretch="0,0,0,0,0,0">
             <property name="spacing">
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_PlatMXYZ_2">
+             <widget class="QLabel" name="lb_PlatMXYZ">
               <property name="text">
                <string>X Y Z</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_PlatMValX_2">
+             <widget class="QLineEdit" name="le_PlatMValX">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1169,7 +1169,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_PlatMValY_2">
+             <widget class="QLineEdit" name="le_PlatMValY">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1191,7 +1191,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_PlatMValZ_2">
+             <widget class="QLineEdit" name="le_PlatMValZ">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1213,7 +1213,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_PlatMRun_2">
+             <widget class="QPushButton" name="btn_PlatMRun">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1232,7 +1232,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_PlatMStop_2">
+             <widget class="QPushButton" name="btn_PlatMStop">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1256,7 +1256,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gb_CrvEdit_2">
+        <widget class="QGroupBox" name="gb_CrvEdit">
          <property name="title">
           <string>雕刻编辑</string>
          </property>
@@ -1277,12 +1277,12 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvMat_2" stretch="0,0,0,0,0">
+           <layout class="QHBoxLayout" name="ly_CrvSize" stretch="0,0,0,0,0">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_CrvMatS_2">
+             <widget class="QLabel" name="lb_CrvSize">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1301,7 +1301,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_MatSzX_2">
+             <widget class="QLineEdit" name="le_CrvSizeX">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1317,7 +1317,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_MatSzY_2">
+             <widget class="QLineEdit" name="le_CrvSizeY">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1333,7 +1333,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_MatSzZ_2">
+             <widget class="QLineEdit" name="le_CrvSizeZ">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1349,7 +1349,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_CrvView_2">
+             <widget class="QPushButton" name="btn_CrvView">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1370,19 +1370,19 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvMod_2">
+           <layout class="QHBoxLayout" name="ly_CrvMov">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_CrvModSz_2">
+             <widget class="QLabel" name="lb_ModMov">
               <property name="text">
                <string>模型偏移(XYZ):</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lb_ModSzX_2">
+             <widget class="QLineEdit" name="lb_MovX">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1398,7 +1398,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lb_ModSzY_2">
+             <widget class="QLineEdit" name="lb_MovY">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1414,7 +1414,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lb_ModSzZ_2">
+             <widget class="QLineEdit" name="lb_MovZ">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1430,7 +1430,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_ModMov_2">
+             <widget class="QPushButton" name="btn_ModMov">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1457,7 +1457,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gb_BlkPara_2">
+        <widget class="QGroupBox" name="gb_BlkPara">
          <property name="title">
           <string>分块参数</string>
          </property>
@@ -1478,25 +1478,25 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk1_2">
+           <layout class="QHBoxLayout" name="ly_Blk1">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_BlkXY_2">
+             <widget class="QLabel" name="lb_BlkXY">
               <property name="text">
                <string>分块大小(XY):</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkValX_2"/>
+             <widget class="QLineEdit" name="le_BlkValX"/>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkVaY_2"/>
+             <widget class="QLineEdit" name="le_BlkValY"/>
             </item>
             <item>
-             <widget class="QCheckBox" name="cb_BlkCen_2">
+             <widget class="QCheckBox" name="cb_BlkCen">
               <property name="text">
                <string>中心对位</string>
               </property>
@@ -1505,26 +1505,26 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk2_2">
+           <layout class="QHBoxLayout" name="ly_Blk2">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_BlkFuz_2">
+             <widget class="QLabel" name="lb_BlkFuz">
               <property name="text">
                <string>模糊带:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtn_BlkUni_2">
+             <widget class="QRadioButton" name="rbtn_BlkUni">
               <property name="text">
                <string>均匀分布</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtn_BlkNor_2">
+             <widget class="QRadioButton" name="rbtn_BlkNor">
               <property name="text">
                <string>正态分布</string>
               </property>
@@ -1533,49 +1533,49 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk3_2">
+           <layout class="QHBoxLayout" name="ly_Blk3">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <widget class="QLabel" name="lb_BlkW_2">
+             <widget class="QLabel" name="lb_BlkW">
               <property name="text">
                <string>宽度:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkValW_2"/>
+             <widget class="QLineEdit" name="le_BlkValWidth"/>
             </item>
             <item>
-             <widget class="QLabel" name="lb_BlkA_2">
+             <widget class="QLabel" name="lb_BlkA">
               <property name="text">
                <string>角度:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkValA_2"/>
+             <widget class="QLineEdit" name="le_BlkValAngle"/>
             </item>
             <item>
-             <widget class="QLabel" name="lb_BlkSd_2">
+             <widget class="QLabel" name="lb_BlkSd">
               <property name="text">
                <string>标准差:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkValSd_2"/>
+             <widget class="QLineEdit" name="le_BlkValStdDev"/>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk4_2">
+           <layout class="QHBoxLayout" name="ly_Blk4">
             <property name="spacing">
              <number>1</number>
             </property>
             <item>
-             <spacer name="sp_Blk1_2">
+             <spacer name="sp_Blk1">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -1588,7 +1588,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_BlkApp_2">
+             <widget class="QPushButton" name="btn_BlkApp">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1606,7 +1606,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gb_MCrvSel_2">
+        <widget class="QGroupBox" name="gb_MCrvSel">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1633,12 +1633,12 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_MCrv_2" stretch="1,1">
+           <layout class="QHBoxLayout" name="ly_MCrv" stretch="1,1">
             <property name="spacing">
              <number>40</number>
             </property>
             <item>
-             <widget class="QComboBox" name="cmb_MCrvSel_2">
+             <widget class="QComboBox" name="cmb_MCrvMode">
               <item>
                <property name="text">
                 <string>单模型单次</string>
@@ -1657,7 +1657,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="cb_MCrvVo_2">
+             <widget class="QCheckBox" name="cb_MCrvVo">
               <property name="text">
                <string>语音提醒</string>
               </property>

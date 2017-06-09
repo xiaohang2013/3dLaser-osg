@@ -37,8 +37,137 @@ enum PointSpreadType
     DIAMONDB
 };
 
+enum ScanType
+{
+    SCAN_X2Y,
+    SCAN_Y2X,
+    SCAN_SHORT
+};
+enum BlockType
+{
+    BLOCK_X2Y,
+    BLOCK_Y2X,
+    BLOCK_SHORT
+};
+enum FuzzySet
+{
+    Fuz_Normal,
+    Fuz_Uniform
+};
+
+enum CorrectType
+{
+    COR_NO,
+    COR_X2Y,
+    COR_Y2X
+};
+enum BorderType
+{
+    Vertical,
+    Bevel
+};
+enum CurvMode
+{
+    single_model_one,
+    single_model_mass,
+    multi_model_mass
+};
+
+struct Point
+{
+    float x;
+    float y;
+    float z;
+};
+
 class Parameter:public osg::Referenced
-{};
+{
+public:
+};
+
+class Crystal
+{
+public:
+    struct S_PointCloud
+    {
+        int pointNum;
+        Point pointMin;
+        Point pointMax;
+        CorrectType correctType;
+    };
+    struct S_BlockSet
+    {
+        BorderType borderType;
+        BlockType blockType;
+        FuzzySet fuzzySet;
+        Point size;
+        float width;
+        float angle;
+        float stdDev;
+        bool isCenter;
+    };
+
+    S_BlockSet blockSet;
+    Point size;
+    S_PointCloud pointCloud;
+    int layMin;
+    ScanType scanType;
+    CurvMode curvMode;
+    bool isAlarm;
+    Point mov;
+};
+class Scaner
+{
+    struct S_Scaner
+    {
+        float ratio;   //%
+        float adjust;
+        float fineTrim;
+    };
+    S_Scaner XScaner;
+    S_Scaner YScaner;
+    int delay;    //us
+    int speed;    //bit/ms
+    bool isXYExchange;
+};
+class Laser
+{
+public:
+    int ratio;
+    int frequency;     //Hz
+    int focalLenth;    //mm
+    int preHeatTime;   //s
+    int lightOutDelay; //us
+    int microStepDelay;
+    bool isMicroStep;
+    bool isSerialLink;
+};
+class Plat
+{
+public:
+    Point size;
+    Point mechPos;
+    Point relPos;
+};
+class Motor
+{
+public:
+    Motor(){}
+    ~Motor(){}
+    struct S_Motor
+    {
+        int ratio;    //p/mm
+        int inchCtrl;
+        int offset;
+        int v0;       //p/s
+        int v;        //p/s
+        int a;        //p/s^2
+    };
+
+    S_Motor motorX;
+    S_Motor motorY;
+    S_Motor motorZ;
+};
 
 class ordinaryParameter:public Parameter
 {

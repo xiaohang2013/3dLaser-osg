@@ -15,9 +15,34 @@
 #include <osgManipulator/TranslateAxisDragger>
 #include <osgManipulator/ScaleAxisDragger>
 #include <osgManipulator/CommandManager>
+#include <osgViewer/Viewer>
+#include <osgDB/ReadFile>
+#include <osgDB/WriteFile>
+#include <osgGA/StateSetManipulator>
+#include <osgGA/TrackballManipulator>
+#include <osgViewer/ViewerEventHandlers>
+#include <osg/Material>
+#include <osg/MatrixTransform>
+#include <osg/ComputeBoundsVisitor>
+#include <osg/BoundingBox>
+#include <osg/BoundingSphere>
+#include <osg/BlendFunc>
+#include <osg/ValueObject>
+
+#include <osg/CullFace>
 
 #include "osgContainer.h"
 #include "ui_mainwindow.h"
+#include "meshinterface.h"
+#include "parameter.h"
+#include "visitor.h"
+#include "interaction.h"
+#include "parawindow.h"
+#include "markwindow.h"
+#include "mcurvwindow.h"
+#include "basicsettingsdialog.h"
+#include "view.h"
+#include "file.h"
 
 #if _MSC_VER >= 1600
    #pragma execution_character_set("utf-8")
@@ -26,18 +51,29 @@
 namespace Ui {
 class MainWindow;
 }
-
+/** 显示模式 */
+enum DisplayMode
+{
+    STEREOGRAM,//模型图（3D object 或 2D image）
+    WIREFRAME,//线框图
+    POINTCLOUD//点云图
+};
+struct T
+{
+    int count;
+    int hour;
+    int minut;
+    int second;
+};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QStringList fPathList;
-
 
 private slots:
-    void slot_FileOpen(QString fPath);
+    void slot_FileOpen();
     void slot_FileSave();
     void slot_FileRecent();
     void slot_FileExit();
@@ -87,18 +123,64 @@ private slots:
 private:
     Ui::MainWindow *ui;
     //mainWindow
+    meshInterface MI;
     QLabel *lb_StRunTime;
     QLabel *lb_StLaserTime;
     QTimer *timerRun;
+    QStringList fileList;
+    QStringList pathList;
+    bool run;
+    T TRun;
+    T TLaser;
+    ParaWindow *paraw;
+    MarkWindow *markw;
+    McurvWindow *mcurvw;
+    Parameter *para;
+    View *v;
+    File *f;
+    Crystal *crystal;
+    Plat *plat;
+    Scaner *scaner;
+    Laser *laser;
+    Motor *motor;
+
     //osgViewer
     osg::ref_ptr<osgContainer> curViewer;
     osg::ref_ptr<osg::Switch> curRoot;
+    osg::ref_ptr<osg::Geode> refShape;
+    osg::ref_ptr<osg::Group> modelGroup;
+    osg::ref_ptr<osg::Group> pictureGroup;
     osg::ref_ptr<osg::Group> pointCloudGroup;
+    osg::ref_ptr<osg::Group> ordinaryPointsGroup;
+    osg::ref_ptr<osg::Group> texturePointsGroup;
+    osg::ref_ptr<osg::Group> picturePointsGroup;
+    osg::ref_ptr<osg::Group> additionalPointsGroup;
+    osg::ref_ptr<osg::Group> previewGroup;//预览组
+    osg::ref_ptr<osg::Group> draggerGroup;//dragger组
+    BasicSettingsDialog::CrystalType curCrystalType = BasicSettingsDialog::BOX;
+    osg::Vec3 curCrystalSize = osg::Vec3(60.f,60.f,60.f);
+    float curCrystalHeight = 10.f;
+    float curCrystalDiameter = 70.f;
+    float curCrystalZRot = 0.f;
 //function
+    void initMainWindow();
     void initTimer();
+    void initParam();
     void initStBar();
     void initOSG();
     void initProjectionAsOrtho();
+    QString makeUniqueName(const QString &oldName, const QStringList &existingNameList);
+    QStringList getOrdinaryLayerNameList();
+    void setUserPrmForNode(osg::Node *node, Parameter *prm);
+    void updateOSGDisplay(DisplayMode mode);
+    void setPointCloudVisible(bool visible);
+    void updateLighting(bool brightening);//增强环境光照
+    void getTime(T *t);
+    osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node);
+    void openFile(QString fileName);
+    void setAxesVisible(bool visible);
+    void updateRefShape(osg::Geode *geode);
+    osg::Geode *createCrystalFrame(BasicSettingsDialog::CrystalType type, osg::Vec3 size, float zRot, float height, float diameter);
 
 };
 

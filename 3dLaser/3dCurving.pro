@@ -38,13 +38,14 @@ SOURCES += \
     $$PWD/source/osginterface.cpp \
     $$PWD/source/visitor.cpp \
     $$PWD/source/interaction.cpp \
+    $$PWD/source/pcgmath.cpp \
     $$PWD/source/geometrymath.cpp \
     $$PWD/source/systemfontfunction.cpp \
     $$PWD/source/mytrackballmanipulator.cpp \
     $$PWD/source/qwidgetinosg.cpp \
     $$PWD/source/imagemath.cpp \
-    $$PWD/source/pcgmath.cpp \
-    $$PWD/source/quadtreenode.cpp
+    $$PWD/source/quadtreenode.cpp \
+    $$PWD/source/parameter.cpp
 
 HEADERS  += \
     $$PWD/include/mainwindow.h\
@@ -63,6 +64,7 @@ HEADERS  += \
     $$PWD/include/osginterface.h \
     $$PWD/include/visitor.h \
     $$PWD/include/interaction.h \
+    $$PWD/include/pcgmath.h \
     $$PWD/include/geometrymath.h \
     $$PWD/include/parameter.h \
     $$PWD/include/linefunctor.h \
@@ -70,7 +72,6 @@ HEADERS  += \
     $$PWD/include/mytrackballmanipulator.h \
     $$PWD/include/qwidgetinosg.h \
     $$PWD/include/imagemath.h \
-    $$PWD/include/pcgmath.h \
     $$PWD/include/quadtreenode.h
 
 

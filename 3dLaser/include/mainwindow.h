@@ -165,7 +165,7 @@ private:
 //function
     void initMainWindow();
     void initTimer();
-    void initParam();
+    void updateParam();
     void initStBar();
     void initOSG();
     void initProjectionAsOrtho();

@@ -340,11 +340,11 @@ void MainWindow::getTime(T *t)
 
 void MainWindow::initMainWindow()
 {
-    initParam();
+    updateParam();
     initStBar();
     initOSG();
 }
-void MainWindow::initParam()
+void MainWindow::updateParam()
 {
     //parameters crystal
     ui->lb_PointNumVal->setText(QString::number(crystal->pointCloud.pointNum, 10));

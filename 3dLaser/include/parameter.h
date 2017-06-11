@@ -100,6 +100,7 @@ public:
         BorderType borderType;
         BlockType blockType;
         FuzzySet fuzzySet;
+        float fuzzyRatio;
         Point size;
         float width;
         float angle;
@@ -115,6 +116,11 @@ public:
     CurvMode curvMode;
     bool isAlarm;
     Point mov;
+
+    //function
+    Crystal *crystal;
+    void setCrystalPtr(Crystal *ptr);
+    Crystal *getCrystalPtr();
 };
 class Scaner
 {
@@ -129,6 +135,9 @@ class Scaner
     int delay;    //us
     int speed;    //bit/ms
     bool isXYExchange;
+    Crystal *crystal;
+    void setScanerPtr(Scaner *ptr);
+    Crystal *getScanerPtr();
 };
 class Laser
 {
@@ -141,6 +150,9 @@ public:
     int microStepDelay;
     bool isMicroStep;
     bool isSerialLink;
+    Laser *laser;
+    void setLaserPtr(Laser *ptr);
+    Laser *getLaserPtr();
 };
 class Plat
 {
@@ -148,6 +160,8 @@ public:
     Point size;
     Point mechPos;
     Point relPos;
+    void setPlatPtr(Plat *ptr);
+    Plat *getPlatPtr();
 };
 class Motor
 {
@@ -167,6 +181,9 @@ public:
     S_Motor motorX;
     S_Motor motorY;
     S_Motor motorZ;
+    Motor *motor;
+    void setMotorPtr(Motor *ptr);
+    Motor getMotorPtr();
 };
 
 class ordinaryParameter:public Parameter

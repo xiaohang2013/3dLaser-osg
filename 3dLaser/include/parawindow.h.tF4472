@@ -40,7 +40,6 @@ private slots:
     void slot_btn_motor();
     void slot_btn_scan();
     void slot_btn_sort();
-    void initParam();
     void updateMotorPara();
     void updateScanPara();
     void updateSortPara();

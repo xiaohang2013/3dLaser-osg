@@ -862,7 +862,7 @@
           <property name="styleSheet">
            <string notr="true">background-color: rgb(200, 200, 200);</string>
           </property>
-          <widget class="QLabel" name="lb_lp_title">
+          <widget class="QLabel" name="lb_laser_pulse_title">
            <property name="geometry">
             <rect>
              <x>80</x>
@@ -885,7 +885,7 @@
             <string>Laser Pulse</string>
            </property>
           </widget>
-          <widget class="QLabel" name="lb_lp_low">
+          <widget class="QLabel" name="lb_laser_pulse_high">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -907,7 +907,7 @@
             <string>900us</string>
            </property>
           </widget>
-          <widget class="QLabel" name="lb_lp_low_2">
+          <widget class="QLabel" name="lb_laser_pulse_low">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -949,7 +949,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lb_test_r_v">
+             <widget class="QLabel" name="lb_laser_r_v">
               <property name="text">
                <string>10%</string>
               </property>
@@ -958,7 +958,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QSlider" name="sl_test_r">
+           <widget class="QSlider" name="sl_laser_r">
             <property name="maximum">
              <number>100</number>
             </property>
@@ -986,7 +986,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="le_test_f_v">
+             <widget class="QLabel" name="lb_laser_f_v">
               <property name="text">
                <string>1000</string>
               </property>
@@ -1002,7 +1002,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QSlider" name="sl_test_f">
+           <widget class="QSlider" name="sl_laser_f">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -1043,7 +1043,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="le_set_lpoint">
+             <widget class="QLineEdit" name="le_laser_focalLen">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1072,7 +1072,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="le_set_ldelay">
+             <widget class="QLineEdit" name="le_laser_lightOutDelay">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1121,7 +1121,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="le_set_ltime">
+             <widget class="QLineEdit" name="le_laser_preHeatTime">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1164,7 +1164,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="le_set_sdelay">
+             <widget class="QLineEdit" name="le_scan_delay">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1200,7 +1200,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="le_set_sv">
+             <widget class="QLineEdit" name="le_scan_speed">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1239,7 +1239,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="le_set_udelay">
+             <widget class="QLineEdit" name="le_scan_microStepDelay">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -1271,7 +1271,7 @@
         <item>
          <layout class="QHBoxLayout" name="ly_la_set_b">
           <item>
-           <widget class="QCheckBox" name="cb_set_X2Y">
+           <widget class="QCheckBox" name="cb_scan_exchangeXY">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -1281,7 +1281,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="cb_set_ustep">
+           <widget class="QCheckBox" name="cb_scan_stepOver">
             <property name="text">
              <string>微步跳转</string>
             </property>
@@ -2445,8 +2445,8 @@
   </widget>
   <zorder>layoutWidget</zorder>
   <zorder>w_para_btn</zorder>
-  <zorder>para_scan</zorder>
   <zorder>para_motor</zorder>
+  <zorder>para_scan</zorder>
   <zorder>para_sort</zorder>
  </widget>
  <resources/>
@@ -2484,14 +2484,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>btn_para_read</sender>
+   <sender>btn_para_motor</sender>
    <signal>clicked(bool)</signal>
    <receiver>ParaWindow</receiver>
    <slot>slot_btn_motor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>274</x>
-     <y>458</y>
+     <x>59</x>
+     <y>347</y>
     </hint>
     <hint type="destinationlabel">
      <x>319</x>
@@ -2595,6 +2595,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_para_write</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ParaWindow</receiver>
+   <slot>slot_btn_write()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_para_read</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ParaWindow</receiver>
+   <slot>slot_btn_read()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_para_enter</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ParaWindow</receiver>
+   <slot>slot_btn_enter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>500</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_para_cancle</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ParaWindow</receiver>
+   <slot>slot_btn_cancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>581</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slot_btn_sort()</slot>
@@ -2606,5 +2670,9 @@
   <slot>slot_correct_none()</slot>
   <slot>slot_correct_x2y()</slot>
   <slot>slot_correct_y2x()</slot>
+  <slot>slot_btn_write()</slot>
+  <slot>slot_btn_read()</slot>
+  <slot>slot_btn_enter()</slot>
+  <slot>slot_btn_cancel()</slot>
  </slots>
 </ui>

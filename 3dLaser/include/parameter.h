@@ -39,15 +39,15 @@ enum PointSpreadType
 
 enum ScanType
 {
-    SCAN_X2Y,
-    SCAN_Y2X,
-    SCAN_SHORT
+    Scan_X2Y,
+    Scan_Y2X,
+    Scan_MIN
 };
 enum BlockType
 {
-    BLOCK_X2Y,
-    BLOCK_Y2X,
-    BLOCK_SHORT
+    Block_X2Y,
+    Block_Y2X,
+    Block_Min
 };
 enum FuzzySet
 {
@@ -57,14 +57,14 @@ enum FuzzySet
 
 enum CorrectType
 {
-    COR_NO,
-    COR_X2Y,
-    COR_Y2X
+    Correct_None,
+    Correct_X2Y,
+    Correct_Y2X
 };
 enum BorderType
 {
-    Vertical,
-    Bevel
+    Border_Vertical,
+    Border_Bevel
 };
 enum CurvMode
 {
@@ -85,9 +85,11 @@ class Parameter:public osg::Referenced
 public:
 };
 
-class Crystal
+class Crystal:public Parameter
 {
 public:
+    Crystal();
+    ~Crystal();
     struct S_PointCloud
     {
         int pointNum;
@@ -95,6 +97,7 @@ public:
         Point pointMax;
         CorrectType correctType;
     };
+
     struct S_BlockSet
     {
         BorderType borderType;
@@ -116,58 +119,53 @@ public:
     CurvMode curvMode;
     bool isAlarm;
     Point mov;
-
-    //function
-    Crystal *crystal;
-    void setCrystalPtr(Crystal *ptr);
-    Crystal *getCrystalPtr();
 };
-class Scaner
+class Scaner:public Parameter
 {
+public:
+    Scaner();
+    ~Scaner();
     struct S_Scaner
     {
-        float ratio;   //%
-        float adjust;
-        float fineTrim;
+        int ratio;   //%
+        int adjust;
+        int fineTrim;
     };
     S_Scaner XScaner;
     S_Scaner YScaner;
     int delay;    //us
     int speed;    //bit/ms
+    int microStepDelay;//us
     bool isXYExchange;
-    Crystal *crystal;
-    void setScanerPtr(Scaner *ptr);
-    Crystal *getScanerPtr();
+    bool isStepOver;
 };
-class Laser
+class Laser:public Parameter
 {
 public:
+    Laser();
+    ~Laser();
     int ratio;
     int frequency;     //Hz
     int focalLenth;    //mm
     int preHeatTime;   //s
     int lightOutDelay; //us
-    int microStepDelay;
     bool isMicroStep;
     bool isSerialLink;
-    Laser *laser;
-    void setLaserPtr(Laser *ptr);
-    Laser *getLaserPtr();
 };
-class Plat
+class Plat:public Parameter
 {
 public:
+    Plat();
+    ~Plat();
     Point size;
     Point mechPos;
     Point relPos;
-    void setPlatPtr(Plat *ptr);
-    Plat *getPlatPtr();
 };
-class Motor
+class Motor:public Parameter
 {
 public:
-    Motor(){}
-    ~Motor(){}
+    Motor();
+    ~Motor();
     struct S_Motor
     {
         int ratio;    //p/mm
@@ -181,9 +179,6 @@ public:
     S_Motor motorX;
     S_Motor motorY;
     S_Motor motorZ;
-    Motor *motor;
-    void setMotorPtr(Motor *ptr);
-    Motor getMotorPtr();
 };
 
 class ordinaryParameter:public Parameter

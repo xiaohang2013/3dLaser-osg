@@ -19,6 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     paraw  = new ParaWindow();
     markw  = new MarkWindow();
     mcurvw = new McurvWindow();
+
+    crystal = paraw->getCrystalRef();
+    motor = paraw->getMotorRef();
+    laser = paraw->getLaserRef();
+    scaner = paraw->getScanerRef();
+    plat = paraw->getPlatRef();
+
     run = false;
     initMainWindow();
 }

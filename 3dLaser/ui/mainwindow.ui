@@ -702,7 +702,7 @@
                </size>
               </property>
               <property name="text">
-               <string>关激光(L)</string>
+               <string>开激光</string>
               </property>
              </widget>
             </item>
@@ -740,7 +740,7 @@
              <number>1</number>
             </property>
             <item row="0" column="0">
-             <widget class="QPushButton" name="btn_PlatHome">
+             <widget class="QPushButton" name="btn_PlatOrigin">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -756,7 +756,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QPushButton" name="btn_PlatZero">
+             <widget class="QPushButton" name="btn_PlatReset">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -764,7 +764,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>复位(Z)</string>
+               <string>复位(R)</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -772,7 +772,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QPushButton" name="btn_PlatReset">
+             <widget class="QPushButton" name="btn_PlatZero">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1260,7 +1260,7 @@
          <property name="title">
           <string>雕刻编辑</string>
          </property>
-         <layout class="QVBoxLayout" name="ly_gbCrvEdit_2">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <property name="spacing">
            <number>1</number>
           </property>
@@ -1277,11 +1277,8 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvSize" stretch="0,0,0,0,0">
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
              <widget class="QLabel" name="lb_CrvSize">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1300,7 +1297,7 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item row="0" column="1">
              <widget class="QLineEdit" name="le_CrvSizeX">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1316,7 +1313,7 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item row="0" column="2">
              <widget class="QLineEdit" name="le_CrvSizeY">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1332,7 +1329,7 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item row="0" column="3">
              <widget class="QLineEdit" name="le_CrvSizeZ">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1348,7 +1345,62 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lb_ModMov">
+              <property name="text">
+               <string>模型偏移(XYZ):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="le_MovX">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>35</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLineEdit" name="le_MovY">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>35</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="le_MovZ">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>35</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
              <widget class="QPushButton" name="btn_CrvView">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1367,72 +1419,10 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="ly_CrvMov">
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="lb_ModMov">
-              <property name="text">
-               <string>模型偏移(XYZ):</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lb_MovX">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lb_MovY">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lb_MovZ">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_ModMov">
+            <item row="1" column="4">
+             <widget class="QPushButton" name="btn_CrvApp">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1447,7 +1437,7 @@
                </size>
               </property>
               <property name="text">
-               <string>偏移</string>
+               <string>应用</string>
               </property>
              </widget>
             </item>
@@ -3035,6 +3025,278 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_PlatMRun</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_MovTo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>444</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatMStop</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_MotorStop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>444</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_CrvView</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_CrvView()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_CrvApp</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_CrvApp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_BlkApp</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_BlockParaApply()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>662</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cb_MCrvVo</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_VoiceAlarm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>738</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatOrigin</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatOrigin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatReset</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatReset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatXN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatXP</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatYN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatYP</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatZN</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_PlatZP</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_PlatCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbtn_PlatCo</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_MovMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbtn_PlatDe</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_MovMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_CrvClsLas</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_LaserCtrl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slot_FileOpen()</slot>
@@ -3066,7 +3328,7 @@
   <slot>slot_BlockX2Y()</slot>
   <slot>slot_BlockY2X()</slot>
   <slot>slot_BlockShort()</slot>
-  <slot>slot_BlockPara()</slot>
+  <slot>slot_BlockParaApply()</slot>
   <slot>slot_OperLaserOri()</slot>
   <slot>slot_OperPlatHome()</slot>
   <slot>slot_OperSetCurPos2LaserOri()</slot>
@@ -3084,5 +3346,19 @@
   <slot>slot_ClearFileList()</slot>
   <slot>slot_ClearPathList()</slot>
   <slot>slot_UpdateStBar()</slot>
+  <slot>slot_CrvView()</slot>
+  <slot>slot_CrvApp()</slot>
+  <slot>slot_SetBlkPara()</slot>
+  <slot>slot_MovTo()</slot>
+  <slot>slot_MotorStop()</slot>
+  <slot>slot_CrvStart()</slot>
+  <slot>slot_CrvPause()</slot>
+  <slot>slot_CrvStop()</slot>
+  <slot>slot_LaserCtrl()</slot>
+  <slot>slot_VoiceAlarm()</slot>
+  <slot>slot_PlatOrigin()</slot>
+  <slot>slot_PlatReset()</slot>
+  <slot>slot_PlatCtrl()</slot>
+  <slot>slot_MovMode()</slot>
  </slots>
 </ui>

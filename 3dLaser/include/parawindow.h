@@ -9,6 +9,7 @@ namespace Ui {
 class ParaWindow;
 }
 
+#define INI_PATH "E:\\3dCurving.ini"
 class ParaWindow : public QDialog
 {
     Q_OBJECT
@@ -26,6 +27,11 @@ public:
     Laser *getLaserRef();
     void setPlatRef(Plat *ref);
     Plat *getPlatRef();
+    void updatePara();
+    void initParam();
+    void setIsUpdate(bool b);
+    bool getIsUpdate();
+    int readIniFile();
 
 private:
     Ui::ParaWindow *ui;
@@ -34,13 +40,19 @@ private:
     osg::ref_ptr<Laser> laser;
     osg::ref_ptr<Crystal> crystal;
     osg::ref_ptr<Plat> plat;
-
+    bool isUpdate;
+    int writeIniFile();
 
 private slots:
     void slot_btn_motor();
     void slot_btn_scan();
     void slot_btn_sort();
-    void initParam();
+    void slot_btn_read();
+    void slot_btn_write();
+    void slot_btn_enter();
+    void slot_btn_cancel();
+    void slot_change_f();
+    void slot_change_r();
     void updateMotorPara();
     void updateScanPara();
     void updateSortPara();

@@ -2,7 +2,6 @@
 #define FILE_H
 #include <string>
 using namespace std;
-
 class File
 {
 public:

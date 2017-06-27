@@ -41,6 +41,7 @@
 #include "markwindow.h"
 #include "mcurvwindow.h"
 #include "basicsettingsdialog.h"
+#include "ctrlcard.h"
 #include "view.h"
 #include "file.h"
 
@@ -118,7 +119,19 @@ private slots:
     void slot_StdModSphere();
     void slot_HelpAboutMe();
     void slot_LanCHN();
-    void slot_UpdateStBar();
+    void slot_UpdateMainWin();
+    void slot_MovTo();
+    void slot_MotorStop();
+    void slot_CrvView();
+    void slot_CrvApp();
+    void slot_BlockParaApply();
+    void slot_VoiceAlarm();
+    void slot_PlatOrigin();
+    void slot_PlatReset();
+    void slot_PlatCtrl();
+    void slot_MovMode();
+    void slot_LaserCtrl();
+
 
 private:
     Ui::MainWindow *ui;
@@ -126,6 +139,7 @@ private:
     meshInterface MI;
     QLabel *lb_StRunTime;
     QLabel *lb_StLaserTime;
+    QLabel *lb_StInfo;
     QTimer *timerRun;
     QStringList fileList;
     QStringList pathList;
@@ -143,6 +157,7 @@ private:
     Scaner *scaner;
     Laser *laser;
     Motor *motor;
+    CtrlCard *ctrlCard;
 
     //osgViewer
     osg::ref_ptr<osgContainer> curViewer;
@@ -169,6 +184,8 @@ private:
     void initStBar();
     void initOSG();
     void initProjectionAsOrtho();
+    int initCtrlBoard();
+    void initPara();
     QString makeUniqueName(const QString &oldName, const QStringList &existingNameList);
     QStringList getOrdinaryLayerNameList();
     void setUserPrmForNode(osg::Node *node, Parameter *prm);
@@ -176,6 +193,7 @@ private:
     void setPointCloudVisible(bool visible);
     void updateLighting(bool brightening);//增强环境光照
     void getTime(T *t);
+    void spyPutIn();
     osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node);
     void openFile(QString fileName);
     void setAxesVisible(bool visible);

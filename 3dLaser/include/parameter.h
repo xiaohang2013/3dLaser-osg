@@ -72,14 +72,91 @@ enum CurvMode
     single_model_mass,
     multi_model_mass
 };
+enum MovDir
+{
+    XP,XN,
+    YP,YN,
+    ZP,ZN
+};
+enum MovMode
+{
+    Continuous,
+    Incremental
+};
+enum LimitType
+{
+    ACTIVE,
+    NONACTIVE
+};
 
 struct Point
 {
     float x;
     float y;
     float z;
+    Point operator+ (const Point p)
+    {
+        Point temp;
+        temp.x = this->x + p.x;
+        temp.y = this->y + p.y;
+        temp.z = this->z + p.z;
+        return temp;
+    }
+    Point operator- (const Point p)
+    {
+        Point temp;
+        temp.x = this->x - p.x;
+        temp.y = this->y - p.y;
+        temp.z = this->z - p.z;
+        return temp;
+    }
 };
 
+struct S_PointCloud
+{
+    int pointNum;
+    Point pointMin;
+    Point pointMax;
+    CorrectType correctType;
+};
+
+struct S_BlockSet
+{
+    BorderType borderType;
+    BlockType blockType;
+    FuzzySet fuzzySet;
+    float fuzzyRatio;
+    Point size;
+    float width;
+    float angle;
+    float stdDev;
+    bool isCenter;
+};
+
+struct S_Scaner
+{
+    int ratio;   //%
+    int adjust;
+    int fineTrim;
+};
+
+struct S_Motor
+{
+    int ratio;    //p/mm
+    int inchCtrl;
+    int offset;
+    int v0;       //p/s
+    int v;        //p/s
+    int a;        //p/s^2
+    int num;
+    int subdivision;
+    float stepAngle;
+    MovDir dir;
+    MovMode mod;
+    LimitType limitP;
+    LimitType limitN;
+    LimitType limitL;
+};
 class Parameter:public osg::Referenced
 {
 public:
@@ -90,26 +167,6 @@ class Crystal:public Parameter
 public:
     Crystal();
     ~Crystal();
-    struct S_PointCloud
-    {
-        int pointNum;
-        Point pointMin;
-        Point pointMax;
-        CorrectType correctType;
-    };
-
-    struct S_BlockSet
-    {
-        BorderType borderType;
-        BlockType blockType;
-        FuzzySet fuzzySet;
-        float fuzzyRatio;
-        Point size;
-        float width;
-        float angle;
-        float stdDev;
-        bool isCenter;
-    };
 
     S_BlockSet blockSet;
     Point size;
@@ -125,12 +182,6 @@ class Scaner:public Parameter
 public:
     Scaner();
     ~Scaner();
-    struct S_Scaner
-    {
-        int ratio;   //%
-        int adjust;
-        int fineTrim;
-    };
     S_Scaner XScaner;
     S_Scaner YScaner;
     int delay;    //us
@@ -157,6 +208,9 @@ class Plat:public Parameter
 public:
     Plat();
     ~Plat();
+    Point CurPos;
+    Point DstPos;
+    Point MovPos;
     Point size;
     Point mechPos;
     Point relPos;
@@ -166,15 +220,6 @@ class Motor:public Parameter
 public:
     Motor();
     ~Motor();
-    struct S_Motor
-    {
-        int ratio;    //p/mm
-        int inchCtrl;
-        int offset;
-        int v0;       //p/s
-        int v;        //p/s
-        int a;        //p/s^2
-    };
 
     S_Motor motorX;
     S_Motor motorY;

@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <qdebug>
 #include <QFileDialog>
-
+#include "macro.h"
 #include "mainwindow.h"
 using namespace std;
 
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     paraw  = new ParaWindow();
     markw  = new MarkWindow();
     mcurvw = new McurvWindow();
+    ctrlCard = new CtrlCard();
+    f = new File();
 
     crystal = paraw->getCrystalRef();
     motor = paraw->getMotorRef();
@@ -27,7 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     plat = paraw->getPlatRef();
 
     run = false;
+    initPara();
     initMainWindow();
+    initCtrlBoard();
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +39,8 @@ MainWindow::~MainWindow()
     delete ui;
     if (timerRun)
         delete timerRun;
+    if (ctrlCard)
+        delete ctrlCard;
 }
 #if 0
 void MainWindow::slot_FileOpen(QString fPath)
@@ -170,6 +176,7 @@ void MainWindow::slot_FileClearPathList()
 
 void MainWindow::slot_LaserPara()
 {
+    paraw->updatePara();
     paraw->show();
 }
 
@@ -309,7 +316,7 @@ void MainWindow::slot_StdModPlat(){}
 void MainWindow::slot_StdModSphere(){}
 void MainWindow::slot_HelpAboutMe(){}
 void MainWindow::slot_LanCHN(){}
-void MainWindow::slot_UpdateStBar()
+void MainWindow::slot_UpdateMainWin()
 {
 
     QString runText;
@@ -329,6 +336,151 @@ void MainWindow::slot_UpdateStBar()
             .arg(QString::number(TLaser.minut))
             .arg(QString::number(TLaser.second));
     lb_StLaserTime->setText(laserText);
+
+    //refresh mainwindow para display
+    if (paraw->getIsUpdate())
+        updateParam();
+    //just for test
+    spyPutIn();
+}
+
+void MainWindow::slot_MovTo()
+{
+    int rtn = 0;
+
+    plat->DstPos.x = ui->le_PlatMValX->text().toFloat();
+    plat->DstPos.y = ui->le_PlatMValY->text().toFloat();
+    plat->DstPos.z = ui->le_PlatMValZ->text().toFloat();
+    plat->MovPos = plat->DstPos - plat->CurPos;
+    //*************设置轴*****************
+    rtn = ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
+    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.x);
+    rtn += ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
+    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.y);
+    rtn += ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
+    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.z);
+    if (DRV_FAIL == rtn)
+    {
+        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
+        return;
+    }
+}
+
+void MainWindow::spyPutIn()
+{
+    int rtn = 0;
+    QString str;
+    for (int i = 0; i < 22; i++)
+    {
+        rtn = ctrlCard->Read_Input(i);
+        if (IO_L == rtn)
+            str = "低电平";
+        else if (IO_H == rtn)
+            str = "高电平";
+        else
+            str = "错误";
+        lb_StInfo->setText("IO" + QString::number(i, 10) + "触发" + str);
+    }
+}
+
+void MainWindow::slot_MotorStop()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        ctrlCard->StopRun(i+1, SUDDEN_STOP);
+    }
+}
+
+void MainWindow::slot_CrvView()
+{
+
+}
+
+void MainWindow::slot_CrvApp()
+{
+    crystal->size.x = ui->le_CrvSizeX->text().toFloat();
+    crystal->size.y = ui->le_CrvSizeY->text().toFloat();
+    crystal->size.z = ui->le_CrvSizeZ->text().toFloat();
+    crystal->mov.x = ui->le_MovX->text().toFloat();
+    crystal->mov.y = ui->le_MovY->text().toFloat();
+    crystal->mov.z = ui->le_MovZ->text().toFloat();
+}
+
+void MainWindow::slot_BlockParaApply()
+{
+    crystal->blockSet.size.x = ui->le_BlkValX->text().toFloat();
+    crystal->blockSet.size.y = ui->le_BlkValY->text().toFloat();
+    crystal->blockSet.isCenter = ui->cb_BlkCen->isChecked();
+    crystal->blockSet.angle = ui->le_BlkValAngle->text().toFloat();
+    crystal->blockSet.width = ui->le_BlkValWidth->text().toFloat();
+    crystal->blockSet.stdDev = ui->le_BlkValStdDev->text().toFloat();
+    if (ui->rbtn_BlkNor->isChecked())
+        crystal->blockSet.fuzzySet = Fuz_Normal;
+    else if (ui->rbtn_BlkUni->isChecked())
+        crystal->blockSet.fuzzySet= Fuz_Uniform;
+}
+
+void MainWindow::slot_VoiceAlarm()
+{
+
+}
+
+void MainWindow::slot_PlatOrigin()
+{
+
+}
+
+void MainWindow::slot_PlatReset()
+{
+    int rtn = DRV_OK;
+    int dir = 0;
+    S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
+    for (int i=0; i < MAXAXIS; i++)
+    {
+        if (0 == dir && m[i].limitP)
+            dir = 1;
+        else if (0 == dir && m[i].limitN)
+            dir = -1;
+        rtn += ctrlCard->Setup_Speed(m[i].num, dir*m[i].v0, dir*m[i].v, m[i].a);
+        if (DRV_FAIL == rtn)
+        {
+            ctrlCard->StopRun(m[i].num, SUDDEN_STOP);
+            lb_StInfo->setText("初始化速度错误");
+            return;
+        }
+    }
+}
+
+void MainWindow::slot_PlatCtrl()
+{
+
+}
+
+void MainWindow::slot_MovMode()
+{
+
+}
+
+void MainWindow::slot_LaserCtrl()
+{
+    int rtn = DRV_FAIL;
+    QPushButton *pt = qobject_cast <QPushButton*>(sender());
+    if ("开激光" == pt->text())
+    {
+        rtn = ctrlCard->Set_Laser(0, LASER_ON);
+        if (DRV_OK == rtn)
+            ui->btn_CrvClsLas->setText("关激光");
+        else
+            lb_StInfo->setText("打开激光错误");
+    }
+    else if ("关激光" == pt->text())
+    {
+        rtn = ctrlCard->Set_Laser(0, LASER_OFF);
+        if (DRV_OK == rtn)
+            ui->btn_CrvClsLas->setText("开激光");
+        else
+            lb_StInfo->setText("关闭激光错误");
+    }
 }
 
 void MainWindow::getTime(T *t)
@@ -351,6 +503,20 @@ void MainWindow::initMainWindow()
     initStBar();
     initOSG();
 }
+void MainWindow::initPara()
+{
+    QFileInfo fi(INI_PATH);
+    if (fi.isFile())
+    {
+        paraw->readIniFile();
+    }
+    else
+    {
+        paraw->initParam();
+    }
+    paraw->updatePara();
+}
+
 void MainWindow::updateParam()
 {
     //parameters crystal
@@ -421,13 +587,18 @@ void MainWindow::updateParam()
     ui->le_CrvSizeX->setText(QString::number(crystal->size.x, 'f', 2));
     ui->le_CrvSizeY->setText(QString::number(crystal->size.y, 'f', 2));
     ui->le_CrvSizeZ->setText(QString::number(crystal->size.z, 'f', 2));
-    ui->lb_MovX->setText(QString::number(crystal->mov.x, 'f', 2));
-    ui->lb_MovY->setText(QString::number(crystal->mov.y, 'f', 2));
-    ui->lb_MovZ->setText(QString::number(crystal->mov.z, 'f', 2));
+    ui->le_MovX->setText(QString::number(crystal->mov.x, 'f', 2));
+    ui->le_MovY->setText(QString::number(crystal->mov.y, 'f', 2));
+    ui->le_MovZ->setText(QString::number(crystal->mov.z, 'f', 2));
 }
 
 void MainWindow::initStBar()
 {
+    lb_StInfo = new QLabel(this);
+    lb_StInfo->setAlignment(Qt::AlignLeft);
+    lb_StInfo->setMaximumWidth(200);
+    lb_StInfo->setMinimumWidth(200);
+
     lb_StRunTime = new QLabel(this);
     lb_StRunTime->setAlignment(Qt::AlignLeft);
     lb_StRunTime->setMaximumWidth(200);
@@ -438,6 +609,7 @@ void MainWindow::initStBar()
     lb_StLaserTime->setMaximumWidth(200);
     lb_StLaserTime->setMinimumWidth(200);
 
+    statusBar()->addPermanentWidget(lb_StInfo);
     statusBar()->addPermanentWidget(lb_StRunTime);
     statusBar()->addPermanentWidget(lb_StLaserTime);
     initTimer();
@@ -452,7 +624,7 @@ void MainWindow::initTimer()
         delete timerRun;
         return;
     }
-    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_UpdateStBar()));
+    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_UpdateMainWin()));
     //间隔1s
     timerRun->setInterval(1000);
     timerRun->start();
@@ -501,6 +673,79 @@ void MainWindow::initProjectionAsOrtho()
     double zfar = 5000.;
 
     camera->setProjectionMatrixAsOrtho( left, right, bottom, top, znear, zfar);
+}
+
+int MainWindow::initCtrlBoard()
+{
+    int rtn = CTRL_ERROR;
+    int msgRtn = 0;
+    //*************初始化8940A1卡**************
+    rtn = ctrlCard->Init_Board();
+    if (rtn <= 0)
+    {
+        msgRtn = QMessageBox::warning(this, "错误", "控制卡初始化失败!", QMessageBox::Ok);
+        if (QMessageBox::Ok == msgRtn)
+        {
+            lb_StInfo->setText("控制卡初始化失败!");
+        }
+        switch (rtn)
+        {
+        case CTRL_NO_CARD_ERROR:
+            msgRtn = QMessageBox::warning(this, "错误", "没有安装ADT8937卡!", QMessageBox::Ok);
+            if (QMessageBox::Ok == msgRtn)
+            {
+                lb_StInfo->setText("没有安装ADT8937卡!");
+            }
+            break;
+        case CTRL_NO_DRIVE_ERROR:
+            msgRtn = QMessageBox::warning(this, "错误", "没有安装端口驱动程序!", QMessageBox::Ok);
+            if (QMessageBox::Ok == msgRtn)
+            {
+                lb_StInfo->setText("没有安装端口驱动程序!");
+            }
+            break;
+        case CTRL_PCI_ERROR:
+
+            msgRtn = QMessageBox::warning(this, "错误", "PCI桥故障!", QMessageBox::Ok);
+            if (QMessageBox::Ok == msgRtn)
+            {
+                lb_StInfo->setText("PCI桥故障!");
+            }
+            break;
+         default:
+            break;
+        }
+    }
+    else
+    {
+        lb_StInfo->setText("运动控制卡可以使用!");
+    }
+    //*************获取版本号**************
+    int ver = ctrlCard->Get_HardWareVer();
+    QString str = "硬件版本:"+ QString::number(ver, 10);
+    lb_StInfo->setText(str);
+    //*************初始化限位**************
+    S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
+    for (int i = 0; i< MAXAXIS; i++)
+    {
+        rtn += ctrlCard->set_limit(0, m[i].num, m[i].limitP, m[i].limitN, m[i].limitL);
+    }
+    if (DRV_FAIL == rtn)
+    {
+        QMessageBox::warning(this, "错误", "初始化限位错误", QMessageBox::Ok);
+    }
+    //*************初始化速度**************
+    for (int i = 0; i< MAXAXIS; i++)
+    {
+        rtn += ctrlCard->Setup_Speed(m[i].num, m[i].v0, m[i].v, m[i].a);
+    }
+    if (DRV_FAIL == rtn)
+    {
+        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
+        return rtn;
+    }
+
+    return rtn;
 }
 
 //为node设置用户自定义数据

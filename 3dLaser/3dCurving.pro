@@ -45,7 +45,8 @@ SOURCES += \
     $$PWD/source/qwidgetinosg.cpp \
     $$PWD/source/imagemath.cpp \
     $$PWD/source/quadtreenode.cpp \
-    $$PWD/source/parameter.cpp
+    $$PWD/source/parameter.cpp \
+    source/ctrlcard.cpp
 
 HEADERS  += \
     $$PWD/include/mainwindow.h\
@@ -72,7 +73,9 @@ HEADERS  += \
     $$PWD/include/mytrackballmanipulator.h \
     $$PWD/include/qwidgetinosg.h \
     $$PWD/include/imagemath.h \
-    $$PWD/include/quadtreenode.h
+    $$PWD/include/quadtreenode.h \
+    $$PWD/include/adt8933.h \
+    $$PWD/include/ctrlcard.h
 
 
 FORMS    += \
@@ -86,7 +89,9 @@ RESOURCES += \
 
 CONFIG(debug,debug|release){
 
-LIBS += $$(OSG_ROOT)\lib\OpenThreadsd.lib\
+LIBS += \
+        $$PWD/lib/adt8933.lib\
+        $$(OSG_ROOT)\lib\OpenThreadsd.lib\
         $$(OSG_ROOT)\lib\osgAnimationd.lib\
         $$(OSG_ROOT)\lib\osgd.lib\
         $$(OSG_ROOT)\lib\osgDBd.lib\

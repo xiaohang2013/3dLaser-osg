@@ -199,7 +199,7 @@ private:
     void setAxesVisible(bool visible);
     void updateRefShape(osg::Geode *geode);
     osg::Geode *createCrystalFrame(BasicSettingsDialog::CrystalType type, osg::Vec3 size, float zRot, float height, float diameter);
-
+    void getPoints(const QString fileName);
 };
 
 #endif // MAINWINDOW_H

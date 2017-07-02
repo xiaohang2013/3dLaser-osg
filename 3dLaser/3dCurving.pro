@@ -4,7 +4,16 @@
 #
 #-------------------------------------------------
 include(../general.pri)
+win32 {
+QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
+QMAKE_LFLAGS_CONSOLE = /SUBSYSTEM:CONSOLE,5.01
 
+DEFINES += _ATL_XP_TARGETING
+QMAKE_CFLAGS += /D_USING_V140_SDK71_
+QMAKE_CXXFLAGS += /D_USING_V140_SDK71_
+LIBS += -L$$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib)
+INCLUDEPATH += $$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include)
+}
 INCLUDEPATH += ../.. \
                $$PWD/include/\
     $$(OSG_ROOT)/include \
@@ -179,6 +188,93 @@ LIBS += \
 
 } else {
 
+LIBS += \
+        $$PWD/lib/adt8933.lib\
+        $$(OSG_ROOT)\lib\OpenThreads.lib\
+        $$(OSG_ROOT)\lib\osgAnimation.lib\
+        $$(OSG_ROOT)\lib\osg.lib\
+        $$(OSG_ROOT)\lib\osgDB.lib\
+        $$(OSG_ROOT)\lib\osgFX.lib\
+        $$(OSG_ROOT)\lib\osgGA.lib\
+        $$(OSG_ROOT)\lib\osgManipulator.lib\
+        $$(OSG_ROOT)\lib\osgParticle.lib\
+        $$(OSG_ROOT)\lib\osgPresentation.lib\
+        $$(OSG_ROOT)\lib\osgQt.lib\
+        $$(OSG_ROOT)\lib\osgShadow.lib\
+        $$(OSG_ROOT)\lib\osgSim.lib\
+        $$(OSG_ROOT)\lib\osgTerrain.lib\
+        $$(OSG_ROOT)\lib\osgText.lib\
+        $$(OSG_ROOT)\lib\osgUtil.lib\
+        $$(OSG_ROOT)\lib\osgViewer.lib\
+        $$(OSG_ROOT)\lib\osgVolume.lib\
+        $$(OSG_ROOT)\lib\osgWidget.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\cares.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\fftss.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\freetype250.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\giflib.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\glut32.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icuin.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icuio.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icule.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\iculx.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icutest.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icutu.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\icuuc.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\jpeg.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libcollada14dom22.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libcurl.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libexpat.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libexpatw.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libpng16.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libpng16_static.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libtiff.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libxml2_a_dll.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libxml2_a.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libxml2.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\minizip.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\pcrecpp.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\pcre.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\pcreposix.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\posh.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\proj.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\squish.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\testplug.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\zlib.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\zlibstatic.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_atomic-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_chrono-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_context-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_coroutine-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_date_time-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_exception-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_filesystem-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_graph-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_iostreams-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_locale-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_log_setup-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_log-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_c99f-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_c99l-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_c99-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_tr1f-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_tr1l-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_math_tr1-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_prg_exec_monitor-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_program_options-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_python-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_random-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_regex-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_signals-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_system-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_test_exec_monitor-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_thread-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_timer-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_unit_test_framework-vc120-mt-gd-1_55.lib\
+        $$(OSG_ROOT)\3rdParty\x86\lib\libboost_wave-vc120-mt-gd-1_55.lib\
+        User32.lib\
+        gdi32.lib\
+        kernel32.lib\
+        Advapi32.lib
 
 }
 

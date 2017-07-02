@@ -234,7 +234,6 @@ osg::Group* meshInterface::openMesh(const QString &formatName, const QString &fi
     else if(lowerformat==tr("dxf"))
     {
         osg::ref_ptr<osgDB::Options> opt = new osgDB::Options();
-
         osg::ref_ptr<osg::Node> node=osgDB::readNodeFile(qPrintable(fileName),opt.get());
         if(!node) return NULL;
         //将读入文件架构统一化为group->MatrixTransform->geode

@@ -116,6 +116,7 @@ void MainWindow::openFile(QString fileName)
     }
 
     osg::ref_ptr<osg::Group> group = MI.openMesh(extension,fileName);
+    getPoints(fileName);
     //以上各节点name均已不为空
     if(group)
     {
@@ -136,15 +137,18 @@ void MainWindow::openFile(QString fileName)
             setUserPrmForNode(mt, op.get());
         }
 
-        //显示模式：点云图
-        updateOSGDisplay(POINTCLOUD);
 
         //测试段代码---------------------------------------------------------------------------------------------
         osg::ref_ptr<osg::Vec3Array> va= getVertexArray(group);
         int num=va->size();
+        crystal->pointCloud.pointNum = num;
         osg::Vec3 v3(va->at(0));
         QMessageBox::information(this,"提示","num = " + QString("%1  %2  %3  %4").arg(num).arg(v3.x()).arg(v3.y()).arg(v3.z()));
         //测试段代码---------------------------------------------------------------------------------------------
+
+        //显示模式：点云图
+        updateOSGDisplay(POINTCLOUD);
+        updateParam();
     }
     else
     {
@@ -883,4 +887,73 @@ osg::Geode *MainWindow::createCrystalFrame(BasicSettingsDialog::CrystalType type
         geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, v->size()/2, v->size()/2)); // up
     }
     return geode.release();
+}
+
+void MainWindow::getPoints(const QString fileName)
+{
+    QFile in(fileName);
+    QString line;
+    bool isMin = false;
+    bool isMax = false;
+    if (!in.open(QIODevice::ReadOnly)) return;
+        QTextStream f(&in);
+        line = f.readLine();
+        while(!line.isNull())
+        {
+            if ("$EXTMIN" == line)
+            {
+                while ("9" != line && "ENDSEC" != line && !line.isNull())
+                {
+                    line = f.readLine();
+                    if ("10" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMin.x = line.toFloat();
+                    }
+                    if ("20" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMin.y = line.toFloat();
+                    }
+                    if ("30" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMin.z = line.toFloat();
+                    }
+                }
+                isMin = true;
+            }
+            if ("$EXTMAX" == line)
+            {
+                while ("9" != line && "ENDSEC" != line && !line.isNull())
+                {
+                    line = f.readLine();
+                    if ("10" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMax.x = line.toFloat();
+                    }
+                    if ("20" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMax.y = line.toFloat();
+                    }
+                    if ("30" == line)
+                    {
+                        line = f.readLine();
+                        if (!line.isNull())
+                            crystal->pointCloud.pointMax.z = line.toFloat();
+                    }
+                }
+                isMax = true;
+            }
+            if (isMin && isMax)
+                return;
+            line = f.readLine();
+        }
 }

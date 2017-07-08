@@ -36,14 +36,11 @@
 #include "meshinterface.h"
 #include "parameter.h"
 #include "visitor.h"
-#include "interaction.h"
 #include "parawindow.h"
 #include "markwindow.h"
 #include "mcurvwindow.h"
 #include "basicsettingsdialog.h"
 #include "ctrlcard.h"
-#include "view.h"
-#include "file.h"
 
 #if _MSC_VER >= 1600
    #pragma execution_character_set("utf-8")
@@ -149,8 +146,6 @@ private:
     MarkWindow *markw;
     McurvWindow *mcurvw;
     Parameter *para;
-    View *v;
-    File *f;
     Crystal *crystal;
     Plat *plat;
     Scaner *scaner;

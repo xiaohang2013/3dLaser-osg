@@ -10,7 +10,7 @@ class MyTrackballManipulator : public osgGA::TrackballManipulator
 
 public:
     MyTrackballManipulator(osg::Camera *camera, int flags = DEFAULT_SETTINGS );
-    ~MyTrackballManipulator(){};
+    ~MyTrackballManipulator(){}
 
 
 protected:

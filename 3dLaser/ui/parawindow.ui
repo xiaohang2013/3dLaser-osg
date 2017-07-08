@@ -955,7 +955,7 @@
             <item>
              <widget class="QLabel" name="lb_laser_r_v">
               <property name="text">
-               <string>10</string>
+               <string>30</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -976,8 +976,11 @@
             <property name="maximum">
              <number>100</number>
             </property>
+            <property name="value">
+             <number>30</number>
+            </property>
             <property name="sliderPosition">
-             <number>10</number>
+             <number>30</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1002,7 +1005,7 @@
             <item>
              <widget class="QLabel" name="lb_laser_f_v">
               <property name="text">
-               <string>1000</string>
+               <string>3000</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1020,14 +1023,17 @@
           </item>
           <item>
            <widget class="QSlider" name="sl_laser_f">
+            <property name="minimum">
+             <number>500</number>
+            </property>
             <property name="maximum">
-             <number>1000</number>
+             <number>3500</number>
             </property>
             <property name="pageStep">
-             <number>1000</number>
+             <number>100</number>
             </property>
             <property name="value">
-             <number>1000</number>
+             <number>3000</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1990,6 +1996,19 @@
            </widget>
           </item>
           <item>
+           <spacer name="sp_sp_v0_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QLabel" name="lb_sp_v0_X">
             <property name="text">
              <string>X:</string>
@@ -2012,13 +2031,6 @@
               <width>60</width>
               <height>16777215</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_v0_X2">
-            <property name="text">
-             <string>mm </string>
             </property>
            </widget>
           </item>
@@ -2062,13 +2074,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="lb_sp_v0_Y2">
-            <property name="text">
-             <string>mm </string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="sp_sp_v0_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -2107,13 +2112,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_v0_Z2">
-            <property name="text">
-             <string>mm </string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -2124,6 +2122,19 @@
              <string>匀速(p/s):    </string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="sp_sp_v0_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QLabel" name="lb_sp_v_X">
@@ -2148,13 +2159,6 @@
               <width>60</width>
               <height>16777215</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_v_X2">
-            <property name="text">
-             <string>mm </string>
             </property>
            </widget>
           </item>
@@ -2198,13 +2202,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="lb_sp_v_Y2">
-            <property name="text">
-             <string>mm </string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="sp_sp_v_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -2243,13 +2240,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_v_Z2">
-            <property name="text">
-             <string>mm </string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -2260,6 +2250,19 @@
              <string>加速度(p/s^2):</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="sp_sp_v0_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QLabel" name="lb_sp_a_X">
@@ -2284,13 +2287,6 @@
               <width>60</width>
               <height>16777215</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_a_X2">
-            <property name="text">
-             <string>mm </string>
             </property>
            </widget>
           </item>
@@ -2334,13 +2330,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="lb_sp_a_Y2">
-            <property name="text">
-             <string>mm </string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="sp_sp_a_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -2376,13 +2365,6 @@
               <width>60</width>
               <height>16777215</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="lb_sp_a_Z2">
-            <property name="text">
-             <string>mm </string>
             </property>
            </widget>
           </item>
@@ -2471,8 +2453,8 @@
   </widget>
   <zorder>layoutWidget</zorder>
   <zorder>w_para_btn</zorder>
-  <zorder>para_motor</zorder>
   <zorder>para_sort</zorder>
+  <zorder>para_motor</zorder>
   <zorder>para_scan</zorder>
  </widget>
  <resources/>

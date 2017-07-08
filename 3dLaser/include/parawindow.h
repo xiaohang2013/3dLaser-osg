@@ -2,6 +2,7 @@
 #define PARAWINDOW_H
 
 #include <QDialog>
+#include <QCoreApplication>
 #include "parameter.h"
 #include <osg/ref_ptr>
 
@@ -9,11 +10,10 @@ namespace Ui {
 class ParaWindow;
 }
 
-#define INI_PATH "E:\\3dCurving.ini"
+#define INI_PATH (qApp->applicationDirPath()+"\\3dCurving.ini")
 class ParaWindow : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit ParaWindow(QWidget *parent = 0);
     ~ParaWindow();

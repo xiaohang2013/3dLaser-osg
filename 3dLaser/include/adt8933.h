@@ -1,3 +1,5 @@
+#ifndef _CTRL_CARD_H_
+#define _CTRL_CARD_H_
 int _stdcall adt8933_initial(void);
 int _stdcall set_pulse_mode(int cardno,int axis,int value,int logic,int dir_logic);
 int _stdcall set_limit_mode(int cardno,int axis,int v1,int v2,int logic);
@@ -109,3 +111,4 @@ int _stdcall fifo_set_pwm_freq4(int cardno,int value);
 int _stdcall fifo_set_pwm_freq5(int cardno,int value);
 int _stdcall fifo_set_pwm_freq6(int cardno,int value);
 int _stdcall fifo_set_pwm_trans(int cardno,int value);
+#endif

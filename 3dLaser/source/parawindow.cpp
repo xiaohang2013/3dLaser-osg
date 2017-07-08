@@ -26,50 +26,61 @@ ParaWindow::~ParaWindow()
 void ParaWindow::initParam()
 {
     //motor
-    motor->motorX.ratio = 5;
-    motor->motorY.ratio = 5;
-    motor->motorZ.ratio = 5;
+    motor->motorX.ratio = 640;
+    motor->motorY.ratio = 640;
+    motor->motorZ.ratio = 427;
     motor->motorX.offset = 0;
     motor->motorY.offset = 0;
     motor->motorZ.offset = 0;
-    motor->motorX.v0 = 1000;
-    motor->motorY.v0 = 1000;
-    motor->motorZ.v0 = 1000;
-    motor->motorX.v = 2000;
-    motor->motorY.v = 2000;
-    motor->motorZ.v = 2000;
-    motor->motorX.a = 1500;
-    motor->motorY.a = 1500;
-    motor->motorZ.a = 1500;
+    motor->motorX.v0 = 6000;
+    motor->motorY.v0 = 6000;
+    motor->motorZ.v0 = 6000;
+    motor->motorX.v = 16000;
+    motor->motorY.v = 19200;
+    motor->motorZ.v = 15000;
+    motor->motorX.a = 50000;
+    motor->motorY.a = 50000;
+    motor->motorZ.a = 50000;
     motor->motorX.inchCtrl = 0;
     motor->motorY.inchCtrl = 0;
     motor->motorZ.inchCtrl = 0;
+    motor->motorX.num = 3;
+    motor->motorY.num = 2;
+    motor->motorZ.num = 1;
+    motor->motorX.limitP = ACTIVE; //IN10
+    motor->motorX.limitN = ACTIVE; //IN9
+    motor->motorY.limitP = ACTIVE; //IN8
+    motor->motorY.limitN = ACTIVE; //IN7
+    motor->motorZ.limitP = ACTIVE; //IN5
+    motor->motorZ.limitN = ACTIVE; //IN6
+
+
     //laser
-    laser->ratio = 10;
-    laser->frequency = 1000;
-    laser->focalLenth = 100;
+    laser->ratio = 30;
+    laser->frequency = 3000;
+    laser->focalLenth = 120;
     laser->isMicroStep = true;
     laser->isSerialLink = false;
-    laser->lightOutDelay = 0;
+    laser->lightOutDelay = 5;
     laser->preHeatTime = 0;
-    scaner->delay = 0;
-    scaner->speed = 0;
+    scaner->delay = 250;
+    scaner->speed = 4000;
     scaner->microStepDelay = 0;
-    scaner->isXYExchange = false;
-    scaner->XScaner.ratio = 0;
+    scaner->isXYExchange = true;
+    scaner->XScaner.ratio = -172.34;
     scaner->XScaner.adjust = 0;
     scaner->XScaner.fineTrim = 0;
-    scaner->YScaner.ratio = 0;
+    scaner->YScaner.ratio = 171.66;
     scaner->YScaner.adjust = 0;
     scaner->YScaner.fineTrim = 0;
     //sort
     crystal->size.x = 60.0;
     crystal->size.y = 60.0;
     crystal->size.z = 60.0;
-    crystal->layMin = 0.02;
+    crystal->layMin = 0.08;
     crystal->blockSet.angle = 0.0;
-    crystal->blockSet.size.x = 0.0;
-    crystal->blockSet.size.y = 0.0;
+    crystal->blockSet.size.x = 30.0;
+    crystal->blockSet.size.y = 30.0;
     crystal->blockSet.size.z = 0.0;
     crystal->blockSet.width = 0.0;
     crystal->blockSet.fuzzyRatio = 0.0;
@@ -93,13 +104,16 @@ void ParaWindow::initParam()
     //plat
     plat->size.x = 300.0;
     plat->size.y = 300.0;
-    plat->size.z = 150.0;
+    plat->size.z = 200.0;
     plat->mechPos.x = 0.0;
     plat->mechPos.y = 0.0;
     plat->mechPos.z = 0.0;
     plat->relPos.x = 0.0;
     plat->relPos.y = 0.0;
     plat->relPos.z = 0.0;
+    plat->HomPos.x = 0.0;
+    plat->HomPos.y = 0.0;
+    plat->HomPos.z = 0.0;
 }
 
 void ParaWindow::slot_btn_motor()
@@ -224,15 +238,15 @@ void ParaWindow::slot_btn_cancel()
 void ParaWindow::slot_change_f()
 {
     ui->lb_laser_f_v->setText(QString::number(ui->sl_laser_f->value(), 10));
-    ui->lb_laser_pulse_low->setText(QString::number(laser->frequency * laser->ratio/100)+"us");
-    ui->lb_laser_pulse_high->setText(QString::number(laser->frequency * (100-laser->ratio)/100)+"us");
+    ui->lb_laser_pulse_low->setText(QString::number(ui->sl_laser_f->value() * ui->sl_laser_r->value()/100)+"us");
+    ui->lb_laser_pulse_high->setText(QString::number(ui->sl_laser_f->value() * (100-ui->sl_laser_r->value())/100)+"us");
 }
 
 void ParaWindow::slot_change_r()
 {
     ui->lb_laser_r_v->setText(QString::number(ui->sl_laser_r->value(), 10));
-    ui->lb_laser_pulse_low->setText(QString::number(laser->frequency * laser->ratio/100)+"us");
-    ui->lb_laser_pulse_high->setText(QString::number(laser->frequency * (100-laser->ratio)/100)+"us");
+    ui->lb_laser_pulse_low->setText(QString::number(ui->sl_laser_f->value() * ui->sl_laser_r->value()/100)+"us");
+    ui->lb_laser_pulse_high->setText(QString::number(ui->sl_laser_f->value() * (100-ui->sl_laser_r->value())/100)+"us");
 }
 
 void ParaWindow::setIsUpdate(bool b)
@@ -298,10 +312,10 @@ void ParaWindow::updateScanPara()
         ui->cb_scan_stepOver->setChecked(true);
     else
         ui->cb_scan_stepOver->setChecked(false);
-    ui->le_la_r_X->setText(QString::number(scaner->XScaner.ratio, 10));
+    ui->le_la_r_X->setText(QString::number(scaner->XScaner.ratio, 'f', 2));
     ui->le_la_v_X->setText(QString::number(scaner->XScaner.adjust, 10));
     ui->le_la_u_X->setText(QString::number(scaner->XScaner.fineTrim, 10));
-    ui->le_la_r_Y->setText(QString::number(scaner->YScaner.ratio, 10));
+    ui->le_la_r_Y->setText(QString::number(scaner->YScaner.ratio, 'f', 2));
     ui->le_la_v_Y->setText(QString::number(scaner->YScaner.adjust, 10));
     ui->le_la_u_Y->setText(QString::number(scaner->YScaner.fineTrim, 10));
     if (laser->isSerialLink)
@@ -546,6 +560,9 @@ int ParaWindow::readIniFile()
     plat->relPos.x = iniFile.value("relPos.x").toFloat();
     plat->relPos.y = iniFile.value("relPos.y").toFloat();
     plat->relPos.z = iniFile.value("relPos.z").toFloat();
+    plat->HomPos.x = iniFile.value("HomPos.x").toFloat();
+    plat->HomPos.y = iniFile.value("HomPos.y").toFloat();
+    plat->HomPos.z = iniFile.value("HomPos.z").toFloat();
     iniFile.endGroup();
     return CUR_OK;
 }
@@ -609,10 +626,10 @@ int ParaWindow::writeIniFile()
     iniFile.setValue("speed", QString::number(scaner->speed, 10));
     iniFile.setValue("microStepDelay", QString::number(scaner->microStepDelay, 10));
     iniFile.setValue("isXYExchange", QString::number(scaner->isXYExchange, 10));
-    iniFile.setValue("XScaner.ratio", QString::number(scaner->XScaner.ratio, 10));
+    iniFile.setValue("XScaner.ratio", QString::number(scaner->XScaner.ratio, 'f', 2));
     iniFile.setValue("XScaner.adjust", QString::number(scaner->XScaner.adjust, 10));
     iniFile.setValue("XScaner.fineTrim", QString::number(scaner->XScaner.fineTrim, 10));
-    iniFile.setValue("YScaner.ratio", QString::number(scaner->YScaner.ratio, 10));
+    iniFile.setValue("YScaner.ratio", QString::number(scaner->YScaner.ratio, 'f', 2));
     iniFile.setValue("YScaner.adjust", QString::number(scaner->YScaner.adjust, 10));
     iniFile.setValue("YScaner.fineTrim", QString::number(scaner->YScaner.fineTrim, 10));
     iniFile.endGroup();
@@ -654,6 +671,9 @@ int ParaWindow::writeIniFile()
     iniFile.setValue("relPos.x", QString::number(plat->relPos.x, 'f', 2));
     iniFile.setValue("relPos.y", QString::number(plat->relPos.y, 'f', 2));
     iniFile.setValue("relPos.z", QString::number(plat->relPos.z, 'f', 2));
+    iniFile.setValue("HomPos.x", QString::number(plat->HomPos.x, 'f', 2));
+    iniFile.setValue("HomPos.y", QString::number(plat->HomPos.y, 'f', 2));
+    iniFile.setValue("HomPos.z", QString::number(plat->HomPos.z, 'f', 2));
     iniFile.endGroup();
     return CUR_OK;
 }

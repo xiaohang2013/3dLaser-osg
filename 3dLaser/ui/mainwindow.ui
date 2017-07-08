@@ -557,7 +557,7 @@
            <number>3</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_CrvTimer" stretch="0,0,0,0">
+           <layout class="QHBoxLayout" name="ly_CrvTimer" stretch="0,0,0">
             <property name="spacing">
              <number>1</number>
             </property>
@@ -600,19 +600,6 @@
               </property>
              </spacer>
             </item>
-            <item>
-             <widget class="QLabel" name="lb_CrvPct">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>100%</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
           <item>
@@ -626,11 +613,17 @@
             <property name="whatsThis">
              <string/>
             </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
             <property name="value">
              <number>0</number>
             </property>
             <property name="textVisible">
-             <bool>false</bool>
+             <bool>true</bool>
+            </property>
+            <property name="textDirection">
+             <enum>QProgressBar::TopToBottom</enum>
             </property>
            </widget>
           </item>
@@ -772,7 +765,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QPushButton" name="btn_PlatZero">
+             <widget class="QPushButton" name="btn_Plat">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1565,6 +1558,23 @@
              <number>1</number>
             </property>
             <item>
+             <widget class="QLabel" name="lb_BlkH">
+              <property name="text">
+               <string>垫板厚度:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="le_BlkValHeight">
+              <property name="maximumSize">
+               <size>
+                <width>55</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="sp_Blk1">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1727,7 +1737,7 @@
    </widget>
    <widget class="QMenu" name="menuLaser">
     <property name="title">
-     <string>激光</string>
+     <string>机器</string>
     </property>
     <addaction name="action_LaserPara"/>
     <addaction name="action_LaserRegImp"/>
@@ -1932,7 +1942,7 @@
     <string>参数</string>
    </property>
    <property name="toolTip">
-    <string>激光参数</string>
+    <string>机器参数</string>
    </property>
    <property name="shortcut">
     <string>Alt+P</string>
@@ -2231,7 +2241,7 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>始终以当前位置为雕刻原点</string>

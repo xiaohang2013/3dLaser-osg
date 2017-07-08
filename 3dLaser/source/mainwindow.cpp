@@ -5,7 +5,7 @@
 #include "macro.h"
 #include "mainwindow.h"
 using namespace std;
-
+#define TIMESPAN 20
 const std::string domain_oriLayerMatrix = "oriLayerMatrix";//域名-层矩阵初始值域名
 const std::string domain_lastUsedLayerMatrix = "lastUsedLayerMatrix";//域名-最近更新的层矩阵域名
 const std::string domain_ordinaryLayerPrm = "ordinaryLayerPrm";//域名-普通层参数域名
@@ -309,7 +309,10 @@ void MainWindow::slot_BlockPara(){}
 void MainWindow::slot_OperLaserOri(){}
 void MainWindow::slot_OperPlatHome(){}
 void MainWindow::slot_OperSetCurPos2LaserOri(){}
-void MainWindow::slot_OperSaveCurPos2LaserOri(){}
+void MainWindow::slot_OperSaveCurPos2LaserOri()
+{
+    plat->HomPos = plat->CurPos;
+}
 void MainWindow::slot_DebugAtchModel(){}
 void MainWindow::slot_DebugHotTest(){}
 void MainWindow::slot_DebugSplitModel(){}
@@ -320,12 +323,15 @@ void MainWindow::slot_StdModPlat(){}
 void MainWindow::slot_StdModSphere(){}
 void MainWindow::slot_HelpAboutMe(){}
 void MainWindow::slot_LanCHN(){}
-void MainWindow::slot_UpdateMainWin()
+void MainWindow::slot_TimerRefresh()
 {
-
+    static int count = 0;
     QString runText;
     QString laserText;
-    TRun.count++;
+    count++;
+    if (count >= 10)
+    {
+        TRun.count++;
     getTime(&TRun);
     runText = QString("总运行时间: %1:%2:%3")
             .arg(QString::number(TRun.hour))
@@ -344,17 +350,28 @@ void MainWindow::slot_UpdateMainWin()
     //refresh mainwindow para display
     if (paraw->getIsUpdate())
         updateParam();
-    //just for test
-    spyPutIn();
+    count = 0;
+    }
 }
+void MainWindow::readIO()
+{
+    int i = 0;
+    for (i = 0; i< INMAX; i ++)
+    {
+        ctrlCard->Read_Input(i);
+    }
+}
+void MainWindow::refreshIO()
+{
 
+}
 void MainWindow::slot_MovTo()
 {
     int rtn = 0;
 
-    plat->DstPos.x = ui->le_PlatMValX->text().toFloat();
-    plat->DstPos.y = ui->le_PlatMValY->text().toFloat();
-    plat->DstPos.z = ui->le_PlatMValZ->text().toFloat();
+    plat->DstPos.x = ui->le_PlatMValX->text().toFloat() * motor->motorX.ratio;
+    plat->DstPos.y = ui->le_PlatMValY->text().toFloat() * motor->motorY.ratio;
+    plat->DstPos.z = ui->le_PlatMValZ->text().toFloat() * motor->motorZ.ratio;
     plat->MovPos = plat->DstPos - plat->CurPos;
     //*************设置轴*****************
     rtn = ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
@@ -367,23 +384,6 @@ void MainWindow::slot_MovTo()
     {
         QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
         return;
-    }
-}
-
-void MainWindow::spyPutIn()
-{
-    int rtn = 0;
-    QString str;
-    for (int i = 0; i < 22; i++)
-    {
-        rtn = ctrlCard->Read_Input(i);
-        if (IO_L == rtn)
-            str = "低电平";
-        else if (IO_H == rtn)
-            str = "高电平";
-        else
-            str = "错误";
-        lb_StInfo->setText("IO" + QString::number(i, 10) + "触发" + str);
     }
 }
 
@@ -628,9 +628,9 @@ void MainWindow::initTimer()
         delete timerRun;
         return;
     }
-    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_UpdateMainWin()));
-    //间隔1s
-    timerRun->setInterval(1000);
+    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_TimerRefresh()));
+    //timer period
+    timerRun->setInterval(TIMESPAN);
     timerRun->start();
 }
 

@@ -44,7 +44,12 @@
 #ifndef LIMIT_OFF
 #define LIMIT_OFF 0
 #endif
-
+#ifndef INMAX
+#define INMAX 22
+#endif
+#ifndef OOTMAX
+#define OUTMAX 9
+#endif
 class CtrlCard: public osg::Referenced
 {
 public:
@@ -66,9 +71,15 @@ public:
     int Get_HardWareVer();
     int set_limit(int cardno,int axis,int lmtP,int lmtN,int logic);
     int Set_Laser(int cardno, int val);
+    int get_IO_Status();
+    const int get_InNum();
+    const int get_outNum();
 private:
+    const int inNum = 22;
+    const int outNum = 9;
     int Result;
     int g_HardwareVer;
+    int IO[];
 };
 
 

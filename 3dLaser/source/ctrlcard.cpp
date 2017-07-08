@@ -39,7 +39,7 @@ int CtrlCard::Init_Board()
 
     for (int i = 1; i<=MAXAXIS; i++)
     {
-       set_limit (0, i, 0, 0, 0);   //设定限位模式
+       set_limit (0, i, 0, 0, 1);   //设定限位模式
        set_command_pos (0, i, 0);        //清逻辑计数器
        //set_pulse_mode(0, i, 1, 0, 0);  //默认脉冲+方向 正逻辑脉冲 方向输出信号正逻辑
       // set_startv (0, i, 100);          //设定起始速度

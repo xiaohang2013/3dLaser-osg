@@ -36,7 +36,10 @@ enum PointSpreadType
     /** means that build points cloud by diamondB type - free diamond.*/
     DIAMONDB
 };
-
+enum IN
+{
+    IN5=5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16
+};
 enum ScanType
 {
     Scan_X2Y,
@@ -135,7 +138,7 @@ struct S_BlockSet
 
 struct S_Scaner
 {
-    int ratio;   //%
+    float ratio;   //%
     int adjust;
     int fineTrim;
 };
@@ -210,6 +213,7 @@ public:
     ~Plat();
     Point CurPos;
     Point DstPos;
+    Point HomPos;
     Point MovPos;
     Point size;
     Point mechPos;

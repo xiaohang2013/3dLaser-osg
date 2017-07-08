@@ -18,7 +18,6 @@
 #include <osgViewer/ViewerEventHandlers>
 #include <osg/TriangleFunctor>
 #include <osgText/Text3D>
-#include "linefunctor.h"
 
 
 #include <QString>
@@ -119,7 +118,6 @@ protected:
     osg::NodeList _groupList;
     osg::NodeList _switchList;
     osg::NodeList _matrixTransformList;
-
 
 };
 
@@ -229,107 +227,6 @@ protected:
     const QString defultGroupName = "defultgroup";
     const QString defultGeodeName = "defultgeode";
 };
-
-
-
-/** 模板类
- * Function: 为class polygonVisitor提供模板类
- * 以便提供operator(). 获取到的是顶点在世界坐标系下（或局部坐标系，取决于其中的转换矩阵）的坐标
-*/
-class TriangleVertex
-{
-public:
-    TriangleVertex(){}
-
-    void operator()(const osg::Vec3& v1,const osg::Vec3& v2,const osg::Vec3& v3,bool) const
-    {
-        osg::ref_ptr<osg::Vec3Array> v3a = new osg::Vec3Array;
-        v3a->push_back(v1);
-        v3a->push_back(v2);
-        v3a->push_back(v3);
-
-        bool isI = _wcMatrix.isIdentity();//单位阵
-        for(unsigned int i=0; i<v3a->size();++i)
-        {
-            osg::Vec3 vt3(v3a->at(i));
-            osg::Vec4 vt4(vt3,1.0);
-            //转换矩阵非单位阵
-            if(!isI)
-            {
-                vt4=vt4*_wcMatrix;
-                vt3=osg::Vec3(vt4.x(),vt4.y(),vt4.z());
-            }
-
-            triangleVertextArray->push_back(vt3);
-        }
-    }
-
-    osg::ref_ptr<osg::Vec3Array> triangleVertextArray=new osg::Vec3Array;
-
-public:
-    void setLocalToWorldMatrix(osg::Matrix &matrix) { _wcMatrix = matrix;}
-
-private:
-    osg::Matrix _wcMatrix=osg::Matrix::identity();//局部至世界坐标转换矩阵,初始化为单位阵
-};
-
-/**
- * Function: 提取多边形
- * 暂时仅实现提取所有drawable中所有三角形及线框（线段）序列
- * 三角形Array：每三点定义一个三角形
- * 线段Array：每两点定义一个线段
-*/
-class polygonVisitor : public osg::NodeVisitor
-{
-public:
-    polygonVisitor(TraversalMode tm = osg::NodeVisitor::TRAVERSE_ALL_CHILDREN)
-        :osg::NodeVisitor( tm)//默认遍历全部children
-    { _linesArray = new osg::Vec3Array;}
-
-    virtual void apply(osg::Geode &geode)
-    {
-        LocalToWorldMatrix nLTWM;
-        geode.accept(nLTWM);
-        osg::Matrix m = nLTWM.getLocalToWorldMatrix();
-        _tf.setLocalToWorldMatrix(m);
-
-        for(unsigned int i=0;i<geode.getNumDrawables();++i)
-        {
-            //三角形
-            geode.getDrawable(i)->accept(_tf);
-
-            //线段
-            geode.getDrawable(i)->accept(_lf);
-            osg::ref_ptr<osg::Vec3Array> linesTemp=new osg::Vec3Array;
-            linesTemp=_lf.getLinesArray();
-            if(m.isIdentity())//单位阵
-            {
-                if(linesTemp && linesTemp->size()>0)
-                    _linesArray->insert(_linesArray->end(),linesTemp->begin(),linesTemp->end());
-            }
-            else//非单位阵
-            {
-                for(unsigned int i=0; i<linesTemp->size(); ++i)
-                {
-                    osg::Vec4 vt4(linesTemp->at(i),1.0f);
-                    vt4=vt4*m;
-                    _linesArray->push_back(osg::Vec3(vt4.x(),vt4.y(),vt4.z()));
-                }
-            }
-        }
-    }
-
-    osg::Vec3Array* getTriangles(){return _tf.triangleVertextArray.release();}
-    osg::Vec3Array* getLines(){return _linesArray.release();}
-
-protected:
-    osg::TriangleFunctor<TriangleVertex> _tf;
-    osg::LineFunctor _lf;
-    osg::ref_ptr<osg::Vec3Array> _linesArray;
-
-
-};
-
 
 
 

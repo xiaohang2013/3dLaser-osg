@@ -8,7 +8,7 @@ SystemFontFunction::SystemFontFunction()
 std::string SystemFontFunction::GetSystemFontFile(const std::string &faceName)
 {
 
-    static const LPWSTR fontRegistryPath = (WCHAR*)"Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
+    static const LPCWSTR fontRegistryPath = L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
     HKEY hKey;
     LONG result;
     std::wstring wsFaceName(faceName.begin(), faceName.end());

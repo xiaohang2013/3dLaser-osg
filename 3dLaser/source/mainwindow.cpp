@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     markw  = new MarkWindow();
     mcurvw = new McurvWindow();
     ctrlCard = new CtrlCard();
-    f = new File();
 
     crystal = paraw->getCrystalRef();
     motor = paraw->getMotorRef();
@@ -652,11 +651,6 @@ void MainWindow::initOSG()
     pointCloudGroup->addChild(picturePointsGroup.get());
     pointCloudGroup->addChild(additionalPointsGroup.get());
 
-    osg::ref_ptr<PickAndOtherEventToSignalHandler> ph = new PickAndOtherEventToSignalHandler;
-    curViewer->addEventHandler(ph.get());
-    connect(ph,SIGNAL(signalSendOutPickedNode(osg::Node*,osg::Node*)),
-            this,SLOT(on_mousePickedNode(osg::Node*,osg::Node*)));
-    connect(ph,SIGNAL(signalSendOutDragging()),this,SLOT(on_mouseDraggingOnOSG()));
 
     initProjectionAsOrtho();
     setAxesVisible(true);

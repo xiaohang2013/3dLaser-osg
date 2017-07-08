@@ -4,16 +4,7 @@
 #
 #-------------------------------------------------
 include(../general.pri)
-win32 {
-QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
-QMAKE_LFLAGS_CONSOLE = /SUBSYSTEM:CONSOLE,5.01
 
-DEFINES += _ATL_XP_TARGETING
-QMAKE_CFLAGS += /D_USING_V140_SDK71_
-QMAKE_CXXFLAGS += /D_USING_V140_SDK71_
-LIBS += -L$$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib)
-INCLUDEPATH += $$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include)
-}
 INCLUDEPATH += ../.. \
                $$PWD/include/\
     $$(OSG_ROOT)/include \
@@ -36,23 +27,15 @@ SOURCES += \
     $$PWD/source/markwindow.cpp \
     $$PWD/source/mainwindow.cpp\
     $$PWD/source/mcurvwindow.cpp \
-    $$PWD/source/view.cpp \
-    $$PWD/source/file.cpp \
     $$PWD/source/main.cpp \
     $$PWD/source/osgContainer.cpp \
     $$PWD/source/mytrackballmanipulator.cpp \
     $$PWD/source/pcgapplication.cpp \
-    $$PWD/source/interfaces.cpp \
     $$PWD/source/meshinterface.cpp \
-    $$PWD/source/osginterface.cpp \
     $$PWD/source/visitor.cpp \
-    $$PWD/source/interaction.cpp \
     $$PWD/source/pcgmath.cpp \
-    $$PWD/source/geometrymath.cpp \
     $$PWD/source/systemfontfunction.cpp \
     $$PWD/source/mytrackballmanipulator.cpp \
-    $$PWD/source/qwidgetinosg.cpp \
-    $$PWD/source/imagemath.cpp \
     $$PWD/source/quadtreenode.cpp \
     $$PWD/source/parameter.cpp \
     source/ctrlcard.cpp
@@ -62,26 +45,17 @@ HEADERS  += \
     $$PWD/include/markwindow.h\
     $$PWD/include/parawindow.h\
     $$PWD/include/mcurvwindow.h\
-    $$PWD/include/view.h \
-    $$PWD/include/file.h \
     $$PWD/include/macro.h \
     $$PWD/include/osgContainer.h \
     $$PWD/include/mytrackballmanipulator.h \
     $$PWD/include/pcgapplication.h \
     $$PWD/include/pcgexception.h \
-    $$PWD/include/interfaces.h \
     $$PWD/include/meshinterface.h \
-    $$PWD/include/osginterface.h \
     $$PWD/include/visitor.h \
-    $$PWD/include/interaction.h \
     $$PWD/include/pcgmath.h \
-    $$PWD/include/geometrymath.h \
     $$PWD/include/parameter.h \
-    $$PWD/include/linefunctor.h \
     $$PWD/include/systemfontfunction.h \
     $$PWD/include/mytrackballmanipulator.h \
-    $$PWD/include/qwidgetinosg.h \
-    $$PWD/include/imagemath.h \
     $$PWD/include/quadtreenode.h \
     $$PWD/include/adt8933.h \
     $$PWD/include/ctrlcard.h
@@ -278,3 +252,13 @@ LIBS += \
 
 }
 
+win32 {
+QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
+QMAKE_LFLAGS_CONSOLE = /SUBSYSTEM:CONSOLE,5.01
+
+#DEFINES += _ATL_XP_TARGETING
+#QMAKE_CFLAGS += /D_USING_V140_SDK71_
+#QMAKE_CXXFLAGS += /D_USING_V140_SDK71_
+#LIBS += -L$$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib)
+#INCLUDEPATH += $$quote(C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include)
+}

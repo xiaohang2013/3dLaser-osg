@@ -79,7 +79,7 @@ private:
     const int outNum = 9;
     int Result;
     int g_HardwareVer;
-    int IO[];
+//    int IO[];
 };
 
 

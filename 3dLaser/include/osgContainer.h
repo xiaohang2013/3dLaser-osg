@@ -4,7 +4,9 @@
 #include <QOpenGLWidget>
 #include <osgViewer/Viewer>
 #include <osg/LightModel>
-#include "mytrackballmanipulator.h"
+#include <mytrackballmanipulator.h>
+
+
 
 class QInputEvent;
 
@@ -30,10 +32,32 @@ public:
     void moveEvent(QMoveEvent* event);
     void timerEvent(QTimerEvent *);
 
+public:
     osgViewer::Viewer* getOSGViewer() { return this; }
     osg::Switch* getRoot(){ return root; }
+    MyTrackballManipulator *getManipulator()
+    {
+        if(!getCameraManipulator()) return NULL;
+        return dynamic_cast<MyTrackballManipulator *>(getCameraManipulator());
+    }
 
+    // 获取操纵器的home点
+    void getManipulatorHomePosition(osg::Vec3d& eye, osg::Vec3d& center, osg::Vec3d& up);
+
+    // 设置坐标轴可见性
     void setAxesVisible(bool visible = true);
+    // 设置视角方位
+    void setViewDirection(ViewDirection direction);
+    // 左右视角转动
+    void rotateLeftRight(int direct);
+    // 上下视角转动
+    void rotateUpDown(int direct);
+    // 视图缩放
+    void zoomInOut(int factor);
+    // 更新OSG环境光照
+    void updateLighting(bool brightening);
+    // 光照是否ON
+    bool isLightingOn();
 
 
 protected:

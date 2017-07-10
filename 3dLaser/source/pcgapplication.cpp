@@ -13,7 +13,7 @@ bool PCGApplication::notify(QObject *rec, QEvent *ev)
     }
     catch(...)
     {
-        qCritical("发生重大错误!");
+        qCritical(qPrintable(tr("发生重大错误!")));
         abort();
     }
     return false;

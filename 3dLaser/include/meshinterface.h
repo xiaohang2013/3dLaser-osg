@@ -11,6 +11,11 @@
 #include <osg/DrawPixels>
 
 
+#if _MSC_VER >= 1600
+   #pragma execution_character_set("utf-8")
+#endif
+
+
 
 class meshInterface : public QObject
 {
@@ -45,8 +50,8 @@ public:
                                     QStringList *inputFilters, QStringList *outputFilters);
 
     osg::Group* openMesh(const QString &formatName, const QString &fileName);
-    bool saveMesh(const osg::ref_ptr<osg::Node> node, const QString &formatName, const QString &fileName);
-    bool saveMesh(const osg::ref_ptr<osg::Image> image, const QString &formatName, const QString &fileName);
+    bool saveMesh(const osg::Node *node, const QString &formatName, const QString &fileName);
+    bool saveMesh(const osg::Image *image, const QString &formatName, const QString &fileName);
 
 private:
     /** Convenience function to be used by image loaders to generate a valid geode

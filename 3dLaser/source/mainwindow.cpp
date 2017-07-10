@@ -16,18 +16,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    paraw  = new ParaWindow();
-    markw  = new MarkWindow();
-    mcurvw = new McurvWindow();
+    parameterWindow  = new ParaWindow();
+    markWindow  = new MarkWindow();
+    mCurvWindow = new McurvWindow();
     ctrlCard = new CtrlCard();
 
-    crystal = paraw->getCrystalRef();
-    motor = paraw->getMotorRef();
-    laser = paraw->getLaserRef();
-    scaner = paraw->getScanerRef();
-    plat = paraw->getPlatRef();
+    crystal = parameterWindow->getCrystalRef();
+    motor = parameterWindow->getMotorRef();
+    laser = parameterWindow->getLaserRef();
+    scaner = parameterWindow->getScanerRef();
+    plat = parameterWindow->getPlatRef();
 
-    run = false;
+    isLaserOn = false;
     initPara();
     initMainWindow();
     initCtrlBoard();
@@ -130,10 +130,6 @@ void MainWindow::openFile(QString fileName)
             osg::ref_ptr<osg::MatrixTransform> mt = dynamic_cast<osg::MatrixTransform *>(node.get());
             mt->setUserValue(domain_oriLayerMatrix, mt->getMatrix());
             mt->setUserValue(domain_lastUsedLayerMatrix, mt->getMatrix());
-
-            //保存默认普通层点云参数
-            osg::ref_ptr<ordinaryParameter> op = new ordinaryParameter;
-            setUserPrmForNode(mt, op.get());
         }
 
 
@@ -179,8 +175,8 @@ void MainWindow::slot_FileClearPathList()
 
 void MainWindow::slot_LaserPara()
 {
-    paraw->updatePara();
-    paraw->show();
+    parameterWindow->updatePara();
+    parameterWindow->show();
 }
 
 void MainWindow::slot_LaserRegImp()
@@ -195,12 +191,12 @@ void MainWindow::slot_LaserRegExp()
 
 void MainWindow::slot_LaserBatchSet()
 {
-    mcurvw->show();
+    mCurvWindow->show();
 }
 
 void MainWindow::slot_LaserTagGen()
 {
-    markw->show();
+    markWindow->show();
 }
 
 void MainWindow::slot_LaserCal()
@@ -330,24 +326,24 @@ void MainWindow::slot_TimerRefresh()
     count++;
     if (count >= 10)
     {
-        TRun.count++;
-    getTime(&TRun);
+        tdRunningTime.count++;
+    getTime(&tdRunningTime);
     runText = QString("总运行时间: %1:%2:%3")
-            .arg(QString::number(TRun.hour))
-            .arg(QString::number(TRun.minut))
-            .arg(QString::number(TRun.second));
+            .arg(QString::number(tdRunningTime.hour))
+            .arg(QString::number(tdRunningTime.minut))
+            .arg(QString::number(tdRunningTime.second));
     lb_StRunTime->setText(runText);
-    if (run)
-        TLaser.count++;
-    getTime(&TLaser);
+    if (isLaserOn)
+        tdLaserOnTime.count++;
+    getTime(&tdLaserOnTime);
     laserText = QString("总雕刻时间: %1:%2:%3")
-            .arg(QString::number(TLaser.hour))
-            .arg(QString::number(TLaser.minut))
-            .arg(QString::number(TLaser.second));
+            .arg(QString::number(tdLaserOnTime.hour))
+            .arg(QString::number(tdLaserOnTime.minut))
+            .arg(QString::number(tdLaserOnTime.second));
     lb_StLaserTime->setText(laserText);
 
     //refresh mainwindow para display
-    if (paraw->getIsUpdate())
+    if (parameterWindow->getIsUpdate())
         updateParam();
     count = 0;
     }
@@ -363,27 +359,6 @@ void MainWindow::readIO()
 void MainWindow::refreshIO()
 {
 
-}
-void MainWindow::slot_MovTo()
-{
-    int rtn = 0;
-
-    plat->DstPos.x = ui->le_PlatMValX->text().toFloat() * motor->motorX.ratio;
-    plat->DstPos.y = ui->le_PlatMValY->text().toFloat() * motor->motorY.ratio;
-    plat->DstPos.z = ui->le_PlatMValZ->text().toFloat() * motor->motorZ.ratio;
-    plat->MovPos = plat->DstPos - plat->CurPos;
-    //*************设置轴*****************
-    rtn = ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
-    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.x);
-    rtn += ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
-    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.y);
-    rtn += ctrlCard->Setup_Speed(motor->motorX.num, motor->motorX.v0, motor->motorX.v, motor->motorX.a);
-    rtn += ctrlCard->Axis_Pmove(motor->motorX.num, plat->MovPos.z);
-    if (DRV_FAIL == rtn)
-    {
-        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
-        return;
-    }
 }
 
 void MainWindow::slot_MotorStop()
@@ -407,25 +382,6 @@ void MainWindow::slot_CrvApp()
     crystal->mov.x = ui->le_MovX->text().toFloat();
     crystal->mov.y = ui->le_MovY->text().toFloat();
     crystal->mov.z = ui->le_MovZ->text().toFloat();
-}
-
-void MainWindow::slot_BlockParaApply()
-{
-    crystal->blockSet.size.x = ui->le_BlkValX->text().toFloat();
-    crystal->blockSet.size.y = ui->le_BlkValY->text().toFloat();
-    crystal->blockSet.isCenter = ui->cb_BlkCen->isChecked();
-    crystal->blockSet.angle = ui->le_BlkValAngle->text().toFloat();
-    crystal->blockSet.width = ui->le_BlkValWidth->text().toFloat();
-    crystal->blockSet.stdDev = ui->le_BlkValStdDev->text().toFloat();
-    if (ui->rbtn_BlkNor->isChecked())
-        crystal->blockSet.fuzzySet = Fuz_Normal;
-    else if (ui->rbtn_BlkUni->isChecked())
-        crystal->blockSet.fuzzySet= Fuz_Uniform;
-}
-
-void MainWindow::slot_VoiceAlarm()
-{
-
 }
 
 void MainWindow::slot_PlatOrigin()
@@ -486,7 +442,7 @@ void MainWindow::slot_LaserCtrl()
     }
 }
 
-void MainWindow::getTime(T *t)
+void MainWindow::getTime(TimerData *t)
 {
     if (NULL == t)
         qDebug()<<"null ptr";
@@ -511,13 +467,13 @@ void MainWindow::initPara()
     QFileInfo fi(INI_PATH);
     if (fi.isFile())
     {
-        paraw->readIniFile();
+        parameterWindow->readIniFile();
     }
     else
     {
-        paraw->initParam();
+        parameterWindow->initParam();
     }
-    paraw->updatePara();
+    parameterWindow->updatePara();
 }
 
 void MainWindow::updateParam()
@@ -541,51 +497,12 @@ void MainWindow::updateParam()
     ui->lb_PointObjValZ->setText(QString::number(crystal->size.z, 'f', 2));
 
     //parameters plat
-    ui->lb_PlatAbsValX->setText(QString::number(plat->mechPos.x, 'f', 2));
-    ui->lb_PlatAbsValY->setText(QString::number(plat->mechPos.y, 'f', 2));
-    ui->lb_PlatAbsValZ->setText(QString::number(plat->mechPos.z, 'f', 2));
     ui->lb_PlatRelValX->setText(QString::number(plat->relPos.x, 'f', 2));
     ui->lb_PlatRelValY->setText(QString::number(plat->relPos.y, 'f', 2));
     ui->lb_PlatRelValZ->setText(QString::number(plat->relPos.z, 'f', 2));
     ui->lb_PlatValX->setText(QString::number(plat->size.x, 'f', 2));
     ui->lb_PlatValY->setText(QString::number(plat->size.y, 'f', 2));
     ui->lb_PlatValZ->setText(QString::number(plat->size.z, 'f', 2));
-    ui->le_PlatSetValX->setText(QString::number(plat->size.x, 'f', 2));
-    ui->le_PlatSetValY->setText(QString::number(plat->size.y, 'f', 2));
-    ui->le_PlatSetValZ->setText(QString::number(plat->size.z, 'f', 2));
-
-    //parameters engraving
-    ui->le_BlkValX->setText(QString::number(crystal->blockSet.size.x, 'f', 2));
-    ui->le_BlkValY->setText(QString::number(crystal->blockSet.size.y, 'f', 2));
-    ui->le_BlkValStdDev->setText(QString::number(crystal->blockSet.stdDev, 'f', 2));
-    ui->le_BlkValAngle->setText(QString::number(crystal->blockSet.angle, 'f', 2));
-    ui->le_BlkValWidth->setText(QString::number(crystal->blockSet.width, 'f', 2));
-    if (Fuz_Normal == crystal->blockSet.fuzzySet)
-    {
-        ui->rbtn_BlkNor->setChecked(TRUE);
-        ui->rbtn_BlkUni->setChecked(FALSE);
-    }
-    else
-    {
-        ui->rbtn_BlkNor->setChecked(FALSE);
-        ui->rbtn_BlkUni->setChecked(TRUE);
-    }
-    if (TRUE == crystal->blockSet.isCenter)
-        ui->cb_BlkCen->setChecked(TRUE);
-    else
-        ui->cb_BlkCen->setChecked(FALSE);
-    if (TRUE == crystal->isAlarm)
-        ui->cb_MCrvVo->setChecked(TRUE);
-    else
-        ui->cb_MCrvVo->setChecked(FALSE);
-    if (single_model_one == ui->cmb_MCrvMode->currentIndex())
-        crystal->curvMode = single_model_one;
-    else if (single_model_mass == ui->cmb_MCrvMode->currentIndex())
-        crystal->curvMode = single_model_mass;
-    else if (multi_model_mass == ui->cmb_MCrvMode->currentIndex())
-        crystal->curvMode = single_model_mass;
-    else
-        crystal->curvMode = single_model_one;
 
     ui->le_CrvSizeX->setText(QString::number(crystal->size.x, 'f', 2));
     ui->le_CrvSizeY->setText(QString::number(crystal->size.y, 'f', 2));
@@ -656,7 +573,7 @@ void MainWindow::initOSG()
     setAxesVisible(true);
     updateLighting(false);
 
-    updateRefShape(createCrystalFrame(curCrystalType, curCrystalSize, curCrystalZRot, curCrystalHeight, curCrystalDiameter));
+//    updateRefShape(createCrystalFrame(curCrystalType, curCrystalSize, curCrystalZRot, curCrystalHeight, curCrystalDiameter));
 
 }
 void MainWindow::initProjectionAsOrtho()
@@ -804,83 +721,6 @@ void MainWindow::updateRefShape(osg::Geode *geode)
     curRoot->removeChild(refShape);
     refShape = geode;
     curRoot->addChild(refShape);
-}
-/// 创建水晶参考
-osg::Geode *MainWindow::createCrystalFrame(BasicSettingsDialog::CrystalType type, osg::Vec3 size, float zRot, float height, float diameter)
-{
-    osg::ref_ptr<osg::Geode> geode = new osg::Geode;
-    osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
-    osg::ref_ptr<osg::Vec3Array> v = new osg::Vec3Array;
-    osg::ref_ptr<osg::Vec4Array> colors=new osg::Vec4Array;
-    colors->push_back(osg::Vec4(1.f,1.f,0.f,1.f));
-    geom->setColorArray(colors);
-    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
-    geode->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
-    geode->addDrawable(geom);
-
-    if(type==BasicSettingsDialog::BOX)
-    {
-        v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
-        v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
-        v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
-        v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
-
-        v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
-        v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
-        v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
-        v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
-
-        if(zRot != 0)
-        {
-            osg::Matrix m = osg::Matrix::rotate(osg::DegreesToRadians(zRot), osg::Vec3(0.f,0.f,1.f));
-            for(unsigned int i=0; i<v->size(); ++i)
-            {
-                osg::Vec4 vt4(v->at(i),1.0f);
-                vt4=vt4*m;
-                v->at(i) = osg::Vec3(vt4.x(),vt4.y(),vt4.z());
-            }
-        }
-
-        geom->setVertexArray(v.get());
-        osg::ref_ptr<osg::DrawElementsUInt> lines = new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
-        for(int i=0; i<8; ++i)
-        {
-            int j= i+1;
-            if(i==3) j=0;
-            else if(i==7) j=4;
-            lines->push_back(i);
-            lines->push_back(j);
-        }
-        for(int i=0; i<4; ++i)
-        {
-            lines->push_back(i);
-            lines->push_back(i+4);
-        }
-        geom->addPrimitiveSet(lines);
-    }
-    else if(type==BasicSettingsDialog::CYLINDER)
-    {
-        float defaultAngleStep = 3.0f;//缺省步距角
-        float r = 0.5f*diameter;
-        float x,y,z;
-        float rad;
-        for(int i=0; i<2; ++i)
-        {
-            if(i==0) z=-0.5f*height;
-            else z=0.5f*height;
-            for(float agl=0.f; agl<=360.f; agl+=defaultAngleStep)
-            {
-                rad = osg::DegreesToRadians(agl);
-                x = r*std::cos(rad);
-                y = r*std::sin(rad);
-                v->push_back(osg::Vec3(x,y,z));
-            }
-        }
-        geom->setVertexArray(v.get());
-        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, 0, v->size()/2)); // down
-        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, v->size()/2, v->size()/2)); // up
-    }
-    return geode.release();
 }
 
 void MainWindow::getPoints(const QString fileName)

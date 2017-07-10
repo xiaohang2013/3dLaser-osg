@@ -2,6 +2,7 @@
 #include "ui_parawindow.h"
 #include "macro.h"
 #include <QSettings>
+
 ParaWindow::ParaWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ParaWindow)
@@ -67,10 +68,10 @@ void ParaWindow::initParam()
     scaner->speed = 4000;
     scaner->microStepDelay = 0;
     scaner->isXYExchange = true;
-    scaner->XScaner.ratio = -172.34;
+    scaner->XScaner.ratio = -172.34f;
     scaner->XScaner.adjust = 0;
     scaner->XScaner.fineTrim = 0;
-    scaner->YScaner.ratio = 171.66;
+    scaner->YScaner.ratio = 171.66f;
     scaner->YScaner.adjust = 0;
     scaner->YScaner.fineTrim = 0;
     //sort
@@ -85,7 +86,7 @@ void ParaWindow::initParam()
     crystal->blockSet.width = 0.0;
     crystal->blockSet.fuzzyRatio = 0.0;
     crystal->blockSet.stdDev = 0.0;
-    crystal->blockSet.blockType = Block_Min;
+    crystal->blockSet.blockType = Block_MIN;
     crystal->blockSet.borderType = Border_Vertical;
     crystal->scanType = Scan_MIN;
     crystal->mov.x = 0.0;
@@ -203,7 +204,7 @@ void ParaWindow::slot_btn_enter()
         crystal->blockSet.borderType = Border_Vertical;
     else if (ui->rbtn_split_bevel)
         crystal->blockSet.borderType = Border_Bevel;
-    crystal->blockSet.blockType = Block_Min;
+    crystal->blockSet.blockType = Block_MIN;
     if (ui->rbtn_sort_y2x->isChecked())
         crystal->scanType = Scan_Y2X;
     else if (ui->rbtn_sort_min->isChecked())

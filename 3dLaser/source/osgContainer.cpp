@@ -174,6 +174,16 @@ void osgContainer::resizeEvent(QResizeEvent *event)
     window->getEventQueue()->windowResize(x(), y(), size.width(), size.height());
     window->requestRedraw();
 
+//    const QSize& oldSize = event->oldSize();
+//    int oldWidth = oldSize.width();
+//    int oldHeight = oldSize.height();
+
+//    int newWidth = size.width();
+//    int newHeight = size.height();
+
+//    double widthChangeRatio = double(newWidth) / double(oldWidth);
+//    double heigtChangeRatio = double(newHeight) / double(oldHeight);
+//    double aspectRatioChange = widthChangeRatio / heigtChangeRatio;
     QOpenGLWidget::resizeEvent(event);
 }
 
@@ -249,16 +259,103 @@ void osgContainer::init3D()
     startTimer(10);
 }
 
+// 获取操纵器的home点
+void osgContainer::getManipulatorHomePosition(osg::Vec3d &eye, osg::Vec3d &center, osg::Vec3d &up)
+{
+    osg::ref_ptr<MyTrackballManipulator> manipulator = getManipulator();
+    if(!manipulator.valid()) return;
+
+    manipulator->getHomePosition(eye,center,up);
+}
+
+// 设置坐标轴可见性
 void osgContainer::setAxesVisible(bool visible)
 {
     root->setChildValue(xyzAxesNode,visible);
+}
+
+// 设置视角方位
+void osgContainer::setViewDirection(ViewDirection direction)
+{
+    osg::ref_ptr<MyTrackballManipulator> manipulator = getManipulator();
+    if(!manipulator.valid()) return;
+
+    manipulator->setViewDirection(direction);
+    this->home();//原点
+
+
+
+
+//    osg::Matrix mat;
+////    mat.makeLookAt(eye, center, up);
+//    mat = this->getCamera()->getViewMatrix();
+//    osg::Matrix rot;
+//    rot.makeRotate(0.5f, osg::Vec3( 1., 0., 0. ));
+//    setCameraManipulator(NULL);
+//    this->getCamera()->setViewMatrix(mat*rot);
+//    setCameraManipulator(manipulator.get());
+
+//    setCameraManipulator(NULL);
+//    this->getCamera()->setViewMatrixAsLookAt(eye, center, up);
+    //    setCameraManipulator(manipulator.get());
+}
+
+// 左右视角变化
+/// @param direct: 正，左； 负，右； direct绝对值控制每次视角变动大小
+void osgContainer::rotateLeftRight(int direct)
+{
+    MyTrackballManipulator *manipulator = getManipulator();
+    if(!manipulator) return;
+
+    manipulator->rotateLeftRight(direct);
+}
+
+// 上下视角变化
+/// @param direct: 正，上； 负，下； direct绝对值控制每次视角变动大小
+void osgContainer::rotateUpDown(int direct)
+{
+    MyTrackballManipulator *manipulator = getManipulator();
+    if(!manipulator) return;
+
+    manipulator->rotateUpDown(direct);
+}
+
+// 视图缩放
+/// @param factor: 缩放标志, >=0:放大； <0: 缩小
+void osgContainer::zoomInOut(int factor)
+{
+    if(factor>=0)
+        window->getEventQueue()->mouseScroll(osgGA::GUIEventAdapter::SCROLL_DOWN);
+    else
+        window->getEventQueue()->mouseScroll(osgGA::GUIEventAdapter::SCROLL_UP);
+}
+
+// 更新OSG环境光照
+void osgContainer::updateLighting(bool brightening)
+{
+    if(brightening)//环境光增强
+    {
+        this->getLight()->setDiffuse(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        this->getLight()->setAmbient(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    }
+    else//不增强
+    {
+        this->getLight()->setDiffuse(osg::Vec4(0.6f, 0.6f, 0.6f, 1.0f));
+        this->getLight()->setAmbient(osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    }
+}
+
+// 光照是否ON
+bool osgContainer::isLightingOn()
+{
+    return this->getLight()->getAmbient() == osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 osg::ref_ptr<osg::Camera> osgContainer::createCamera(int x, int y, int w, int h)
 {
     window = new osgViewer::GraphicsWindowEmbedded(x, y, w, h);
 
-//    osg::DisplaySettings* ds = osg::DisplaySettings::instance().get();
+    //    osg::DisplaySettings* ds = osg::DisplaySettings::instance().get();
     osg::ref_ptr<osg::GraphicsContext::Traits> traits = new osg::GraphicsContext::Traits;
     traits->windowDecoration = true;
     traits->x = x;
@@ -367,7 +464,7 @@ osg::ref_ptr<osg::Node> osgContainer::createCoordinateAxes()
 osg::ref_ptr<osg::Drawable> osgContainer::createAixsLabel(const std::string& text, const osg::Vec3& pos)
 {
     osg::ref_ptr<osgText::Text> t = new osgText::Text;
-    osg::ref_ptr<osgText::Font> font = osgText::readFontFile("fonts/isocp3_.ttf");
+    osg::ref_ptr<osgText::Font> font = osgText::readFontFile("isocp3_.ttf");
     t->setFont(font.get());
     t->setText(text,osgText::String::ENCODING_UTF8);
     t->setPosition(pos);

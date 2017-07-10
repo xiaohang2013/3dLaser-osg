@@ -1,11 +1,11 @@
-#include "mcurvwindow.h"
+ï»¿#include "mcurvwindow.h"
 #include "ui_mcurvwindow.h"
 #include <string>
 using namespace std;
 
-/************************È«¾Ö±äÁ¿Çø****************************/
+/************************å…¨å±€å˜é‡åŒº****************************/
 
-/************************È«¾Öº¯ÊıÇø****************************/
+/************************å…¨å±€å‡½æ•°åŒº****************************/
 McurvWindow::McurvWindow(QWidget *parent) :
 QDialog(parent),
 ui(new Ui::McurvWindow)

@@ -25,7 +25,7 @@
      <x>9</x>
      <y>446</y>
      <width>611</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="ly_para_btn">
@@ -836,7 +836,7 @@
       <x>0</x>
       <y>0</y>
       <width>509</width>
-      <height>419</height>
+      <height>479</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1571,7 +1571,7 @@
       <x>0</x>
       <y>0</y>
       <width>509</width>
-      <height>419</height>
+      <height>445</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2451,11 +2451,11 @@
     </layout>
    </widget>
   </widget>
+  <zorder>para_motor</zorder>
+  <zorder>para_scan</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>w_para_btn</zorder>
   <zorder>para_sort</zorder>
-  <zorder>para_motor</zorder>
-  <zorder>para_scan</zorder>
  </widget>
  <resources/>
  <connections>

@@ -1,11 +1,11 @@
-#include "markwindow.h"
+ï»¿#include "markwindow.h"
 #include "ui_markwindow.h"
 #include <string>
 using namespace std;
 
-/************************È«¾Ö±äÁ¿Çø****************************/
+/************************å…¨å±€å˜é‡åŒº****************************/
 
-/************************È«¾Öº¯ÊıÇø****************************/
+/************************å…¨å±€å‡½æ•°åŒº****************************/
 MarkWindow::MarkWindow(QWidget *parent) :
 QDialog(parent),
 ui(new Ui::MarkWindow)

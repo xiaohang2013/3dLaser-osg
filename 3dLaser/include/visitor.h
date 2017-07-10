@@ -11,26 +11,24 @@
 #include <osg/Geometry>
 #include <osg/Geode>
 #include <osg/MatrixTransform>
-#include <osg/ref_ptr>
 #include <osg/Switch>
 #include <osgGA/GUIEventHandler>
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>
-#include <osg/TriangleFunctor>
+//#include <osg/TriangleFunctor>
 #include <osgText/Text3D>
+#include "parameter.h"
 
 
 #include <QString>
 
-
-
 /**
  * Function: 查找给定名称的节点
 */
-class findNamedNodeList : public osg::NodeVisitor
+class findNodeList : public osg::NodeVisitor
 {
 public:
-    findNamedNodeList(const std::string& name="", TraversalMode tm = osg::NodeVisitor::TRAVERSE_ALL_CHILDREN)
+    findNodeList(const std::string& name="", TraversalMode tm = osg::NodeVisitor::TRAVERSE_ALL_CHILDREN)
         :osg::NodeVisitor( tm),// 默认遍历所有子节点
         _name(name){}
 
@@ -47,7 +45,7 @@ public:
     virtual void apply(osg::Node &node)
     {
         if(node.getName()==_name)
-            _nodeList.push_back(&node);
+            _namedNodeList.push_back(&node);
 
         // 继续遍历场景图形剩余的部分(父类inline函数，直接推进本访问器继续访问)
         traverse(node);
@@ -55,8 +53,15 @@ public:
 
     virtual void apply(osg::Geode &geode)
     {
+        _allGeodeList.push_back(&geode);
         if(geode.getName()==_name)
-            _geodeList.push_back(&geode);
+            _namedGeodeList.push_back(&geode);
+
+        // 存储Drawables
+        unsigned int numDraw = geode.getNumDrawables();
+        if(numDraw>0)
+            _allDrawableList.insert(_allDrawableList.end(), geode.getDrawableList().begin(), geode.getDrawableList().end());
+
         apply((osg::Node&)geode);
 
         //traverse(geode);
@@ -65,7 +70,7 @@ public:
     virtual void apply(osg::Group &group)
     {
         if(group.getName()==_name)
-            _groupList.push_back(&group);
+            _namedGroupList.push_back(&group);
         apply((osg::Node&)group);
 
         //traverse(group);
@@ -74,7 +79,7 @@ public:
     virtual void apply(osg::Switch &sw)
     {
         if(sw.getName()==_name)
-            _switchList.push_back(&sw);
+            _namedSwitchList.push_back(&sw);
         apply((osg::Node&)sw);
 
         //traverse(sw);
@@ -82,8 +87,9 @@ public:
 
     virtual void apply(osg::MatrixTransform &mt)
     {
+        _allMatrixTransformList.push_back(&mt);
         if(mt.getName()==_name)
-            _matrixTransformList.push_back(&mt);
+            _namedMatrixTransformList.push_back(&mt);
         apply((osg::Node&)mt);
 
         //traverse(transform);
@@ -98,11 +104,16 @@ public:
 //    osg::Switch *getNamedSwitch(){return _switch.release();}
 //    osg::MatrixTransform *getNamedMatrixTransform(){return _matrixTransform.release();}
 
-    osg::NodeList getAllNamedNodeList(){return _nodeList;}
-    osg::NodeList getNamedGeodeList(){return _geodeList;}
-    osg::NodeList getNamedGroupList(){return _groupList;}
-    osg::NodeList getNamedSwitchList(){return _switchList;}
-    osg::NodeList getNamedMatrixTransformList(){return _matrixTransformList;}
+    osg::NodeList getAllNamedNodeList(){return _namedNodeList;}
+    osg::NodeList getNamedGeodeList(){return _namedGeodeList;}
+    osg::NodeList getNamedGroupList(){return _namedGroupList;}
+    osg::NodeList getNamedSwitchList(){return _namedSwitchList;}
+    osg::NodeList getNamedMatrixTransformList(){return _namedMatrixTransformList;}
+
+    osg::NodeList getAllMatrixTransformList(){return _allMatrixTransformList;}
+    osg::NodeList getAllGeodeList(){return _allGeodeList;}
+    osg::Geode::DrawableList getAllDrawableList(){return _allDrawableList;}
+
 
 protected:
     std::string _name;
@@ -113,11 +124,16 @@ protected:
 //    osg::ref_ptr<osg::Switch> _switch;
 //    osg::ref_ptr<osg::MatrixTransform> _matrixTransform;
 
-    osg::NodeList _nodeList;
-    osg::NodeList _geodeList;
-    osg::NodeList _groupList;
-    osg::NodeList _switchList;
-    osg::NodeList _matrixTransformList;
+    osg::NodeList _namedNodeList;
+    osg::NodeList _namedGeodeList;
+    osg::NodeList _namedGroupList;
+    osg::NodeList _namedSwitchList;
+    osg::NodeList _namedMatrixTransformList;
+
+    osg::NodeList _allMatrixTransformList;
+    osg::NodeList _allGeodeList;
+    osg::Geode::DrawableList _allDrawableList;
+
 
 };
 
@@ -224,8 +240,8 @@ protected:
     osg::ref_ptr<osg::Group> _group;
 
 
-    const QString defultGroupName = "defultgroup";
-    const QString defultGeodeName = "defultgeode";
+    const QString defaultGroupName = "defultgroup";
+    const QString defaultGeodeName = "defultgeode";
 };
 
 

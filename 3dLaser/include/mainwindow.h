@@ -39,7 +39,6 @@
 #include "parawindow.h"
 #include "markwindow.h"
 #include "mcurvwindow.h"
-#include "basicsettingsdialog.h"
 #include "ctrlcard.h"
 
 #if _MSC_VER >= 1600
@@ -49,6 +48,7 @@
 namespace Ui {
 class MainWindow;
 }
+
 /** 显示模式 */
 enum DisplayMode
 {
@@ -56,13 +56,15 @@ enum DisplayMode
     WIREFRAME,//线框图
     POINTCLOUD//点云图
 };
-struct T
+
+struct TimerData
 {
     int count;
     int hour;
     int minut;
     int second;
 };
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -71,11 +73,15 @@ public:
     ~MainWindow();
 
 private slots:
+
+    /**   文件菜单    **/
     void slot_FileOpen();
     void slot_FileSave();
     void slot_FileRecent();
     void slot_FileExit();
     void slot_FileClearPathList();
+
+    /**   机器参数    **/
     void slot_LaserPara();
     void slot_LaserRegImp();
     void slot_LaserRegExp();
@@ -84,6 +90,8 @@ private slots:
     void slot_LaserCal();
     void slot_LaserPosTest();
     void slot_LaserPlatSetH();
+
+    /**   视图菜单    **/
     void slot_ViewTool();
     void slot_ViewStat();
     void slot_ViewCtrl();
@@ -94,18 +102,26 @@ private slots:
     void slot_ViewOriModel();
     void slot_ViewModModel();
     void slot_ViewApartModel();
+
+    /**   排序菜单    **/
     void slot_SortY2X();
     void slot_SortX2Y();
     void slot_SortOri();
     void slot_SortShort();
+
+    /**   分块菜单    **/
     void slot_BlockX2Y();
     void slot_BlockY2X();
     void slot_BlockShort();
     void slot_BlockPara();
+
+    /**   操作菜单    **/
     void slot_OperLaserOri();
     void slot_OperPlatHome();
     void slot_OperSetCurPos2LaserOri();
     void slot_OperSaveCurPos2LaserOri();
+
+    /**   调试菜单    **/
     void slot_DebugAtchModel();
     void slot_DebugHotTest();
     void slot_DebugSplitModel();
@@ -114,14 +130,17 @@ private slots:
     void slot_StdModLine();
     void slot_StdModPlat();
     void slot_StdModSphere();
+
+    /**   帮助菜单    **/
     void slot_HelpAboutMe();
+
+    /**   语言菜单    **/
     void slot_LanCHN();
-    void slot_MovTo();
+
+    /**   侧边栏    **/
     void slot_MotorStop();
     void slot_CrvView();
     void slot_CrvApp();
-    void slot_BlockParaApply();
-    void slot_VoiceAlarm();
     void slot_PlatOrigin();
     void slot_PlatReset();
     void slot_PlatCtrl();
@@ -129,29 +148,39 @@ private slots:
     void slot_LaserCtrl();
 
 
+    // UI窗体/控件
 private:
-    Ui::MainWindow *ui;
-    //mainWindow
-    meshInterface MI;
+
     QLabel *lb_StRunTime;
     QLabel *lb_StLaserTime;
     QLabel *lb_StInfo;
     QTimer *timerRun;
-    QStringList fileList;
-    QStringList pathList;
-    bool run;
-    T TRun;
-    T TLaser;
-    ParaWindow *paraw;
-    MarkWindow *markw;
-    McurvWindow *mcurvw;
-    Parameter *para;
-    Crystal *crystal;
-    Plat *plat;
-    Scaner *scaner;
-    Laser *laser;
-    Motor *motor;
-    CtrlCard *ctrlCard;
+
+    ParaWindow *parameterWindow;
+    MarkWindow *markWindow;
+    McurvWindow *mCurvWindow;
+
+private:
+
+    Ui::MainWindow *ui;
+
+    //mainWindow
+    meshInterface MI;   // 读取文件接口
+
+    QStringList fileList;   //最近打开的文件
+    QStringList pathList;   //最近文件目录
+    bool isLaserOn;
+    TimerData tdRunningTime;
+    TimerData tdLaserOnTime;
+
+
+
+    osg::ref_ptr<Crystal> crystal;
+    osg::ref_ptr<Plat> plat;
+    osg::ref_ptr<Scaner> scaner;
+    osg::ref_ptr<Laser> laser;
+    osg::ref_ptr<Motor> motor;
+    osg::ref_ptr<CtrlCard> ctrlCard;
 
     //osgViewer
     osg::ref_ptr<osgContainer> curViewer;
@@ -166,7 +195,6 @@ private:
     osg::ref_ptr<osg::Group> additionalPointsGroup;
     osg::ref_ptr<osg::Group> previewGroup;//预览组
     osg::ref_ptr<osg::Group> draggerGroup;//dragger组
-    BasicSettingsDialog::CrystalType curCrystalType = BasicSettingsDialog::BOX;
     osg::Vec3 curCrystalSize = osg::Vec3(60.f,60.f,60.f);
     float curCrystalHeight = 10.f;
     float curCrystalDiameter = 70.f;
@@ -186,13 +214,12 @@ private:
     void updateOSGDisplay(DisplayMode mode);
     void setPointCloudVisible(bool visible);
     void updateLighting(bool brightening);//增强环境光照
-    void getTime(T *t);
+    void getTime(TimerData *t);
     void spyPutIn();
     osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node);
     void openFile(QString fileName);
     void setAxesVisible(bool visible);
     void updateRefShape(osg::Geode *geode);
-    osg::Geode *createCrystalFrame(BasicSettingsDialog::CrystalType type, osg::Vec3 size, float zRot, float height, float diameter);
     void getPoints(const QString fileName);
     void slot_TimerRefresh();
     void readIO();

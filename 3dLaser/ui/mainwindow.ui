@@ -77,22 +77,7 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="ly_paraWt">
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <property name="leftMargin">
-        <number>9</number>
-       </property>
-       <property name="topMargin">
-        <number>9</number>
-       </property>
-       <property name="rightMargin">
-        <number>9</number>
-       </property>
-       <property name="bottomMargin">
-        <number>9</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QGroupBox" name="gb_ModInfo">
          <property name="sizePolicy">
@@ -273,7 +258,7 @@
           <item row="1" column="4">
            <widget class="QLabel" name="lb_PointObj">
             <property name="text">
-             <string>材料</string>
+             <string>水晶</string>
             </property>
             <property name="scaledContents">
              <bool>false</bool>
@@ -644,7 +629,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>开始(S)</string>
+               <string>开始</string>
               </property>
              </widget>
             </item>
@@ -657,7 +642,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>暂停(P)</string>
+               <string>暂停</string>
               </property>
              </widget>
             </item>
@@ -670,7 +655,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>停止(T)</string>
+               <string>停止</string>
               </property>
              </widget>
             </item>
@@ -711,27 +696,9 @@
          <property name="title">
           <string>平台控制</string>
          </property>
-         <layout class="QVBoxLayout" name="ly_gbPlatCtrl_2">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QGridLayout" name="ly_PlatCtrlBtn" columnstretch="1,1,1,1">
-            <property name="spacing">
-             <number>1</number>
-            </property>
+           <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0">
              <widget class="QPushButton" name="btn_PlatOrigin">
               <property name="sizePolicy">
@@ -780,19 +747,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QRadioButton" name="rbtn_PlatCo">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>连续</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="btn_PlatXP">
               <property name="sizePolicy">
@@ -818,7 +772,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>远(Y+)</string>
+               <string>后(Y+)</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -838,19 +792,6 @@
               </property>
               <property name="autoDefault">
                <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QRadioButton" name="rbtn_PlatDe">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>增量</string>
               </property>
              </widget>
             </item>
@@ -879,7 +820,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>近(Y-)</string>
+               <string>前(Y-)</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -902,346 +843,189 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QSpinBox" name="sb_PlatStep">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="ly_PlatCtrlPara" rowstretch="0,0,0,0" columnstretch="1,1,1,1,1">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <item row="3" column="0">
-             <widget class="QLabel" name="lb_PlatZ">
-              <property name="text">
-               <string>Z:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValZ">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="lb_PlatRelValX">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QLabel" name="lb_PlatValZ">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="lb_PlatRelValZ">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="lb_PlatRelValY">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
-             <widget class="QLabel" name="lb_PlatValY">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValY">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLabel" name="lb_PlatAbsValX">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QLabel" name="lb_PlatValX">
-              <property name="text">
-               <string>0.0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lb_PlatY">
-              <property name="text">
-               <string>Y:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="lb_PlatSize">
-              <property name="text">
-               <string>幅面</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QLabel" name="lb_PlatSet">
-              <property name="text">
-               <string>幅面设置</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="lb_PlatAbs">
-              <property name="text">
-               <string>机械</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lb_PlatAxis">
-              <property name="text">
-               <string>轴</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lb_PlatRel">
-              <property name="text">
-               <string>相对</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lb_PlatX">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>X:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValX">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValY">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
-             <widget class="QLineEdit" name="le_PlatSetValZ">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="ly_PlatCtrlMotion" stretch="0,0,0,0,0,0">
-            <property name="spacing">
-             <number>0</number>
-            </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QLabel" name="lb_PlatMXYZ">
-              <property name="text">
-               <string>X Y Z</string>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>操作模式</string>
               </property>
+              <widget class="QRadioButton" name="rbtn_PlatCo">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>20</y>
+                 <width>53</width>
+                 <height>20</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>连续</string>
+               </property>
+              </widget>
+              <widget class="QRadioButton" name="rbtn_PlatDe">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>40</y>
+                 <width>53</width>
+                 <height>20</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>增量</string>
+               </property>
+              </widget>
+              <widget class="QSpinBox" name="sb_PlatStep">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>60</y>
+                 <width>71</width>
+                 <height>22</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+              <widget class="QLabel" name="lb_CrvSize_8">
+               <property name="geometry">
+                <rect>
+                 <x>80</x>
+                 <y>60</y>
+                 <width>31</width>
+                 <height>22</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>mm</string>
+               </property>
+              </widget>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_PlatMValX">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_PlatMValY">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_PlatMValZ">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_PlatMRun">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>前往</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_PlatMStop">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>电机停</string>
-              </property>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QLabel" name="lb_PlatAxis">
+                <property name="text">
+                 <string>轴</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="lb_PlatRel">
+                <property name="text">
+                 <string>相对</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="lb_PlatSize">
+                <property name="text">
+                 <string>幅面</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lb_PlatX">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>X:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="lb_PlatRelValX">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="lb_PlatValX">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lb_PlatY">
+                <property name="text">
+                 <string>Y:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="lb_PlatRelValY">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="lb_PlatValY">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lb_PlatZ">
+                <property name="text">
+                 <string>Z:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="lb_PlatRelValZ">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="lb_PlatValZ">
+                <property name="text">
+                 <string>0.0</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -1254,318 +1038,254 @@
           <string>雕刻编辑</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
           <item>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="lb_CrvSize">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>材料大小(XYZ):</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="le_CrvSizeX">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLineEdit" name="le_CrvSizeY">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QLineEdit" name="le_CrvSizeZ">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lb_ModMov">
-              <property name="text">
-               <string>模型偏移(XYZ):</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="le_MovX">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLineEdit" name="le_MovY">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QLineEdit" name="le_MovZ">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>35</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QPushButton" name="btn_CrvView">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>预览</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QPushButton" name="btn_CrvApp">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>应用</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_BlkPara">
-         <property name="title">
-          <string>分块参数</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="ly_Blk1">
-            <property name="spacing">
-             <number>1</number>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>水晶大小(mm)</string>
             </property>
-            <item>
-             <widget class="QLabel" name="lb_BlkXY">
-              <property name="text">
-               <string>分块大小(XY):</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValX"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValY"/>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="cb_BlkCen">
-              <property name="text">
-               <string>中心对位</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>X:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_CrvSizeX">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Y:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_CrvSizeY">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Z:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_CrvSizeZ">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk2">
-            <property name="spacing">
-             <number>1</number>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>模型偏移(mm)</string>
             </property>
-            <item>
-             <widget class="QLabel" name="lb_BlkFuz">
-              <property name="text">
-               <string>模糊带:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="rbtn_BlkUni">
-              <property name="text">
-               <string>均匀分布</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="rbtn_BlkNor">
-              <property name="text">
-               <string>正态分布</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>X:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_MovX">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_6">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Y:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_MovY">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lb_CrvSize_5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Z:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="le_MovZ">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ly_Blk3">
-            <property name="spacing">
-             <number>1</number>
-            </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QLabel" name="lb_BlkW">
+             <widget class="QLabel" name="lb_BlkH_2">
               <property name="text">
-               <string>宽度:</string>
+               <string>垫板厚度(mm):</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_BlkValWidth"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="lb_BlkA">
-              <property name="text">
-               <string>角度:</string>
+             <widget class="QLineEdit" name="le_BlkValHeight_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValAngle"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="lb_BlkSd">
-              <property name="text">
-               <string>标准差:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValStdDev"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="ly_Blk4">
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="lb_BlkH">
-              <property name="text">
-               <string>垫板厚度:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValHeight">
               <property name="maximumSize">
                <size>
                 <width>55</width>
@@ -1574,10 +1294,36 @@
               </property>
              </widget>
             </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <spacer name="sp_Blk1">
+             <widget class="QPushButton" name="btn_CrvView">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>预览</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="sp_Point4_2">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Preferred</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -1588,12 +1334,21 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="btn_BlkApp">
+             <widget class="QPushButton" name="btn_CrvApp">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
               </property>
               <property name="text">
                <string>应用</string>
@@ -1602,68 +1357,18 @@
             </item>
            </layout>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_MCrvSel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>批量雕刻选项</string>
-         </property>
-         <layout class="QVBoxLayout" name="ly_gbMCrvSel_2">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
           <item>
-           <layout class="QHBoxLayout" name="ly_MCrv" stretch="1,1">
-            <property name="spacing">
-             <number>40</number>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
             </property>
-            <item>
-             <widget class="QComboBox" name="cmb_MCrvMode">
-              <item>
-               <property name="text">
-                <string>单模型单次</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>单模型批量</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>多模型批量</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="cb_MCrvVo">
-              <property name="text">
-               <string>语音提醒</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -1706,7 +1411,7 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -3036,38 +2741,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>btn_PlatMRun</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_MovTo()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>192</x>
-     <y>444</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatMStop</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_MotorStop()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>254</x>
-     <y>444</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>btn_CrvView</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -3092,38 +2765,6 @@
     <hint type="sourcelabel">
      <x>265</x>
      <y>543</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_BlkApp</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockParaApply()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>662</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cb_MCrvVo</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_VoiceAlarm()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>227</x>
-     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>639</x>

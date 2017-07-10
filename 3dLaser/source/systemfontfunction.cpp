@@ -5,13 +5,12 @@ SystemFontFunction::SystemFontFunction()
 
 }
 
-std::string SystemFontFunction::GetSystemFontFile(const std::string &faceName)
+std::string SystemFontFunction::GetSystemFontFile(/*const std::string &faceName*/const std::wstring wsFaceName)
 {
-
     static const LPCWSTR fontRegistryPath = L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
     HKEY hKey;
     LONG result;
-    std::wstring wsFaceName(faceName.begin(), faceName.end());
+//    std::wstring wsFaceName(faceName.begin(), faceName.end());
 
     // Open Windows font registry key
     result = RegOpenKeyEx(HKEY_LOCAL_MACHINE, fontRegistryPath, 0, KEY_READ, &hKey);

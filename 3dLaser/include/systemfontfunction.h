@@ -25,7 +25,7 @@ public:
     SystemFontFunction();
 
     // Get system font file path
-    std::string GetSystemFontFile(const std::string &faceName);
+    std::string GetSystemFontFile(/*const std::string &faceName*/const std::wstring wsFaceName);
 
     #define MAKE_TAG(ch1, ch2, ch3, ch4) (\
         (((quint32)(ch4)) << 24) | \

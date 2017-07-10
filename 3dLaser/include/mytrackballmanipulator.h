@@ -3,6 +3,16 @@
 
 #include <osgGA/TrackballManipulator>
 
+/** 视图方向 */
+enum ViewDirection
+{
+    DEFAULTVIEW,    //缺省（未设定）
+    FRONTVIEW,  //前视图
+    LEFTVIEW,   //左视图
+    RIGHTVIEW,  //右视图
+    TOPVIEW //顶视图
+};
+
 
 class MyTrackballManipulator : public osgGA::TrackballManipulator
 {
@@ -20,6 +30,14 @@ protected:
 public:
     bool isPerspectiveProjection();
     bool isOrthoProjection();
+
+    // 设置视角方位
+    void setViewDirection(ViewDirection direction);
+    // 界面按键控制manipulator，从而控制界面视角变化
+    // 左右视角转动
+    void rotateLeftRight(int direct);
+    // 上下视角转动
+    void rotateUpDown(int direct);
 
 private:
     osg::ref_ptr<osg::Camera> _camera;

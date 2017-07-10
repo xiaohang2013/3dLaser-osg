@@ -4,9 +4,6 @@
 
 
 
-
-
-
 LocalToWorldMatrix::LocalToWorldMatrix(osg::NodeVisitor::TraversalMode tm)
     :osg::NodeVisitor(tm),_done(false)//默认遍历全部父节点
 {}
@@ -45,11 +42,11 @@ void unificateNodeStructure::apply(osg::Geode &geode)
         std::string name = geode.getName();
         if(name.empty())
         {
-            geode.setName(qPrintable(defultGeodeName));
-            name = qPrintable(defultGeodeName);
+            geode.setName(qPrintable(defaultGeodeName));
+            name = qPrintable(defaultGroupName);
         }
         //是否已存在（值）相等osg::MatrixTransform，是：直接添加geode；否：新建后添加
-        findNamedNodeList fnnl(name);
+        findNodeList fnnl(name);
         _group->accept(fnnl);
         osg::NodeList mtList=fnnl.getNamedMatrixTransformList();
         if(mtList.size()>0)//同名项

@@ -5,7 +5,13 @@
 #include "macro.h"
 #include "mainwindow.h"
 using namespace std;
-#define TIMESPAN 20
+#define TIMESPAN 20   //ms
+#define INMAX 22
+#define OUTMAX 9
+
+int inPut[INMAX];
+int outPut[OUTMAX];
+osg::ref_ptr<osg::Vec3Array> g_Points;
 const std::string domain_oriLayerMatrix = "oriLayerMatrix";//域名-层矩阵初始值域名
 const std::string domain_lastUsedLayerMatrix = "lastUsedLayerMatrix";//域名-最近更新的层矩阵域名
 const std::string domain_ordinaryLayerPrm = "ordinaryLayerPrm";//域名-普通层参数域名
@@ -132,15 +138,11 @@ void MainWindow::openFile(QString fileName)
             mt->setUserValue(domain_lastUsedLayerMatrix, mt->getMatrix());
         }
 
-
-        //测试段代码---------------------------------------------------------------------------------------------
-        osg::ref_ptr<osg::Vec3Array> va= getVertexArray(group);
-        int num=va->size();
+        g_Points = getVertexArray(group);
+        int num=g_Points->size();
         crystal->pointCloud.pointNum = num;
-        osg::Vec3 v3(va->at(0));
+        osg::Vec3 v3(g_Points->at(0));
         QMessageBox::information(this,"提示","num = " + QString("%1  %2  %3  %4").arg(num).arg(v3.x()).arg(v3.y()).arg(v3.z()));
-        //测试段代码---------------------------------------------------------------------------------------------
-
         //显示模式：点云图
         updateOSGDisplay(POINTCLOUD);
         updateParam();
@@ -318,54 +320,78 @@ void MainWindow::slot_StdModPlat(){}
 void MainWindow::slot_StdModSphere(){}
 void MainWindow::slot_HelpAboutMe(){}
 void MainWindow::slot_LanCHN(){}
-void MainWindow::slot_TimerRefresh()
+
+//主窗口刷新timer，TIMESPAN间隔刷新一次
+void MainWindow::mwTimerRefresh()
 {
     static int count = 0;
     QString runText;
     QString laserText;
+    //刷新IO
+    refreshIO();
+    //检查是否触发限位，触发则停止电机
+    checkIfStopMotor();
+
+    //刷新时间
     count++;
-    if (count >= 10)
+    if (count >= (1000/TIMESPAN))
     {
         tdRunningTime.count++;
-    getTime(&tdRunningTime);
-    runText = QString("总运行时间: %1:%2:%3")
-            .arg(QString::number(tdRunningTime.hour))
-            .arg(QString::number(tdRunningTime.minut))
-            .arg(QString::number(tdRunningTime.second));
-    lb_StRunTime->setText(runText);
-    if (isLaserOn)
-        tdLaserOnTime.count++;
-    getTime(&tdLaserOnTime);
-    laserText = QString("总雕刻时间: %1:%2:%3")
-            .arg(QString::number(tdLaserOnTime.hour))
-            .arg(QString::number(tdLaserOnTime.minut))
-            .arg(QString::number(tdLaserOnTime.second));
-    lb_StLaserTime->setText(laserText);
+        getTime(&tdRunningTime);
+        runText = QString("总运行时间: %1:%2:%3")
+                .arg(QString::number(tdRunningTime.hour))
+                .arg(QString::number(tdRunningTime.minut))
+                .arg(QString::number(tdRunningTime.second));
+        lb_StRunTime->setText(runText);
+        if (isLaserOn)
+            tdLaserOnTime.count++;
+        getTime(&tdLaserOnTime);
+        laserText = QString("总雕刻时间: %1:%2:%3")
+                .arg(QString::number(tdLaserOnTime.hour))
+                .arg(QString::number(tdLaserOnTime.minut))
+                .arg(QString::number(tdLaserOnTime.second));
+        lb_StLaserTime->setText(laserText);
 
-    //refresh mainwindow para display
-    if (parameterWindow->getIsUpdate())
-        updateParam();
-    count = 0;
-    }
-}
-void MainWindow::readIO()
-{
-    int i = 0;
-    for (i = 0; i< INMAX; i ++)
-    {
-        ctrlCard->Read_Input(i);
+        //刷新主窗口显示
+        if (parameterWindow->getIsUpdate())
+            updateParam();
+        count = 0;
     }
 }
 void MainWindow::refreshIO()
 {
-
+    int i = 0;
+    int rtn = 1;
+    //输入
+    for (i = 0; i< INMAX; i++)
+    {
+        inPut[i] = ctrlCard->readInput(i);
+        if(-1 == inPut[i])
+            qDebug()<<"IN"<<i<<"输入失败";
+    }
+    //输出
+    for (i = 0; i< OUTMAX; i++)
+    {
+        rtn = ctrlCard->writeOutput(i, outPut[i]);
+        if(1 == rtn)
+            qDebug()<<"OUT"<<i<<"输出失败";
+    }
+}
+void MainWindow::checkIfStopMotor()
+{
+    if (INPUT_L == inPut[X_LIMIT_N] || INPUT_L == inPut[X_LIMIT_P])
+        ctrlCard->stopRun(motor->motorX.num, SUDDEN_STOP);
+    if (INPUT_L == inPut[Y_LIMIT_N] || INPUT_L == inPut[Y_LIMIT_P])
+        ctrlCard->stopRun(motor->motorY.num, SUDDEN_STOP);
+    if (INPUT_L == inPut[Z_LIMIT_N] || INPUT_L == inPut[Z_LIMIT_P])
+        ctrlCard->stopRun(motor->motorZ.num, SUDDEN_STOP);
 }
 
 void MainWindow::slot_MotorStop()
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < MAXAXIS; i++)
     {
-        ctrlCard->StopRun(i+1, SUDDEN_STOP);
+        ctrlCard->stopRun(i+1, SUDDEN_STOP);
     }
 }
 
@@ -384,6 +410,22 @@ void MainWindow::slot_CrvApp()
     crystal->mov.z = ui->le_MovZ->text().toFloat();
 }
 
+
+void MainWindow::slot_CrvStart()
+{
+
+}
+
+void MainWindow::slot_CrvPause()
+{
+
+}
+
+void MainWindow::slot_CrvStop()
+{
+
+}
+
 void MainWindow::slot_PlatOrigin()
 {
 
@@ -391,7 +433,7 @@ void MainWindow::slot_PlatOrigin()
 
 void MainWindow::slot_PlatReset()
 {
-    int rtn = DRV_OK;
+    int rtn = ADTDRV_OK;
     int dir = 0;
     S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
     for (int i=0; i < MAXAXIS; i++)
@@ -400,10 +442,10 @@ void MainWindow::slot_PlatReset()
             dir = 1;
         else if (0 == dir && m[i].limitN)
             dir = -1;
-        rtn += ctrlCard->Setup_Speed(m[i].num, dir*m[i].v0, dir*m[i].v, m[i].a);
-        if (DRV_FAIL == rtn)
+        rtn += ctrlCard->setSpeed(m[i].num, dir*m[i].v0, dir*m[i].v, m[i].a);
+        if (ADTDRV_FAIL == rtn)
         {
-            ctrlCard->StopRun(m[i].num, SUDDEN_STOP);
+            ctrlCard->stopRun(m[i].num, SUDDEN_STOP);
             lb_StInfo->setText("初始化速度错误");
             return;
         }
@@ -422,20 +464,20 @@ void MainWindow::slot_MovMode()
 
 void MainWindow::slot_LaserCtrl()
 {
-    int rtn = DRV_FAIL;
+    int rtn = ADTDRV_FAIL;
     QPushButton *pt = qobject_cast <QPushButton*>(sender());
     if ("开激光" == pt->text())
     {
-        rtn = ctrlCard->Set_Laser(0, LASER_ON);
-        if (DRV_OK == rtn)
+        rtn = ctrlCard->setLaser(0, LASER_ON, laser->frequency, laser->ratio/100.0);
+        if (ADTDRV_OK == rtn)
             ui->btn_CrvClsLas->setText("关激光");
         else
             lb_StInfo->setText("打开激光错误");
     }
     else if ("关激光" == pt->text())
     {
-        rtn = ctrlCard->Set_Laser(0, LASER_OFF);
-        if (DRV_OK == rtn)
+        rtn = ctrlCard->setLaser(0, LASER_OFF, laser->frequency, laser->ratio/100.0);
+        if (ADTDRV_OK == rtn)
             ui->btn_CrvClsLas->setText("开激光");
         else
             lb_StInfo->setText("关闭激光错误");
@@ -444,7 +486,7 @@ void MainWindow::slot_LaserCtrl()
 
 void MainWindow::getTime(TimerData *t)
 {
-    if (NULL == t)
+    if (!t)
         qDebug()<<"null ptr";
     int count = t->count;
     t->second = count%60;
@@ -544,7 +586,7 @@ void MainWindow::initTimer()
         delete timerRun;
         return;
     }
-    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_TimerRefresh()));
+    connect(timerRun, SIGNAL(timeout()), this, SLOT(mwTimerRefresh()));
     //timer period
     timerRun->setInterval(TIMESPAN);
     timerRun->start();
@@ -595,7 +637,7 @@ int MainWindow::initCtrlBoard()
     int rtn = CTRL_ERROR;
     int msgRtn = 0;
     //*************初始化8940A1卡**************
-    rtn = ctrlCard->Init_Board();
+    rtn = ctrlCard->initBoard();
     if (rtn <= 0)
     {
         msgRtn = QMessageBox::warning(this, "错误", "控制卡初始化失败!", QMessageBox::Ok);
@@ -636,29 +678,31 @@ int MainWindow::initCtrlBoard()
         lb_StInfo->setText("运动控制卡可以使用!");
     }
     //*************获取版本号**************
-    int ver = ctrlCard->Get_HardWareVer();
+    int ver = ctrlCard->getHardWareVer();
     QString str = "硬件版本:"+ QString::number(ver, 10);
     lb_StInfo->setText(str);
     //*************初始化限位**************
     S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
     for (int i = 0; i< MAXAXIS; i++)
     {
-        rtn += ctrlCard->set_limit(0, m[i].num, m[i].limitP, m[i].limitN, m[i].limitL);
+        rtn += ctrlCard->setLimit(0, m[i].num, m[i].limitP, m[i].limitN, m[i].limitL);
     }
-    if (DRV_FAIL == rtn)
+    if (ADTDRV_FAIL == rtn)
     {
         QMessageBox::warning(this, "错误", "初始化限位错误", QMessageBox::Ok);
     }
     //*************初始化速度**************
     for (int i = 0; i< MAXAXIS; i++)
     {
-        rtn += ctrlCard->Setup_Speed(m[i].num, m[i].v0, m[i].v, m[i].a);
+        rtn += ctrlCard->setSpeed(m[i].num, m[i].v0, m[i].v, m[i].a);
     }
-    if (DRV_FAIL == rtn)
+    if (ADTDRV_FAIL == rtn)
     {
         QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
         return rtn;
     }
+    //*************初始化激光延时**************
+    ctrlCard->setLaserOutDelay(0, laser->lightOutDelay);
 
     return rtn;
 }

@@ -5,6 +5,8 @@
 #include <QString>
 #include <QMainWindow>
 #include <QTimer>
+#include <QThread>
+
 #include <osg/ref_ptr>
 #include <osg/MatrixTransform>
 #include <osg/Vec3>
@@ -146,6 +148,9 @@ private slots:
     void slot_PlatCtrl();
     void slot_MovMode();
     void slot_LaserCtrl();
+    void slot_CrvStart();
+    void slot_CrvPause();
+    void slot_CrvStop();
 
 
     // UI窗体/控件
@@ -172,8 +177,6 @@ private:
     bool isLaserOn;
     TimerData tdRunningTime;
     TimerData tdLaserOnTime;
-
-
 
     osg::ref_ptr<Crystal> crystal;
     osg::ref_ptr<Plat> plat;
@@ -221,9 +224,9 @@ private:
     void setAxesVisible(bool visible);
     void updateRefShape(osg::Geode *geode);
     void getPoints(const QString fileName);
-    void slot_TimerRefresh();
-    void readIO();
+    void mwTimerRefresh();
     void refreshIO();
+    void checkIfStopMotor();
 };
 
 #endif // MAINWINDOW_H

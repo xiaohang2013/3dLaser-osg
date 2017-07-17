@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1171</width>
+    <height>936</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -19,79 +19,13 @@
   <property name="windowTitle">
    <string>参数</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>9</x>
-     <y>446</y>
-     <width>611</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="ly_para_btn">
-    <item>
-     <spacer name="sp_para_btn2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_para_write">
-      <property name="text">
-       <string>写默认值</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_para_read">
-      <property name="text">
-       <string>读默认值</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="sp_para_btn1">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_para_enter">
-      <property name="text">
-       <string>确定</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_para_cancle">
-      <property name="text">
-       <string>取消</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="w_para_btn" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>100</width>
-     <height>421</height>
+     <height>450</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -105,7 +39,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="btn_para_sort">
+     <widget class="QPushButton" name="pb_sortingMethod">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -140,7 +74,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="btn_para_scan">
+     <widget class="QPushButton" name="pb_laserAndScanner">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -166,7 +100,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="btn_para_motor">
+     <widget class="QPushButton" name="pb_PlatformMotor">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -193,13 +127,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QScrollArea" name="para_sort">
+  <widget class="QScrollArea" name="sa_sortingMethod">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>640</x>
      <y>10</y>
      <width>511</width>
-     <height>421</height>
+     <height>450</height>
     </rect>
    </property>
    <property name="verticalScrollBarPolicy">
@@ -216,8 +150,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>509</width>
-      <height>419</height>
+      <width>518</width>
+      <height>448</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -259,7 +193,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_cry_width"/>
+         <widget class="QDoubleSpinBox" name="dsb_crystalSizeX">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>60.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="lb_para_c_w2">
@@ -276,7 +223,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_cry_len"/>
+         <widget class="QDoubleSpinBox" name="dsb_crystalSizeY">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>60.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="lb_para_c_l2">
@@ -293,7 +253,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_cry_high"/>
+         <widget class="QDoubleSpinBox" name="dsb_crystalSizeZ">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>60.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="lb_para_c_h2">
@@ -316,21 +289,21 @@
           <item>
            <layout class="QVBoxLayout" name="ly_para_s">
             <item>
-             <widget class="QRadioButton" name="rbtn_sort_y2x">
+             <widget class="QRadioButton" name="rb_squenceY2X">
               <property name="text">
                <string>顺序扫描(Y-X)</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtn_sort_x2y">
+             <widget class="QRadioButton" name="rb_squenceX2Y">
               <property name="text">
                <string>顺序扫描(X-Y)</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="rbtn_sort_min">
+             <widget class="QRadioButton" name="rb_ShortestPath">
               <property name="text">
                <string>最短路径</string>
               </property>
@@ -350,13 +323,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="le_para_width">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="2">
              <widget class="QLabel" name="lb_para_w2">
               <property name="text">
@@ -371,13 +337,42 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="le_para_ratio"/>
-            </item>
             <item row="1" column="2">
              <widget class="QLabel" name="lb_para_r2">
               <property name="text">
                <string>%</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="dsb_blockWidth">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="maximum">
+               <double>9999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="dsb_boundaryDisable">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -402,7 +397,23 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_min_layer"/>
+             <widget class="QDoubleSpinBox" name="dsb_minLayerDis">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <double>999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.088000000000000</double>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="lb_min_layer2">
@@ -442,21 +453,21 @@
              </spacer>
             </item>
             <item row="4" column="1">
-             <widget class="QRadioButton" name="rbtn_correct_y2x">
+             <widget class="QRadioButton" name="rb_YXCorrect">
               <property name="text">
                <string>YX矫正</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QRadioButton" name="rbtn_correct_x2y">
+             <widget class="QRadioButton" name="rb_XYCorrect">
               <property name="text">
                <string>XY矫正</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QRadioButton" name="rbtn_correct_none">
+             <widget class="QRadioButton" name="rb_noneCorrect">
               <property name="text">
                <string>无</string>
               </property>
@@ -583,14 +594,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="rbtn_split_vertical">
+           <widget class="QRadioButton" name="rb_verticalBorder">
             <property name="text">
              <string>垂直</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="rbtn_split_bevel">
+           <widget class="QRadioButton" name="rb_inclinedBorder">
             <property name="text">
              <string>斜面</string>
             </property>
@@ -628,12 +639,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_split_size_X">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+           <widget class="QDoubleSpinBox" name="dsb_blockSizeX">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="decimals">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>25.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -652,12 +669,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_split_size_Y">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+           <widget class="QDoubleSpinBox" name="dsb_blockSizeY">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="decimals">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>25.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -676,15 +699,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_split_size_Z">
+           <widget class="QDoubleSpinBox" name="dsb_blockSizeZ">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="decimals">
+             <number>2</number>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -727,18 +753,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_border_width">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QDoubleSpinBox" name="dsb_borderWidth">
+            <property name="enabled">
+             <bool>true</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>3.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -757,25 +783,25 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_border_angle">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QDoubleSpinBox" name="dsb_borderAngle">
+            <property name="enabled">
+             <bool>true</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>5.000000000000000</double>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="lb_border_a2">
             <property name="text">
-             <string>度</string>
+             <string>°</string>
             </property>
            </widget>
           </item>
@@ -800,13 +826,13 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QScrollArea" name="para_scan">
+  <widget class="QScrollArea" name="sa_laserAndScanner">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>10</y>
+     <x>640</x>
+     <y>470</y>
      <width>511</width>
-     <height>421</height>
+     <height>450</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -818,7 +844,7 @@
    <property name="maximumSize">
     <size>
      <width>511</width>
-     <height>421</height>
+     <height>450</height>
     </size>
    </property>
    <property name="verticalScrollBarPolicy">
@@ -836,15 +862,18 @@
       <x>0</x>
       <y>0</y>
       <width>509</width>
-      <height>479</height>
+      <height>448</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <property name="leftMargin">
       <number>9</number>
      </property>
      <property name="topMargin">
-      <number>9</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
       <number>9</number>
@@ -871,7 +900,7 @@
             <rect>
              <x>80</x>
              <y>0</y>
-             <width>91</width>
+             <width>101</width>
              <height>20</height>
             </rect>
            </property>
@@ -889,7 +918,7 @@
             <string>Laser Pulse</string>
            </property>
           </widget>
-          <widget class="QLabel" name="lb_laser_pulse_high">
+          <widget class="QLabel" name="lb_highPulseTime">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -911,7 +940,7 @@
             <string>100us</string>
            </property>
           </widget>
-          <widget class="QLabel" name="lb_laser_pulse_low">
+          <widget class="QLabel" name="lb_lwoPulseTime">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -953,7 +982,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lb_laser_r_v">
+             <widget class="QLabel" name="lb_laserRatio">
               <property name="text">
                <string>30</string>
               </property>
@@ -972,7 +1001,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QSlider" name="sl_laser_r">
+           <widget class="QSlider" name="s_laserRatio">
             <property name="maximum">
              <number>100</number>
             </property>
@@ -1003,7 +1032,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lb_laser_f_v">
+             <widget class="QLabel" name="lb_laserFrequency">
               <property name="text">
                <string>3000</string>
               </property>
@@ -1022,12 +1051,12 @@
            </layout>
           </item>
           <item>
-           <widget class="QSlider" name="sl_laser_f">
+           <widget class="QSlider" name="s_laserFrequency">
             <property name="minimum">
              <number>500</number>
             </property>
             <property name="maximum">
-             <number>3500</number>
+             <number>5000</number>
             </property>
             <property name="pageStep">
              <number>100</number>
@@ -1074,22 +1103,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="le_laser_focalLen">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="lb_set_lpoint">
               <property name="sizePolicy">
@@ -1100,22 +1113,6 @@
               </property>
               <property name="text">
                <string>激光焦距：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="le_laser_lightOutDelay">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
               </property>
              </widget>
             </item>
@@ -1152,29 +1149,52 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="le_laser_preHeatTime">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="2">
              <widget class="QLabel" name="lb_set_ldelay2">
               <property name="text">
                <string>us</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="dsb_focalLength">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>120.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="sb_laserSimmerTime">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sb_laserDelay">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+              <property name="value">
+               <number>205</number>
               </property>
              </widget>
             </item>
@@ -1192,22 +1212,6 @@
               </property>
               <property name="text">
                <string>振镜延时：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="le_scan_delay">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
               </property>
              </widget>
             </item>
@@ -1231,25 +1235,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="le_scan_speed">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="2">
              <widget class="QLabel" name="lb_set_sv2">
               <property name="text">
@@ -1270,29 +1255,49 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="le_scan_microStepDelay">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="2">
              <widget class="QLabel" name="lb_set_udelay2">
               <property name="text">
                <string>us</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="sb_scannerDelay">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+              <property name="value">
+               <number>500</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="sb_scannerSpeed">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>9999999</number>
+              </property>
+              <property name="value">
+               <number>4130</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sb_microStepDelay">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+              <property name="value">
+               <number>10</number>
               </property>
              </widget>
             </item>
@@ -1303,7 +1308,7 @@
         <item>
          <layout class="QHBoxLayout" name="ly_la_set_b">
           <item>
-           <widget class="QCheckBox" name="cb_scan_exchangeXY">
+           <widget class="QCheckBox" name="cb_exchangeXYScanner">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -1313,7 +1318,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="cb_scan_stepOver">
+           <widget class="QCheckBox" name="cb_stepOverMicroStep">
             <property name="text">
              <string>微步跳转</string>
             </property>
@@ -1350,25 +1355,6 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="le_la_r_X">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="lb_la_r_X">
           <property name="text">
@@ -1376,123 +1362,28 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
-         <widget class="QLineEdit" name="le_la_r_Y">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QLineEdit" name="le_la_u_Y">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
+        <item row="3" column="3">
          <widget class="QLabel" name="lb_la_u_Y">
           <property name="text">
            <string>Y振镜微调：</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="le_la_u_X">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="lb_la_u_X">
           <property name="text">
            <string>X振镜微调：</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="4">
-         <widget class="QLineEdit" name="le_la_v_Y">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
+        <item row="2" column="3">
          <widget class="QLabel" name="lb_la_v_X">
           <property name="text">
            <string>Y振镜调整：</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="le_la_v_X">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="lb_la_v_X_2">
           <property name="text">
            <string>X振镜调整：</string>
@@ -1506,6 +1397,120 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="dsb_scannerRatioX">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>2</number>
+          </property>
+          <property name="minimum">
+           <double>-9999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>-172.340000000000003</double>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QDoubleSpinBox" name="dsb_scannerRatioY">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>2</number>
+          </property>
+          <property name="minimum">
+           <double>-9999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>171.659999999999997</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="dsb_scannerAdjustX">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>-999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QDoubleSpinBox" name="dsb_scannerAdjustY">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>-999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="dsb_scannerPlatformAdjustX">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>-999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QDoubleSpinBox" name="dsb_scannerPlatformAdjustY">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>-999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -1515,6 +1520,12 @@
         <string>激光器控制</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QCheckBox" name="cb_la_r232">
           <property name="enabled">
@@ -1535,13 +1546,13 @@
     <zorder>gb_la_set</zorder>
    </widget>
   </widget>
-  <widget class="QScrollArea" name="para_motor">
+  <widget class="QScrollArea" name="sa_platformAndMotor">
    <property name="geometry">
     <rect>
      <x>120</x>
      <y>10</y>
      <width>511</width>
-     <height>421</height>
+     <height>450</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -1553,7 +1564,7 @@
    <property name="maximumSize">
     <size>
      <width>511</width>
-     <height>421</height>
+     <height>450</height>
     </size>
    </property>
    <property name="verticalScrollBarPolicy">
@@ -1571,26 +1582,14 @@
       <x>0</x>
       <y>0</y>
       <width>509</width>
-      <height>445</height>
+      <height>449</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
-     <property name="leftMargin">
-      <number>9</number>
-     </property>
-     <property name="topMargin">
-      <number>9</number>
-     </property>
-     <property name="rightMargin">
-      <number>9</number>
-     </property>
-     <property name="bottomMargin">
-      <number>9</number>
-     </property>
      <item>
       <widget class="QGroupBox" name="gb_par_motor">
        <property name="title">
-        <string>电机参数</string>
+        <string>电机参数(pulse/mm)</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_14">
         <item>
@@ -1601,21 +1600,18 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_mo_ratioX">
+         <widget class="QDoubleSpinBox" name="dsb_motorRatioX">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>640.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -1647,21 +1643,18 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_mo_ratioY">
+         <widget class="QDoubleSpinBox" name="dsb_motorRatioY">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>640.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -1693,21 +1686,18 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_mo_ratioZ">
+         <widget class="QDoubleSpinBox" name="dsb_motorRatioZ">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>427.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -1724,7 +1714,7 @@
      <item>
       <widget class="QGroupBox" name="gb_para_up">
        <property name="title">
-        <string>微调</string>
+        <string>微调(pulse)</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
@@ -1735,21 +1725,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_inch_X">
+         <widget class="QSpinBox" name="sb_marginX">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <number>9999</number>
           </property>
          </widget>
         </item>
@@ -1781,21 +1762,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_inch_Y">
+         <widget class="QSpinBox" name="sb_marginY">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <number>9999</number>
           </property>
          </widget>
         </item>
@@ -1827,21 +1799,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_inch_Z">
+         <widget class="QSpinBox" name="sb_marginZ">
           <property name="enabled">
            <bool>false</bool>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <number>9999</number>
           </property>
          </widget>
         </item>
@@ -1858,7 +1821,7 @@
      <item>
       <widget class="QGroupBox" name="gb_para_s0">
        <property name="title">
-        <string>初始偏移</string>
+        <string>初始偏移(mm)</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_16">
         <item>
@@ -1869,18 +1832,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_s0_X">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QDoubleSpinBox" name="dsb_initOffsetX">
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>295.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -1912,18 +1872,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_s0_Y">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QDoubleSpinBox" name="dsb_initOffsetY">
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>20.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -1955,18 +1912,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_s0_Z">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QDoubleSpinBox" name="dsb_initOffsetZ">
+          <property name="decimals">
+           <number>1</number>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>200.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -2016,21 +1970,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v0_X">
+           <widget class="QSpinBox" name="sb_startSpeedX">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>6000</number>
             </property>
            </widget>
           </item>
@@ -2055,21 +2006,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v0_Y">
+           <widget class="QSpinBox" name="sb_startSpeedY">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>6000</number>
             </property>
            </widget>
           </item>
@@ -2094,21 +2042,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v0_Z">
+           <widget class="QSpinBox" name="sb_startSpeedZ">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>6000</number>
             </property>
            </widget>
           </item>
@@ -2119,7 +2064,7 @@
           <item>
            <widget class="QLabel" name="lb_sp_v">
             <property name="text">
-             <string>匀速(p/s):    </string>
+             <string>匀速(p/s):</string>
             </property>
            </widget>
           </item>
@@ -2144,21 +2089,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v_X">
+           <widget class="QSpinBox" name="sb_runSpeedX">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>16000</number>
             </property>
            </widget>
           </item>
@@ -2183,21 +2125,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v_Y">
+           <widget class="QSpinBox" name="sb_runSpeedY">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>19200</number>
             </property>
            </widget>
           </item>
@@ -2222,21 +2161,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_v_Z">
+           <widget class="QSpinBox" name="sb_runSpeedZ">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>15000</number>
             </property>
            </widget>
           </item>
@@ -2272,21 +2208,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_a_X">
+           <widget class="QSpinBox" name="sb_motorAccX">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>50000</number>
             </property>
            </widget>
           </item>
@@ -2311,21 +2244,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_a_Y">
+           <widget class="QSpinBox" name="sb_motorAccY">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>50000</number>
             </property>
            </widget>
           </item>
@@ -2350,21 +2280,18 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_sp_a_Z">
+           <widget class="QSpinBox" name="sb_motorAccZ">
             <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="readOnly">
+             <bool>false</bool>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+            <property name="value">
+             <number>50000</number>
             </property>
            </widget>
           </item>
@@ -2380,7 +2307,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="1" column="2">
-         <widget class="QCheckBox" name="cb_pl_cv">
+         <widget class="QCheckBox" name="cb_sphereMachine">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2390,7 +2317,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QCheckBox" name="cb_pl_scan_XY">
+         <widget class="QCheckBox" name="cb_reverseScannerXY">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2400,7 +2327,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QCheckBox" name="cb_pl_X">
+         <widget class="QCheckBox" name="cb_reverseXDir">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2413,7 +2340,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QCheckBox" name="cb_pl_Z">
+         <widget class="QCheckBox" name="cb_reverseZDir">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2423,7 +2350,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QCheckBox" name="cb_pl_scan_Z">
+         <widget class="QCheckBox" name="cb_reverseScannerZ">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2433,7 +2360,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QCheckBox" name="cb_pl_Y">
+         <widget class="QCheckBox" name="cb_reverseYDir">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -2451,255 +2378,79 @@
     </layout>
    </widget>
   </widget>
-  <zorder>para_motor</zorder>
-  <zorder>para_scan</zorder>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>621</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <spacer name="sp_para_btn2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pb_setDefaultParam">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>写默认值</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pb_getDefaultParam">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>读默认值</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="sp_para_btn1">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <zorder>sa_platformAndMotor</zorder>
+  <zorder>sa_laserAndScanner</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>w_para_btn</zorder>
-  <zorder>para_sort</zorder>
+  <zorder>sa_sortingMethod</zorder>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>btn_para_sort</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_sort()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>74</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_scan</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_scan()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>211</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_motor</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_motor()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>347</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_sort_x2y</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_sort_x2y()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>139</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_sort_y2x</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_sort_y2x()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>117</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_sort_min</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_sort_min()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>161</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_correct_none</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_correct_none()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>481</x>
-     <y>176</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_correct_x2y</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_correct_x2y()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>481</x>
-     <y>202</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_correct_y2x</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_correct_y2x()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>481</x>
-     <y>228</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_write</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_write()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>193</x>
-     <y>458</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_read</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_read()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>274</x>
-     <y>458</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_enter</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_enter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>500</x>
-     <y>458</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_para_cancle</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_btn_cancel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>581</x>
-     <y>458</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sl_laser_f</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_change_f()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>516</x>
-     <y>105</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sl_laser_r</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>ParaWindow</receiver>
-   <slot>slot_change_r()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>516</x>
-     <y>68</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>239</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>slot_btn_sort()</slot>
   <slot>slot_btn_scan()</slot>

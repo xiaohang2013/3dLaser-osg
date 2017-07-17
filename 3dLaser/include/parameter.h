@@ -8,185 +8,141 @@
 #define PARAMETER
 
 #include <osg/Referenced>
+#include <osg/Vec3>
 
+#define MAXNUM_MOTOR 3      //电机最大数目
+#define MAXNUM_SCANNERAXIS 2 //振镜最大轴数
 
-//
-enum ScanType
+// 坐标轴
+enum AXIS
 {
-    Scan_X2Y,
-    Scan_Y2X,
-    Scan_MIN
+    AXISX=0,
+    AXISY=1,
+    AXISZ=2
 };
 
+// 排序方法
+enum SortingMethod
+{
+    Sorting_X2Y,
+    Sorting_Y2X,
+    Sorting_ShortestPath
+};
+
+// 分块方法
 enum BlockType
 {
     Block_X2Y,
     Block_Y2X,
-    Block_MIN
+    Block_ZShortestPath
 };
 
-enum CorrectType
+// 扭曲修正方式
+enum DistortionCorrection
 {
     Correct_None,
-    Correct_X2Y,
-    Correct_Y2X
+    Correct_XY,
+    Correct_YX
 };
 
+// 边界类型
 enum BorderType
 {
     Border_Vertical,
-    Border_Bevel
+    Border_Inclined
 };
 
+// 雕刻模式
 enum CurvMode
 {
-    single_model_one,
-    single_model_mass,
-    multi_model_mass
+    Single_Model_Once,
+    Single_Model_Repeat,
+    Multi_Model_Repeat
 };
 
-enum MovDir
+// 电机移动方向
+enum MoevDirection
 {
     XP,XN,
     YP,YN,
     ZP,ZN
 };
 
-enum MovMode
+// 电机手动移动方式
+enum MoveMode
 {
     Continuous,
     Incremental
 };
 
+// 限位是否激活----------可以直接用true false二值化代替
 enum LimitType
 {
     ACTIVE,
     NONACTIVE
 };
 
-struct Point
-{
-    float x;
-    float y;
-    float z;
-    Point operator+ (const Point p)
-    {
-        Point temp;
-        temp.x = this->x + p.x;
-        temp.y = this->y + p.y;
-        temp.z = this->z + p.z;
-        return temp;
-    }
-    Point operator- (const Point p)
-    {
-        Point temp;
-        temp.x = this->x - p.x;
-        temp.y = this->y - p.y;
-        temp.z = this->z - p.z;
-        return temp;
-    }
-};
-
-struct S_PointCloud
-{
-    int pointNum;
-    Point pointMin;
-    Point pointMax;
-    CorrectType correctType;
-};
-
-struct S_BlockSet
-{
-    BorderType borderType;
-    BlockType blockType;
-    float fuzzyRatio;
-    Point size;
-    float width;
-    float angle;
-    float stdDev;
-    bool isCenter;
-};
-
-struct S_Scaner
-{
-    float ratio;   //%
-    int adjust;
-    int fineTrim;
-};
-
-struct S_Motor
-{
-    int ratio;    //p/mm
-    int inchCtrl;
-    int offset;
-    int v0;       //p/s
-    int v;        //p/s
-    int a;        //p/s^2
-    int num;
-    int subdivision;
-    float stepAngle;
-    MovDir dir;
-    MovMode mod;
-    LimitType limitP;
-    LimitType limitN;
-    LimitType limitL;
-};
 class Parameter:public osg::Referenced
 {};
 
-class Crystal:public Parameter
+class sharedParameter:public Parameter
 {
 public:
 
-    S_BlockSet blockSet;
-    Point size;
-    S_PointCloud pointCloud;
-    int layMin;
-    ScanType scanType;
-    CurvMode curvMode;
-    bool isAlarm;
-    Point mov;
-};
-class Scaner:public Parameter
-{
-public:
-    S_Scaner XScaner;
-    S_Scaner YScaner;
-    int delay;    //us
-    int speed;    //bit/ms
-    int microStepDelay;//us
-    bool isXYExchange;
-    bool isStepOver;
-};
-class Laser:public Parameter
-{
-public:
-    int ratio;
-    int frequency;     //Hz
-    int focalLenth;    //mm
-    int preHeatTime;   //s
-    int lightOutDelay; //us
-    bool isMicroStep;
-    bool isSerialLink;
-};
-class Plat:public Parameter
-{
-public:
-    Point CurPos;
-    Point DstPos;
-    Point HomPos;
-    Point MovPos;
-    Point size;
-    Point mechPos;
-    Point relPos;
-};
-class Motor:public Parameter
-{
-public:
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    osg::Vec3 crystalSize;          //水晶大小
+    //**   排序方法   **
+    SortingMethod sortingMethod;    //排序方法
+    float blockWidth;               //块宽度
+    float boundaryDisable;          //模糊比例
+    //**   点云模型   **
+    float minLayerDis;              //最小分层间距
+    DistortionCorrection distortionCorr;    //扭曲校正
+    //**   分块参数   **
+    BorderType borderType;  //边界类型
+    osg::Vec3 blockSize;    //分块大小
+    float borderWidth;      //边界参数，宽度
+    float borderAngle;      //边界参数，倾斜角度
 
-    S_Motor motorX;
-    S_Motor motorY;
-    S_Motor motorZ;
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    float testRatio;    //比率（占空比）
+    int testFrequency;  //HZ,测试频率
+    float focalLength;  //mm,激光焦距
+    int simmerTime;     //s，激光预热时间
+    int laserDelay;     //us，激光出光延时
+    //**   设置   **
+    int scannerDelay;   //us,振镜延时
+    int scannerSpeed;   //bit/ms,振镜速度
+    int microStepDelay; //us,微步延时
+    bool isScannerXYExchange;   //是否 振镜XY互换
+    bool isMicroStepOver;       //是否 微步跳转
+    //**   振镜标定参数   **
+    float scannerRatio[MAXNUM_SCANNERAXIS];
+    float scannerAdjust[MAXNUM_SCANNERAXIS];
+    float scannerPlatformAdjust[MAXNUM_SCANNERAXIS];
+
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    float motorRatio[MAXNUM_MOTOR];     //电机减速比，pulse/mm
+    // 微调
+    int margin[MAXNUM_MOTOR];           //电机精调，pulse
+    // 初始偏移
+    float initOffset[MAXNUM_MOTOR];     //初始偏移，mm
+    // 起始速度
+    int startSpeed[MAXNUM_MOTOR];       //起始速度，p/s
+    // 匀速
+    int runSpeed[MAXNUM_MOTOR];         //匀速，p/s
+    // 加速度
+    int acc[MAXNUM_MOTOR];              //加速度，p/s^2
+    // 平台调整
+    bool reversePlatformX;              //平台X方向反转
+    bool reversePlatformY;              //平台Y方向反转
+    bool reversePlatformZ;              //平台Z方向反转
+    bool reverseScannerXY;              //振镜XY方向反转
+    bool reverseScannerZ;               //振镜Z方向反转
+    bool isSphereMachine;               //雕球机
 };
 
 

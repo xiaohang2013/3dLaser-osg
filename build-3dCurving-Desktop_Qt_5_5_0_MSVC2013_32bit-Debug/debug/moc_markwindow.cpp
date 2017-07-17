@@ -18,25 +18,25 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_MarkWindow_t {
+struct qt_meta_stringdata_MarkCodeWindow_t {
     QByteArrayData data[1];
-    char stringdata0[11];
+    char stringdata0[15];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MarkWindow_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_MarkCodeWindow_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_MarkWindow_t qt_meta_stringdata_MarkWindow = {
+static const qt_meta_stringdata_MarkCodeWindow_t qt_meta_stringdata_MarkCodeWindow = {
     {
-QT_MOC_LITERAL(0, 0, 10) // "MarkWindow"
+QT_MOC_LITERAL(0, 0, 14) // "MarkCodeWindow"
 
     },
-    "MarkWindow"
+    "MarkCodeWindow"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_MarkWindow[] = {
+static const uint qt_meta_data_MarkCodeWindow[] = {
 
  // content:
        7,       // revision
@@ -52,7 +52,7 @@ static const uint qt_meta_data_MarkWindow[] = {
        0        // eod
 };
 
-void MarkWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void MarkCodeWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -60,26 +60,26 @@ void MarkWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     Q_UNUSED(_a);
 }
 
-const QMetaObject MarkWindow::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_MarkWindow.data,
-      qt_meta_data_MarkWindow,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+const QMetaObject MarkCodeWindow::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_MarkCodeWindow.data,
+      qt_meta_data_MarkCodeWindow,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *MarkWindow::metaObject() const
+const QMetaObject *MarkCodeWindow::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *MarkWindow::qt_metacast(const char *_clname)
+void *MarkCodeWindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_MarkWindow.stringdata0))
-        return static_cast<void*>(const_cast< MarkWindow*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_MarkCodeWindow.stringdata0))
+        return static_cast<void*>(const_cast< MarkCodeWindow*>(this));
     return QDialog::qt_metacast(_clname);
 }
 
-int MarkWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int MarkCodeWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

@@ -7,13 +7,13 @@ namespace Ui {
 class McurvWindow;
 }
 
-class McurvWindow : public QDialog
+class BatchEngravingDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit McurvWindow(QWidget *parent = 0);
-    ~McurvWindow();
+    explicit BatchEngravingDialog(QWidget *parent = 0);
+    ~BatchEngravingDialog();
 
 private:
     Ui::McurvWindow *ui;

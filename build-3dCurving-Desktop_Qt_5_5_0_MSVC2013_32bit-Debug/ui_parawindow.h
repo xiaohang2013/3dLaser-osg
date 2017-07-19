@@ -15,17 +15,19 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,62 +36,54 @@ QT_BEGIN_NAMESPACE
 class Ui_ParaWindow
 {
 public:
-    QWidget *layoutWidget;
-    QHBoxLayout *ly_para_btn;
-    QSpacerItem *sp_para_btn2;
-    QPushButton *btn_para_w;
-    QPushButton *btn_para_r;
-    QSpacerItem *sp_para_btn1;
-    QPushButton *btn_para_enter;
-    QPushButton *btn_para_cancle;
     QWidget *w_para_btn;
     QVBoxLayout *verticalLayout;
-    QPushButton *btn_para_sort;
+    QPushButton *pb_sortingMethod;
     QLabel *lb_para_sort;
-    QPushButton *btn_para_scan;
+    QPushButton *pb_laserAndScanner;
     QLabel *lb_para_scan;
-    QPushButton *btn_para_motor;
+    QPushButton *pb_PlatformMotor;
     QLabel *lb_para_motor;
-    QScrollArea *para_sort;
+    QScrollArea *sa_sortingMethod;
     QWidget *w_para_sort;
     QVBoxLayout *verticalLayout_2;
     QGroupBox *gb_para_crystal;
     QHBoxLayout *horizontalLayout_26;
     QLabel *lb_para_c_w;
-    QLineEdit *le_cry_w;
+    QDoubleSpinBox *dsb_crystalSizeX;
     QLabel *lb_para_c_w2;
     QLabel *lb_para_c_l;
-    QLineEdit *le_cry_l;
+    QDoubleSpinBox *dsb_crystalSizeY;
     QLabel *lb_para_c_l2;
     QLabel *lb_para_c_h;
-    QLineEdit *le_cry_h;
+    QDoubleSpinBox *dsb_crystalSizeZ;
     QLabel *lb_para_c_h2;
     QHBoxLayout *ly_para_s_m;
     QGroupBox *gb_para_s;
     QVBoxLayout *verticalLayout_25;
     QVBoxLayout *ly_para_s;
-    QRadioButton *rbtn_yx;
-    QRadioButton *rbtn_xy;
-    QRadioButton *rbtn_min;
+    QRadioButton *rb_squenceY2X;
+    QRadioButton *rb_squenceX2Y;
+    QRadioButton *rb_ShortestPath;
     QGridLayout *ly_para_s_2;
     QLabel *lb_para_w;
-    QLineEdit *le_para_w;
     QLabel *lb_para_w2;
     QLabel *lb_para_r;
-    QLineEdit *le_para_r;
     QLabel *lb_para_r2;
+    QDoubleSpinBox *dsb_blockWidth;
+    QDoubleSpinBox *dsb_boundaryDisable;
     QGroupBox *gb_para_m;
     QVBoxLayout *verticalLayout_26;
-    QHBoxLayout *ly_m_min_layer;
-    QLabel *lb_m_min_layer;
-    QLineEdit *le_m_min_layer;
-    QLabel *lb_m_min_layer2;
+    QHBoxLayout *ly_min_layer;
+    QLabel *lb_min_layer;
+    QDoubleSpinBox *dsb_minLayerDis;
+    QLabel *lb_min_layer2;
     QSpacerItem *sp_m_1;
     QGridLayout *ly_para_m_correct;
     QSpacerItem *sp_m_correct1;
-    QRadioButton *rbtn_m_correct_yx;
-    QRadioButton *rbtn_m_correct_xy;
-    QRadioButton *rbtn_m_correct_none;
+    QRadioButton *rb_YXCorrect;
+    QRadioButton *rb_XYCorrect;
+    QRadioButton *rb_noneCorrect;
     QSpacerItem *sp_m_correct2;
     QSpacerItem *sp_m_correct3;
     QLabel *lb_m_correct;
@@ -102,246 +96,214 @@ public:
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *ly_split_border;
     QLabel *lb_split_border;
-    QRadioButton *rbtn_split_vertical;
-    QRadioButton *rbtn_split_bevel;
+    QRadioButton *rb_verticalBorder;
+    QRadioButton *rb_inclinedBorder;
     QSpacerItem *sp_split_1;
     QHBoxLayout *ly_split_size;
-    QLabel *label_70;
+    QLabel *lb_split_size;
     QLabel *lb_split_size_X;
-    QLineEdit *le_split_size_X;
+    QDoubleSpinBox *dsb_blockSizeX;
     QLabel *lb_split_size_X2;
     QLabel *lb_split_size_Y;
-    QLineEdit *le_split_size_Y;
+    QDoubleSpinBox *dsb_blockSizeY;
     QLabel *lb_split_size_Y2;
     QLabel *lb_split_size_Z;
-    QLineEdit *le_split_size_Z;
+    QDoubleSpinBox *dsb_blockSizeZ;
     QLabel *lb_split_size_Z2;
     QSpacerItem *sp_split_2;
     QHBoxLayout *ly_split_border_para;
-    QLabel *label_71;
+    QLabel *lb_split_border_para;
     QLabel *lb_border_w;
-    QLineEdit *le_border_w;
+    QDoubleSpinBox *dsb_borderWidth;
     QLabel *lb_border_w2;
     QLabel *lb_border_a;
-    QLineEdit *le_border_a;
-    QLabel *lb_border_w2_2;
+    QDoubleSpinBox *dsb_borderAngle;
+    QLabel *lb_border_a2;
     QSpacerItem *sp_split_border1;
-    QScrollArea *para_scan;
+    QScrollArea *sa_laserAndScanner;
     QWidget *w_para_laser;
     QVBoxLayout *verticalLayout_3;
     QGroupBox *gb_la_test;
     QHBoxLayout *horizontalLayout_3;
     QWidget *w_laser_pulse;
-    QLabel *lb_lp_title;
-    QLabel *lb_lp_low;
-    QLabel *lb_lp_low_2;
+    QLabel *lb_laser_pulse_title;
+    QLabel *lb_highPulseTime;
+    QLabel *lb_lwoPulseTime;
     QVBoxLayout *ly_la_test_r_f;
     QHBoxLayout *ly_test_r;
     QLabel *lb_test_r;
-    QLabel *lb_test_r_v;
-    QSlider *sl_test_r;
+    QLabel *lb_laserRatio;
+    QLabel *lb_laser_r_v_2;
+    QSlider *s_laserRatio;
     QHBoxLayout *ly_test_f;
     QLabel *lb_test_f;
-    QLabel *le_test_f_v;
+    QLabel *lb_laserFrequency;
     QLabel *lb_test_f2;
-    QSlider *sl_test_f;
+    QSlider *s_laserFrequency;
     QGroupBox *gb_la_set;
     QVBoxLayout *verticalLayout_5;
     QHBoxLayout *ly_la_set_t;
     QGridLayout *ly_la_set_l;
     QLabel *lb_set_lpoint2;
-    QLineEdit *le_set_lpoint;
     QLabel *lb_set_lpoint;
-    QLineEdit *le_set_ldelay;
     QLabel *lb_set_ltime2;
     QLabel *lb_set_ldelay;
     QLabel *lb_set_ltime;
-    QLineEdit *le_set_ltime;
     QLabel *lb_set_ldelay2;
+    QDoubleSpinBox *dsb_focalLength;
+    QSpinBox *sb_laserSimmerTime;
+    QSpinBox *sb_laserDelay;
     QGridLayout *ly_la_set_r;
     QLabel *lb_set_sdelay;
-    QLineEdit *le_set_sdelay;
     QLabel *lb_set_sdelay2;
     QLabel *lb_set_sv;
-    QLineEdit *le_set_sv;
     QLabel *lb_set_sv2;
     QLabel *lb_set_udelay;
-    QLineEdit *le_set_udelay;
     QLabel *lb_set_udelay2;
+    QSpinBox *sb_scannerDelay;
+    QSpinBox *sb_scannerSpeed;
+    QSpinBox *sb_microStepDelay;
     QHBoxLayout *ly_la_set_b;
-    QCheckBox *cb_set_X2Y;
-    QCheckBox *cb_set_ustep;
+    QCheckBox *cb_exchangeXYScanner;
+    QCheckBox *cb_stepOverMicroStep;
     QGroupBox *gb_la_para;
     QGridLayout *gridLayout;
     QLabel *lb_la_r_X2;
     QLabel *lb_la_r_Y;
-    QLineEdit *le_la_r_X;
     QLabel *lb_la_r_X;
-    QLineEdit *le_la_r_Y;
-    QLineEdit *le_la_u_Y;
     QLabel *lb_la_u_Y;
-    QLineEdit *le_la_u_X;
     QLabel *lb_la_u_X;
-    QLineEdit *le_la_v_Y;
     QLabel *lb_la_v_X;
-    QLineEdit *le_la_v_X;
     QLabel *lb_la_v_X_2;
     QLabel *lb_la_r_Y2;
+    QDoubleSpinBox *dsb_scannerRatioX;
+    QDoubleSpinBox *dsb_scannerRatioY;
+    QDoubleSpinBox *dsb_scannerAdjustX;
+    QDoubleSpinBox *dsb_scannerAdjustY;
+    QDoubleSpinBox *dsb_scannerPlatformAdjustX;
+    QDoubleSpinBox *dsb_scannerPlatformAdjustY;
     QGroupBox *gb_la_ctrl;
     QHBoxLayout *horizontalLayout_4;
     QCheckBox *cb_la_r232;
-    QScrollArea *para_motor;
+    QScrollArea *sa_platformAndMotor;
     QWidget *w_para_motor;
     QVBoxLayout *verticalLayout_6;
     QGroupBox *gb_par_motor;
     QHBoxLayout *horizontalLayout_14;
     QLabel *lb_mo_X;
-    QLineEdit *le_mo_X;
+    QDoubleSpinBox *dsb_motorRatioX;
     QLabel *lb_mo_X2;
     QSpacerItem *sp_mo_1;
     QLabel *lb_mo_Y;
-    QLineEdit *le_mo_Y;
+    QDoubleSpinBox *dsb_motorRatioY;
     QLabel *lb_mo_Y2;
     QSpacerItem *sp_mo_2;
     QLabel *lb_mo_Z;
-    QLineEdit *le_mo_Z;
+    QDoubleSpinBox *dsb_motorRatioZ;
     QLabel *lb_mo_Z2;
     QGroupBox *gb_para_up;
     QHBoxLayout *horizontalLayout_15;
     QLabel *sp_up_X;
-    QLineEdit *le_up_X;
+    QSpinBox *sb_marginX;
     QLabel *lb_up_X2;
     QSpacerItem *sp_up_1;
     QLabel *lb_up_Y;
-    QLineEdit *le_up_Y;
+    QSpinBox *sb_marginY;
     QLabel *lb_up_Y2;
     QSpacerItem *sp_up_2;
     QLabel *lb_up_Z;
-    QLineEdit *le_up_Z;
+    QSpinBox *sb_marginZ;
     QLabel *lb_up_Z2;
-    QGroupBox *gb_para_os;
+    QGroupBox *gb_para_s0;
     QHBoxLayout *horizontalLayout_16;
-    QLabel *lb_os_X;
-    QLineEdit *le_os_X;
-    QLabel *lb_os_X2;
-    QSpacerItem *sp_os_1;
-    QLabel *lb_os_Y;
-    QLineEdit *le_os_Y;
-    QLabel *lb_os_Y2;
-    QSpacerItem *sp_os_2;
-    QLabel *lb_os_Z;
-    QLineEdit *le_os_Z;
-    QLabel *lb_os_Z2;
+    QLabel *lb_s0_X;
+    QDoubleSpinBox *dsb_initOffsetX;
+    QLabel *lb_s0_X2;
+    QSpacerItem *sp_s0_1;
+    QLabel *lb_s0_Y;
+    QDoubleSpinBox *dsb_initOffsetY;
+    QLabel *lb_s0_Y2;
+    QSpacerItem *sp_s0_2;
+    QLabel *lb_s0_Z;
+    QDoubleSpinBox *dsb_initOffsetZ;
+    QLabel *lb_s0_Z2;
     QGroupBox *gb_para_speed_v0;
     QVBoxLayout *verticalLayout_9;
     QHBoxLayout *ly_para_speed_v0;
     QLabel *lb_sp_v0;
+    QSpacerItem *sp_sp_v0_3;
     QLabel *lb_sp_v0_X;
-    QLineEdit *le_sp_v0_X;
-    QLabel *lb_sp_v0_X2;
+    QSpinBox *sb_startSpeedX;
     QSpacerItem *sp_sp_v0_1;
     QLabel *lb_sp_v0_Y;
-    QLineEdit *le_sp_v0_Y;
-    QLabel *lb_sp_v0_Y2;
+    QSpinBox *sb_startSpeedY;
     QSpacerItem *sp_sp_v0_2;
     QLabel *lb_sp_v0_Z;
-    QLineEdit *le_sp_v0_Z;
-    QLabel *lb_sp_v0_Z2;
+    QSpinBox *sb_startSpeedZ;
     QHBoxLayout *ly_para_speed_v;
     QLabel *lb_sp_v;
+    QSpacerItem *sp_sp_v0_4;
     QLabel *lb_sp_v_X;
-    QLineEdit *le_sp_v_X;
-    QLabel *lb_sp_v_X2;
+    QSpinBox *sb_runSpeedX;
     QSpacerItem *sp_sp_v_1;
     QLabel *lb_sp_v_Y;
-    QLineEdit *le_sp_v_Y;
-    QLabel *lb_sp_v_Y2;
+    QSpinBox *sb_runSpeedY;
     QSpacerItem *sp_sp_v_2;
     QLabel *lb_sp_v_Z;
-    QLineEdit *le_sp_v_Z;
-    QLabel *lb_sp_v_Z2;
+    QSpinBox *sb_runSpeedZ;
     QHBoxLayout *ly_para_sp_acc;
     QLabel *lb_sp_a;
+    QSpacerItem *sp_sp_v0_5;
     QLabel *lb_sp_a_X;
-    QLineEdit *le_sp_a_X;
-    QLabel *lb_sp_a_X2;
+    QSpinBox *sb_motorAccX;
     QSpacerItem *sp_sp_a_1;
     QLabel *lb_sp_a_Y;
-    QLineEdit *le_sp_a_Y;
-    QLabel *lb_sp_a_Y2;
+    QSpinBox *sb_motorAccY;
     QSpacerItem *sp_sp_a_2;
     QLabel *lb_sp_a_Z;
-    QLineEdit *le_sp_a_Z;
-    QLabel *lb_sp_a_Z2;
+    QSpinBox *sb_motorAccZ;
     QGroupBox *gb_para_plat;
     QGridLayout *gridLayout_7;
-    QCheckBox *cb_pl_cv;
-    QCheckBox *cb_pl_scan_XY;
-    QCheckBox *cb_pl_X;
-    QCheckBox *cb_pl_Z;
-    QCheckBox *cb_pl_scan_Z;
-    QCheckBox *cb_pl_Y;
+    QCheckBox *cb_sphereMachine;
+    QCheckBox *cb_reverseScannerXY;
+    QCheckBox *cb_reverseXDir;
+    QCheckBox *cb_reverseZDir;
+    QCheckBox *cb_reverseScannerZ;
+    QCheckBox *cb_reverseYDir;
+    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *sp_para_btn2;
+    QPushButton *pb_setDefaultParam;
+    QPushButton *pb_getDefaultParam;
+    QSpacerItem *sp_para_btn1;
+    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *ParaWindow)
     {
         if (ParaWindow->objectName().isEmpty())
             ParaWindow->setObjectName(QStringLiteral("ParaWindow"));
         ParaWindow->setWindowModality(Qt::NonModal);
-        ParaWindow->resize(640, 480);
+        ParaWindow->resize(1171, 936);
         ParaWindow->setContextMenuPolicy(Qt::NoContextMenu);
-        layoutWidget = new QWidget(ParaWindow);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 446, 611, 25));
-        ly_para_btn = new QHBoxLayout(layoutWidget);
-        ly_para_btn->setObjectName(QStringLiteral("ly_para_btn"));
-        ly_para_btn->setContentsMargins(0, 0, 0, 0);
-        sp_para_btn2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        ly_para_btn->addItem(sp_para_btn2);
-
-        btn_para_w = new QPushButton(layoutWidget);
-        btn_para_w->setObjectName(QStringLiteral("btn_para_w"));
-
-        ly_para_btn->addWidget(btn_para_w);
-
-        btn_para_r = new QPushButton(layoutWidget);
-        btn_para_r->setObjectName(QStringLiteral("btn_para_r"));
-
-        ly_para_btn->addWidget(btn_para_r);
-
-        sp_para_btn1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        ly_para_btn->addItem(sp_para_btn1);
-
-        btn_para_enter = new QPushButton(layoutWidget);
-        btn_para_enter->setObjectName(QStringLiteral("btn_para_enter"));
-
-        ly_para_btn->addWidget(btn_para_enter);
-
-        btn_para_cancle = new QPushButton(layoutWidget);
-        btn_para_cancle->setObjectName(QStringLiteral("btn_para_cancle"));
-
-        ly_para_btn->addWidget(btn_para_cancle);
-
         w_para_btn = new QWidget(ParaWindow);
         w_para_btn->setObjectName(QStringLiteral("w_para_btn"));
-        w_para_btn->setGeometry(QRect(10, 10, 100, 421));
+        w_para_btn->setGeometry(QRect(10, 10, 100, 450));
         w_para_btn->setMinimumSize(QSize(100, 0));
         w_para_btn->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 127);"));
         verticalLayout = new QVBoxLayout(w_para_btn);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        btn_para_sort = new QPushButton(w_para_btn);
-        btn_para_sort->setObjectName(QStringLiteral("btn_para_sort"));
+        pb_sortingMethod = new QPushButton(w_para_btn);
+        pb_sortingMethod->setObjectName(QStringLiteral("pb_sortingMethod"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(btn_para_sort->sizePolicy().hasHeightForWidth());
-        btn_para_sort->setSizePolicy(sizePolicy);
-        btn_para_sort->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/sort.png);"));
-        btn_para_sort->setIconSize(QSize(16, 16));
-        btn_para_sort->setAutoExclusive(true);
+        sizePolicy.setHeightForWidth(pb_sortingMethod->sizePolicy().hasHeightForWidth());
+        pb_sortingMethod->setSizePolicy(sizePolicy);
+        pb_sortingMethod->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/sort.png);"));
+        pb_sortingMethod->setIconSize(QSize(16, 16));
+        pb_sortingMethod->setAutoExclusive(true);
 
-        verticalLayout->addWidget(btn_para_sort);
+        verticalLayout->addWidget(pb_sortingMethod);
 
         lb_para_sort = new QLabel(w_para_btn);
         lb_para_sort->setObjectName(QStringLiteral("lb_para_sort"));
@@ -349,13 +311,13 @@ public:
 
         verticalLayout->addWidget(lb_para_sort);
 
-        btn_para_scan = new QPushButton(w_para_btn);
-        btn_para_scan->setObjectName(QStringLiteral("btn_para_scan"));
-        sizePolicy.setHeightForWidth(btn_para_scan->sizePolicy().hasHeightForWidth());
-        btn_para_scan->setSizePolicy(sizePolicy);
-        btn_para_scan->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/scan.png);"));
+        pb_laserAndScanner = new QPushButton(w_para_btn);
+        pb_laserAndScanner->setObjectName(QStringLiteral("pb_laserAndScanner"));
+        sizePolicy.setHeightForWidth(pb_laserAndScanner->sizePolicy().hasHeightForWidth());
+        pb_laserAndScanner->setSizePolicy(sizePolicy);
+        pb_laserAndScanner->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/scan.png);"));
 
-        verticalLayout->addWidget(btn_para_scan);
+        verticalLayout->addWidget(pb_laserAndScanner);
 
         lb_para_scan = new QLabel(w_para_btn);
         lb_para_scan->setObjectName(QStringLiteral("lb_para_scan"));
@@ -363,13 +325,13 @@ public:
 
         verticalLayout->addWidget(lb_para_scan);
 
-        btn_para_motor = new QPushButton(w_para_btn);
-        btn_para_motor->setObjectName(QStringLiteral("btn_para_motor"));
-        sizePolicy.setHeightForWidth(btn_para_motor->sizePolicy().hasHeightForWidth());
-        btn_para_motor->setSizePolicy(sizePolicy);
-        btn_para_motor->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/motor.png);"));
+        pb_PlatformMotor = new QPushButton(w_para_btn);
+        pb_PlatformMotor->setObjectName(QStringLiteral("pb_PlatformMotor"));
+        sizePolicy.setHeightForWidth(pb_PlatformMotor->sizePolicy().hasHeightForWidth());
+        pb_PlatformMotor->setSizePolicy(sizePolicy);
+        pb_PlatformMotor->setStyleSheet(QStringLiteral("border-image: url(:/prefix/resource/motor.png);"));
 
-        verticalLayout->addWidget(btn_para_motor);
+        verticalLayout->addWidget(pb_PlatformMotor);
 
         lb_para_motor = new QLabel(w_para_btn);
         lb_para_motor->setObjectName(QStringLiteral("lb_para_motor"));
@@ -377,15 +339,15 @@ public:
 
         verticalLayout->addWidget(lb_para_motor);
 
-        para_sort = new QScrollArea(ParaWindow);
-        para_sort->setObjectName(QStringLiteral("para_sort"));
-        para_sort->setGeometry(QRect(120, 10, 511, 421));
-        para_sort->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_sort->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_sort->setWidgetResizable(true);
+        sa_sortingMethod = new QScrollArea(ParaWindow);
+        sa_sortingMethod->setObjectName(QStringLiteral("sa_sortingMethod"));
+        sa_sortingMethod->setGeometry(QRect(640, 10, 511, 450));
+        sa_sortingMethod->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_sortingMethod->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_sortingMethod->setWidgetResizable(true);
         w_para_sort = new QWidget();
         w_para_sort->setObjectName(QStringLiteral("w_para_sort"));
-        w_para_sort->setGeometry(QRect(0, 0, 509, 419));
+        w_para_sort->setGeometry(QRect(0, 0, 518, 448));
         verticalLayout_2 = new QVBoxLayout(w_para_sort);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
@@ -401,10 +363,14 @@ public:
 
         horizontalLayout_26->addWidget(lb_para_c_w);
 
-        le_cry_w = new QLineEdit(gb_para_crystal);
-        le_cry_w->setObjectName(QStringLiteral("le_cry_w"));
+        dsb_crystalSizeX = new QDoubleSpinBox(gb_para_crystal);
+        dsb_crystalSizeX->setObjectName(QStringLiteral("dsb_crystalSizeX"));
+        dsb_crystalSizeX->setEnabled(true);
+        dsb_crystalSizeX->setDecimals(1);
+        dsb_crystalSizeX->setMaximum(9999);
+        dsb_crystalSizeX->setValue(60);
 
-        horizontalLayout_26->addWidget(le_cry_w);
+        horizontalLayout_26->addWidget(dsb_crystalSizeX);
 
         lb_para_c_w2 = new QLabel(gb_para_crystal);
         lb_para_c_w2->setObjectName(QStringLiteral("lb_para_c_w2"));
@@ -416,10 +382,14 @@ public:
 
         horizontalLayout_26->addWidget(lb_para_c_l);
 
-        le_cry_l = new QLineEdit(gb_para_crystal);
-        le_cry_l->setObjectName(QStringLiteral("le_cry_l"));
+        dsb_crystalSizeY = new QDoubleSpinBox(gb_para_crystal);
+        dsb_crystalSizeY->setObjectName(QStringLiteral("dsb_crystalSizeY"));
+        dsb_crystalSizeY->setEnabled(true);
+        dsb_crystalSizeY->setDecimals(1);
+        dsb_crystalSizeY->setMaximum(9999);
+        dsb_crystalSizeY->setValue(60);
 
-        horizontalLayout_26->addWidget(le_cry_l);
+        horizontalLayout_26->addWidget(dsb_crystalSizeY);
 
         lb_para_c_l2 = new QLabel(gb_para_crystal);
         lb_para_c_l2->setObjectName(QStringLiteral("lb_para_c_l2"));
@@ -431,10 +401,14 @@ public:
 
         horizontalLayout_26->addWidget(lb_para_c_h);
 
-        le_cry_h = new QLineEdit(gb_para_crystal);
-        le_cry_h->setObjectName(QStringLiteral("le_cry_h"));
+        dsb_crystalSizeZ = new QDoubleSpinBox(gb_para_crystal);
+        dsb_crystalSizeZ->setObjectName(QStringLiteral("dsb_crystalSizeZ"));
+        dsb_crystalSizeZ->setEnabled(true);
+        dsb_crystalSizeZ->setDecimals(1);
+        dsb_crystalSizeZ->setMaximum(9999);
+        dsb_crystalSizeZ->setValue(60);
 
-        horizontalLayout_26->addWidget(le_cry_h);
+        horizontalLayout_26->addWidget(dsb_crystalSizeZ);
 
         lb_para_c_h2 = new QLabel(gb_para_crystal);
         lb_para_c_h2->setObjectName(QStringLiteral("lb_para_c_h2"));
@@ -452,21 +426,21 @@ public:
         verticalLayout_25->setObjectName(QStringLiteral("verticalLayout_25"));
         ly_para_s = new QVBoxLayout();
         ly_para_s->setObjectName(QStringLiteral("ly_para_s"));
-        rbtn_yx = new QRadioButton(gb_para_s);
-        rbtn_yx->setObjectName(QStringLiteral("rbtn_yx"));
+        rb_squenceY2X = new QRadioButton(gb_para_s);
+        rb_squenceY2X->setObjectName(QStringLiteral("rb_squenceY2X"));
 
-        ly_para_s->addWidget(rbtn_yx);
+        ly_para_s->addWidget(rb_squenceY2X);
 
-        rbtn_xy = new QRadioButton(gb_para_s);
-        rbtn_xy->setObjectName(QStringLiteral("rbtn_xy"));
+        rb_squenceX2Y = new QRadioButton(gb_para_s);
+        rb_squenceX2Y->setObjectName(QStringLiteral("rb_squenceX2Y"));
 
-        ly_para_s->addWidget(rbtn_xy);
+        ly_para_s->addWidget(rb_squenceX2Y);
 
-        rbtn_min = new QRadioButton(gb_para_s);
-        rbtn_min->setObjectName(QStringLiteral("rbtn_min"));
-        rbtn_min->setChecked(true);
+        rb_ShortestPath = new QRadioButton(gb_para_s);
+        rb_ShortestPath->setObjectName(QStringLiteral("rb_ShortestPath"));
+        rb_ShortestPath->setChecked(true);
 
-        ly_para_s->addWidget(rbtn_min);
+        ly_para_s->addWidget(rb_ShortestPath);
 
 
         verticalLayout_25->addLayout(ly_para_s);
@@ -478,11 +452,6 @@ public:
 
         ly_para_s_2->addWidget(lb_para_w, 0, 0, 1, 1);
 
-        le_para_w = new QLineEdit(gb_para_s);
-        le_para_w->setObjectName(QStringLiteral("le_para_w"));
-
-        ly_para_s_2->addWidget(le_para_w, 0, 1, 1, 1);
-
         lb_para_w2 = new QLabel(gb_para_s);
         lb_para_w2->setObjectName(QStringLiteral("lb_para_w2"));
 
@@ -493,15 +462,28 @@ public:
 
         ly_para_s_2->addWidget(lb_para_r, 1, 0, 1, 1);
 
-        le_para_r = new QLineEdit(gb_para_s);
-        le_para_r->setObjectName(QStringLiteral("le_para_r"));
-
-        ly_para_s_2->addWidget(le_para_r, 1, 1, 1, 1);
-
         lb_para_r2 = new QLabel(gb_para_s);
         lb_para_r2->setObjectName(QStringLiteral("lb_para_r2"));
 
         ly_para_s_2->addWidget(lb_para_r2, 1, 2, 1, 1);
+
+        dsb_blockWidth = new QDoubleSpinBox(gb_para_s);
+        dsb_blockWidth->setObjectName(QStringLiteral("dsb_blockWidth"));
+        dsb_blockWidth->setEnabled(true);
+        dsb_blockWidth->setDecimals(2);
+        dsb_blockWidth->setMaximum(9999);
+        dsb_blockWidth->setValue(1);
+
+        ly_para_s_2->addWidget(dsb_blockWidth, 0, 1, 1, 1);
+
+        dsb_boundaryDisable = new QDoubleSpinBox(gb_para_s);
+        dsb_boundaryDisable->setObjectName(QStringLiteral("dsb_boundaryDisable"));
+        dsb_boundaryDisable->setEnabled(true);
+        dsb_boundaryDisable->setDecimals(1);
+        dsb_boundaryDisable->setMaximum(100);
+        dsb_boundaryDisable->setValue(0.1);
+
+        ly_para_s_2->addWidget(dsb_boundaryDisable, 1, 1, 1, 1);
 
 
         verticalLayout_25->addLayout(ly_para_s_2);
@@ -513,29 +495,34 @@ public:
         gb_para_m->setObjectName(QStringLiteral("gb_para_m"));
         verticalLayout_26 = new QVBoxLayout(gb_para_m);
         verticalLayout_26->setObjectName(QStringLiteral("verticalLayout_26"));
-        ly_m_min_layer = new QHBoxLayout();
-        ly_m_min_layer->setObjectName(QStringLiteral("ly_m_min_layer"));
-        lb_m_min_layer = new QLabel(gb_para_m);
-        lb_m_min_layer->setObjectName(QStringLiteral("lb_m_min_layer"));
+        ly_min_layer = new QHBoxLayout();
+        ly_min_layer->setObjectName(QStringLiteral("ly_min_layer"));
+        lb_min_layer = new QLabel(gb_para_m);
+        lb_min_layer->setObjectName(QStringLiteral("lb_min_layer"));
 
-        ly_m_min_layer->addWidget(lb_m_min_layer);
+        ly_min_layer->addWidget(lb_min_layer);
 
-        le_m_min_layer = new QLineEdit(gb_para_m);
-        le_m_min_layer->setObjectName(QStringLiteral("le_m_min_layer"));
+        dsb_minLayerDis = new QDoubleSpinBox(gb_para_m);
+        dsb_minLayerDis->setObjectName(QStringLiteral("dsb_minLayerDis"));
+        dsb_minLayerDis->setEnabled(true);
+        dsb_minLayerDis->setDecimals(3);
+        dsb_minLayerDis->setMaximum(999);
+        dsb_minLayerDis->setSingleStep(0.1);
+        dsb_minLayerDis->setValue(0.088);
 
-        ly_m_min_layer->addWidget(le_m_min_layer);
+        ly_min_layer->addWidget(dsb_minLayerDis);
 
-        lb_m_min_layer2 = new QLabel(gb_para_m);
-        lb_m_min_layer2->setObjectName(QStringLiteral("lb_m_min_layer2"));
+        lb_min_layer2 = new QLabel(gb_para_m);
+        lb_min_layer2->setObjectName(QStringLiteral("lb_min_layer2"));
 
-        ly_m_min_layer->addWidget(lb_m_min_layer2);
+        ly_min_layer->addWidget(lb_min_layer2);
 
         sp_m_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        ly_m_min_layer->addItem(sp_m_1);
+        ly_min_layer->addItem(sp_m_1);
 
 
-        verticalLayout_26->addLayout(ly_m_min_layer);
+        verticalLayout_26->addLayout(ly_min_layer);
 
         ly_para_m_correct = new QGridLayout();
         ly_para_m_correct->setObjectName(QStringLiteral("ly_para_m_correct"));
@@ -543,20 +530,20 @@ public:
 
         ly_para_m_correct->addItem(sp_m_correct1, 4, 0, 1, 1);
 
-        rbtn_m_correct_yx = new QRadioButton(gb_para_m);
-        rbtn_m_correct_yx->setObjectName(QStringLiteral("rbtn_m_correct_yx"));
+        rb_YXCorrect = new QRadioButton(gb_para_m);
+        rb_YXCorrect->setObjectName(QStringLiteral("rb_YXCorrect"));
 
-        ly_para_m_correct->addWidget(rbtn_m_correct_yx, 4, 1, 1, 1);
+        ly_para_m_correct->addWidget(rb_YXCorrect, 4, 1, 1, 1);
 
-        rbtn_m_correct_xy = new QRadioButton(gb_para_m);
-        rbtn_m_correct_xy->setObjectName(QStringLiteral("rbtn_m_correct_xy"));
+        rb_XYCorrect = new QRadioButton(gb_para_m);
+        rb_XYCorrect->setObjectName(QStringLiteral("rb_XYCorrect"));
 
-        ly_para_m_correct->addWidget(rbtn_m_correct_xy, 3, 1, 1, 1);
+        ly_para_m_correct->addWidget(rb_XYCorrect, 3, 1, 1, 1);
 
-        rbtn_m_correct_none = new QRadioButton(gb_para_m);
-        rbtn_m_correct_none->setObjectName(QStringLiteral("rbtn_m_correct_none"));
+        rb_noneCorrect = new QRadioButton(gb_para_m);
+        rb_noneCorrect->setObjectName(QStringLiteral("rb_noneCorrect"));
 
-        ly_para_m_correct->addWidget(rbtn_m_correct_none, 2, 1, 1, 1);
+        ly_para_m_correct->addWidget(rb_noneCorrect, 2, 1, 1, 1);
 
         sp_m_correct2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -611,15 +598,15 @@ public:
 
         ly_split_border->addWidget(lb_split_border);
 
-        rbtn_split_vertical = new QRadioButton(gb_para_split);
-        rbtn_split_vertical->setObjectName(QStringLiteral("rbtn_split_vertical"));
+        rb_verticalBorder = new QRadioButton(gb_para_split);
+        rb_verticalBorder->setObjectName(QStringLiteral("rb_verticalBorder"));
 
-        ly_split_border->addWidget(rbtn_split_vertical);
+        ly_split_border->addWidget(rb_verticalBorder);
 
-        rbtn_split_bevel = new QRadioButton(gb_para_split);
-        rbtn_split_bevel->setObjectName(QStringLiteral("rbtn_split_bevel"));
+        rb_inclinedBorder = new QRadioButton(gb_para_split);
+        rb_inclinedBorder->setObjectName(QStringLiteral("rb_inclinedBorder"));
 
-        ly_split_border->addWidget(rbtn_split_bevel);
+        ly_split_border->addWidget(rb_inclinedBorder);
 
         sp_split_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -630,21 +617,24 @@ public:
 
         ly_split_size = new QHBoxLayout();
         ly_split_size->setObjectName(QStringLiteral("ly_split_size"));
-        label_70 = new QLabel(gb_para_split);
-        label_70->setObjectName(QStringLiteral("label_70"));
+        lb_split_size = new QLabel(gb_para_split);
+        lb_split_size->setObjectName(QStringLiteral("lb_split_size"));
 
-        ly_split_size->addWidget(label_70);
+        ly_split_size->addWidget(lb_split_size);
 
         lb_split_size_X = new QLabel(gb_para_split);
         lb_split_size_X->setObjectName(QStringLiteral("lb_split_size_X"));
 
         ly_split_size->addWidget(lb_split_size_X);
 
-        le_split_size_X = new QLineEdit(gb_para_split);
-        le_split_size_X->setObjectName(QStringLiteral("le_split_size_X"));
-        le_split_size_X->setMaximumSize(QSize(60, 16777215));
+        dsb_blockSizeX = new QDoubleSpinBox(gb_para_split);
+        dsb_blockSizeX->setObjectName(QStringLiteral("dsb_blockSizeX"));
+        dsb_blockSizeX->setEnabled(true);
+        dsb_blockSizeX->setDecimals(2);
+        dsb_blockSizeX->setMaximum(999);
+        dsb_blockSizeX->setValue(25);
 
-        ly_split_size->addWidget(le_split_size_X);
+        ly_split_size->addWidget(dsb_blockSizeX);
 
         lb_split_size_X2 = new QLabel(gb_para_split);
         lb_split_size_X2->setObjectName(QStringLiteral("lb_split_size_X2"));
@@ -656,11 +646,14 @@ public:
 
         ly_split_size->addWidget(lb_split_size_Y);
 
-        le_split_size_Y = new QLineEdit(gb_para_split);
-        le_split_size_Y->setObjectName(QStringLiteral("le_split_size_Y"));
-        le_split_size_Y->setMaximumSize(QSize(60, 16777215));
+        dsb_blockSizeY = new QDoubleSpinBox(gb_para_split);
+        dsb_blockSizeY->setObjectName(QStringLiteral("dsb_blockSizeY"));
+        dsb_blockSizeY->setEnabled(true);
+        dsb_blockSizeY->setDecimals(2);
+        dsb_blockSizeY->setMaximum(999);
+        dsb_blockSizeY->setValue(25);
 
-        ly_split_size->addWidget(le_split_size_Y);
+        ly_split_size->addWidget(dsb_blockSizeY);
 
         lb_split_size_Y2 = new QLabel(gb_para_split);
         lb_split_size_Y2->setObjectName(QStringLiteral("lb_split_size_Y2"));
@@ -672,12 +665,14 @@ public:
 
         ly_split_size->addWidget(lb_split_size_Z);
 
-        le_split_size_Z = new QLineEdit(gb_para_split);
-        le_split_size_Z->setObjectName(QStringLiteral("le_split_size_Z"));
-        le_split_size_Z->setEnabled(false);
-        le_split_size_Z->setMaximumSize(QSize(60, 16777215));
+        dsb_blockSizeZ = new QDoubleSpinBox(gb_para_split);
+        dsb_blockSizeZ->setObjectName(QStringLiteral("dsb_blockSizeZ"));
+        dsb_blockSizeZ->setEnabled(false);
+        dsb_blockSizeZ->setDecimals(2);
+        dsb_blockSizeZ->setMaximum(999);
+        dsb_blockSizeZ->setValue(0.1);
 
-        ly_split_size->addWidget(le_split_size_Z);
+        ly_split_size->addWidget(dsb_blockSizeZ);
 
         lb_split_size_Z2 = new QLabel(gb_para_split);
         lb_split_size_Z2->setObjectName(QStringLiteral("lb_split_size_Z2"));
@@ -693,26 +688,24 @@ public:
 
         ly_split_border_para = new QHBoxLayout();
         ly_split_border_para->setObjectName(QStringLiteral("ly_split_border_para"));
-        label_71 = new QLabel(gb_para_split);
-        label_71->setObjectName(QStringLiteral("label_71"));
+        lb_split_border_para = new QLabel(gb_para_split);
+        lb_split_border_para->setObjectName(QStringLiteral("lb_split_border_para"));
 
-        ly_split_border_para->addWidget(label_71);
+        ly_split_border_para->addWidget(lb_split_border_para);
 
         lb_border_w = new QLabel(gb_para_split);
         lb_border_w->setObjectName(QStringLiteral("lb_border_w"));
 
         ly_split_border_para->addWidget(lb_border_w);
 
-        le_border_w = new QLineEdit(gb_para_split);
-        le_border_w->setObjectName(QStringLiteral("le_border_w"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(le_border_w->sizePolicy().hasHeightForWidth());
-        le_border_w->setSizePolicy(sizePolicy1);
-        le_border_w->setMaximumSize(QSize(60, 16777215));
+        dsb_borderWidth = new QDoubleSpinBox(gb_para_split);
+        dsb_borderWidth->setObjectName(QStringLiteral("dsb_borderWidth"));
+        dsb_borderWidth->setEnabled(true);
+        dsb_borderWidth->setDecimals(1);
+        dsb_borderWidth->setMaximum(999);
+        dsb_borderWidth->setValue(3);
 
-        ly_split_border_para->addWidget(le_border_w);
+        ly_split_border_para->addWidget(dsb_borderWidth);
 
         lb_border_w2 = new QLabel(gb_para_split);
         lb_border_w2->setObjectName(QStringLiteral("lb_border_w2"));
@@ -724,18 +717,19 @@ public:
 
         ly_split_border_para->addWidget(lb_border_a);
 
-        le_border_a = new QLineEdit(gb_para_split);
-        le_border_a->setObjectName(QStringLiteral("le_border_a"));
-        sizePolicy1.setHeightForWidth(le_border_a->sizePolicy().hasHeightForWidth());
-        le_border_a->setSizePolicy(sizePolicy1);
-        le_border_a->setMaximumSize(QSize(60, 16777215));
+        dsb_borderAngle = new QDoubleSpinBox(gb_para_split);
+        dsb_borderAngle->setObjectName(QStringLiteral("dsb_borderAngle"));
+        dsb_borderAngle->setEnabled(true);
+        dsb_borderAngle->setDecimals(1);
+        dsb_borderAngle->setMaximum(999);
+        dsb_borderAngle->setValue(5);
 
-        ly_split_border_para->addWidget(le_border_a);
+        ly_split_border_para->addWidget(dsb_borderAngle);
 
-        lb_border_w2_2 = new QLabel(gb_para_split);
-        lb_border_w2_2->setObjectName(QStringLiteral("lb_border_w2_2"));
+        lb_border_a2 = new QLabel(gb_para_split);
+        lb_border_a2->setObjectName(QStringLiteral("lb_border_a2"));
 
-        ly_split_border_para->addWidget(lb_border_w2_2);
+        ly_split_border_para->addWidget(lb_border_a2);
 
         sp_split_border1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -747,25 +741,26 @@ public:
 
         verticalLayout_2->addWidget(gb_para_split);
 
-        para_sort->setWidget(w_para_sort);
-        para_scan = new QScrollArea(ParaWindow);
-        para_scan->setObjectName(QStringLiteral("para_scan"));
-        para_scan->setGeometry(QRect(120, 10, 511, 421));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(para_scan->sizePolicy().hasHeightForWidth());
-        para_scan->setSizePolicy(sizePolicy2);
-        para_scan->setMaximumSize(QSize(511, 421));
-        para_scan->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_scan->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_scan->setWidgetResizable(true);
+        sa_sortingMethod->setWidget(w_para_sort);
+        sa_laserAndScanner = new QScrollArea(ParaWindow);
+        sa_laserAndScanner->setObjectName(QStringLiteral("sa_laserAndScanner"));
+        sa_laserAndScanner->setGeometry(QRect(640, 470, 511, 450));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(sa_laserAndScanner->sizePolicy().hasHeightForWidth());
+        sa_laserAndScanner->setSizePolicy(sizePolicy1);
+        sa_laserAndScanner->setMaximumSize(QSize(511, 450));
+        sa_laserAndScanner->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_laserAndScanner->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_laserAndScanner->setWidgetResizable(true);
         w_para_laser = new QWidget();
         w_para_laser->setObjectName(QStringLiteral("w_para_laser"));
-        w_para_laser->setGeometry(QRect(0, 0, 509, 419));
+        w_para_laser->setGeometry(QRect(0, 0, 509, 448));
         verticalLayout_3 = new QVBoxLayout(w_para_laser);
+        verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(9, 9, 9, 9);
+        verticalLayout_3->setContentsMargins(9, 0, 9, 9);
         gb_la_test = new QGroupBox(w_para_laser);
         gb_la_test->setObjectName(QStringLiteral("gb_la_test"));
         horizontalLayout_3 = new QHBoxLayout(gb_la_test);
@@ -774,29 +769,29 @@ public:
         w_laser_pulse = new QWidget(gb_la_test);
         w_laser_pulse->setObjectName(QStringLiteral("w_laser_pulse"));
         w_laser_pulse->setStyleSheet(QStringLiteral("background-color: rgb(200, 200, 200);"));
-        lb_lp_title = new QLabel(w_laser_pulse);
-        lb_lp_title->setObjectName(QStringLiteral("lb_lp_title"));
-        lb_lp_title->setGeometry(QRect(80, 0, 91, 20));
+        lb_laser_pulse_title = new QLabel(w_laser_pulse);
+        lb_laser_pulse_title->setObjectName(QStringLiteral("lb_laser_pulse_title"));
+        lb_laser_pulse_title->setGeometry(QRect(80, 0, 101, 20));
         QFont font;
         font.setPointSize(10);
         font.setBold(true);
         font.setWeight(75);
-        lb_lp_title->setFont(font);
-        lb_lp_title->setStyleSheet(QStringLiteral("color: rgb(255, 255, 0);"));
-        lb_lp_low = new QLabel(w_laser_pulse);
-        lb_lp_low->setObjectName(QStringLiteral("lb_lp_low"));
-        lb_lp_low->setGeometry(QRect(110, 40, 41, 16));
+        lb_laser_pulse_title->setFont(font);
+        lb_laser_pulse_title->setStyleSheet(QStringLiteral("color: rgb(255, 255, 0);"));
+        lb_highPulseTime = new QLabel(w_laser_pulse);
+        lb_highPulseTime->setObjectName(QStringLiteral("lb_highPulseTime"));
+        lb_highPulseTime->setGeometry(QRect(20, 10, 41, 16));
         QFont font1;
         font1.setBold(true);
         font1.setWeight(75);
-        lb_lp_low->setFont(font1);
-        lb_lp_low->setStyleSheet(QStringLiteral("color: rgb(170, 0, 0);"));
-        lb_lp_low_2 = new QLabel(w_laser_pulse);
-        lb_lp_low_2->setObjectName(QStringLiteral("lb_lp_low_2"));
-        lb_lp_low_2->setEnabled(true);
-        lb_lp_low_2->setGeometry(QRect(10, 10, 41, 16));
-        lb_lp_low_2->setFont(font1);
-        lb_lp_low_2->setStyleSheet(QStringLiteral("color: rgb(170, 0, 0);"));
+        lb_highPulseTime->setFont(font1);
+        lb_highPulseTime->setStyleSheet(QStringLiteral("color: rgb(170, 0, 0);"));
+        lb_lwoPulseTime = new QLabel(w_laser_pulse);
+        lb_lwoPulseTime->setObjectName(QStringLiteral("lb_lwoPulseTime"));
+        lb_lwoPulseTime->setEnabled(true);
+        lb_lwoPulseTime->setGeometry(QRect(200, 50, 41, 16));
+        lb_lwoPulseTime->setFont(font1);
+        lb_lwoPulseTime->setStyleSheet(QStringLiteral("color: rgb(170, 0, 0);"));
 
         horizontalLayout_3->addWidget(w_laser_pulse);
 
@@ -810,23 +805,30 @@ public:
 
         ly_test_r->addWidget(lb_test_r);
 
-        lb_test_r_v = new QLabel(gb_la_test);
-        lb_test_r_v->setObjectName(QStringLiteral("lb_test_r_v"));
+        lb_laserRatio = new QLabel(gb_la_test);
+        lb_laserRatio->setObjectName(QStringLiteral("lb_laserRatio"));
+        lb_laserRatio->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        ly_test_r->addWidget(lb_test_r_v);
+        ly_test_r->addWidget(lb_laserRatio);
+
+        lb_laser_r_v_2 = new QLabel(gb_la_test);
+        lb_laser_r_v_2->setObjectName(QStringLiteral("lb_laser_r_v_2"));
+
+        ly_test_r->addWidget(lb_laser_r_v_2);
 
 
         ly_la_test_r_f->addLayout(ly_test_r);
 
-        sl_test_r = new QSlider(gb_la_test);
-        sl_test_r->setObjectName(QStringLiteral("sl_test_r"));
-        sl_test_r->setMaximum(100);
-        sl_test_r->setSliderPosition(10);
-        sl_test_r->setOrientation(Qt::Horizontal);
-        sl_test_r->setTickPosition(QSlider::NoTicks);
-        sl_test_r->setTickInterval(0);
+        s_laserRatio = new QSlider(gb_la_test);
+        s_laserRatio->setObjectName(QStringLiteral("s_laserRatio"));
+        s_laserRatio->setMaximum(100);
+        s_laserRatio->setValue(30);
+        s_laserRatio->setSliderPosition(30);
+        s_laserRatio->setOrientation(Qt::Horizontal);
+        s_laserRatio->setTickPosition(QSlider::NoTicks);
+        s_laserRatio->setTickInterval(0);
 
-        ly_la_test_r_f->addWidget(sl_test_r);
+        ly_la_test_r_f->addWidget(s_laserRatio);
 
         ly_test_f = new QHBoxLayout();
         ly_test_f->setObjectName(QStringLiteral("ly_test_f"));
@@ -835,10 +837,11 @@ public:
 
         ly_test_f->addWidget(lb_test_f);
 
-        le_test_f_v = new QLabel(gb_la_test);
-        le_test_f_v->setObjectName(QStringLiteral("le_test_f_v"));
+        lb_laserFrequency = new QLabel(gb_la_test);
+        lb_laserFrequency->setObjectName(QStringLiteral("lb_laserFrequency"));
+        lb_laserFrequency->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        ly_test_f->addWidget(le_test_f_v);
+        ly_test_f->addWidget(lb_laserFrequency);
 
         lb_test_f2 = new QLabel(gb_la_test);
         lb_test_f2->setObjectName(QStringLiteral("lb_test_f2"));
@@ -848,11 +851,15 @@ public:
 
         ly_la_test_r_f->addLayout(ly_test_f);
 
-        sl_test_f = new QSlider(gb_la_test);
-        sl_test_f->setObjectName(QStringLiteral("sl_test_f"));
-        sl_test_f->setOrientation(Qt::Horizontal);
+        s_laserFrequency = new QSlider(gb_la_test);
+        s_laserFrequency->setObjectName(QStringLiteral("s_laserFrequency"));
+        s_laserFrequency->setMinimum(500);
+        s_laserFrequency->setMaximum(5000);
+        s_laserFrequency->setPageStep(100);
+        s_laserFrequency->setValue(3000);
+        s_laserFrequency->setOrientation(Qt::Horizontal);
 
-        ly_la_test_r_f->addWidget(sl_test_f);
+        ly_la_test_r_f->addWidget(s_laserFrequency);
 
 
         horizontalLayout_3->addLayout(ly_la_test_r_f);
@@ -878,28 +885,12 @@ public:
 
         ly_la_set_l->addWidget(lb_set_lpoint2, 0, 2, 1, 1);
 
-        le_set_lpoint = new QLineEdit(gb_la_set);
-        le_set_lpoint->setObjectName(QStringLiteral("le_set_lpoint"));
-        sizePolicy1.setHeightForWidth(le_set_lpoint->sizePolicy().hasHeightForWidth());
-        le_set_lpoint->setSizePolicy(sizePolicy1);
-        le_set_lpoint->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_l->addWidget(le_set_lpoint, 0, 1, 1, 1);
-
         lb_set_lpoint = new QLabel(gb_la_set);
         lb_set_lpoint->setObjectName(QStringLiteral("lb_set_lpoint"));
-        sizePolicy2.setHeightForWidth(lb_set_lpoint->sizePolicy().hasHeightForWidth());
-        lb_set_lpoint->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_lpoint->sizePolicy().hasHeightForWidth());
+        lb_set_lpoint->setSizePolicy(sizePolicy1);
 
         ly_la_set_l->addWidget(lb_set_lpoint, 0, 0, 1, 1);
-
-        le_set_ldelay = new QLineEdit(gb_la_set);
-        le_set_ldelay->setObjectName(QStringLiteral("le_set_ldelay"));
-        sizePolicy1.setHeightForWidth(le_set_ldelay->sizePolicy().hasHeightForWidth());
-        le_set_ldelay->setSizePolicy(sizePolicy1);
-        le_set_ldelay->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_l->addWidget(le_set_ldelay, 2, 1, 1, 1);
 
         lb_set_ltime2 = new QLabel(gb_la_set);
         lb_set_ltime2->setObjectName(QStringLiteral("lb_set_ltime2"));
@@ -908,31 +899,47 @@ public:
 
         lb_set_ldelay = new QLabel(gb_la_set);
         lb_set_ldelay->setObjectName(QStringLiteral("lb_set_ldelay"));
-        sizePolicy2.setHeightForWidth(lb_set_ldelay->sizePolicy().hasHeightForWidth());
-        lb_set_ldelay->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_ldelay->sizePolicy().hasHeightForWidth());
+        lb_set_ldelay->setSizePolicy(sizePolicy1);
 
         ly_la_set_l->addWidget(lb_set_ldelay, 2, 0, 1, 1);
 
         lb_set_ltime = new QLabel(gb_la_set);
         lb_set_ltime->setObjectName(QStringLiteral("lb_set_ltime"));
-        sizePolicy2.setHeightForWidth(lb_set_ltime->sizePolicy().hasHeightForWidth());
-        lb_set_ltime->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_ltime->sizePolicy().hasHeightForWidth());
+        lb_set_ltime->setSizePolicy(sizePolicy1);
 
         ly_la_set_l->addWidget(lb_set_ltime, 1, 0, 1, 1);
-
-        le_set_ltime = new QLineEdit(gb_la_set);
-        le_set_ltime->setObjectName(QStringLiteral("le_set_ltime"));
-        le_set_ltime->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_set_ltime->sizePolicy().hasHeightForWidth());
-        le_set_ltime->setSizePolicy(sizePolicy1);
-        le_set_ltime->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_l->addWidget(le_set_ltime, 1, 1, 1, 1);
 
         lb_set_ldelay2 = new QLabel(gb_la_set);
         lb_set_ldelay2->setObjectName(QStringLiteral("lb_set_ldelay2"));
 
         ly_la_set_l->addWidget(lb_set_ldelay2, 2, 2, 1, 1);
+
+        dsb_focalLength = new QDoubleSpinBox(gb_la_set);
+        dsb_focalLength->setObjectName(QStringLiteral("dsb_focalLength"));
+        dsb_focalLength->setEnabled(true);
+        dsb_focalLength->setDecimals(1);
+        dsb_focalLength->setMaximum(999);
+        dsb_focalLength->setValue(120);
+
+        ly_la_set_l->addWidget(dsb_focalLength, 0, 1, 1, 1);
+
+        sb_laserSimmerTime = new QSpinBox(gb_la_set);
+        sb_laserSimmerTime->setObjectName(QStringLiteral("sb_laserSimmerTime"));
+        sb_laserSimmerTime->setEnabled(false);
+        sb_laserSimmerTime->setMaximum(999999);
+        sb_laserSimmerTime->setValue(0);
+
+        ly_la_set_l->addWidget(sb_laserSimmerTime, 1, 1, 1, 1);
+
+        sb_laserDelay = new QSpinBox(gb_la_set);
+        sb_laserDelay->setObjectName(QStringLiteral("sb_laserDelay"));
+        sb_laserDelay->setEnabled(true);
+        sb_laserDelay->setMaximum(999999);
+        sb_laserDelay->setValue(205);
+
+        ly_la_set_l->addWidget(sb_laserDelay, 2, 1, 1, 1);
 
 
         ly_la_set_t->addLayout(ly_la_set_l);
@@ -941,18 +948,10 @@ public:
         ly_la_set_r->setObjectName(QStringLiteral("ly_la_set_r"));
         lb_set_sdelay = new QLabel(gb_la_set);
         lb_set_sdelay->setObjectName(QStringLiteral("lb_set_sdelay"));
-        sizePolicy2.setHeightForWidth(lb_set_sdelay->sizePolicy().hasHeightForWidth());
-        lb_set_sdelay->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_sdelay->sizePolicy().hasHeightForWidth());
+        lb_set_sdelay->setSizePolicy(sizePolicy1);
 
         ly_la_set_r->addWidget(lb_set_sdelay, 0, 0, 1, 1);
-
-        le_set_sdelay = new QLineEdit(gb_la_set);
-        le_set_sdelay->setObjectName(QStringLiteral("le_set_sdelay"));
-        sizePolicy1.setHeightForWidth(le_set_sdelay->sizePolicy().hasHeightForWidth());
-        le_set_sdelay->setSizePolicy(sizePolicy1);
-        le_set_sdelay->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_r->addWidget(le_set_sdelay, 0, 1, 1, 1);
 
         lb_set_sdelay2 = new QLabel(gb_la_set);
         lb_set_sdelay2->setObjectName(QStringLiteral("lb_set_sdelay2"));
@@ -961,19 +960,10 @@ public:
 
         lb_set_sv = new QLabel(gb_la_set);
         lb_set_sv->setObjectName(QStringLiteral("lb_set_sv"));
-        sizePolicy2.setHeightForWidth(lb_set_sv->sizePolicy().hasHeightForWidth());
-        lb_set_sv->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_sv->sizePolicy().hasHeightForWidth());
+        lb_set_sv->setSizePolicy(sizePolicy1);
 
         ly_la_set_r->addWidget(lb_set_sv, 1, 0, 1, 1);
-
-        le_set_sv = new QLineEdit(gb_la_set);
-        le_set_sv->setObjectName(QStringLiteral("le_set_sv"));
-        le_set_sv->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_set_sv->sizePolicy().hasHeightForWidth());
-        le_set_sv->setSizePolicy(sizePolicy1);
-        le_set_sv->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_r->addWidget(le_set_sv, 1, 1, 1, 1);
 
         lb_set_sv2 = new QLabel(gb_la_set);
         lb_set_sv2->setObjectName(QStringLiteral("lb_set_sv2"));
@@ -982,24 +972,39 @@ public:
 
         lb_set_udelay = new QLabel(gb_la_set);
         lb_set_udelay->setObjectName(QStringLiteral("lb_set_udelay"));
-        sizePolicy2.setHeightForWidth(lb_set_udelay->sizePolicy().hasHeightForWidth());
-        lb_set_udelay->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(lb_set_udelay->sizePolicy().hasHeightForWidth());
+        lb_set_udelay->setSizePolicy(sizePolicy1);
 
         ly_la_set_r->addWidget(lb_set_udelay, 2, 0, 1, 1);
-
-        le_set_udelay = new QLineEdit(gb_la_set);
-        le_set_udelay->setObjectName(QStringLiteral("le_set_udelay"));
-        le_set_udelay->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_set_udelay->sizePolicy().hasHeightForWidth());
-        le_set_udelay->setSizePolicy(sizePolicy1);
-        le_set_udelay->setMaximumSize(QSize(60, 16777215));
-
-        ly_la_set_r->addWidget(le_set_udelay, 2, 1, 1, 1);
 
         lb_set_udelay2 = new QLabel(gb_la_set);
         lb_set_udelay2->setObjectName(QStringLiteral("lb_set_udelay2"));
 
         ly_la_set_r->addWidget(lb_set_udelay2, 2, 2, 1, 1);
+
+        sb_scannerDelay = new QSpinBox(gb_la_set);
+        sb_scannerDelay->setObjectName(QStringLiteral("sb_scannerDelay"));
+        sb_scannerDelay->setEnabled(true);
+        sb_scannerDelay->setMaximum(999999);
+        sb_scannerDelay->setValue(500);
+
+        ly_la_set_r->addWidget(sb_scannerDelay, 0, 1, 1, 1);
+
+        sb_scannerSpeed = new QSpinBox(gb_la_set);
+        sb_scannerSpeed->setObjectName(QStringLiteral("sb_scannerSpeed"));
+        sb_scannerSpeed->setEnabled(false);
+        sb_scannerSpeed->setMaximum(9999999);
+        sb_scannerSpeed->setValue(4130);
+
+        ly_la_set_r->addWidget(sb_scannerSpeed, 1, 1, 1, 1);
+
+        sb_microStepDelay = new QSpinBox(gb_la_set);
+        sb_microStepDelay->setObjectName(QStringLiteral("sb_microStepDelay"));
+        sb_microStepDelay->setEnabled(false);
+        sb_microStepDelay->setMaximum(999999);
+        sb_microStepDelay->setValue(10);
+
+        ly_la_set_r->addWidget(sb_microStepDelay, 2, 1, 1, 1);
 
 
         ly_la_set_t->addLayout(ly_la_set_r);
@@ -1009,17 +1014,17 @@ public:
 
         ly_la_set_b = new QHBoxLayout();
         ly_la_set_b->setObjectName(QStringLiteral("ly_la_set_b"));
-        cb_set_X2Y = new QCheckBox(gb_la_set);
-        cb_set_X2Y->setObjectName(QStringLiteral("cb_set_X2Y"));
-        cb_set_X2Y->setEnabled(false);
+        cb_exchangeXYScanner = new QCheckBox(gb_la_set);
+        cb_exchangeXYScanner->setObjectName(QStringLiteral("cb_exchangeXYScanner"));
+        cb_exchangeXYScanner->setEnabled(false);
 
-        ly_la_set_b->addWidget(cb_set_X2Y);
+        ly_la_set_b->addWidget(cb_exchangeXYScanner);
 
-        cb_set_ustep = new QCheckBox(gb_la_set);
-        cb_set_ustep->setObjectName(QStringLiteral("cb_set_ustep"));
-        cb_set_ustep->setChecked(true);
+        cb_stepOverMicroStep = new QCheckBox(gb_la_set);
+        cb_stepOverMicroStep->setObjectName(QStringLiteral("cb_stepOverMicroStep"));
+        cb_stepOverMicroStep->setChecked(true);
 
-        ly_la_set_b->addWidget(cb_set_ustep);
+        ly_la_set_b->addWidget(cb_stepOverMicroStep);
 
 
         verticalLayout_5->addLayout(ly_la_set_b);
@@ -1042,89 +1047,95 @@ public:
 
         gridLayout->addWidget(lb_la_r_Y, 0, 3, 1, 1);
 
-        le_la_r_X = new QLineEdit(gb_la_para);
-        le_la_r_X->setObjectName(QStringLiteral("le_la_r_X"));
-        le_la_r_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_r_X->sizePolicy().hasHeightForWidth());
-        le_la_r_X->setSizePolicy(sizePolicy1);
-        le_la_r_X->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_r_X, 0, 1, 1, 1);
-
         lb_la_r_X = new QLabel(gb_la_para);
         lb_la_r_X->setObjectName(QStringLiteral("lb_la_r_X"));
 
         gridLayout->addWidget(lb_la_r_X, 0, 0, 1, 1);
 
-        le_la_r_Y = new QLineEdit(gb_la_para);
-        le_la_r_Y->setObjectName(QStringLiteral("le_la_r_Y"));
-        le_la_r_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_r_Y->sizePolicy().hasHeightForWidth());
-        le_la_r_Y->setSizePolicy(sizePolicy1);
-        le_la_r_Y->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_r_Y, 0, 4, 1, 1);
-
-        le_la_u_Y = new QLineEdit(gb_la_para);
-        le_la_u_Y->setObjectName(QStringLiteral("le_la_u_Y"));
-        le_la_u_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_u_Y->sizePolicy().hasHeightForWidth());
-        le_la_u_Y->setSizePolicy(sizePolicy1);
-        le_la_u_Y->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_u_Y, 2, 4, 1, 1);
-
         lb_la_u_Y = new QLabel(gb_la_para);
         lb_la_u_Y->setObjectName(QStringLiteral("lb_la_u_Y"));
 
-        gridLayout->addWidget(lb_la_u_Y, 2, 3, 1, 1);
-
-        le_la_u_X = new QLineEdit(gb_la_para);
-        le_la_u_X->setObjectName(QStringLiteral("le_la_u_X"));
-        le_la_u_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_u_X->sizePolicy().hasHeightForWidth());
-        le_la_u_X->setSizePolicy(sizePolicy1);
-        le_la_u_X->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_u_X, 2, 1, 1, 1);
+        gridLayout->addWidget(lb_la_u_Y, 3, 3, 1, 1);
 
         lb_la_u_X = new QLabel(gb_la_para);
         lb_la_u_X->setObjectName(QStringLiteral("lb_la_u_X"));
 
-        gridLayout->addWidget(lb_la_u_X, 2, 0, 1, 1);
-
-        le_la_v_Y = new QLineEdit(gb_la_para);
-        le_la_v_Y->setObjectName(QStringLiteral("le_la_v_Y"));
-        le_la_v_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_v_Y->sizePolicy().hasHeightForWidth());
-        le_la_v_Y->setSizePolicy(sizePolicy1);
-        le_la_v_Y->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_v_Y, 1, 4, 1, 1);
+        gridLayout->addWidget(lb_la_u_X, 3, 0, 1, 1);
 
         lb_la_v_X = new QLabel(gb_la_para);
         lb_la_v_X->setObjectName(QStringLiteral("lb_la_v_X"));
 
-        gridLayout->addWidget(lb_la_v_X, 1, 3, 1, 1);
-
-        le_la_v_X = new QLineEdit(gb_la_para);
-        le_la_v_X->setObjectName(QStringLiteral("le_la_v_X"));
-        le_la_v_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_la_v_X->sizePolicy().hasHeightForWidth());
-        le_la_v_X->setSizePolicy(sizePolicy1);
-        le_la_v_X->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout->addWidget(le_la_v_X, 1, 1, 1, 1);
+        gridLayout->addWidget(lb_la_v_X, 2, 3, 1, 1);
 
         lb_la_v_X_2 = new QLabel(gb_la_para);
         lb_la_v_X_2->setObjectName(QStringLiteral("lb_la_v_X_2"));
 
-        gridLayout->addWidget(lb_la_v_X_2, 1, 0, 1, 1);
+        gridLayout->addWidget(lb_la_v_X_2, 2, 0, 1, 1);
 
         lb_la_r_Y2 = new QLabel(gb_la_para);
         lb_la_r_Y2->setObjectName(QStringLiteral("lb_la_r_Y2"));
 
         gridLayout->addWidget(lb_la_r_Y2, 0, 5, 1, 1);
+
+        dsb_scannerRatioX = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerRatioX->setObjectName(QStringLiteral("dsb_scannerRatioX"));
+        dsb_scannerRatioX->setEnabled(false);
+        dsb_scannerRatioX->setDecimals(2);
+        dsb_scannerRatioX->setMinimum(-9999);
+        dsb_scannerRatioX->setMaximum(9999);
+        dsb_scannerRatioX->setValue(-172.34);
+
+        gridLayout->addWidget(dsb_scannerRatioX, 0, 1, 1, 1);
+
+        dsb_scannerRatioY = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerRatioY->setObjectName(QStringLiteral("dsb_scannerRatioY"));
+        dsb_scannerRatioY->setEnabled(false);
+        dsb_scannerRatioY->setDecimals(2);
+        dsb_scannerRatioY->setMinimum(-9999);
+        dsb_scannerRatioY->setMaximum(9999);
+        dsb_scannerRatioY->setValue(171.66);
+
+        gridLayout->addWidget(dsb_scannerRatioY, 0, 4, 1, 1);
+
+        dsb_scannerAdjustX = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerAdjustX->setObjectName(QStringLiteral("dsb_scannerAdjustX"));
+        dsb_scannerAdjustX->setEnabled(false);
+        dsb_scannerAdjustX->setDecimals(1);
+        dsb_scannerAdjustX->setMinimum(-999);
+        dsb_scannerAdjustX->setMaximum(999);
+        dsb_scannerAdjustX->setValue(0);
+
+        gridLayout->addWidget(dsb_scannerAdjustX, 2, 1, 1, 1);
+
+        dsb_scannerAdjustY = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerAdjustY->setObjectName(QStringLiteral("dsb_scannerAdjustY"));
+        dsb_scannerAdjustY->setEnabled(false);
+        dsb_scannerAdjustY->setDecimals(1);
+        dsb_scannerAdjustY->setMinimum(-999);
+        dsb_scannerAdjustY->setMaximum(999);
+        dsb_scannerAdjustY->setValue(0);
+
+        gridLayout->addWidget(dsb_scannerAdjustY, 2, 4, 1, 1);
+
+        dsb_scannerPlatformAdjustX = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerPlatformAdjustX->setObjectName(QStringLiteral("dsb_scannerPlatformAdjustX"));
+        dsb_scannerPlatformAdjustX->setEnabled(false);
+        dsb_scannerPlatformAdjustX->setDecimals(1);
+        dsb_scannerPlatformAdjustX->setMinimum(-999);
+        dsb_scannerPlatformAdjustX->setMaximum(999);
+        dsb_scannerPlatformAdjustX->setValue(0);
+
+        gridLayout->addWidget(dsb_scannerPlatformAdjustX, 3, 1, 1, 1);
+
+        dsb_scannerPlatformAdjustY = new QDoubleSpinBox(gb_la_para);
+        dsb_scannerPlatformAdjustY->setObjectName(QStringLiteral("dsb_scannerPlatformAdjustY"));
+        dsb_scannerPlatformAdjustY->setEnabled(false);
+        dsb_scannerPlatformAdjustY->setDecimals(1);
+        dsb_scannerPlatformAdjustY->setMinimum(-999);
+        dsb_scannerPlatformAdjustY->setMaximum(999);
+        dsb_scannerPlatformAdjustY->setValue(0);
+
+        gridLayout->addWidget(dsb_scannerPlatformAdjustY, 3, 4, 1, 1);
 
 
         verticalLayout_3->addWidget(gb_la_para);
@@ -1133,6 +1144,7 @@ public:
         gb_la_ctrl->setObjectName(QStringLiteral("gb_la_ctrl"));
         horizontalLayout_4 = new QHBoxLayout(gb_la_ctrl);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(-1, 0, -1, 0);
         cb_la_r232 = new QCheckBox(gb_la_ctrl);
         cb_la_r232->setObjectName(QStringLiteral("cb_la_r232"));
         cb_la_r232->setEnabled(false);
@@ -1142,26 +1154,25 @@ public:
 
         verticalLayout_3->addWidget(gb_la_ctrl);
 
-        para_scan->setWidget(w_para_laser);
+        sa_laserAndScanner->setWidget(w_para_laser);
         gb_la_test->raise();
         gb_la_para->raise();
         gb_la_ctrl->raise();
         gb_la_set->raise();
-        para_motor = new QScrollArea(ParaWindow);
-        para_motor->setObjectName(QStringLiteral("para_motor"));
-        para_motor->setGeometry(QRect(120, 10, 511, 421));
-        sizePolicy2.setHeightForWidth(para_motor->sizePolicy().hasHeightForWidth());
-        para_motor->setSizePolicy(sizePolicy2);
-        para_motor->setMaximumSize(QSize(511, 421));
-        para_motor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_motor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        para_motor->setWidgetResizable(true);
+        sa_platformAndMotor = new QScrollArea(ParaWindow);
+        sa_platformAndMotor->setObjectName(QStringLiteral("sa_platformAndMotor"));
+        sa_platformAndMotor->setGeometry(QRect(120, 10, 511, 450));
+        sizePolicy1.setHeightForWidth(sa_platformAndMotor->sizePolicy().hasHeightForWidth());
+        sa_platformAndMotor->setSizePolicy(sizePolicy1);
+        sa_platformAndMotor->setMaximumSize(QSize(511, 450));
+        sa_platformAndMotor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_platformAndMotor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        sa_platformAndMotor->setWidgetResizable(true);
         w_para_motor = new QWidget();
         w_para_motor->setObjectName(QStringLiteral("w_para_motor"));
-        w_para_motor->setGeometry(QRect(0, 0, 509, 419));
+        w_para_motor->setGeometry(QRect(0, 0, 509, 449));
         verticalLayout_6 = new QVBoxLayout(w_para_motor);
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-        verticalLayout_6->setContentsMargins(9, 9, 9, 9);
         gb_par_motor = new QGroupBox(w_para_motor);
         gb_par_motor->setObjectName(QStringLiteral("gb_par_motor"));
         horizontalLayout_14 = new QHBoxLayout(gb_par_motor);
@@ -1171,14 +1182,14 @@ public:
 
         horizontalLayout_14->addWidget(lb_mo_X);
 
-        le_mo_X = new QLineEdit(gb_par_motor);
-        le_mo_X->setObjectName(QStringLiteral("le_mo_X"));
-        le_mo_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_mo_X->sizePolicy().hasHeightForWidth());
-        le_mo_X->setSizePolicy(sizePolicy1);
-        le_mo_X->setMaximumSize(QSize(60, 16777215));
+        dsb_motorRatioX = new QDoubleSpinBox(gb_par_motor);
+        dsb_motorRatioX->setObjectName(QStringLiteral("dsb_motorRatioX"));
+        dsb_motorRatioX->setEnabled(false);
+        dsb_motorRatioX->setDecimals(1);
+        dsb_motorRatioX->setMaximum(9999);
+        dsb_motorRatioX->setValue(640);
 
-        horizontalLayout_14->addWidget(le_mo_X);
+        horizontalLayout_14->addWidget(dsb_motorRatioX);
 
         lb_mo_X2 = new QLabel(gb_par_motor);
         lb_mo_X2->setObjectName(QStringLiteral("lb_mo_X2"));
@@ -1194,14 +1205,14 @@ public:
 
         horizontalLayout_14->addWidget(lb_mo_Y);
 
-        le_mo_Y = new QLineEdit(gb_par_motor);
-        le_mo_Y->setObjectName(QStringLiteral("le_mo_Y"));
-        le_mo_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_mo_Y->sizePolicy().hasHeightForWidth());
-        le_mo_Y->setSizePolicy(sizePolicy1);
-        le_mo_Y->setMaximumSize(QSize(60, 16777215));
+        dsb_motorRatioY = new QDoubleSpinBox(gb_par_motor);
+        dsb_motorRatioY->setObjectName(QStringLiteral("dsb_motorRatioY"));
+        dsb_motorRatioY->setEnabled(false);
+        dsb_motorRatioY->setDecimals(1);
+        dsb_motorRatioY->setMaximum(9999);
+        dsb_motorRatioY->setValue(640);
 
-        horizontalLayout_14->addWidget(le_mo_Y);
+        horizontalLayout_14->addWidget(dsb_motorRatioY);
 
         lb_mo_Y2 = new QLabel(gb_par_motor);
         lb_mo_Y2->setObjectName(QStringLiteral("lb_mo_Y2"));
@@ -1217,14 +1228,14 @@ public:
 
         horizontalLayout_14->addWidget(lb_mo_Z);
 
-        le_mo_Z = new QLineEdit(gb_par_motor);
-        le_mo_Z->setObjectName(QStringLiteral("le_mo_Z"));
-        le_mo_Z->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_mo_Z->sizePolicy().hasHeightForWidth());
-        le_mo_Z->setSizePolicy(sizePolicy1);
-        le_mo_Z->setMaximumSize(QSize(60, 16777215));
+        dsb_motorRatioZ = new QDoubleSpinBox(gb_par_motor);
+        dsb_motorRatioZ->setObjectName(QStringLiteral("dsb_motorRatioZ"));
+        dsb_motorRatioZ->setEnabled(false);
+        dsb_motorRatioZ->setDecimals(1);
+        dsb_motorRatioZ->setMaximum(9999);
+        dsb_motorRatioZ->setValue(427);
 
-        horizontalLayout_14->addWidget(le_mo_Z);
+        horizontalLayout_14->addWidget(dsb_motorRatioZ);
 
         lb_mo_Z2 = new QLabel(gb_par_motor);
         lb_mo_Z2->setObjectName(QStringLiteral("lb_mo_Z2"));
@@ -1243,14 +1254,12 @@ public:
 
         horizontalLayout_15->addWidget(sp_up_X);
 
-        le_up_X = new QLineEdit(gb_para_up);
-        le_up_X->setObjectName(QStringLiteral("le_up_X"));
-        le_up_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_up_X->sizePolicy().hasHeightForWidth());
-        le_up_X->setSizePolicy(sizePolicy1);
-        le_up_X->setMaximumSize(QSize(60, 16777215));
+        sb_marginX = new QSpinBox(gb_para_up);
+        sb_marginX->setObjectName(QStringLiteral("sb_marginX"));
+        sb_marginX->setEnabled(false);
+        sb_marginX->setMaximum(9999);
 
-        horizontalLayout_15->addWidget(le_up_X);
+        horizontalLayout_15->addWidget(sb_marginX);
 
         lb_up_X2 = new QLabel(gb_para_up);
         lb_up_X2->setObjectName(QStringLiteral("lb_up_X2"));
@@ -1266,14 +1275,12 @@ public:
 
         horizontalLayout_15->addWidget(lb_up_Y);
 
-        le_up_Y = new QLineEdit(gb_para_up);
-        le_up_Y->setObjectName(QStringLiteral("le_up_Y"));
-        le_up_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_up_Y->sizePolicy().hasHeightForWidth());
-        le_up_Y->setSizePolicy(sizePolicy1);
-        le_up_Y->setMaximumSize(QSize(60, 16777215));
+        sb_marginY = new QSpinBox(gb_para_up);
+        sb_marginY->setObjectName(QStringLiteral("sb_marginY"));
+        sb_marginY->setEnabled(false);
+        sb_marginY->setMaximum(9999);
 
-        horizontalLayout_15->addWidget(le_up_Y);
+        horizontalLayout_15->addWidget(sb_marginY);
 
         lb_up_Y2 = new QLabel(gb_para_up);
         lb_up_Y2->setObjectName(QStringLiteral("lb_up_Y2"));
@@ -1289,14 +1296,12 @@ public:
 
         horizontalLayout_15->addWidget(lb_up_Z);
 
-        le_up_Z = new QLineEdit(gb_para_up);
-        le_up_Z->setObjectName(QStringLiteral("le_up_Z"));
-        le_up_Z->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_up_Z->sizePolicy().hasHeightForWidth());
-        le_up_Z->setSizePolicy(sizePolicy1);
-        le_up_Z->setMaximumSize(QSize(60, 16777215));
+        sb_marginZ = new QSpinBox(gb_para_up);
+        sb_marginZ->setObjectName(QStringLiteral("sb_marginZ"));
+        sb_marginZ->setEnabled(false);
+        sb_marginZ->setMaximum(9999);
 
-        horizontalLayout_15->addWidget(le_up_Z);
+        horizontalLayout_15->addWidget(sb_marginZ);
 
         lb_up_Z2 = new QLabel(gb_para_up);
         lb_up_Z2->setObjectName(QStringLiteral("lb_up_Z2"));
@@ -1306,74 +1311,74 @@ public:
 
         verticalLayout_6->addWidget(gb_para_up);
 
-        gb_para_os = new QGroupBox(w_para_motor);
-        gb_para_os->setObjectName(QStringLiteral("gb_para_os"));
-        horizontalLayout_16 = new QHBoxLayout(gb_para_os);
+        gb_para_s0 = new QGroupBox(w_para_motor);
+        gb_para_s0->setObjectName(QStringLiteral("gb_para_s0"));
+        horizontalLayout_16 = new QHBoxLayout(gb_para_s0);
         horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
-        lb_os_X = new QLabel(gb_para_os);
-        lb_os_X->setObjectName(QStringLiteral("lb_os_X"));
+        lb_s0_X = new QLabel(gb_para_s0);
+        lb_s0_X->setObjectName(QStringLiteral("lb_s0_X"));
 
-        horizontalLayout_16->addWidget(lb_os_X);
+        horizontalLayout_16->addWidget(lb_s0_X);
 
-        le_os_X = new QLineEdit(gb_para_os);
-        le_os_X->setObjectName(QStringLiteral("le_os_X"));
-        sizePolicy1.setHeightForWidth(le_os_X->sizePolicy().hasHeightForWidth());
-        le_os_X->setSizePolicy(sizePolicy1);
-        le_os_X->setMaximumSize(QSize(60, 16777215));
+        dsb_initOffsetX = new QDoubleSpinBox(gb_para_s0);
+        dsb_initOffsetX->setObjectName(QStringLiteral("dsb_initOffsetX"));
+        dsb_initOffsetX->setDecimals(1);
+        dsb_initOffsetX->setMaximum(9999);
+        dsb_initOffsetX->setValue(295);
 
-        horizontalLayout_16->addWidget(le_os_X);
+        horizontalLayout_16->addWidget(dsb_initOffsetX);
 
-        lb_os_X2 = new QLabel(gb_para_os);
-        lb_os_X2->setObjectName(QStringLiteral("lb_os_X2"));
+        lb_s0_X2 = new QLabel(gb_para_s0);
+        lb_s0_X2->setObjectName(QStringLiteral("lb_s0_X2"));
 
-        horizontalLayout_16->addWidget(lb_os_X2);
+        horizontalLayout_16->addWidget(lb_s0_X2);
 
-        sp_os_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sp_s0_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_16->addItem(sp_os_1);
+        horizontalLayout_16->addItem(sp_s0_1);
 
-        lb_os_Y = new QLabel(gb_para_os);
-        lb_os_Y->setObjectName(QStringLiteral("lb_os_Y"));
+        lb_s0_Y = new QLabel(gb_para_s0);
+        lb_s0_Y->setObjectName(QStringLiteral("lb_s0_Y"));
 
-        horizontalLayout_16->addWidget(lb_os_Y);
+        horizontalLayout_16->addWidget(lb_s0_Y);
 
-        le_os_Y = new QLineEdit(gb_para_os);
-        le_os_Y->setObjectName(QStringLiteral("le_os_Y"));
-        sizePolicy1.setHeightForWidth(le_os_Y->sizePolicy().hasHeightForWidth());
-        le_os_Y->setSizePolicy(sizePolicy1);
-        le_os_Y->setMaximumSize(QSize(60, 16777215));
+        dsb_initOffsetY = new QDoubleSpinBox(gb_para_s0);
+        dsb_initOffsetY->setObjectName(QStringLiteral("dsb_initOffsetY"));
+        dsb_initOffsetY->setDecimals(1);
+        dsb_initOffsetY->setMaximum(9999);
+        dsb_initOffsetY->setValue(20);
 
-        horizontalLayout_16->addWidget(le_os_Y);
+        horizontalLayout_16->addWidget(dsb_initOffsetY);
 
-        lb_os_Y2 = new QLabel(gb_para_os);
-        lb_os_Y2->setObjectName(QStringLiteral("lb_os_Y2"));
+        lb_s0_Y2 = new QLabel(gb_para_s0);
+        lb_s0_Y2->setObjectName(QStringLiteral("lb_s0_Y2"));
 
-        horizontalLayout_16->addWidget(lb_os_Y2);
+        horizontalLayout_16->addWidget(lb_s0_Y2);
 
-        sp_os_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sp_s0_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_16->addItem(sp_os_2);
+        horizontalLayout_16->addItem(sp_s0_2);
 
-        lb_os_Z = new QLabel(gb_para_os);
-        lb_os_Z->setObjectName(QStringLiteral("lb_os_Z"));
+        lb_s0_Z = new QLabel(gb_para_s0);
+        lb_s0_Z->setObjectName(QStringLiteral("lb_s0_Z"));
 
-        horizontalLayout_16->addWidget(lb_os_Z);
+        horizontalLayout_16->addWidget(lb_s0_Z);
 
-        le_os_Z = new QLineEdit(gb_para_os);
-        le_os_Z->setObjectName(QStringLiteral("le_os_Z"));
-        sizePolicy1.setHeightForWidth(le_os_Z->sizePolicy().hasHeightForWidth());
-        le_os_Z->setSizePolicy(sizePolicy1);
-        le_os_Z->setMaximumSize(QSize(60, 16777215));
+        dsb_initOffsetZ = new QDoubleSpinBox(gb_para_s0);
+        dsb_initOffsetZ->setObjectName(QStringLiteral("dsb_initOffsetZ"));
+        dsb_initOffsetZ->setDecimals(1);
+        dsb_initOffsetZ->setMaximum(9999);
+        dsb_initOffsetZ->setValue(200);
 
-        horizontalLayout_16->addWidget(le_os_Z);
+        horizontalLayout_16->addWidget(dsb_initOffsetZ);
 
-        lb_os_Z2 = new QLabel(gb_para_os);
-        lb_os_Z2->setObjectName(QStringLiteral("lb_os_Z2"));
+        lb_s0_Z2 = new QLabel(gb_para_s0);
+        lb_s0_Z2->setObjectName(QStringLiteral("lb_s0_Z2"));
 
-        horizontalLayout_16->addWidget(lb_os_Z2);
+        horizontalLayout_16->addWidget(lb_s0_Z2);
 
 
-        verticalLayout_6->addWidget(gb_para_os);
+        verticalLayout_6->addWidget(gb_para_s0);
 
         gb_para_speed_v0 = new QGroupBox(w_para_motor);
         gb_para_speed_v0->setObjectName(QStringLiteral("gb_para_speed_v0"));
@@ -1386,24 +1391,23 @@ public:
 
         ly_para_speed_v0->addWidget(lb_sp_v0);
 
+        sp_sp_v0_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        ly_para_speed_v0->addItem(sp_sp_v0_3);
+
         lb_sp_v0_X = new QLabel(gb_para_speed_v0);
         lb_sp_v0_X->setObjectName(QStringLiteral("lb_sp_v0_X"));
 
         ly_para_speed_v0->addWidget(lb_sp_v0_X);
 
-        le_sp_v0_X = new QLineEdit(gb_para_speed_v0);
-        le_sp_v0_X->setObjectName(QStringLiteral("le_sp_v0_X"));
-        le_sp_v0_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v0_X->sizePolicy().hasHeightForWidth());
-        le_sp_v0_X->setSizePolicy(sizePolicy1);
-        le_sp_v0_X->setMaximumSize(QSize(60, 16777215));
+        sb_startSpeedX = new QSpinBox(gb_para_speed_v0);
+        sb_startSpeedX->setObjectName(QStringLiteral("sb_startSpeedX"));
+        sb_startSpeedX->setEnabled(false);
+        sb_startSpeedX->setReadOnly(false);
+        sb_startSpeedX->setMaximum(99999);
+        sb_startSpeedX->setValue(6000);
 
-        ly_para_speed_v0->addWidget(le_sp_v0_X);
-
-        lb_sp_v0_X2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v0_X2->setObjectName(QStringLiteral("lb_sp_v0_X2"));
-
-        ly_para_speed_v0->addWidget(lb_sp_v0_X2);
+        ly_para_speed_v0->addWidget(sb_startSpeedX);
 
         sp_sp_v0_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1414,19 +1418,14 @@ public:
 
         ly_para_speed_v0->addWidget(lb_sp_v0_Y);
 
-        le_sp_v0_Y = new QLineEdit(gb_para_speed_v0);
-        le_sp_v0_Y->setObjectName(QStringLiteral("le_sp_v0_Y"));
-        le_sp_v0_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v0_Y->sizePolicy().hasHeightForWidth());
-        le_sp_v0_Y->setSizePolicy(sizePolicy1);
-        le_sp_v0_Y->setMaximumSize(QSize(60, 16777215));
+        sb_startSpeedY = new QSpinBox(gb_para_speed_v0);
+        sb_startSpeedY->setObjectName(QStringLiteral("sb_startSpeedY"));
+        sb_startSpeedY->setEnabled(false);
+        sb_startSpeedY->setReadOnly(false);
+        sb_startSpeedY->setMaximum(99999);
+        sb_startSpeedY->setValue(6000);
 
-        ly_para_speed_v0->addWidget(le_sp_v0_Y);
-
-        lb_sp_v0_Y2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v0_Y2->setObjectName(QStringLiteral("lb_sp_v0_Y2"));
-
-        ly_para_speed_v0->addWidget(lb_sp_v0_Y2);
+        ly_para_speed_v0->addWidget(sb_startSpeedY);
 
         sp_sp_v0_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1437,19 +1436,14 @@ public:
 
         ly_para_speed_v0->addWidget(lb_sp_v0_Z);
 
-        le_sp_v0_Z = new QLineEdit(gb_para_speed_v0);
-        le_sp_v0_Z->setObjectName(QStringLiteral("le_sp_v0_Z"));
-        le_sp_v0_Z->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v0_Z->sizePolicy().hasHeightForWidth());
-        le_sp_v0_Z->setSizePolicy(sizePolicy1);
-        le_sp_v0_Z->setMaximumSize(QSize(60, 16777215));
+        sb_startSpeedZ = new QSpinBox(gb_para_speed_v0);
+        sb_startSpeedZ->setObjectName(QStringLiteral("sb_startSpeedZ"));
+        sb_startSpeedZ->setEnabled(false);
+        sb_startSpeedZ->setReadOnly(false);
+        sb_startSpeedZ->setMaximum(99999);
+        sb_startSpeedZ->setValue(6000);
 
-        ly_para_speed_v0->addWidget(le_sp_v0_Z);
-
-        lb_sp_v0_Z2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v0_Z2->setObjectName(QStringLiteral("lb_sp_v0_Z2"));
-
-        ly_para_speed_v0->addWidget(lb_sp_v0_Z2);
+        ly_para_speed_v0->addWidget(sb_startSpeedZ);
 
 
         verticalLayout_9->addLayout(ly_para_speed_v0);
@@ -1461,24 +1455,23 @@ public:
 
         ly_para_speed_v->addWidget(lb_sp_v);
 
+        sp_sp_v0_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        ly_para_speed_v->addItem(sp_sp_v0_4);
+
         lb_sp_v_X = new QLabel(gb_para_speed_v0);
         lb_sp_v_X->setObjectName(QStringLiteral("lb_sp_v_X"));
 
         ly_para_speed_v->addWidget(lb_sp_v_X);
 
-        le_sp_v_X = new QLineEdit(gb_para_speed_v0);
-        le_sp_v_X->setObjectName(QStringLiteral("le_sp_v_X"));
-        le_sp_v_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v_X->sizePolicy().hasHeightForWidth());
-        le_sp_v_X->setSizePolicy(sizePolicy1);
-        le_sp_v_X->setMaximumSize(QSize(60, 16777215));
+        sb_runSpeedX = new QSpinBox(gb_para_speed_v0);
+        sb_runSpeedX->setObjectName(QStringLiteral("sb_runSpeedX"));
+        sb_runSpeedX->setEnabled(false);
+        sb_runSpeedX->setReadOnly(false);
+        sb_runSpeedX->setMaximum(99999);
+        sb_runSpeedX->setValue(16000);
 
-        ly_para_speed_v->addWidget(le_sp_v_X);
-
-        lb_sp_v_X2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v_X2->setObjectName(QStringLiteral("lb_sp_v_X2"));
-
-        ly_para_speed_v->addWidget(lb_sp_v_X2);
+        ly_para_speed_v->addWidget(sb_runSpeedX);
 
         sp_sp_v_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1489,19 +1482,14 @@ public:
 
         ly_para_speed_v->addWidget(lb_sp_v_Y);
 
-        le_sp_v_Y = new QLineEdit(gb_para_speed_v0);
-        le_sp_v_Y->setObjectName(QStringLiteral("le_sp_v_Y"));
-        le_sp_v_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v_Y->sizePolicy().hasHeightForWidth());
-        le_sp_v_Y->setSizePolicy(sizePolicy1);
-        le_sp_v_Y->setMaximumSize(QSize(60, 16777215));
+        sb_runSpeedY = new QSpinBox(gb_para_speed_v0);
+        sb_runSpeedY->setObjectName(QStringLiteral("sb_runSpeedY"));
+        sb_runSpeedY->setEnabled(false);
+        sb_runSpeedY->setReadOnly(false);
+        sb_runSpeedY->setMaximum(99999);
+        sb_runSpeedY->setValue(19200);
 
-        ly_para_speed_v->addWidget(le_sp_v_Y);
-
-        lb_sp_v_Y2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v_Y2->setObjectName(QStringLiteral("lb_sp_v_Y2"));
-
-        ly_para_speed_v->addWidget(lb_sp_v_Y2);
+        ly_para_speed_v->addWidget(sb_runSpeedY);
 
         sp_sp_v_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1512,19 +1500,14 @@ public:
 
         ly_para_speed_v->addWidget(lb_sp_v_Z);
 
-        le_sp_v_Z = new QLineEdit(gb_para_speed_v0);
-        le_sp_v_Z->setObjectName(QStringLiteral("le_sp_v_Z"));
-        le_sp_v_Z->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_v_Z->sizePolicy().hasHeightForWidth());
-        le_sp_v_Z->setSizePolicy(sizePolicy1);
-        le_sp_v_Z->setMaximumSize(QSize(60, 16777215));
+        sb_runSpeedZ = new QSpinBox(gb_para_speed_v0);
+        sb_runSpeedZ->setObjectName(QStringLiteral("sb_runSpeedZ"));
+        sb_runSpeedZ->setEnabled(false);
+        sb_runSpeedZ->setReadOnly(false);
+        sb_runSpeedZ->setMaximum(99999);
+        sb_runSpeedZ->setValue(15000);
 
-        ly_para_speed_v->addWidget(le_sp_v_Z);
-
-        lb_sp_v_Z2 = new QLabel(gb_para_speed_v0);
-        lb_sp_v_Z2->setObjectName(QStringLiteral("lb_sp_v_Z2"));
-
-        ly_para_speed_v->addWidget(lb_sp_v_Z2);
+        ly_para_speed_v->addWidget(sb_runSpeedZ);
 
 
         verticalLayout_9->addLayout(ly_para_speed_v);
@@ -1536,24 +1519,23 @@ public:
 
         ly_para_sp_acc->addWidget(lb_sp_a);
 
+        sp_sp_v0_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        ly_para_sp_acc->addItem(sp_sp_v0_5);
+
         lb_sp_a_X = new QLabel(gb_para_speed_v0);
         lb_sp_a_X->setObjectName(QStringLiteral("lb_sp_a_X"));
 
         ly_para_sp_acc->addWidget(lb_sp_a_X);
 
-        le_sp_a_X = new QLineEdit(gb_para_speed_v0);
-        le_sp_a_X->setObjectName(QStringLiteral("le_sp_a_X"));
-        le_sp_a_X->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_a_X->sizePolicy().hasHeightForWidth());
-        le_sp_a_X->setSizePolicy(sizePolicy1);
-        le_sp_a_X->setMaximumSize(QSize(60, 16777215));
+        sb_motorAccX = new QSpinBox(gb_para_speed_v0);
+        sb_motorAccX->setObjectName(QStringLiteral("sb_motorAccX"));
+        sb_motorAccX->setEnabled(false);
+        sb_motorAccX->setReadOnly(false);
+        sb_motorAccX->setMaximum(99999);
+        sb_motorAccX->setValue(50000);
 
-        ly_para_sp_acc->addWidget(le_sp_a_X);
-
-        lb_sp_a_X2 = new QLabel(gb_para_speed_v0);
-        lb_sp_a_X2->setObjectName(QStringLiteral("lb_sp_a_X2"));
-
-        ly_para_sp_acc->addWidget(lb_sp_a_X2);
+        ly_para_sp_acc->addWidget(sb_motorAccX);
 
         sp_sp_a_1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1564,19 +1546,14 @@ public:
 
         ly_para_sp_acc->addWidget(lb_sp_a_Y);
 
-        le_sp_a_Y = new QLineEdit(gb_para_speed_v0);
-        le_sp_a_Y->setObjectName(QStringLiteral("le_sp_a_Y"));
-        le_sp_a_Y->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_a_Y->sizePolicy().hasHeightForWidth());
-        le_sp_a_Y->setSizePolicy(sizePolicy1);
-        le_sp_a_Y->setMaximumSize(QSize(60, 16777215));
+        sb_motorAccY = new QSpinBox(gb_para_speed_v0);
+        sb_motorAccY->setObjectName(QStringLiteral("sb_motorAccY"));
+        sb_motorAccY->setEnabled(false);
+        sb_motorAccY->setReadOnly(false);
+        sb_motorAccY->setMaximum(99999);
+        sb_motorAccY->setValue(50000);
 
-        ly_para_sp_acc->addWidget(le_sp_a_Y);
-
-        lb_sp_a_Y2 = new QLabel(gb_para_speed_v0);
-        lb_sp_a_Y2->setObjectName(QStringLiteral("lb_sp_a_Y2"));
-
-        ly_para_sp_acc->addWidget(lb_sp_a_Y2);
+        ly_para_sp_acc->addWidget(sb_motorAccY);
 
         sp_sp_a_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1587,19 +1564,14 @@ public:
 
         ly_para_sp_acc->addWidget(lb_sp_a_Z);
 
-        le_sp_a_Z = new QLineEdit(gb_para_speed_v0);
-        le_sp_a_Z->setObjectName(QStringLiteral("le_sp_a_Z"));
-        le_sp_a_Z->setEnabled(false);
-        sizePolicy1.setHeightForWidth(le_sp_a_Z->sizePolicy().hasHeightForWidth());
-        le_sp_a_Z->setSizePolicy(sizePolicy1);
-        le_sp_a_Z->setMaximumSize(QSize(60, 16777215));
+        sb_motorAccZ = new QSpinBox(gb_para_speed_v0);
+        sb_motorAccZ->setObjectName(QStringLiteral("sb_motorAccZ"));
+        sb_motorAccZ->setEnabled(false);
+        sb_motorAccZ->setReadOnly(false);
+        sb_motorAccZ->setMaximum(99999);
+        sb_motorAccZ->setValue(50000);
 
-        ly_para_sp_acc->addWidget(le_sp_a_Z);
-
-        lb_sp_a_Z2 = new QLabel(gb_para_speed_v0);
-        lb_sp_a_Z2->setObjectName(QStringLiteral("lb_sp_a_Z2"));
-
-        ly_para_sp_acc->addWidget(lb_sp_a_Z2);
+        ly_para_sp_acc->addWidget(sb_motorAccZ);
 
 
         verticalLayout_9->addLayout(ly_para_sp_acc);
@@ -1611,58 +1583,87 @@ public:
         gb_para_plat->setObjectName(QStringLiteral("gb_para_plat"));
         gridLayout_7 = new QGridLayout(gb_para_plat);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
-        cb_pl_cv = new QCheckBox(gb_para_plat);
-        cb_pl_cv->setObjectName(QStringLiteral("cb_pl_cv"));
-        cb_pl_cv->setEnabled(false);
+        cb_sphereMachine = new QCheckBox(gb_para_plat);
+        cb_sphereMachine->setObjectName(QStringLiteral("cb_sphereMachine"));
+        cb_sphereMachine->setEnabled(false);
 
-        gridLayout_7->addWidget(cb_pl_cv, 1, 2, 1, 1);
+        gridLayout_7->addWidget(cb_sphereMachine, 1, 2, 1, 1);
 
-        cb_pl_scan_XY = new QCheckBox(gb_para_plat);
-        cb_pl_scan_XY->setObjectName(QStringLiteral("cb_pl_scan_XY"));
-        cb_pl_scan_XY->setEnabled(false);
+        cb_reverseScannerXY = new QCheckBox(gb_para_plat);
+        cb_reverseScannerXY->setObjectName(QStringLiteral("cb_reverseScannerXY"));
+        cb_reverseScannerXY->setEnabled(false);
 
-        gridLayout_7->addWidget(cb_pl_scan_XY, 1, 0, 1, 1);
+        gridLayout_7->addWidget(cb_reverseScannerXY, 1, 0, 1, 1);
 
-        cb_pl_X = new QCheckBox(gb_para_plat);
-        cb_pl_X->setObjectName(QStringLiteral("cb_pl_X"));
-        cb_pl_X->setEnabled(false);
-        cb_pl_X->setChecked(true);
+        cb_reverseXDir = new QCheckBox(gb_para_plat);
+        cb_reverseXDir->setObjectName(QStringLiteral("cb_reverseXDir"));
+        cb_reverseXDir->setEnabled(false);
+        cb_reverseXDir->setChecked(true);
 
-        gridLayout_7->addWidget(cb_pl_X, 0, 0, 1, 1);
+        gridLayout_7->addWidget(cb_reverseXDir, 0, 0, 1, 1);
 
-        cb_pl_Z = new QCheckBox(gb_para_plat);
-        cb_pl_Z->setObjectName(QStringLiteral("cb_pl_Z"));
-        cb_pl_Z->setEnabled(false);
+        cb_reverseZDir = new QCheckBox(gb_para_plat);
+        cb_reverseZDir->setObjectName(QStringLiteral("cb_reverseZDir"));
+        cb_reverseZDir->setEnabled(false);
 
-        gridLayout_7->addWidget(cb_pl_Z, 0, 2, 1, 1);
+        gridLayout_7->addWidget(cb_reverseZDir, 0, 2, 1, 1);
 
-        cb_pl_scan_Z = new QCheckBox(gb_para_plat);
-        cb_pl_scan_Z->setObjectName(QStringLiteral("cb_pl_scan_Z"));
-        cb_pl_scan_Z->setEnabled(false);
+        cb_reverseScannerZ = new QCheckBox(gb_para_plat);
+        cb_reverseScannerZ->setObjectName(QStringLiteral("cb_reverseScannerZ"));
+        cb_reverseScannerZ->setEnabled(false);
 
-        gridLayout_7->addWidget(cb_pl_scan_Z, 1, 1, 1, 1);
+        gridLayout_7->addWidget(cb_reverseScannerZ, 1, 1, 1, 1);
 
-        cb_pl_Y = new QCheckBox(gb_para_plat);
-        cb_pl_Y->setObjectName(QStringLiteral("cb_pl_Y"));
-        cb_pl_Y->setEnabled(false);
-        cb_pl_Y->setChecked(true);
+        cb_reverseYDir = new QCheckBox(gb_para_plat);
+        cb_reverseYDir->setObjectName(QStringLiteral("cb_reverseYDir"));
+        cb_reverseYDir->setEnabled(false);
+        cb_reverseYDir->setChecked(true);
 
-        gridLayout_7->addWidget(cb_pl_Y, 0, 1, 1, 1);
+        gridLayout_7->addWidget(cb_reverseYDir, 0, 1, 1, 1);
 
 
         verticalLayout_6->addWidget(gb_para_plat);
 
-        para_motor->setWidget(w_para_motor);
+        sa_platformAndMotor->setWidget(w_para_motor);
+        layoutWidget = new QWidget(ParaWindow);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 470, 621, 30));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        sp_para_btn2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(sp_para_btn2);
+
+        pb_setDefaultParam = new QPushButton(layoutWidget);
+        pb_setDefaultParam->setObjectName(QStringLiteral("pb_setDefaultParam"));
+        pb_setDefaultParam->setEnabled(false);
+
+        horizontalLayout->addWidget(pb_setDefaultParam);
+
+        pb_getDefaultParam = new QPushButton(layoutWidget);
+        pb_getDefaultParam->setObjectName(QStringLiteral("pb_getDefaultParam"));
+        pb_getDefaultParam->setEnabled(false);
+
+        horizontalLayout->addWidget(pb_getDefaultParam);
+
+        sp_para_btn1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(sp_para_btn1);
+
+        buttonBox = new QDialogButtonBox(layoutWidget);
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        horizontalLayout->addWidget(buttonBox);
+
+        sa_platformAndMotor->raise();
+        sa_laserAndScanner->raise();
         layoutWidget->raise();
         w_para_btn->raise();
-        para_motor->raise();
-        para_scan->raise();
-        para_sort->raise();
+        sa_sortingMethod->raise();
 
         retranslateUi(ParaWindow);
-        QObject::connect(btn_para_sort, SIGNAL(clicked(bool)), ParaWindow, SLOT(slot_btn_sort()));
-        QObject::connect(btn_para_scan, SIGNAL(clicked(bool)), ParaWindow, SLOT(slot_btn_scan()));
-        QObject::connect(btn_para_motor, SIGNAL(clicked(bool)), ParaWindow, SLOT(slot_btn_motor()));
 
         QMetaObject::connectSlotsByName(ParaWindow);
     } // setupUi
@@ -1670,15 +1671,11 @@ public:
     void retranslateUi(QDialog *ParaWindow)
     {
         ParaWindow->setWindowTitle(QApplication::translate("ParaWindow", "\345\217\202\346\225\260", 0));
-        btn_para_w->setText(QApplication::translate("ParaWindow", "\345\206\231\351\273\230\350\256\244\345\200\274", 0));
-        btn_para_r->setText(QApplication::translate("ParaWindow", "\350\257\273\351\273\230\350\256\244\345\200\274", 0));
-        btn_para_enter->setText(QApplication::translate("ParaWindow", "\347\241\256\345\256\232", 0));
-        btn_para_cancle->setText(QApplication::translate("ParaWindow", "\345\217\226\346\266\210", 0));
-        btn_para_sort->setText(QString());
+        pb_sortingMethod->setText(QString());
         lb_para_sort->setText(QApplication::translate("ParaWindow", "\346\216\222\345\272\217\346\226\271\346\263\225", 0));
-        btn_para_scan->setText(QString());
+        pb_laserAndScanner->setText(QString());
         lb_para_scan->setText(QApplication::translate("ParaWindow", "\346\277\200\345\205\211\346\214\257\351\225\234", 0));
-        btn_para_motor->setText(QString());
+        pb_PlatformMotor->setText(QString());
         lb_para_motor->setText(QApplication::translate("ParaWindow", "\345\271\263\345\217\260\347\224\265\346\234\272", 0));
         gb_para_crystal->setTitle(QApplication::translate("ParaWindow", "\346\260\264\346\231\266\351\200\211\351\241\271", 0));
         lb_para_c_w->setText(QApplication::translate("ParaWindow", "\345\256\275(X)", 0));
@@ -1688,44 +1685,45 @@ public:
         lb_para_c_h->setText(QApplication::translate("ParaWindow", "\351\253\230(Z)", 0));
         lb_para_c_h2->setText(QApplication::translate("ParaWindow", "mm", 0));
         gb_para_s->setTitle(QApplication::translate("ParaWindow", "\346\216\222\345\272\217\346\226\271\346\263\225", 0));
-        rbtn_yx->setText(QApplication::translate("ParaWindow", "\351\241\272\345\272\217\346\211\253\346\217\217(Y-X)", 0));
-        rbtn_xy->setText(QApplication::translate("ParaWindow", "\351\241\272\345\272\217\346\211\253\346\217\217(X-Y)", 0));
-        rbtn_min->setText(QApplication::translate("ParaWindow", "\346\234\200\347\237\255\350\267\257\345\276\204", 0));
+        rb_squenceY2X->setText(QApplication::translate("ParaWindow", "\351\241\272\345\272\217\346\211\253\346\217\217(Y-X)", 0));
+        rb_squenceX2Y->setText(QApplication::translate("ParaWindow", "\351\241\272\345\272\217\346\211\253\346\217\217(X-Y)", 0));
+        rb_ShortestPath->setText(QApplication::translate("ParaWindow", "\346\234\200\347\237\255\350\267\257\345\276\204", 0));
         lb_para_w->setText(QApplication::translate("ParaWindow", "\345\235\227\345\256\275\345\272\246:", 0));
         lb_para_w2->setText(QApplication::translate("ParaWindow", "mm", 0));
         lb_para_r->setText(QApplication::translate("ParaWindow", "\346\250\241\347\263\212\346\257\224\344\276\213:", 0));
         lb_para_r2->setText(QApplication::translate("ParaWindow", "%", 0));
         gb_para_m->setTitle(QApplication::translate("ParaWindow", "\347\202\271\344\272\221\346\250\241\345\236\213", 0));
-        lb_m_min_layer->setText(QApplication::translate("ParaWindow", "\346\234\200\345\260\217\345\210\206\345\261\202\351\227\264\350\267\235:", 0));
-        lb_m_min_layer2->setText(QApplication::translate("ParaWindow", "mm", 0));
-        rbtn_m_correct_yx->setText(QApplication::translate("ParaWindow", "YX\347\237\253\346\255\243", 0));
-        rbtn_m_correct_xy->setText(QApplication::translate("ParaWindow", "XY\347\237\253\346\255\243", 0));
-        rbtn_m_correct_none->setText(QApplication::translate("ParaWindow", "\346\227\240", 0));
+        lb_min_layer->setText(QApplication::translate("ParaWindow", "\346\234\200\345\260\217\345\210\206\345\261\202\351\227\264\350\267\235:", 0));
+        lb_min_layer2->setText(QApplication::translate("ParaWindow", "mm", 0));
+        rb_YXCorrect->setText(QApplication::translate("ParaWindow", "YX\347\237\253\346\255\243", 0));
+        rb_XYCorrect->setText(QApplication::translate("ParaWindow", "XY\347\237\253\346\255\243", 0));
+        rb_noneCorrect->setText(QApplication::translate("ParaWindow", "\346\227\240", 0));
         lb_m_correct->setText(QApplication::translate("ParaWindow", "\346\211\255\346\233\262\347\237\253\346\255\243:", 0));
         gb_para_split->setTitle(QApplication::translate("ParaWindow", "\345\210\206\345\235\227\345\217\202\346\225\260", 0));
         lb_split_border->setText(QApplication::translate("ParaWindow", "\350\276\271\347\225\214\347\261\273\345\236\213:", 0));
-        rbtn_split_vertical->setText(QApplication::translate("ParaWindow", "\345\236\202\347\233\264", 0));
-        rbtn_split_bevel->setText(QApplication::translate("ParaWindow", "\346\226\234\351\235\242", 0));
-        label_70->setText(QApplication::translate("ParaWindow", "\345\210\206\345\235\227\345\244\247\345\260\217", 0));
+        rb_verticalBorder->setText(QApplication::translate("ParaWindow", "\345\236\202\347\233\264", 0));
+        rb_inclinedBorder->setText(QApplication::translate("ParaWindow", "\346\226\234\351\235\242", 0));
+        lb_split_size->setText(QApplication::translate("ParaWindow", "\345\210\206\345\235\227\345\244\247\345\260\217", 0));
         lb_split_size_X->setText(QApplication::translate("ParaWindow", "\345\256\275(X)", 0));
         lb_split_size_X2->setText(QApplication::translate("ParaWindow", "mm", 0));
         lb_split_size_Y->setText(QApplication::translate("ParaWindow", "\351\225\277(Y)", 0));
         lb_split_size_Y2->setText(QApplication::translate("ParaWindow", "mm", 0));
         lb_split_size_Z->setText(QApplication::translate("ParaWindow", "\351\253\230(Z)", 0));
         lb_split_size_Z2->setText(QApplication::translate("ParaWindow", "mm", 0));
-        label_71->setText(QApplication::translate("ParaWindow", "\350\276\271\347\225\214\345\217\202\346\225\260:", 0));
+        lb_split_border_para->setText(QApplication::translate("ParaWindow", "\350\276\271\347\225\214\345\217\202\346\225\260:", 0));
         lb_border_w->setText(QApplication::translate("ParaWindow", "\345\256\275\345\272\246", 0));
         lb_border_w2->setText(QApplication::translate("ParaWindow", "mm", 0));
         lb_border_a->setText(QApplication::translate("ParaWindow", "\350\247\222\345\272\246", 0));
-        lb_border_w2_2->setText(QApplication::translate("ParaWindow", "\345\272\246", 0));
+        lb_border_a2->setText(QApplication::translate("ParaWindow", "\302\260", 0));
         gb_la_test->setTitle(QApplication::translate("ParaWindow", "\346\277\200\345\205\211\346\265\213\350\257\225", 0));
-        lb_lp_title->setText(QApplication::translate("ParaWindow", "Laser Pulse", 0));
-        lb_lp_low->setText(QApplication::translate("ParaWindow", "900us", 0));
-        lb_lp_low_2->setText(QApplication::translate("ParaWindow", "100us", 0));
+        lb_laser_pulse_title->setText(QApplication::translate("ParaWindow", "Laser Pulse", 0));
+        lb_highPulseTime->setText(QApplication::translate("ParaWindow", "100us", 0));
+        lb_lwoPulseTime->setText(QApplication::translate("ParaWindow", "900us", 0));
         lb_test_r->setText(QApplication::translate("ParaWindow", "\346\257\224\347\216\207\357\274\232", 0));
-        lb_test_r_v->setText(QApplication::translate("ParaWindow", "10%", 0));
+        lb_laserRatio->setText(QApplication::translate("ParaWindow", "30", 0));
+        lb_laser_r_v_2->setText(QApplication::translate("ParaWindow", "%", 0));
         lb_test_f->setText(QApplication::translate("ParaWindow", "\351\242\221\347\216\207\357\274\232", 0));
-        le_test_f_v->setText(QApplication::translate("ParaWindow", "1000", 0));
+        lb_laserFrequency->setText(QApplication::translate("ParaWindow", "3000", 0));
         lb_test_f2->setText(QApplication::translate("ParaWindow", "Hz", 0));
         gb_la_set->setTitle(QApplication::translate("ParaWindow", "\350\256\276\347\275\256", 0));
         lb_set_lpoint2->setText(QApplication::translate("ParaWindow", "mm", 0));
@@ -1740,8 +1738,8 @@ public:
         lb_set_sv2->setText(QApplication::translate("ParaWindow", "bit/ms", 0));
         lb_set_udelay->setText(QApplication::translate("ParaWindow", "\345\276\256\346\255\245\345\273\266\346\227\266\357\274\232", 0));
         lb_set_udelay2->setText(QApplication::translate("ParaWindow", "us", 0));
-        cb_set_X2Y->setText(QApplication::translate("ParaWindow", "X<->Y\346\214\257\351\225\234\344\272\222\346\215\242", 0));
-        cb_set_ustep->setText(QApplication::translate("ParaWindow", "\345\276\256\346\255\245\350\267\263\350\275\254", 0));
+        cb_exchangeXYScanner->setText(QApplication::translate("ParaWindow", "X<->Y\346\214\257\351\225\234\344\272\222\346\215\242", 0));
+        cb_stepOverMicroStep->setText(QApplication::translate("ParaWindow", "\345\276\256\346\255\245\350\267\263\350\275\254", 0));
         gb_la_para->setTitle(QApplication::translate("ParaWindow", "\346\240\207\345\256\232\345\217\202\346\225\260", 0));
         lb_la_r_X2->setText(QApplication::translate("ParaWindow", "%", 0));
         lb_la_r_Y->setText(QApplication::translate("ParaWindow", "Y\346\214\257\351\225\234\346\257\224\347\216\207\357\274\232", 0));
@@ -1753,56 +1751,49 @@ public:
         lb_la_r_Y2->setText(QApplication::translate("ParaWindow", "%", 0));
         gb_la_ctrl->setTitle(QApplication::translate("ParaWindow", "\346\277\200\345\205\211\345\231\250\346\216\247\345\210\266", 0));
         cb_la_r232->setText(QApplication::translate("ParaWindow", "RS232\344\270\262\345\217\243\345\267\262\350\277\236\346\216\245", 0));
-        gb_par_motor->setTitle(QApplication::translate("ParaWindow", "\347\224\265\346\234\272\345\217\202\346\225\260", 0));
+        gb_par_motor->setTitle(QApplication::translate("ParaWindow", "\347\224\265\346\234\272\345\217\202\346\225\260(pulse/mm)", 0));
         lb_mo_X->setText(QApplication::translate("ParaWindow", "X:", 0));
         lb_mo_X2->setText(QApplication::translate("ParaWindow", "p/mm", 0));
         lb_mo_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
         lb_mo_Y2->setText(QApplication::translate("ParaWindow", "p/mm", 0));
         lb_mo_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
         lb_mo_Z2->setText(QApplication::translate("ParaWindow", "p/mm", 0));
-        gb_para_up->setTitle(QApplication::translate("ParaWindow", "\345\276\256\350\260\203", 0));
+        gb_para_up->setTitle(QApplication::translate("ParaWindow", "\345\276\256\350\260\203(pulse)", 0));
         sp_up_X->setText(QApplication::translate("ParaWindow", "X:", 0));
         lb_up_X2->setText(QApplication::translate("ParaWindow", "p  ", 0));
         lb_up_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
         lb_up_Y2->setText(QApplication::translate("ParaWindow", "p  ", 0));
         lb_up_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
         lb_up_Z2->setText(QApplication::translate("ParaWindow", "p  ", 0));
-        gb_para_os->setTitle(QApplication::translate("ParaWindow", "\345\210\235\345\247\213\345\201\217\347\247\273", 0));
-        lb_os_X->setText(QApplication::translate("ParaWindow", "X:", 0));
-        lb_os_X2->setText(QApplication::translate("ParaWindow", "mm ", 0));
-        lb_os_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
-        lb_os_Y2->setText(QApplication::translate("ParaWindow", "mm ", 0));
-        lb_os_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
-        lb_os_Z2->setText(QApplication::translate("ParaWindow", "mm ", 0));
+        gb_para_s0->setTitle(QApplication::translate("ParaWindow", "\345\210\235\345\247\213\345\201\217\347\247\273(mm)", 0));
+        lb_s0_X->setText(QApplication::translate("ParaWindow", "X:", 0));
+        lb_s0_X2->setText(QApplication::translate("ParaWindow", "mm ", 0));
+        lb_s0_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
+        lb_s0_Y2->setText(QApplication::translate("ParaWindow", "mm ", 0));
+        lb_s0_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
+        lb_s0_Z2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         gb_para_speed_v0->setTitle(QApplication::translate("ParaWindow", "\347\224\265\346\234\272\351\200\237\345\272\246", 0));
         lb_sp_v0->setText(QApplication::translate("ParaWindow", "\345\210\235\345\247\213\351\200\237\345\272\246(p/s):", 0));
         lb_sp_v0_X->setText(QApplication::translate("ParaWindow", "X:", 0));
-        lb_sp_v0_X2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_v0_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
-        lb_sp_v0_Y2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_v0_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
-        lb_sp_v0_Z2->setText(QApplication::translate("ParaWindow", "mm ", 0));
-        lb_sp_v->setText(QApplication::translate("ParaWindow", "\345\214\200\351\200\237(p/s):    ", 0));
+        lb_sp_v->setText(QApplication::translate("ParaWindow", "\345\214\200\351\200\237(p/s):", 0));
         lb_sp_v_X->setText(QApplication::translate("ParaWindow", "X:", 0));
-        lb_sp_v_X2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_v_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
-        lb_sp_v_Y2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_v_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
-        lb_sp_v_Z2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_a->setText(QApplication::translate("ParaWindow", "\345\212\240\351\200\237\345\272\246(p/s^2):", 0));
         lb_sp_a_X->setText(QApplication::translate("ParaWindow", "X:", 0));
-        lb_sp_a_X2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_a_Y->setText(QApplication::translate("ParaWindow", "Y:", 0));
-        lb_sp_a_Y2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         lb_sp_a_Z->setText(QApplication::translate("ParaWindow", "Z:", 0));
-        lb_sp_a_Z2->setText(QApplication::translate("ParaWindow", "mm ", 0));
         gb_para_plat->setTitle(QApplication::translate("ParaWindow", "\345\271\263\345\217\260\350\260\203\346\225\264", 0));
-        cb_pl_cv->setText(QApplication::translate("ParaWindow", "\351\233\225\347\220\203\346\234\272", 0));
-        cb_pl_scan_XY->setText(QApplication::translate("ParaWindow", "\346\214\257\351\225\234\347\247\273\345\212\250-XY", 0));
-        cb_pl_X->setText(QApplication::translate("ParaWindow", "X\346\226\271\345\220\221", 0));
-        cb_pl_Z->setText(QApplication::translate("ParaWindow", "Z\346\226\271\345\220\221", 0));
-        cb_pl_scan_Z->setText(QApplication::translate("ParaWindow", "\346\214\257\351\225\234\347\247\273\345\212\250-Z", 0));
-        cb_pl_Y->setText(QApplication::translate("ParaWindow", "Y\346\226\271\345\220\221", 0));
+        cb_sphereMachine->setText(QApplication::translate("ParaWindow", "\351\233\225\347\220\203\346\234\272", 0));
+        cb_reverseScannerXY->setText(QApplication::translate("ParaWindow", "\346\214\257\351\225\234\347\247\273\345\212\250-XY", 0));
+        cb_reverseXDir->setText(QApplication::translate("ParaWindow", "X\346\226\271\345\220\221", 0));
+        cb_reverseZDir->setText(QApplication::translate("ParaWindow", "Z\346\226\271\345\220\221", 0));
+        cb_reverseScannerZ->setText(QApplication::translate("ParaWindow", "\346\214\257\351\225\234\347\247\273\345\212\250-Z", 0));
+        cb_reverseYDir->setText(QApplication::translate("ParaWindow", "Y\346\226\271\345\220\221", 0));
+        pb_setDefaultParam->setText(QApplication::translate("ParaWindow", "\345\206\231\351\273\230\350\256\244\345\200\274", 0));
+        pb_getDefaultParam->setText(QApplication::translate("ParaWindow", "\350\257\273\351\273\230\350\256\244\345\200\274", 0));
     } // retranslateUi
 
 };

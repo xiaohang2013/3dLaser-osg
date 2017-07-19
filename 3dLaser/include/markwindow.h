@@ -10,12 +10,12 @@ namespace Ui {
     class MarkWindow;
 }
 
-class MarkWindow : public QDialog
+class MarkCodeWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit MarkWindow(QWidget *parent = 0);
-    ~MarkWindow();
+    explicit MarkCodeWindow(QWidget *parent = 0);
+    ~MarkCodeWindow();
     
     private slots:
 private:

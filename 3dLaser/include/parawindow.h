@@ -10,52 +10,115 @@ namespace Ui {
 class ParaWindow;
 }
 
-#define INI_PATH (qApp->applicationDirPath()+"\\3dCurving.ini")
-class ParaWindow : public QDialog
+// 注册表组
+const QString g_CrystalPrm = "CrystalPrm";
+const QString g_DefaultCrystalPrm = "DefaultCrystalPrm";
+const QString g_MachinePrm = "MachinePrm";
+const QString g_DefaultPrmMachinePrm = "DefaultMachinePrm";
+
+// 水晶参数
+const QString crystalSizeX = "CrystalWidth";
+const QString crystalSizeY = "CrystalLength";
+const QString crystalSizeZ = "CrystalHeight";
+const QString sortMethod = "SortingMethod";
+const QString blockWidth = "BlockWidth";
+const QString boundaryDisable = "BoundaryDisable";
+const QString minLayerDis = "MinLayerDistance";
+const QString distortionCorr = "DistortionCorr";
+const QString borderType = "BorderType";
+const QString blockSizeX = "BlockSizeX";
+const QString blockSizeY = "BlockSizeY";
+const QString blockSizeZ = "BlockSizeZ";
+const QString borderWidth = "BorderWidth";
+const QString borderAngle = "InclinedAngle";
+
+// 机器参数（振镜和电机参数）
+// 振镜
+const QString testRatio = "LaserDutyRation";
+const QString testFrequency = "LaserFrequency";
+const QString focalLength = "FocalLength";
+const QString simmerTime = "SimmerTime";
+const QString laserDelay = "LaserDelay";
+const QString scannerDelay = "ScannerDelay";
+const QString scannerSpeed = "ScannerSpeed";
+const QString microStepDelay = "MicroDealy";
+const QString scannerXYExchange = "ScannerXYExchange";
+const QString microStepOver = "MicroStepOver";
+const QString scannerXRatio = "ScannerXRatio";
+const QString scannerYRatio = "ScannerYRatio";
+const QString scannerXAdjust = "ScannerXAdjust";
+const QString scannerYAdjust = "ScannerYAdjust";
+const QString scannerXPlatformAdjust = "ScannerXPlatformAdjust";
+const QString scannerYPlatformAdjust = "ScannerYPlatformAdjust";
+// 电机
+const QString motorRatioX = "MotorRatioX";
+const QString motorRatioY = "MotorRatioY";
+const QString motorRatioZ = "MotorRatioZ";
+const QString marginX = "MarginX";
+const QString marginY = "MarginY";
+const QString marginZ = "MarginZ";
+const QString initOffsetX = "InitOffsetX";
+const QString initOffsetY = "InitOffsetY";
+const QString initOffsetZ = "InitOffsetZ";
+const QString startSpeedX = "StartSpeedX";
+const QString startSpeedY = "StartSpeedY";
+const QString startSpeedZ = "StartSpeedZ";
+const QString runSpeedX = "RunSpeedX";
+const QString runSpeedY = "RunSpeedY";
+const QString runSpeedZ = "RunSpeedZ";
+const QString motorAccX = "MotorAccX";
+const QString motorAccY = "MotorAccY";
+const QString motorAccZ = "MotorAccZ";
+const QString reversePlatX = "ReversePlatformX";
+const QString reversePlatY = "ReversePlatformY";
+const QString reversePlatZ = "ReversePlatformZ";
+const QString reverseScannerXY = "ReverseScannerXY";
+const QString reverseScannerZ = "ReverseScannerZ";
+const QString sphereMachine = "SphereMachine";
+
+
+
+
+
+class ParamWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ParaWindow(QWidget *parent = 0);
-    ~ParaWindow();
-    void setMotorRef(Motor *ref);
-    Motor *getMotorRef();
-    void setCrystalRef(Crystal *ref);
-    Crystal *getCrystalRef();
-    void setScanerRef(Scaner *ref);
-    Scaner *getScanerRef();
-    void setLaserRef(Laser *ref);
-    Laser *getLaserRef();
-    void setPlatRef(Plat *ref);
-    Plat *getPlatRef();
-    void updatePara();
-    void initParam();
-    void setIsUpdate(bool b);
-    bool getIsUpdate();
-    int readIniFile();
+    explicit ParamWindow(sharedParameter *sharedPrm, QWidget *parent = 0);
+    ~ParamWindow();
 
+    // 私有变量
 private:
     Ui::ParaWindow *ui;
-    osg::ref_ptr<Motor> motor;
-    osg::ref_ptr<Scaner> scaner;
-    osg::ref_ptr<Laser> laser;
-    osg::ref_ptr<Crystal> crystal;
-    osg::ref_ptr<Plat> plat;
-    bool isUpdate;
-    int writeIniFile();
 
+    sharedParameter *_sharedPrm;
+
+    // 公有函数
+public:
+    static void readParamFromRegistry(sharedParameter *sharedPrm);
+    static void writeParamToRegistry(const sharedParameter *sharedPrm);
+
+
+    // 私有函数
+private:
+    void initActionsAndSlots();
+    void initParam();
+
+    void getSharedParamOnUI(sharedParameter *sharedPrm);
+    void setSharedParamToUI(const sharedParameter *sharedPrm);
+
+    // 槽函数
 private slots:
-    void slot_btn_motor();
-    void slot_btn_scan();
-    void slot_btn_sort();
-    void slot_btn_read();
-    void slot_btn_write();
-    void slot_btn_enter();
-    void slot_btn_cancel();
-    void slot_change_f();
-    void slot_change_r();
-    void updateMotorPara();
-    void updateScanPara();
-    void updateSortPara();
+    void accept();
+    void reject();
+
+    void on_sortingMethod();
+    void on_laserAndScanner();
+    void on_platformAndMotor();
+
+    void on_setDefaultParam();
+    void on_getDefaultParam();
+
 };
 
 #endif // PARAWINDOW_H

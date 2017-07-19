@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/prefix">
-        <file>resource/fileOpen.ico</file>
         <file>resource/fileSave.ico</file>
         <file>resource/3DLaser.ico</file>
         <file>resource/crystal.ico</file>
@@ -22,5 +21,9 @@
         <file>resource/sort.png</file>
         <file>resource/mirror.png</file>
         <file>resource/right-side.ico</file>
+        <file>resource/clear.png</file>
+        <file>resource/fileOpen.png</file>
+        <file>resource/fopen.ico</file>
+        <file>resource/front-side-b.ico</file>
     </qresource>
 </RCC>

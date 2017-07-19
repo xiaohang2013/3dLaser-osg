@@ -68,7 +68,7 @@ public:
     {
         if (McurvWindow->objectName().isEmpty())
             McurvWindow->setObjectName(QStringLiteral("McurvWindow"));
-        McurvWindow->resize(337, 240);
+        McurvWindow->resize(404, 240);
         verticalLayout = new QVBoxLayout(McurvWindow);
         verticalLayout->setSpacing(9);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));

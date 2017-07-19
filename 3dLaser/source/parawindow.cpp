@@ -48,12 +48,15 @@ void ParaWindow::initParam()
     motor->motorX.num = 3;
     motor->motorY.num = 2;
     motor->motorZ.num = 1;
-    motor->motorX.limitP = ACTIVE; //IN10
-    motor->motorX.limitN = ACTIVE; //IN9
-    motor->motorY.limitP = ACTIVE; //IN8
-    motor->motorY.limitN = ACTIVE; //IN7
-    motor->motorZ.limitP = ACTIVE; //IN5
-    motor->motorZ.limitN = ACTIVE; //IN6
+    motor->motorX.limitP = ACTIVE; //IN0
+    motor->motorX.limitN = ACTIVE; //IN1
+    motor->motorX.limitL = ACTIVE;
+    motor->motorY.limitP = ACTIVE; //IN3
+    motor->motorY.limitN = ACTIVE; //IN2
+    motor->motorY.limitL = ACTIVE;
+    motor->motorZ.limitP = ACTIVE; //IN17
+    motor->motorZ.limitN = ACTIVE; //IN4
+    motor->motorZ.limitL = ACTIVE;
 
 
     //laser
@@ -78,7 +81,7 @@ void ParaWindow::initParam()
     crystal->size.x = 60.0;
     crystal->size.y = 60.0;
     crystal->size.z = 60.0;
-    crystal->layMin = 0.08;
+    crystal->layMin = 0.088;
     crystal->blockSet.angle = 0.0;
     crystal->blockSet.size.x = 30.0;
     crystal->blockSet.size.y = 30.0;
@@ -193,7 +196,7 @@ void ParaWindow::slot_btn_enter()
     crystal->size.x = ui->le_cry_width->text().toFloat();
     crystal->size.y = ui->le_cry_len->text().toFloat();
     crystal->size.z = ui->le_cry_high->text().toFloat();
-    crystal->layMin = ui->le_min_layer->text().toInt();
+    crystal->layMin = ui->le_min_layer->text().toFloat();
     crystal->blockSet.size.x = ui->le_split_size_X->text().toFloat();
     crystal->blockSet.size.y = ui->le_split_size_Y->text().toFloat();
     crystal->blockSet.size.z = ui->le_split_size_Z->text().toFloat();
@@ -331,7 +334,7 @@ void ParaWindow::updateSortPara()
     ui->le_cry_width->setText(QString::number(crystal->size.x, 'f', 2));
     ui->le_cry_len->setText(QString::number(crystal->size.y, 'f', 2));
     ui->le_cry_high->setText(QString::number(crystal->size.z, 'f', 2));
-    ui->le_min_layer->setText(QString::number(crystal->layMin, 'f', 2));
+    ui->le_min_layer->setText(QString::number(crystal->layMin, 'f', 3));
     ui->le_border_angle->setText(QString::number(crystal->blockSet.angle, 'f', 2));
     ui->le_border_width->setText(QString::number(crystal->blockSet.width, 'f', 2));
     ui->le_split_size_X->setText(QString::number(crystal->blockSet.size.x, 'f', 2));
@@ -640,7 +643,7 @@ int ParaWindow::writeIniFile()
     iniFile.setValue("size.x",QString::number(crystal->size.x, 'f', 2));
     iniFile.setValue("size.y",QString::number(crystal->size.y, 'f', 2));
     iniFile.setValue("size.z",QString::number(crystal->size.z, 'f', 2));
-    iniFile.setValue("layMin",crystal->layMin);
+    iniFile.setValue("layMin",QString::number(crystal->layMin, 'f', 3));
     iniFile.setValue("blockSet.angle",QString::number(crystal->blockSet.angle, 'f', 2));
     iniFile.setValue("blockSet.width",QString::number(crystal->blockSet.width, 'f', 2));
     iniFile.setValue("blockSet.fuzzyRatio",QString::number(crystal->blockSet.fuzzyRatio, 'f', 2));

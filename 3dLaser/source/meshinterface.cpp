@@ -177,61 +177,10 @@ osg::Group* meshInterface::openMesh(const QString &formatName, const QString &fi
         osg::ref_ptr<osg::Node> node=osgDB::readNodeFile(stdfileName, opt.get());
         if(!node) return NULL;
         osg::ref_ptr<osg::Group> groupResult=new osg::Group;
-//        osg::Group *groupReadin=node->asGroup();
-//        for(unsigned int i=0;i < groupReadin->getNumChildren(); i++)
-//        {
-//            //获取其节点至世界坐标系的变换矩阵
-//            nodeLocalToWorldMatrix nLTWM;
-//            groupReadin->getChild(i)->accept(nLTWM);
-//            osg::Matrixd matrix=*(nLTWM.getLocalToWorldMatrix());
-//            //插入osg::MatrixTransform节点
-//            osg::ref_ptr<osg::MatrixTransform> mt=new osg::MatrixTransform;
-//            mt->setMatrix(matrix);
-//            mt->addChild(groupReadin->getChild(i));
-//            mt->setName(groupReadin->getChild(i)->getName());
-//            groupResult->addChild(mt);
-//        }
-
         //将读入文件架构统一化为group->MatrixTransform->geode
         unificateNodeStructure snv;
         node->accept(snv);
         groupResult=snv.getStructurizedGroup();
-
-        return groupResult.release();
-    }
-    //3ds的option有：noMatrixTransforms checkForEspilonIdentityMatrices restoreMatrixTransformsNoMeshes
-    else if(lowerformat=="stl"||lowerformat=="3ds"||lowerformat=="dae")
-    {
-        osg::ref_ptr<osgDB::Options> opt = new osgDB::Options();
-
-        osg::ref_ptr<osg::Node> node=osgDB::readNodeFile(stdfileName,opt.get());
-        if(!node) return NULL;
-        //将读入文件架构统一化为group->MatrixTransform->geode
-        unificateNodeStructure snv;
-        node->accept(snv);
-        osg::ref_ptr<osg::Group> groupResult = snv.getStructurizedGroup();
-
-        return groupResult.release();
-    }
-    else if(lowerformat=="png"||lowerformat=="jpg"||lowerformat=="jpeg"||
-            lowerformat=="gif"||lowerformat=="bmp"||lowerformat=="pic")
-    {
-        osg::ref_ptr<osgDB::Options> opt = new osgDB::Options();
-
-        osg::ref_ptr<osg::Image> image = osgDB::readImageFile(stdfileName, opt.get());
-        if(!image || !image.valid()) return NULL;
-        //读入文件架构统一化为group->MatrixTransform->geode
-        osg::ref_ptr<osg::Geode> geode = createGeodeForImage(image.get());
-        if (image->isImageTranslucent())
-        {
-//            OSG_INFO<<"Image "<<image->getFileName()<<" is translucent; setting up blending."<<std::endl;
-            geode->getOrCreateStateSet()->setMode(GL_BLEND, osg::StateAttribute::ON);
-            geode->getOrCreateStateSet()->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-        }
-        osg::ref_ptr<osg::MatrixTransform> mt = new osg::MatrixTransform;
-        mt->addChild(geode.get());
-        osg::ref_ptr<osg::Group> groupResult = new osg::Group;
-        groupResult->addChild(mt.get());
 
         return groupResult.release();
     }
@@ -282,92 +231,6 @@ bool meshInterface::saveMesh(const osg::Image *image, const QString &formatName,
         return osgDB::writeImageFile(*image, stdfileName);
 
     return false;
-}
-
-osg::Geode *meshInterface::createGeodeForImage(osg::Image *image)
-{
-    return createGeodeForImage(image,image->s(),image->t());
-}
-
-osg::Geode *meshInterface::createGeodeForImage(osg::Image *image, float s, float t)
-{
-    if (image)
-    {
-        if (s>0 && t>0)
-        {
-
-            float y = 0.05f*t;
-            float x = y*(s/t);
-
-            float texcoord_y_b = (image->getOrigin() == osg::Image::BOTTOM_LEFT) ? 0.0f : 1.0f;
-            float texcoord_y_t = (image->getOrigin() == osg::Image::BOTTOM_LEFT) ? 1.0f : 0.0f;
-
-            // set up the texture.
-
-#if 0
-            osg::ref_ptr<osg::TextureRectangle> texture = new osg::TextureRectangle;
-            texture->setFilter(osg::Texture::MIN_FILTER,osg::Texture::LINEAR);
-            texture->setFilter(osg::Texture::MAG_FILTER,osg::Texture::LINEAR);
-            //texture->setResizeNonPowerOfTwoHint(false);
-            float texcoord_x = image->s();
-            texcoord_y_b *= image->t();
-            texcoord_y_t *= image->t();
-#else
-            osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D;
-            texture->setFilter(osg::Texture::MIN_FILTER,osg::Texture::LINEAR);
-            texture->setFilter(osg::Texture::MAG_FILTER,osg::Texture::LINEAR);
-            texture->setResizeNonPowerOfTwoHint(false);
-            float texcoord_x = 1.0f;
-#endif
-            texture->setImage(image);
-
-            // set up the drawstate.
-            osg::ref_ptr<osg::StateSet> dstate = new osg::StateSet;
-            dstate->setMode(GL_CULL_FACE,osg::StateAttribute::OFF);
-            dstate->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
-            dstate->setTextureAttributeAndModes(0, texture.get(),osg::StateAttribute::ON);
-
-            // set up the geoset.                unsigned int rowSize = computeRowWidthInBytes(s,_pixelFormat,_dataType,_packing);
-
-            osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
-            geom->setStateSet(dstate.get());
-
-            osg::ref_ptr<osg::Vec3Array> coords = new osg::Vec3Array(4);
-            (*coords)[0].set(-x,y,0.0f);
-            (*coords)[1].set(-x,-y,0.0f);
-            (*coords)[2].set(x,-y,0.0f);
-            (*coords)[3].set(x,y,0.0f);
-            geom->setVertexArray(coords.get());
-
-            osg::ref_ptr<osg::Vec2Array> tcoords = new osg::Vec2Array(4);
-            (*tcoords)[0].set(0.0f*texcoord_x,texcoord_y_t);
-            (*tcoords)[1].set(0.0f*texcoord_x,texcoord_y_b);
-            (*tcoords)[2].set(1.0f*texcoord_x,texcoord_y_b);
-            (*tcoords)[3].set(1.0f*texcoord_x,texcoord_y_t);
-            geom->setTexCoordArray(0,tcoords.get());
-
-            osg::ref_ptr<osg::Vec4Array> colors = new osg::Vec4Array(1);
-            (*colors)[0].set(1.0f,1.0f,1.0f,1.0f);
-            geom->setColorArray(colors.get(), osg::Array::BIND_OVERALL);
-
-            geom->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS,0,4));
-
-            // set up the geode.
-            osg::Geode* geode = new osg::Geode;
-            geode->addDrawable(geom);
-
-            return geode;
-
-        }
-        else
-        {
-            return NULL;
-        }
-    }
-    else
-    {
-        return NULL;
-    }
 }
 
 

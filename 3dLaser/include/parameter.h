@@ -141,7 +141,7 @@ public:
     S_BlockSet blockSet;
     Point size;
     S_PointCloud pointCloud;
-    int layMin;
+    float layMin;
     ScanType scanType;
     CurvMode curvMode;
     bool isAlarm;

@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <qdebug>
 #include <QFileDialog>
+#include <time.h>
 #include "macro.h"
 #include "mainwindow.h"
 using namespace std;
@@ -12,6 +13,7 @@ using namespace std;
 int inPut[INMAX];
 int outPut[OUTMAX];
 osg::ref_ptr<osg::Vec3Array> g_Points;
+osg::ref_ptr<osg::Vec3Array> curvPoints;
 const std::string domain_oriLayerMatrix = "oriLayerMatrix";//域名-层矩阵初始值域名
 const std::string domain_lastUsedLayerMatrix = "lastUsedLayerMatrix";//域名-最近更新的层矩阵域名
 const std::string domain_ordinaryLayerPrm = "ordinaryLayerPrm";//域名-普通层参数域名
@@ -139,6 +141,10 @@ void MainWindow::openFile(QString fileName)
         }
 
         g_Points = getVertexArray(group);
+        double t_start = (double) clock();
+        curvPoints = sortPointByZmin2Zmax(g_Points);
+        double t_end = (double) clock();
+        qDebug()<<"排序时间"<<(t_end - t_start)/1000.0<<"s";
         int num=g_Points->size();
         crystal->pointCloud.pointNum = num;
         osg::Vec3 v3(g_Points->at(0));
@@ -298,14 +304,20 @@ void MainWindow::slot_ViewApartModel()
 void MainWindow::slot_SortY2X(){}
 void MainWindow::slot_SortX2Y(){}
 void MainWindow::slot_SortOri(){}
-void MainWindow::slot_SortShort(){}
+void MainWindow::slot_SortShort()
+{
+
+}
 void MainWindow::slot_BlockX2Y(){}
 void MainWindow::slot_BlockY2X(){}
 void MainWindow::slot_BlockShort(){}
 void MainWindow::slot_BlockPara(){}
 void MainWindow::slot_OperLaserOri(){}
 void MainWindow::slot_OperPlatHome(){}
-void MainWindow::slot_OperSetCurPos2LaserOri(){}
+void MainWindow::slot_OperSetCurPos2LaserOri()
+{
+    plat->HomPos = plat->CurPos;
+}
 void MainWindow::slot_OperSaveCurPos2LaserOri()
 {
     plat->HomPos = plat->CurPos;
@@ -322,19 +334,19 @@ void MainWindow::slot_HelpAboutMe(){}
 void MainWindow::slot_LanCHN(){}
 
 //主窗口刷新timer，TIMESPAN间隔刷新一次
-void MainWindow::mwTimerRefresh()
+void MainWindow::slot_TimerRefresh()
 {
-    static int count = 0;
     QString runText;
     QString laserText;
+    static int cnt = 0;
     //刷新IO
     refreshIO();
     //检查是否触发限位，触发则停止电机
     checkIfStopMotor();
 
     //刷新时间
-    count++;
-    if (count >= (1000/TIMESPAN))
+    cnt++;
+    if (cnt >= (1000/TIMESPAN))
     {
         tdRunningTime.count++;
         getTime(&tdRunningTime);
@@ -355,7 +367,7 @@ void MainWindow::mwTimerRefresh()
         //刷新主窗口显示
         if (parameterWindow->getIsUpdate())
             updateParam();
-        count = 0;
+        cnt = 0;
     }
 }
 void MainWindow::refreshIO()
@@ -397,7 +409,17 @@ void MainWindow::slot_MotorStop()
 
 void MainWindow::slot_CrvView()
 {
-
+    Point size;
+    Point mov;
+    size.x = ui->le_CrvSizeX->text().toFloat();
+    size.y = ui->le_CrvSizeY->text().toFloat();
+    size.z = ui->le_CrvSizeZ->text().toFloat();
+    mov.x = ui->le_MovX->text().toFloat();
+    mov.y = ui->le_MovY->text().toFloat();
+    mov.z = ui->le_MovZ->text().toFloat();
+    curCrystalSize = osg::Vec3(size.x, size.y, size.z);
+    curCrystalTran = osg::Vec3(mov.x, mov.y, mov.z);
+    updateRefShape(createCrystalFrame(curCrystalSize, curCrystalZRot, curCrystalTran));
 }
 
 void MainWindow::slot_CrvApp()
@@ -408,6 +430,9 @@ void MainWindow::slot_CrvApp()
     crystal->mov.x = ui->le_MovX->text().toFloat();
     crystal->mov.y = ui->le_MovY->text().toFloat();
     crystal->mov.z = ui->le_MovZ->text().toFloat();
+    curCrystalSize = osg::Vec3(crystal->size.x, crystal->size.y, crystal->size.z);
+    curCrystalTran = osg::Vec3(crystal->mov.x, crystal->mov.y, crystal->mov.z);
+    updateRefShape(createCrystalFrame(curCrystalSize, curCrystalZRot, curCrystalTran));
 }
 
 
@@ -586,7 +611,7 @@ void MainWindow::initTimer()
         delete timerRun;
         return;
     }
-    connect(timerRun, SIGNAL(timeout()), this, SLOT(mwTimerRefresh()));
+    connect(timerRun, SIGNAL(timeout()), this, SLOT(slot_TimerRefresh()));
     //timer period
     timerRun->setInterval(TIMESPAN);
     timerRun->start();
@@ -615,7 +640,7 @@ void MainWindow::initOSG()
     setAxesVisible(true);
     updateLighting(false);
 
-//    updateRefShape(createCrystalFrame(curCrystalType, curCrystalSize, curCrystalZRot, curCrystalHeight, curCrystalDiameter));
+    updateRefShape(createCrystalFrame(curCrystalSize, curCrystalZRot, curCrystalTran));
 
 }
 void MainWindow::initProjectionAsOrtho()
@@ -754,6 +779,43 @@ osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node)
     node->accept(ve);
     return ve.getAllVertexArrayInWorldCoord();
 }
+osg::ref_ptr<osg::Vec3Array> MainWindow::sortPointByZmin2Zmax(osg::ref_ptr<osg::Vec3Array> points)
+{
+    osg::ref_ptr<osg::Vec3Array> p = points;
+    int num = p->size();
+    float layMin = crystal->layMin;
+    int low = 0;
+    int high = num-1;
+    osg::Vec3 temp;
+    int j = 0;
+    while (high > low)
+    {
+        for (j=low; j< high; j++)
+        {
+            if ((*p)[j][2] > (*p)[j+1][2] )
+            {
+                temp = (*p)[j];
+                (*p)[j] = (*p)[j+1];
+                (*p)[j+1] = temp;
+            }
+            (*p)[j][2] = (int)((*p)[j][2]/layMin)*layMin;
+        }
+        high--;
+        for (j=high; j>low; j--)
+        {
+            if ((*p)[j][2] < (*p)[j-1][2])
+            {
+                temp = (*p)[j];
+                (*p)[j] = (*p)[j-1];
+                (*p)[j-1] = temp;
+            }
+            (*p)[j][2] = (int)((*p)[j][2]/layMin)*layMin;
+        }
+        low++;
+    }
+    return p;
+}
+
 /// 设置坐标轴可见性
 void MainWindow::setAxesVisible(bool visible)
 {
@@ -765,6 +827,57 @@ void MainWindow::updateRefShape(osg::Geode *geode)
     curRoot->removeChild(refShape);
     refShape = geode;
     curRoot->addChild(refShape);
+}
+
+/// 创建水晶参考
+osg::Geode *MainWindow::createCrystalFrame(osg::Vec3 size, float zRot, osg::Vec3 tran)
+{
+    osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+    osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
+    osg::ref_ptr<osg::Vec3Array> v = new osg::Vec3Array;
+    osg::ref_ptr<osg::Vec4Array> colors=new osg::Vec4Array;
+    colors->push_back(osg::Vec4(1.f,1.f,0.f,1.f));
+    geom->setColorArray(colors);
+    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
+    geode->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+    geode->addDrawable(geom);
+
+    v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
+    v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
+    v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
+    v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
+
+    v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
+    v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
+    v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
+    v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
+
+    osg::Matrix m = osg::Matrix::rotate(osg::DegreesToRadians(zRot), osg::Vec3(0.f,0.f,1.f));
+    osg::Matrix t = osg::Matrix::translate(tran[0], tran[1], tran[2]);
+    for(unsigned int i=0; i<v->size(); ++i)
+    {
+        osg::Vec4 vt4(v->at(i),1.0f);
+        vt4=vt4*m*t;
+        v->at(i) = osg::Vec3(vt4.x(),vt4.y(),vt4.z());
+    }
+
+    geom->setVertexArray(v.get());
+    osg::ref_ptr<osg::DrawElementsUInt> lines = new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
+    for(int i=0; i<8; ++i)
+    {
+        int j= i+1;
+        if(i==3) j=0;
+        else if(i==7) j=4;
+        lines->push_back(i);
+        lines->push_back(j);
+    }
+    for(int i=0; i<4; ++i)
+    {
+        lines->push_back(i);
+        lines->push_back(i+4);
+    }
+    geom->addPrimitiveSet(lines);
+    return geode.release();
 }
 
 void MainWindow::getPoints(const QString fileName)

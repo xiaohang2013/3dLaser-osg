@@ -151,6 +151,7 @@ private slots:
     void slot_CrvStart();
     void slot_CrvPause();
     void slot_CrvStop();
+    void slot_TimerRefresh();
 
 
     // UI窗体/控件
@@ -199,8 +200,7 @@ private:
     osg::ref_ptr<osg::Group> previewGroup;//预览组
     osg::ref_ptr<osg::Group> draggerGroup;//dragger组
     osg::Vec3 curCrystalSize = osg::Vec3(60.f,60.f,60.f);
-    float curCrystalHeight = 10.f;
-    float curCrystalDiameter = 70.f;
+    osg::Vec3 curCrystalTran = osg::Vec3(0.f, 0.f, 0.f);
     float curCrystalZRot = 0.f;
 //function
     void initMainWindow();
@@ -219,12 +219,13 @@ private:
     void updateLighting(bool brightening);//增强环境光照
     void getTime(TimerData *t);
     void spyPutIn();
-    osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node);
+    osg::Vec3Array *getVertexArray(osg::Node *node);
+    osg::ref_ptr<osg::Vec3Array> sortPointByZmin2Zmax(osg::ref_ptr<osg::Vec3Array> points);
+    osg::Geode *createCrystalFrame(osg::Vec3 size, float zRot, osg::Vec3 tran);
     void openFile(QString fileName);
     void setAxesVisible(bool visible);
     void updateRefShape(osg::Geode *geode);
     void getPoints(const QString fileName);
-    void mwTimerRefresh();
     void refreshIO();
     void checkIfStopMotor();
 };

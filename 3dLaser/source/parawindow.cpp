@@ -3,678 +3,511 @@
 #include "macro.h"
 #include <QSettings>
 
-ParaWindow::ParaWindow(QWidget *parent) :
+ParamWindow::ParamWindow(sharedParameter *sharedPrm, QWidget *parent) :
+    _sharedPrm(sharedPrm),
     QDialog(parent),
     ui(new Ui::ParaWindow)
 {
     ui->setupUi(this);
-    crystal = new Crystal;
-    scaner = new Scaner;
-    laser = new Laser;
-    motor = new Motor;
-    plat = new Plat;
-    //initParam();
-    isUpdate = false;
-    //readIniFile();
-    //updatePara();
+
+    this->resize(634, 503);
+    setWindowFlags(Qt::Popup | Qt::Dialog | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+
+    QSizePolicy policy = this->sizePolicy();
+    policy.setHorizontalPolicy(QSizePolicy::Fixed);
+    policy.setVerticalPolicy(QSizePolicy::Fixed);
+    this->setSizePolicy(policy);
+
+    initActionsAndSlots();
+    on_sortingMethod();
+    setSharedParamToUI(_sharedPrm);
 }
 
-ParaWindow::~ParaWindow()
+ParamWindow::~ParamWindow()
 {
     delete ui;
 }
 
-void ParaWindow::initParam()
+void ParamWindow::initParam()
 {
-    //motor
-    motor->motorX.ratio = 640;
-    motor->motorY.ratio = 640;
-    motor->motorZ.ratio = 427;
-    motor->motorX.offset = 0;
-    motor->motorY.offset = 0;
-    motor->motorZ.offset = 0;
-    motor->motorX.v0 = 6000;
-    motor->motorY.v0 = 6000;
-    motor->motorZ.v0 = 6000;
-    motor->motorX.v = 16000;
-    motor->motorY.v = 19200;
-    motor->motorZ.v = 15000;
-    motor->motorX.a = 50000;
-    motor->motorY.a = 50000;
-    motor->motorZ.a = 50000;
-    motor->motorX.inchCtrl = 0;
-    motor->motorY.inchCtrl = 0;
-    motor->motorZ.inchCtrl = 0;
-    motor->motorX.num = 3;
-    motor->motorY.num = 2;
-    motor->motorZ.num = 1;
-    motor->motorX.limitP = ACTIVE; //IN10
-    motor->motorX.limitN = ACTIVE; //IN9
-    motor->motorY.limitP = ACTIVE; //IN8
-    motor->motorY.limitN = ACTIVE; //IN7
-    motor->motorZ.limitP = ACTIVE; //IN5
-    motor->motorZ.limitN = ACTIVE; //IN6
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    _sharedPrm->crystalSize.set(60.f,60.f,60.f);
+    //**   排序方法   **
+    _sharedPrm->sortingMethod = Sorting_ShortestPath;    //排序方法
+    _sharedPrm->blockWidth = 1.f;       //块宽度
+    _sharedPrm->boundaryDisable = 0.1f; //模糊比例
+    //**   点云模型   **
+    _sharedPrm->minLayerDis = 0.088f;   //最小分层间距
+    _sharedPrm->distortionCorr = Correct_YX;    //扭曲校正
+    //**   分块参数   **
+    _sharedPrm->borderType = Border_Inclined;   //边界类型
+    _sharedPrm->blockSize.set(25.f,25.f,0.1f);  //分块大小
+    _sharedPrm->borderWidth = 30.f;             //边界参数，宽度
+    _sharedPrm->borderAngle = 5.f;              //边界参数，倾斜角度
 
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    _sharedPrm->testRatio = 0.3f;       //比率（占空比）
+    _sharedPrm->testFrequency = 3000;   //HZ,测试频率
+    _sharedPrm->focalLength = 120.f;     //mm,激光焦距
+    _sharedPrm->simmerTime = 0;         //s，激光预热时间
+    _sharedPrm->laserDelay = 205;    //us，激光出光延时
+    //**   设置   **
+    _sharedPrm->scannerDelay = 500;      //us,振镜延时
+    _sharedPrm->scannerSpeed = 4130;     //bit/ms,振镜速度
+    _sharedPrm->microStepDelay = 10;    //us,微步延时
+    _sharedPrm->isScannerXYExchange = false;    //是否 振镜XY互换
+    _sharedPrm->isMicroStepOver = true;        //是否 微步跳转
+    //**   振镜标定参数   **
+    _sharedPrm->scannerRatio[AXISX] = -172.34f;
+    _sharedPrm->scannerAdjust[AXISX] = 0.f;
+    _sharedPrm->scannerPlatformAdjust[AXISX] = 0.f;
+    _sharedPrm->scannerRatio[AXISY] = 171.66f;
+    _sharedPrm->scannerAdjust[AXISY] = 0.f;
+    _sharedPrm->scannerPlatformAdjust[AXISY] = 0.f;
 
-    //laser
-    laser->ratio = 30;
-    laser->frequency = 3000;
-    laser->focalLenth = 120;
-    laser->isMicroStep = true;
-    laser->isSerialLink = false;
-    laser->lightOutDelay = 5;
-    laser->preHeatTime = 0;
-    scaner->delay = 250;
-    scaner->speed = 4000;
-    scaner->microStepDelay = 0;
-    scaner->isXYExchange = true;
-    scaner->XScaner.ratio = -172.34f;
-    scaner->XScaner.adjust = 0;
-    scaner->XScaner.fineTrim = 0;
-    scaner->YScaner.ratio = 171.66f;
-    scaner->YScaner.adjust = 0;
-    scaner->YScaner.fineTrim = 0;
-    //sort
-    crystal->size.x = 60.0;
-    crystal->size.y = 60.0;
-    crystal->size.z = 60.0;
-    crystal->layMin = 0.08;
-    crystal->blockSet.angle = 0.0;
-    crystal->blockSet.size.x = 30.0;
-    crystal->blockSet.size.y = 30.0;
-    crystal->blockSet.size.z = 0.0;
-    crystal->blockSet.width = 0.0;
-    crystal->blockSet.fuzzyRatio = 0.0;
-    crystal->blockSet.stdDev = 0.0;
-    crystal->blockSet.blockType = Block_MIN;
-    crystal->blockSet.borderType = Border_Vertical;
-    crystal->scanType = Scan_MIN;
-    crystal->mov.x = 0.0;
-    crystal->mov.y = 0.0;
-    crystal->mov.z = 0.0;
-    crystal->pointCloud.correctType = Correct_None;
-    crystal->pointCloud.pointMax.x = 0.0;
-    crystal->pointCloud.pointMax.y = 0.0;
-    crystal->pointCloud.pointMax.z = 0.0;
-    crystal->pointCloud.pointMin.x = 0.0;
-    crystal->pointCloud.pointMin.y = 0.0;
-    crystal->pointCloud.pointMin.z = 0.0;
-    crystal->pointCloud.pointNum = 0;
-    crystal->curvMode = single_model_one;
-    crystal->isAlarm = false;
-    //plat
-    plat->size.x = 300.0;
-    plat->size.y = 300.0;
-    plat->size.z = 200.0;
-    plat->mechPos.x = 0.0;
-    plat->mechPos.y = 0.0;
-    plat->mechPos.z = 0.0;
-    plat->relPos.x = 0.0;
-    plat->relPos.y = 0.0;
-    plat->relPos.z = 0.0;
-    plat->HomPos.x = 0.0;
-    plat->HomPos.y = 0.0;
-    plat->HomPos.z = 0.0;
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    _sharedPrm->motorRatio[AXISX] = 640.f;  //电机减速比，pulse/mm
+    _sharedPrm->motorRatio[AXISY] = 640.f;
+    _sharedPrm->motorRatio[AXISZ] = 427.f;
+    // 微调
+    _sharedPrm->margin[AXISX] = 0.f;        //电机精调，pulse
+    _sharedPrm->margin[AXISY] = 0.f;
+    _sharedPrm->margin[AXISZ] = 0.f;
+    // 初始偏移
+    _sharedPrm->initOffset[AXISX] = 295.f;  //初始偏移，mm
+    _sharedPrm->initOffset[AXISY] = 20.f;
+    _sharedPrm->initOffset[AXISZ] = 200.f;
+    // 起始速度
+    _sharedPrm->startSpeed[AXISX] = 6000;   //起始速度，p/s
+    _sharedPrm->startSpeed[AXISY] = 6000;
+    _sharedPrm->startSpeed[AXISZ] = 6000;
+    // 匀速
+    _sharedPrm->runSpeed[AXISX] = 16000;    //匀速，p/s
+    _sharedPrm->runSpeed[AXISY] = 19200;
+    _sharedPrm->runSpeed[AXISZ] = 15000;
+    // 加速度
+    _sharedPrm->acc[AXISX] = 50000;         //加速度，p/s^2
+    _sharedPrm->acc[AXISY] = 50000;
+    _sharedPrm->acc[AXISZ] = 50000;
+    // 平台调整
+    _sharedPrm->reversePlatformX = true;         //平台X方向反转
+    _sharedPrm->reversePlatformY = true;         //平台Y方向反转
+    _sharedPrm->reversePlatformZ = false;        //平台Z方向反转
+    _sharedPrm->reverseScannerXY = false;   //振镜XY方向反转
+    _sharedPrm->reverseScannerZ = false;    //振镜Z方向反转
+    _sharedPrm->isSphereMachine = false;    //雕球机
 }
 
-void ParaWindow::slot_btn_motor()
+void ParamWindow::readParamFromRegistry(sharedParameter *sharedPrm)
 {
-    ui->para_sort->hide();
-    ui->para_scan->hide();
-    ui->para_motor->show();
+    if(!sharedPrm) return;
+
+    float x,y,z;
+    QSettings settings;
+
+    ///------ begin group
+    settings.beginGroup(g_CrystalPrm);
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    x = settings.value(crystalSizeX, QVariant(60.f)).toFloat();
+    y = settings.value(crystalSizeY, QVariant(60.f)).toFloat();
+    z = settings.value(crystalSizeZ, QVariant(60.f)).toFloat();
+    sharedPrm->crystalSize.set(x,y,z);
+    //**   排序方法   **
+    sharedPrm->sortingMethod = (SortingMethod)settings.value(sortMethod, QVariant(Sorting_ShortestPath)).toInt();  //排序方法
+    sharedPrm->blockWidth = settings.value(blockWidth, QVariant(1.f)).toFloat();               //块宽度
+    sharedPrm->boundaryDisable = settings.value(boundaryDisable, QVariant(0.1f)).toFloat();    //模糊比例
+    //**   点云模型   **
+    sharedPrm->minLayerDis = settings.value(minLayerDis, QVariant(0.088f)).toFloat();          //最小分层间距
+    sharedPrm->distortionCorr = (DistortionCorrection)settings.value(distortionCorr, QVariant(Correct_YX)).toInt();    //扭曲校正
+    //**   分块参数   **
+    sharedPrm->borderType = (BorderType)settings.value(borderType, QVariant(Border_Inclined)).toInt(); //边界类型
+    x = settings.value(blockSizeX, QVariant(25.f)).toFloat();
+    y = settings.value(blockSizeY, QVariant(25.f)).toFloat();
+    z = settings.value(blockSizeZ, QVariant(0.1f)).toFloat();
+    sharedPrm->blockSize.set(x,y,z);   //分块大小
+    sharedPrm->borderWidth = settings.value(borderWidth, QVariant(30.f)).toFloat();    //边界参数，宽度
+    sharedPrm->borderAngle = settings.value(borderAngle, QVariant(5.f)).toFloat();     //边界参数，倾斜角度
+    settings.endGroup();
+    ///------ end group
+
+    ///------ begin group
+    settings.beginGroup(g_MachinePrm);
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    sharedPrm->testRatio = settings.value(testRatio, QVariant(0.3f)).toFloat();    //比率（占空比）
+    sharedPrm->testFrequency = settings.value(testFrequency, QVariant(3000)).toInt();  //HZ,测试频率
+    sharedPrm->focalLength = settings.value(focalLength, QVariant(120.f)).toFloat();   //mm,激光焦距
+    sharedPrm->simmerTime = settings.value(simmerTime, QVariant(0)).toInt();       //s，激光预热时间
+    sharedPrm->laserDelay = settings.value(laserDelay, QVariant(205)).toInt();     //us，激光出光延时
+    //**   设置   **
+    sharedPrm->scannerDelay = settings.value(scannerDelay, QVariant(500)).toInt(); //us,振镜延时
+    sharedPrm->scannerSpeed = settings.value(scannerSpeed, QVariant(4130)).toInt();    //bit/ms,振镜速度
+    sharedPrm->microStepDelay = settings.value(microStepDelay, QVariant(10)).toInt();  //us,微步延时
+    sharedPrm->isScannerXYExchange = settings.value(scannerXYExchange, QVariant(false)).toBool();  //是否 振镜XY互换
+    sharedPrm->isMicroStepOver = settings.value(microStepOver, QVariant(true)).toBool();   //是否 微步跳转
+    //**   振镜标定参数   **
+    sharedPrm->scannerRatio[AXISX] = settings.value(scannerXRatio, QVariant(-172.34f)).toFloat();
+    sharedPrm->scannerAdjust[AXISX] = settings.value(scannerXAdjust, QVariant(0.f)).toFloat();
+    sharedPrm->scannerPlatformAdjust[AXISX] = settings.value(scannerXPlatformAdjust, QVariant(0.f)).toFloat();
+    sharedPrm->scannerRatio[AXISY] = settings.value(scannerYRatio, QVariant(171.66f)).toFloat();
+    sharedPrm->scannerAdjust[AXISY] = settings.value(scannerYAdjust, QVariant(0.f)).toFloat();
+    sharedPrm->scannerPlatformAdjust[AXISY] = settings.value(scannerYPlatformAdjust, QVariant(0.f)).toFloat();
+
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    sharedPrm->motorRatio[AXISX] = settings.value(motorRatioX, QVariant(640.f)).toFloat(); //电机减速比，pulse/mm
+    sharedPrm->motorRatio[AXISY] = settings.value(motorRatioY, QVariant(640.f)).toFloat();
+    sharedPrm->motorRatio[AXISZ] = settings.value(motorRatioZ, QVariant(427.f)).toFloat();
+    // 微调
+    sharedPrm->margin[AXISX] = settings.value(marginX, QVariant(0.f)).toFloat();           //电机精调，pulse
+    sharedPrm->margin[AXISY] = settings.value(marginY, QVariant(0.f)).toFloat();
+    sharedPrm->margin[AXISZ] = settings.value(marginZ, QVariant(0.f)).toFloat();
+    // 初始偏移
+    sharedPrm->initOffset[AXISX] = settings.value(initOffsetX, QVariant(295.f)).toFloat(); //初始偏移，mm
+    sharedPrm->initOffset[AXISY] = settings.value(initOffsetY, QVariant(20.f)).toFloat();
+    sharedPrm->initOffset[AXISZ] = settings.value(initOffsetZ, QVariant(200.f)).toFloat();
+    // 起始速度
+    sharedPrm->startSpeed[AXISX] = settings.value(startSpeedX, QVariant(6000)).toInt();    //起始速度，p/s
+    sharedPrm->startSpeed[AXISY] = settings.value(startSpeedY, QVariant(6000)).toInt();
+    sharedPrm->startSpeed[AXISZ] = settings.value(startSpeedZ, QVariant(6000)).toInt();
+    // 匀速
+    sharedPrm->runSpeed[AXISX] = settings.value(runSpeedX, QVariant(16000)).toInt();       //匀速，p/s
+    sharedPrm->runSpeed[AXISY] = settings.value(runSpeedY, QVariant(19200)).toInt();
+    sharedPrm->runSpeed[AXISZ] = settings.value(runSpeedZ, QVariant(15000)).toInt();
+    // 加速度
+    sharedPrm->acc[AXISX] = settings.value(motorAccX, QVariant(50000)).toInt();            //加速度，p/s^2
+    sharedPrm->acc[AXISY] = settings.value(motorAccY, QVariant(50000)).toInt();
+    sharedPrm->acc[AXISZ] = settings.value(motorAccZ, QVariant(50000)).toInt();
+    // 平台调整
+    sharedPrm->reversePlatformX = settings.value(reversePlatX, QVariant(true)).toBool();   //平台X方向反转
+    sharedPrm->reversePlatformY = settings.value(reversePlatY, QVariant(true)).toBool();   //平台Y方向反转
+    sharedPrm->reversePlatformZ = settings.value(reversePlatZ, QVariant(false)).toBool();  //平台Z方向反转
+    sharedPrm->reverseScannerXY = settings.value(reverseScannerXY, QVariant(false)).toBool();  //振镜XY方向反转
+    sharedPrm->reverseScannerZ = settings.value(reverseScannerZ, QVariant(false)).toBool();    //振镜Z方向反转
+    sharedPrm->isSphereMachine = settings.value(sphereMachine, QVariant(false)).toBool();      //雕球机
+    settings.endGroup();
+    ///------ end group
 }
 
-void ParaWindow::slot_btn_scan()
+void ParamWindow::writeParamToRegistry(const sharedParameter *sharedPrm)
 {
-    ui->para_sort->hide();
-    ui->para_scan->show();
-    ui->para_motor->hide();
+    if(!sharedPrm) return;
+
+    QSettings settings;
+
+    ///------ begin group
+    settings.beginGroup(g_CrystalPrm);
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    settings.setValue(crystalSizeX, QVariant(sharedPrm->crystalSize.x()));
+    settings.setValue(crystalSizeY, QVariant(sharedPrm->crystalSize.y()));
+    settings.setValue(crystalSizeZ, QVariant(sharedPrm->crystalSize.z()));
+    //**   排序方法   **
+    settings.setValue(sortMethod, QVariant(sharedPrm->sortingMethod));     //排序方法
+    settings.setValue(blockWidth, QVariant(sharedPrm->blockWidth));        //块宽度
+    settings.setValue(boundaryDisable, QVariant(sharedPrm->boundaryDisable));  //模糊比例
+    //**   点云模型   **
+    settings.setValue(minLayerDis, QVariant(sharedPrm->minLayerDis));      //最小分层间距
+    settings.setValue(distortionCorr, QVariant(sharedPrm->distortionCorr));    //扭曲校正
+    //**   分块参数   **
+    settings.setValue(borderType, QVariant(sharedPrm->borderType));        //边界类型
+    settings.setValue(blockSizeX, QVariant(sharedPrm->blockSize.x()));     //分块大小
+    settings.setValue(blockSizeY, QVariant(sharedPrm->blockSize.y()));
+    settings.setValue(blockSizeZ, QVariant(sharedPrm->blockSize.z()));
+    settings.setValue(borderWidth, QVariant(sharedPrm->borderWidth));      //边界参数，宽度
+    settings.setValue(borderAngle, QVariant(sharedPrm->borderAngle));      //边界参数，倾斜角度
+    settings.endGroup();
+    ///------ end group
+
+    ///------ begin group
+    settings.beginGroup(g_MachinePrm);
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    settings.setValue(testRatio, QVariant(sharedPrm->testRatio));          //比率（占空比）
+    settings.setValue(testFrequency, QVariant(sharedPrm->testFrequency));  //HZ,测试频率
+    settings.setValue(focalLength, QVariant(sharedPrm->focalLength));      //mm,激光焦距
+    settings.setValue(simmerTime, QVariant(sharedPrm->simmerTime));        //s，激光预热时间
+    settings.setValue(laserDelay, QVariant(sharedPrm->laserDelay));        //us，激光出光延时
+    //**   设置   **
+    settings.setValue(scannerDelay, QVariant(sharedPrm->scannerDelay));    //us,振镜延时
+    settings.setValue(scannerSpeed, QVariant(sharedPrm->scannerSpeed));    //bit/ms,振镜速度
+    settings.setValue(microStepDelay, QVariant(sharedPrm->microStepDelay));//us,微步延时
+    settings.setValue(scannerXYExchange, QVariant(sharedPrm->isScannerXYExchange));    //是否 振镜XY互换
+    settings.setValue(microStepOver, QVariant(sharedPrm->isMicroStepOver)); //是否 微步跳转
+    //**   振镜标定参数   **
+    settings.setValue(scannerXRatio, QVariant(sharedPrm->scannerRatio[AXISX]));
+    settings.setValue(scannerXAdjust, QVariant(sharedPrm->scannerAdjust[AXISX]));
+    settings.setValue(scannerXPlatformAdjust, QVariant(sharedPrm->scannerPlatformAdjust[AXISX]));
+    settings.setValue(scannerYRatio, QVariant(sharedPrm->scannerRatio[AXISY]));
+    settings.setValue(scannerYAdjust, QVariant(sharedPrm->scannerAdjust[AXISY]));
+    settings.setValue(scannerYPlatformAdjust, QVariant(sharedPrm->scannerPlatformAdjust[AXISY]));
+
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    settings.setValue(motorRatioX, QVariant( sharedPrm->motorRatio[AXISX]));   //电机减速比，pulse/mm
+    settings.setValue(motorRatioY, QVariant( sharedPrm->motorRatio[AXISY]));
+    settings.setValue(motorRatioZ, QVariant( sharedPrm->motorRatio[AXISZ]));
+    // 微调
+    settings.setValue(marginX, QVariant(sharedPrm->margin[AXISX]));            //电机精调，pulse
+    settings.setValue(marginY, QVariant(sharedPrm->margin[AXISY]));
+    settings.setValue(marginZ, QVariant(sharedPrm->margin[AXISZ]));
+    // 初始偏移
+    settings.setValue(initOffsetX, QVariant(sharedPrm->initOffset[AXISX]));    //初始偏移，mm
+    settings.setValue(initOffsetY, QVariant(sharedPrm->initOffset[AXISY]));
+    settings.setValue(initOffsetZ, QVariant(sharedPrm->initOffset[AXISZ]));
+    // 起始速度
+    settings.setValue(startSpeedX, QVariant(sharedPrm->startSpeed[AXISX]));    //起始速度，p/s
+    settings.setValue(startSpeedY, QVariant(sharedPrm->startSpeed[AXISY]));
+    settings.setValue(startSpeedZ, QVariant(sharedPrm->startSpeed[AXISZ]));
+    // 匀速
+    settings.setValue(runSpeedX, QVariant( sharedPrm->runSpeed[AXISX]));       //匀速，p/s
+    settings.setValue(runSpeedY, QVariant( sharedPrm->runSpeed[AXISY]));
+    settings.setValue(runSpeedZ, QVariant( sharedPrm->runSpeed[AXISZ]));
+    // 加速度
+    settings.setValue(motorAccX, QVariant(sharedPrm->acc[AXISX]));     //加速度，p/s^2
+    settings.setValue(motorAccY, QVariant(sharedPrm->acc[AXISY]));
+    settings.setValue(motorAccZ, QVariant(sharedPrm->acc[AXISZ]));
+    // 平台调整
+    settings.setValue(reversePlatX, QVariant(sharedPrm->reversePlatformX));    //平台X方向反转
+    settings.setValue(reversePlatY, QVariant(sharedPrm->reversePlatformY));    //平台Y方向反转
+    settings.setValue(reversePlatZ, QVariant(sharedPrm->reversePlatformZ));    //平台Z方向反转
+    settings.setValue(reverseScannerXY, QVariant(sharedPrm->reverseScannerXY));//振镜XY方向反转
+    settings.setValue(reverseScannerZ, QVariant(sharedPrm->reverseScannerZ));  //振镜Z方向反转
+    settings.setValue(sphereMachine, QVariant(sharedPrm->isSphereMachine));    //雕球机
+    settings.endGroup();
+    ///------ end group
 }
 
-void ParaWindow::slot_btn_sort()
+void ParamWindow::initActionsAndSlots()
 {
-    ui->para_sort->show();
-    ui->para_scan->hide();
-    ui->para_motor->hide();
+    connect(ui->pb_sortingMethod, SIGNAL(clicked()), this, SLOT(on_sortingMethod()));
+    connect(ui->pb_laserAndScanner, SIGNAL(clicked()), this, SLOT(on_laserAndScanner()));
+    connect(ui->pb_PlatformMotor, SIGNAL(clicked()), this, SLOT(on_platformAndMotor()));
 }
 
-
-void ParaWindow::slot_btn_enter()
+void ParamWindow::getSharedParamOnUI(sharedParameter *sharedPrm)
 {
-    //motor
-    motor->motorX.ratio = ui->le_mo_ratioX->text().toFloat();
-    motor->motorY.ratio = ui->le_mo_ratioY->text().toFloat();
-    motor->motorZ.ratio = ui->le_mo_ratioZ->text().toFloat();
-    motor->motorX.offset = ui->le_s0_X->text().toInt();
-    motor->motorY.offset = ui->le_s0_Y->text().toInt();
-    motor->motorZ.offset = ui->le_s0_Z->text().toInt();
-    motor->motorX.v0 = ui->le_sp_v0_X->text().toInt();
-    motor->motorY.v0 = ui->le_sp_v0_Y->text().toInt();
-    motor->motorZ.v0 = ui->le_sp_v0_Z->text().toInt();
-    motor->motorX.v = ui->le_sp_v_X->text().toInt();
-    motor->motorY.v = ui->le_sp_v_Y->text().toInt();
-    motor->motorZ.v = ui->le_sp_v_Z->text().toInt();
-    motor->motorX.a = ui->le_sp_a_X->text().toInt();
-    motor->motorY.a = ui->le_sp_a_Y->text().toInt();
-    motor->motorZ.a = ui->le_sp_a_Z->text().toInt();
-    motor->motorX.inchCtrl = ui->le_inch_X->text().toInt();
-    motor->motorY.inchCtrl = ui->le_inch_Y->text().toInt();
-    motor->motorZ.inchCtrl = ui->le_inch_Z->text().toInt();
-    //laser
-    laser->ratio = ui->sl_laser_r->value();
-    laser->frequency = ui->sl_laser_f->value();
-    laser->focalLenth = ui->le_laser_focalLen->text().toInt();
-    laser->lightOutDelay = ui->le_laser_lightOutDelay->text().toInt();
-    laser->preHeatTime = ui->le_laser_preHeatTime->text().toInt();
-    scaner->delay = ui->le_scan_delay->text().toInt();
-    scaner->speed = ui->le_scan_speed->text().toInt();
-    scaner->microStepDelay = ui->le_scan_microStepDelay->text().toInt();
-    scaner->XScaner.ratio = ui->le_la_r_X->text().toInt();
-    scaner->XScaner.adjust = ui->le_la_v_X->text().toInt();
-    scaner->XScaner.fineTrim = ui->le_la_u_X->text().toInt();
-    scaner->YScaner.ratio = ui->le_la_r_Y->text().toInt();
-    scaner->YScaner.adjust = ui->le_la_v_Y->text().toInt();
-    scaner->YScaner.fineTrim = ui->le_la_u_Y->text().toInt();
-    if (ui->cb_scan_exchangeXY->isChecked())
-        scaner->isXYExchange = true;
-    else
-        scaner->isXYExchange = false;
+    if(!sharedPrm) return;
 
-    if (ui->cb_scan_stepOver->isChecked())
-        laser->isMicroStep = true;
-    else
-        laser->isMicroStep = true;
+    float x,y,z;
 
-    if (ui->cb_la_r232->isChecked())
-        laser->isSerialLink = true;
-    else
-        laser->isSerialLink = false;
-    //crystal
-    crystal->size.x = ui->le_cry_width->text().toFloat();
-    crystal->size.y = ui->le_cry_len->text().toFloat();
-    crystal->size.z = ui->le_cry_high->text().toFloat();
-    crystal->layMin = ui->le_min_layer->text().toInt();
-    crystal->blockSet.size.x = ui->le_split_size_X->text().toFloat();
-    crystal->blockSet.size.y = ui->le_split_size_Y->text().toFloat();
-    crystal->blockSet.size.z = ui->le_split_size_Z->text().toFloat();
-    crystal->blockSet.angle = ui->le_border_angle->text().toFloat();
-    crystal->blockSet.width = ui->le_border_width->text().toFloat();
-    crystal->blockSet.fuzzyRatio = ui->le_para_ratio->text().toFloat();
-    if (ui->rbtn_split_vertical->isChecked())
-        crystal->blockSet.borderType = Border_Vertical;
-    else if (ui->rbtn_split_bevel)
-        crystal->blockSet.borderType = Border_Bevel;
-    crystal->blockSet.blockType = Block_MIN;
-    if (ui->rbtn_sort_y2x->isChecked())
-        crystal->scanType = Scan_Y2X;
-    else if (ui->rbtn_sort_min->isChecked())
-        crystal->scanType = Scan_MIN;
-    else if (ui->rbtn_sort_x2y->isChecked())
-        crystal->scanType = Scan_X2Y;
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    x = ui->dsb_crystalSizeX->value();
+    y = ui->dsb_crystalSizeY->value();
+    z = ui->dsb_crystalSizeZ->value();
+    sharedPrm->crystalSize.set(x,y,z);
+    //**   排序方法   **
+    if(ui->rb_squenceX2Y->isChecked())
+        sharedPrm->sortingMethod = Sorting_X2Y;    //排序方法
+    else if(ui->rb_squenceY2X->isChecked())
+        sharedPrm->sortingMethod = Sorting_Y2X;
+    else if(ui->rb_ShortestPath->isChecked())
+        sharedPrm->sortingMethod = Sorting_ShortestPath;
+    sharedPrm->blockWidth = ui->dsb_blockWidth->value();   //块宽度
+    sharedPrm->boundaryDisable = ui->dsb_boundaryDisable->value(); //模糊比例
+    //**   点云模型   **
+    sharedPrm->minLayerDis = ui->dsb_minLayerDis->value(); //最小分层间距
+    if(ui->rb_noneCorrect->isChecked())
+        sharedPrm->distortionCorr = Correct_None;  //扭曲校正
+    else if(ui->rb_XYCorrect->isChecked())
+        sharedPrm->distortionCorr = Correct_XY;
+    else if(ui->rb_YXCorrect->isChecked())
+        sharedPrm->distortionCorr = Correct_YX;
+    //**   分块参数   **
+    if(ui->rb_verticalBorder->isChecked())
+        sharedPrm->borderType = Border_Vertical;   //边界类型
+    else if(ui->rb_inclinedBorder->isChecked())
+        sharedPrm->borderType = Border_Inclined;
+    x = ui->dsb_blockSizeX->value();
+    y = ui->dsb_blockSizeY->value();
+    z = ui->dsb_blockSizeZ->value();
+    sharedPrm->blockSize.set(x,y,z);  //分块大小
+    sharedPrm->borderWidth = ui->dsb_borderWidth->value(); //边界参数，宽度
+    sharedPrm->borderAngle = ui->dsb_borderAngle->value(); //边界参数，倾斜角度
 
-    if (ui->rbtn_correct_none->isChecked())
-        crystal->pointCloud.correctType = Correct_None;
-    else if (ui->rbtn_correct_x2y->isChecked())
-        crystal->pointCloud.correctType = Correct_X2Y;
-    else if (ui->rbtn_correct_y2x->isChecked())
-        crystal->pointCloud.correctType = Correct_Y2X;
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    sharedPrm->testRatio = (float)ui->s_laserRatio->value()/100.f; //比率（占空比）
+    sharedPrm->testFrequency = ui->s_laserFrequency->value();      //HZ,测试频率
+    sharedPrm->focalLength = ui->dsb_focalLength->value();         //mm,激光焦距
+    sharedPrm->simmerTime = ui->sb_laserSimmerTime->value();       //s，激光预热时间
+    sharedPrm->laserDelay = ui->sb_laserDelay->value();            //us，激光出光延时
+    //**   设置   **
+    sharedPrm->scannerDelay = ui->sb_scannerDelay->value();        //us,振镜延时
+    sharedPrm->scannerSpeed = ui->sb_scannerSpeed->value();        //bit/ms,振镜速度
+    sharedPrm->microStepDelay = ui->sb_microStepDelay->value();    //us,微步延时
+    sharedPrm->isScannerXYExchange = ui->cb_exchangeXYScanner->isChecked();    //是否 振镜XY互换
+    sharedPrm->isMicroStepOver = ui->cb_stepOverMicroStep->isChecked();        //是否 微步跳转
+    //**   振镜标定参数   **
+    sharedPrm->scannerRatio[AXISX] = ui->dsb_scannerRatioX->value();
+    sharedPrm->scannerAdjust[AXISX] = ui->dsb_scannerAdjustX->value();
+    sharedPrm->scannerPlatformAdjust[AXISX] = ui->dsb_scannerPlatformAdjustX->value();
+    sharedPrm->scannerRatio[AXISY] = ui->dsb_scannerRatioY->value();
+    sharedPrm->scannerAdjust[AXISY] = ui->dsb_scannerAdjustY->value();
+    sharedPrm->scannerPlatformAdjust[AXISY] = ui->dsb_scannerPlatformAdjustY->value();
 
-    setIsUpdate(true);
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    sharedPrm->motorRatio[AXISX] = ui->dsb_motorRatioX->value();   //电机减速比，pulse/mm
+    sharedPrm->motorRatio[AXISY] = ui->dsb_motorRatioY->value();
+    sharedPrm->motorRatio[AXISZ] = ui->dsb_motorRatioZ->value();
+    // 微调
+    sharedPrm->margin[AXISX] = ui->sb_marginX->value();            //电机精调，pulse
+    sharedPrm->margin[AXISY] = ui->sb_marginY->value();
+    sharedPrm->margin[AXISZ] = ui->sb_marginZ->value();
+    // 初始偏移
+    sharedPrm->initOffset[AXISX] = ui->dsb_initOffsetX->value();   //初始偏移，mm
+    sharedPrm->initOffset[AXISY] = ui->dsb_initOffsetY->value();
+    sharedPrm->initOffset[AXISZ] = ui->dsb_initOffsetZ->value();
+    // 起始速度
+    sharedPrm->startSpeed[AXISX] = ui->sb_startSpeedX->value();    //起始速度，p/s
+    sharedPrm->startSpeed[AXISY] = ui->sb_startSpeedY->value();
+    sharedPrm->startSpeed[AXISZ] = ui->sb_startSpeedZ->value();
+    // 匀速
+    sharedPrm->runSpeed[AXISX] = ui->sb_runSpeedX->value();        //匀速，p/s
+    sharedPrm->runSpeed[AXISY] = ui->sb_runSpeedY->value();
+    sharedPrm->runSpeed[AXISZ] = ui->sb_runSpeedZ->value();
+    // 加速度
+    sharedPrm->acc[AXISX] = ui->sb_motorAccX->value();             //加速度，p/s^2
+    sharedPrm->acc[AXISY] = ui->sb_motorAccY->value();
+    sharedPrm->acc[AXISZ] = ui->sb_motorAccZ->value();
+    // 平台调整
+    sharedPrm->reversePlatformX = ui->cb_reverseXDir->isChecked();     //平台X方向反转
+    sharedPrm->reversePlatformY = ui->cb_reverseYDir->isChecked();     //平台Y方向反转
+    sharedPrm->reversePlatformZ = ui->cb_reverseZDir->isChecked();     //平台Z方向反转
+    sharedPrm->reverseScannerXY = ui->cb_reverseScannerXY->isChecked();//振镜XY方向反转
+    sharedPrm->reverseScannerZ = ui->cb_reverseScannerZ->isChecked();  //振镜Z方向反转
+    sharedPrm->isSphereMachine = ui->cb_sphereMachine->isChecked();    //雕球机
 }
 
-void ParaWindow::slot_btn_cancel()
+void ParamWindow::setSharedParamToUI(const sharedParameter *sharedPrm)
 {
-    if (ui->para_motor->isVisible())
-        updateMotorPara();
-    else if (ui->para_scan->isVisible())
-        updateScanPara();
-    else if (ui->para_sort->isVisible())
-        updateSortPara();
-    else
-        updatePara();
-    setIsUpdate(false);
+    if(!sharedPrm) return;
+
+    /****************    排序方法界面参数     ****************/
+    //**   水晶   **
+    ui->dsb_crystalSizeX->setValue(sharedPrm->crystalSize.x());
+    ui->dsb_crystalSizeY->setValue(sharedPrm->crystalSize.y());
+    ui->dsb_crystalSizeZ->setValue(sharedPrm->crystalSize.z());
+    //**   排序方法   **
+    ui->rb_squenceX2Y->setChecked(sharedPrm->sortingMethod == Sorting_X2Y);    //排序方法
+    ui->rb_squenceY2X->setChecked(sharedPrm->sortingMethod == Sorting_Y2X);
+    ui->rb_ShortestPath->setChecked(sharedPrm->sortingMethod == Sorting_ShortestPath);
+    ui->dsb_blockWidth->setValue(sharedPrm->blockWidth);   //块宽度
+    ui->dsb_boundaryDisable->setValue(sharedPrm->boundaryDisable); //模糊比例
+    //**   点云模型   **
+    ui->dsb_minLayerDis->setValue(sharedPrm->minLayerDis); //最小分层间距
+    ui->rb_noneCorrect->setChecked(sharedPrm->distortionCorr == Correct_None);  //扭曲校正
+    ui->rb_XYCorrect->setChecked(sharedPrm->distortionCorr == Correct_XY);
+    ui->rb_YXCorrect->setChecked(sharedPrm->distortionCorr == Correct_YX);
+    //**   分块参数   **
+    ui->rb_verticalBorder->setChecked(sharedPrm->borderType == Border_Vertical);   //边界类型
+    ui->rb_inclinedBorder->setChecked(sharedPrm->borderType == Border_Inclined);
+    ui->dsb_blockSizeX->setValue(sharedPrm->blockSize.x());  //分块大小
+    ui->dsb_blockSizeY->setValue(sharedPrm->blockSize.y());
+    ui->dsb_blockSizeZ->setValue(sharedPrm->blockSize.z());
+    ui->dsb_borderWidth->setValue(sharedPrm->borderWidth); //边界参数，宽度
+    ui->dsb_borderAngle->setValue(sharedPrm->borderAngle); //边界参数，倾斜角度
+
+    /****************    激光振镜界面参数     ****************/
+    //**   激光测试   **
+    ui->s_laserRatio->setValue(sharedPrm->testRatio*100); //比率（占空比）
+    ui->s_laserFrequency->setValue(sharedPrm->testFrequency);      //HZ,测试频率
+    ui->dsb_focalLength->setValue(sharedPrm->focalLength);         //mm,激光焦距
+    ui->sb_laserSimmerTime->setValue(sharedPrm->simmerTime);       //s，激光预热时间
+    ui->sb_laserDelay->setValue(sharedPrm->laserDelay);            //us，激光出光延时
+    //**   设置   **
+    ui->sb_scannerDelay->setValue(sharedPrm->scannerDelay);        //us,振镜延时
+    ui->sb_scannerSpeed->setValue(sharedPrm->scannerSpeed);        //bit/ms,振镜速度
+    ui->sb_microStepDelay->setValue(sharedPrm->microStepDelay);    //us,微步延时
+    ui->cb_exchangeXYScanner->setChecked(sharedPrm->isScannerXYExchange);    //是否 振镜XY互换
+    ui->cb_stepOverMicroStep->setChecked(sharedPrm->isMicroStepOver);        //是否 微步跳转
+    //**   振镜标定参数   **
+    ui->dsb_scannerRatioX->setValue(sharedPrm->scannerRatio[AXISX]);
+    ui->dsb_scannerAdjustX->setValue(sharedPrm->scannerAdjust[AXISX]);
+    ui->dsb_scannerPlatformAdjustX->setValue(sharedPrm->scannerPlatformAdjust[AXISX]);
+    ui->dsb_scannerRatioY->setValue(sharedPrm->scannerRatio[AXISY]);
+    ui->dsb_scannerAdjustY->setValue(sharedPrm->scannerAdjust[AXISY]);
+    ui->dsb_scannerPlatformAdjustY->setValue(sharedPrm->scannerPlatformAdjust[AXISY]);
+
+    /****************    平台电机界面参数     ****************/
+    // 三电机的参数
+    ui->dsb_motorRatioX->setValue(sharedPrm->motorRatio[AXISX]);   //电机减速比，pulse/mm
+    ui->dsb_motorRatioY->setValue(sharedPrm->motorRatio[AXISY]);
+    ui->dsb_motorRatioZ->setValue(sharedPrm->motorRatio[AXISZ]);
+    // 微调
+    ui->sb_marginX->setValue(sharedPrm->margin[AXISX]);            //电机精调，pulse
+    ui->sb_marginY->setValue(sharedPrm->margin[AXISY]);
+    ui->sb_marginZ->setValue(sharedPrm->margin[AXISZ]);
+    // 初始偏移
+    ui->dsb_initOffsetX->setValue(sharedPrm->initOffset[AXISX]);   //初始偏移，mm
+    ui->dsb_initOffsetY->setValue(sharedPrm->initOffset[AXISY]);
+    ui->dsb_initOffsetZ->setValue(sharedPrm->initOffset[AXISZ]);
+    // 起始速度
+    ui->sb_startSpeedX->setValue(sharedPrm->startSpeed[AXISX]);    //起始速度，p/s
+    ui->sb_startSpeedY->setValue(sharedPrm->startSpeed[AXISY]);
+    ui->sb_startSpeedZ->setValue(sharedPrm->startSpeed[AXISZ]);
+    // 匀速
+    ui->sb_runSpeedX->setValue(sharedPrm->runSpeed[AXISX]);        //匀速，p/s
+    ui->sb_runSpeedY->setValue(sharedPrm->runSpeed[AXISY]);
+    ui->sb_runSpeedZ->setValue(sharedPrm->runSpeed[AXISZ]);
+    // 加速度
+    ui->sb_motorAccX->setValue(sharedPrm->acc[AXISX]);             //加速度，p/s^2
+    ui->sb_motorAccY->setValue(sharedPrm->acc[AXISY]);
+    ui->sb_motorAccZ->setValue(sharedPrm->acc[AXISZ]);
+    // 平台调整
+    ui->cb_reverseXDir->setChecked(sharedPrm->reversePlatformX);     //平台X方向反转
+    ui->cb_reverseYDir->setChecked(sharedPrm->reversePlatformY);     //平台Y方向反转
+    ui->cb_reverseZDir->setChecked(sharedPrm->reversePlatformZ);     //平台Z方向反转
+    ui->cb_reverseScannerXY->setChecked(sharedPrm->reverseScannerXY);//振镜XY方向反转
+    ui->cb_reverseScannerZ->setChecked(sharedPrm->reverseScannerZ);  //振镜Z方向反转
+    ui->cb_sphereMachine->setChecked(sharedPrm->isSphereMachine);    //雕球机
 }
 
-
-void ParaWindow::slot_change_f()
+void ParamWindow::accept()
 {
-    ui->lb_laser_f_v->setText(QString::number(ui->sl_laser_f->value(), 10));
-    ui->lb_laser_pulse_low->setText(QString::number(ui->sl_laser_f->value() * ui->sl_laser_r->value()/100)+"us");
-    ui->lb_laser_pulse_high->setText(QString::number(ui->sl_laser_f->value() * (100-ui->sl_laser_r->value())/100)+"us");
+    getSharedParamOnUI(_sharedPrm);
+    QDialog::accept();
 }
 
-void ParaWindow::slot_change_r()
+void ParamWindow::reject()
 {
-    ui->lb_laser_r_v->setText(QString::number(ui->sl_laser_r->value(), 10));
-    ui->lb_laser_pulse_low->setText(QString::number(ui->sl_laser_f->value() * ui->sl_laser_r->value()/100)+"us");
-    ui->lb_laser_pulse_high->setText(QString::number(ui->sl_laser_f->value() * (100-ui->sl_laser_r->value())/100)+"us");
+    setSharedParamToUI(_sharedPrm);
+    QDialog::reject();
 }
 
-void ParaWindow::setIsUpdate(bool b)
+void ParamWindow::on_sortingMethod()
 {
-    isUpdate = b;
+    ui->sa_sortingMethod->move(120,10);
+    ui->sa_laserAndScanner->move(640,10);
+    ui->sa_platformAndMotor->move(640,10);
 }
 
-bool ParaWindow::getIsUpdate()
+void ParamWindow::on_laserAndScanner()
 {
-    return isUpdate;
+    ui->sa_sortingMethod->move(640,10);
+    ui->sa_laserAndScanner->move(120,10);
+    ui->sa_platformAndMotor->move(640,10);
 }
 
-void ParaWindow::updatePara()
+void ParamWindow::on_platformAndMotor()
 {
-    updateSortPara();
-    updateMotorPara();
-    updateScanPara();
+    ui->sa_sortingMethod->move(640,10);
+    ui->sa_laserAndScanner->move(640,10);
+    ui->sa_platformAndMotor->move(120,10);
 }
 
-void ParaWindow::updateMotorPara()
+void ParamWindow::on_setDefaultParam()
 {
-    //motor
-    ui->le_mo_ratioX->setText(QString::number(motor->motorX.ratio, 'f', 2));
-    ui->le_mo_ratioY->setText(QString::number(motor->motorY.ratio, 'f', 2));
-    ui->le_mo_ratioZ->setText(QString::number(motor->motorZ.ratio, 'f', 2));
-    ui->le_s0_X->setText(QString::number(motor->motorX.offset, 'f', 2));
-    ui->le_s0_Y->setText(QString::number(motor->motorY.offset, 'f', 2));
-    ui->le_s0_Z->setText(QString::number(motor->motorZ.offset, 'f', 2));
-    ui->le_sp_v0_X->setText(QString::number(motor->motorX.v0, 'f', 2));
-    ui->le_sp_v0_Y->setText(QString::number(motor->motorY.v0, 'f', 2));
-    ui->le_sp_v0_Z->setText(QString::number(motor->motorZ.v0, 'f', 2));
-    ui->le_sp_v_X->setText(QString::number(motor->motorX.v, 'f', 2));
-    ui->le_sp_v_Y->setText(QString::number(motor->motorY.v, 'f', 2));
-    ui->le_sp_v_Z->setText(QString::number(motor->motorZ.v, 'f', 2));
-    ui->le_sp_a_X->setText(QString::number(motor->motorX.a, 'f', 2));
-    ui->le_sp_a_Y->setText(QString::number(motor->motorY.a, 'f', 2));
-    ui->le_sp_a_Z->setText(QString::number(motor->motorZ.a, 'f', 2));
-    ui->le_inch_X->setText(QString::number(motor->motorX.inchCtrl, 10));
-    ui->le_inch_Y->setText(QString::number(motor->motorY.inchCtrl, 10));
-    ui->le_inch_Z->setText(QString::number(motor->motorZ.inchCtrl, 10));
+
 }
 
-void ParaWindow::updateScanPara()
+void ParamWindow::on_getDefaultParam()
 {
-    //scaner
-    ui->sl_laser_r->setSliderPosition(laser->ratio);
-    ui->sl_laser_f->setSliderPosition(laser->frequency);
-    ui->lb_laser_r_v->setText(QString::number(laser->ratio, 10));
-    ui->lb_laser_f_v->setText(QString::number(laser->frequency, 10));
-    ui->lb_laser_pulse_low->setText(QString::number(laser->frequency * laser->ratio/100)+"us");
-    ui->lb_laser_pulse_high->setText(QString::number(laser->frequency * (100-laser->ratio)/100)+"us");
-    ui->le_laser_focalLen->setText(QString::number(laser->focalLenth, 'f', 2));
-    ui->le_laser_lightOutDelay->setText(QString::number(laser->lightOutDelay, 'f', 2));
-    ui->le_laser_preHeatTime->setText(QString::number(laser->preHeatTime));
-    ui->le_scan_delay->setText(QString::number(scaner->delay, 'f', 2));
-    ui->le_scan_speed->setText(QString::number(scaner->speed, 'f', 2));
-    ui->le_scan_microStepDelay->setText(QString::number(scaner->microStepDelay, 'f', 2));
-    if (scaner->isXYExchange)
-        ui->cb_scan_exchangeXY->setChecked(true);
-    else
-        ui->cb_scan_exchangeXY->setChecked(false);
-    if (scaner->microStepDelay)
-        ui->cb_scan_stepOver->setChecked(true);
-    else
-        ui->cb_scan_stepOver->setChecked(false);
-    ui->le_la_r_X->setText(QString::number(scaner->XScaner.ratio, 'f', 2));
-    ui->le_la_v_X->setText(QString::number(scaner->XScaner.adjust, 10));
-    ui->le_la_u_X->setText(QString::number(scaner->XScaner.fineTrim, 10));
-    ui->le_la_r_Y->setText(QString::number(scaner->YScaner.ratio, 'f', 2));
-    ui->le_la_v_Y->setText(QString::number(scaner->YScaner.adjust, 10));
-    ui->le_la_u_Y->setText(QString::number(scaner->YScaner.fineTrim, 10));
-    if (laser->isSerialLink)
-        ui->cb_la_r232->setChecked(true);
-    else
-        ui->cb_la_r232->setChecked(false);
-}
 
-void ParaWindow::updateSortPara()
-{
-    //sort
-    ui->le_cry_width->setText(QString::number(crystal->size.x, 'f', 2));
-    ui->le_cry_len->setText(QString::number(crystal->size.y, 'f', 2));
-    ui->le_cry_high->setText(QString::number(crystal->size.z, 'f', 2));
-    ui->le_min_layer->setText(QString::number(crystal->layMin, 'f', 2));
-    ui->le_border_angle->setText(QString::number(crystal->blockSet.angle, 'f', 2));
-    ui->le_border_width->setText(QString::number(crystal->blockSet.width, 'f', 2));
-    ui->le_split_size_X->setText(QString::number(crystal->blockSet.size.x, 'f', 2));
-    ui->le_split_size_Y->setText(QString::number(crystal->blockSet.size.y, 'f', 2));
-    ui->le_split_size_Z->setText(QString::number(crystal->blockSet.size.z, 'f', 2));
-    ui->le_para_ratio->setText(QString::number(crystal->blockSet.fuzzyRatio, 'f', 2));
-    ui->le_para_width->setText(QString::number(crystal->blockSet.width, 'f', 2));
-
-    switch (crystal->scanType)
-    {
-    case Scan_X2Y:
-        ui->rbtn_sort_x2y->setChecked(true);
-        ui->rbtn_sort_y2x->setChecked(false);
-        ui->rbtn_sort_min->setChecked(false);
-        break;
-    case Scan_Y2X:
-        ui->rbtn_sort_x2y->setChecked(false);
-        ui->rbtn_sort_y2x->setChecked(true);
-        ui->rbtn_sort_min->setChecked(false);
-        break;
-    case Scan_MIN:
-        ui->rbtn_sort_x2y->setChecked(false);
-        ui->rbtn_sort_y2x->setChecked(false);
-        ui->rbtn_sort_min->setChecked(true);
-        break;
-    default:
-        ui->rbtn_sort_x2y->setChecked(true);
-        ui->rbtn_sort_y2x->setChecked(false);
-        ui->rbtn_sort_min->setChecked(false);
-        break;
-    };
-    switch (crystal->blockSet.blockType)
-    {
-    case Correct_X2Y:
-        ui->rbtn_correct_none->setChecked(false);
-        ui->rbtn_correct_x2y->setChecked(true);
-        ui->rbtn_correct_y2x->setChecked(false);
-        break;
-    case Correct_Y2X:
-        ui->rbtn_correct_none->setChecked(false);
-        ui->rbtn_correct_x2y->setChecked(false);
-        ui->rbtn_correct_y2x->setChecked(true);
-        break;
-    case Correct_None:
-        ui->rbtn_correct_none->setChecked(false);
-        ui->rbtn_correct_x2y->setChecked(true);
-        ui->rbtn_correct_y2x->setChecked(false);
-        break;
-    default:
-        ui->rbtn_correct_none->setChecked(false);
-        ui->rbtn_correct_x2y->setChecked(true);
-        ui->rbtn_correct_y2x->setChecked(false);
-        break;
-    }
-    switch (crystal->blockSet.borderType)
-    {
-    case Border_Vertical:
-        ui->rbtn_split_bevel->setChecked(true);
-        ui->rbtn_split_vertical->setChecked(false);
-        break;
-    case Border_Bevel:
-        ui->rbtn_split_bevel->setChecked(false);
-        ui->rbtn_split_vertical->setChecked(true);
-    default:
-        break;
-    }
-}
-Motor *ParaWindow::getMotorRef()
-{
-    return motor;
-}
-
-void ParaWindow::setCrystalRef(Crystal *ref)
-{
-    if (NULL == ref) return;
-    crystal = ref;
-}
-
-Crystal *ParaWindow::getCrystalRef()
-{
-    return crystal;
-}
-
-void ParaWindow::setScanerRef(Scaner *ref)
-{
-    if (NULL == ref) return;
-    scaner = ref;
-}
-
-Scaner *ParaWindow::getScanerRef()
-{
-    return scaner;
-}
-
-void ParaWindow::setLaserRef(Laser *ref)
-{
-    if (NULL == ref) return;
-    laser = ref;
-}
-
-Laser *ParaWindow::getLaserRef()
-{
-    return laser;
-}
-
-void ParaWindow::setPlatRef(Plat *ref)
-{
-    if (NULL == ref) return;
-    plat = ref;
-}
-
-Plat *ParaWindow::getPlatRef()
-{
-    return plat;
-}
-
-
-void ParaWindow::slot_btn_read()
-{
-    readIniFile();
-}
-
-void ParaWindow::slot_btn_write()
-{
-    writeIniFile();
-}
-
-int ParaWindow::readIniFile()
-{
-    QSettings iniFile(INI_PATH, QSettings::IniFormat);
-    iniFile.beginGroup("Motor");
-    motor->motorX.ratio = iniFile.value("motorX.ratio").toInt();
-    motor->motorX.offset = iniFile.value("motorX.offset").toInt();
-    motor->motorX.stepAngle = iniFile.value("motorX.stepAngle").toFloat();
-    motor->motorX.subdivision = iniFile.value("motorX.subdivision").toInt();
-    motor->motorX.v0 = iniFile.value("motorX.v0").toInt();
-    motor->motorX.v = iniFile.value("motorX.v").toInt();
-    motor->motorX.a = iniFile.value("motorX.a").toInt();
-    motor->motorX.inchCtrl = iniFile.value("motorX.inchCtrl").toInt();
-    motor->motorX.mod = (MovMode)iniFile.value("motorX.mod").toInt();
-    motor->motorX.num = iniFile.value("motorX.num").toInt();
-    motor->motorX.limitP = (LimitType)iniFile.value("motorX.limitP").toInt();
-    motor->motorX.limitN = (LimitType)iniFile.value("motorX.limitN").toInt();
-    motor->motorX.limitL = (LimitType)iniFile.value("motorX.limitL").toInt();
-    motor->motorY.ratio = iniFile.value("motorY.ratio").toInt();
-    motor->motorY.offset = iniFile.value("motorY.offset").toInt();
-    motor->motorY.stepAngle = iniFile.value("motorY.stepAngle").toFloat();
-    motor->motorY.subdivision = iniFile.value("motorY.subdivision").toInt();
-    motor->motorY.v0 = iniFile.value("motorY.v0").toInt();
-    motor->motorY.v = iniFile.value("motorY.v").toInt();
-    motor->motorY.a = iniFile.value("motorY.a").toInt();
-    motor->motorY.inchCtrl = iniFile.value("motorY.inchCtrl").toInt();
-    motor->motorY.mod = (MovMode)iniFile.value("motorY.mod").toInt();
-    motor->motorY.num = iniFile.value("motorY.num").toInt();
-    motor->motorY.limitP = (LimitType)iniFile.value("motorY.limitP").toInt();
-    motor->motorY.limitN = (LimitType)iniFile.value("motorY.limitN").toInt();
-    motor->motorY.limitL = (LimitType)iniFile.value("motorY.limitL").toInt();
-    motor->motorZ.ratio = iniFile.value("motorZ.ratio").toInt();
-    motor->motorZ.offset = iniFile.value("motorZ.offset").toInt();
-    motor->motorZ.stepAngle = iniFile.value("motorZ.stepAngle").toFloat();
-    motor->motorZ.subdivision = iniFile.value("motorZ.subdivision").toInt();
-    motor->motorZ.v0 = iniFile.value("motorZ.v0").toInt();
-    motor->motorZ.v = iniFile.value("motorZ.v").toInt();
-    motor->motorZ.a = iniFile.value("motorZ.a").toInt();
-    motor->motorZ.inchCtrl = iniFile.value("motorZ.inchCtrl").toInt();
-    motor->motorZ.mod = (MovMode)iniFile.value("motorZ.mod").toInt();
-    motor->motorZ.num = iniFile.value("motorZ.num").toInt();
-    motor->motorZ.limitP = (LimitType)iniFile.value("motorZ.limitP").toInt();
-    motor->motorZ.limitN = (LimitType)iniFile.value("motorZ.limitN").toInt();
-    motor->motorZ.limitL = (LimitType)iniFile.value("motorZ.limitL").toInt();
-    iniFile.endGroup();
-    iniFile.beginGroup("Laser");
-    laser->ratio = iniFile.value("ratio").toInt();
-    laser->frequency = iniFile.value("frequency").toInt();
-    laser->focalLenth = iniFile.value("focalLenth").toInt();
-    laser->isMicroStep = iniFile.value("isMicroStep").toInt();
-    laser->lightOutDelay = iniFile.value("lightOutDelay").toInt();
-    laser->preHeatTime = iniFile.value("preHeatTime").toInt();
-    iniFile.endGroup();
-    iniFile.beginGroup("Scaner");
-    scaner->delay = iniFile.value("delay").toInt();
-    scaner->speed = iniFile.value("speed").toInt();
-    scaner->microStepDelay = iniFile.value("microStepDelay").toInt();
-    scaner->isXYExchange = iniFile.value("isXYExchange").toBool();
-    scaner->XScaner.ratio = iniFile.value("XScaner.ratio").toInt();
-    scaner->XScaner.adjust = iniFile.value("XScaner.adjust").toInt();
-    scaner->XScaner.fineTrim = iniFile.value("XScaner.fineTrim").toInt();
-    scaner->YScaner.ratio = iniFile.value("YScaner.ratio").toInt();
-    scaner->YScaner.adjust = iniFile.value("YScaner.adjust").toInt();
-    scaner->YScaner.fineTrim = iniFile.value("YScaner.fineTrim").toInt();
-    iniFile.endGroup();
-    iniFile.beginGroup("Crystal");
-    crystal->curvMode = (CurvMode)iniFile.value("curvMode").toInt();
-    crystal->isAlarm = iniFile.value("isAlarm").toBool();
-    crystal->size.x = iniFile.value("size.x").toFloat();
-    crystal->size.y = iniFile.value("size.y").toFloat();
-    crystal->size.z = iniFile.value("size.z").toFloat();
-    crystal->layMin = iniFile.value("layMin").toFloat();
-    crystal->blockSet.angle = iniFile.value("blockSet.angle").toFloat();
-    crystal->blockSet.width = iniFile.value("blockSet.width").toFloat();
-    crystal->blockSet.fuzzyRatio = iniFile.value("blockSet.fuzzyRatio").toFloat();
-    crystal->blockSet.stdDev = iniFile.value("blockSet.stdDev").toFloat();
-    crystal->blockSet.blockType = (BlockType)iniFile.value("blockSet.blockType").toInt();
-    crystal->blockSet.borderType = (BorderType)iniFile.value("blockSet.borderType").toInt();
-    crystal->blockSet.size.x = iniFile.value("blockSet.size.x").toFloat();
-    crystal->blockSet.size.y = iniFile.value("blockSet.size.y").toFloat();
-    crystal->blockSet.size.z = iniFile.value("blockSet.size.z").toFloat();
-    crystal->scanType = (ScanType)iniFile.value("scanType").toInt();
-    crystal->mov.x = iniFile.value("mov.x").toFloat();
-    crystal->mov.y = iniFile.value("mov.y").toFloat();
-    crystal->mov.z = iniFile.value("mov.z").toFloat();
-    crystal->pointCloud.pointNum = iniFile.value("pointCloud.pointNum").toInt();
-    crystal->pointCloud.pointMax.x = iniFile.value("pointCloud.pointMax.x").toFloat();
-    crystal->pointCloud.pointMax.y = iniFile.value("pointCloud.pointMax.y").toFloat();
-    crystal->pointCloud.pointMax.z = iniFile.value("pointCloud.pointMax.z").toFloat();
-    crystal->pointCloud.pointMin.x = iniFile.value("pointCloud.pointMin.x").toFloat();
-    crystal->pointCloud.pointMin.y = iniFile.value("pointCloud.pointMin.y").toFloat();
-    crystal->pointCloud.pointMin.z = iniFile.value("pointCloud.pointMin.z").toFloat();
-    iniFile.endGroup();
-    iniFile.beginGroup("Plat");
-    plat->size.x = iniFile.value("size.x").toFloat();
-    plat->size.y = iniFile.value("size.y").toFloat();
-    plat->size.z = iniFile.value("size.z").toFloat();
-    plat->mechPos.x = iniFile.value("mechPos.x").toFloat();
-    plat->mechPos.y = iniFile.value("mechPos.y").toFloat();
-    plat->mechPos.z = iniFile.value("mechPos.z").toFloat();
-    plat->relPos.x = iniFile.value("relPos.x").toFloat();
-    plat->relPos.y = iniFile.value("relPos.y").toFloat();
-    plat->relPos.z = iniFile.value("relPos.z").toFloat();
-    plat->HomPos.x = iniFile.value("HomPos.x").toFloat();
-    plat->HomPos.y = iniFile.value("HomPos.y").toFloat();
-    plat->HomPos.z = iniFile.value("HomPos.z").toFloat();
-    iniFile.endGroup();
-    return CUR_OK;
-}
-
-int ParaWindow::writeIniFile()
-{
-    //motor
-    QSettings iniFile(INI_PATH, QSettings::IniFormat);
-    iniFile.beginGroup("Motor");
-    iniFile.setValue("motorX.ratio", QString::number(motor->motorX.ratio, 10));
-    iniFile.setValue("motorX.offset", QString::number(motor->motorX.offset, 10));
-    iniFile.setValue("motorX.stepAngle", QString::number(motor->motorX.stepAngle, 'f', 2));
-    iniFile.setValue("motorX.subdivision", QString::number(motor->motorX.subdivision, 10));
-    iniFile.setValue("motorX.v0", QString::number(motor->motorX.v0, 10));
-    iniFile.setValue("motorX.v", QString::number(motor->motorX.v, 10));
-    iniFile.setValue("motorX.a", QString::number(motor->motorX.a, 10));
-    iniFile.setValue("motorX.inchCtrl", QString::number(motor->motorX.inchCtrl, 10));
-    iniFile.setValue("motorX.mod", QString::number(motor->motorX.mod));
-    iniFile.setValue("motorX.num", QString::number(motor->motorX.num));
-    iniFile.setValue("motorX.limitP", QString::number(motor->motorX.limitP));
-    iniFile.setValue("motorX.limitN", QString::number(motor->motorX.limitN));
-    iniFile.setValue("motorX.limitL", QString::number(motor->motorX.limitL));
-    iniFile.setValue("motorY.ratio", QString::number(motor->motorY.ratio, 10));
-    iniFile.setValue("motorY.offset", QString::number(motor->motorY.offset, 10));
-    iniFile.setValue("motorY.stepAngle", QString::number(motor->motorY.stepAngle, 'f', 2));
-    iniFile.setValue("motorY.subdivision", QString::number(motor->motorY.subdivision, 10));
-    iniFile.setValue("motorY.v0", QString::number(motor->motorY.v0, 10));
-    iniFile.setValue("motorY.v", QString::number(motor->motorY.v, 10));
-    iniFile.setValue("motorY.a", QString::number(motor->motorY.a, 10));
-    iniFile.setValue("motorY.inchCtrl", QString::number(motor->motorY.inchCtrl, 10));
-    iniFile.setValue("motorY.mod", QString::number(motor->motorY.mod));
-    iniFile.setValue("motorY.num", QString::number(motor->motorY.num));
-    iniFile.setValue("motorY.limitP", QString::number(motor->motorY.limitP));
-    iniFile.setValue("motorY.limitN", QString::number(motor->motorY.limitN));
-    iniFile.setValue("motorY.limitL", QString::number(motor->motorY.limitL));
-    iniFile.setValue("motorZ.ratio", QString::number(motor->motorZ.ratio, 10));
-    iniFile.setValue("motorZ.offset", QString::number(motor->motorZ.offset, 10));
-    iniFile.setValue("motorZ.stepAngle", QString::number(motor->motorZ.stepAngle, 'f', 2));
-    iniFile.setValue("motorZ.subdivision", QString::number(motor->motorZ.subdivision, 10));
-    iniFile.setValue("motorZ.v0", QString::number(motor->motorZ.v0, 10));
-    iniFile.setValue("motorZ.v", QString::number(motor->motorZ.v, 10));
-    iniFile.setValue("motorZ.a", QString::number(motor->motorZ.a, 10));
-    iniFile.setValue("motorZ.inchCtrl", QString::number(motor->motorZ.inchCtrl, 10));
-    iniFile.setValue("motorZ.mod", QString::number(motor->motorZ.mod));
-    iniFile.setValue("motorZ.num", QString::number(motor->motorZ.num));
-    iniFile.setValue("motorZ.limitP", QString::number(motor->motorZ.limitP));
-    iniFile.setValue("motorZ.limitN", QString::number(motor->motorZ.limitN));
-    iniFile.setValue("motorZ.limitL", QString::number(motor->motorZ.limitL));
-    iniFile.endGroup();
-    iniFile.beginGroup("Laser");
-    iniFile.setValue("ratio", QString::number(laser->ratio, 10));
-    iniFile.setValue("frequency", QString::number(laser->frequency, 10));
-    iniFile.setValue("focalLenth", QString::number(laser->focalLenth, 10));
-    iniFile.setValue("isMicroStep", QString::number(laser->isMicroStep, 10));
-    iniFile.setValue("isSerialLink", QString::number(laser->isSerialLink, 10));
-    iniFile.setValue("lightOutDelay", QString::number(laser->lightOutDelay, 10));
-    iniFile.setValue("preHeatTime", QString::number(laser->preHeatTime, 10));
-    iniFile.endGroup();
-    iniFile.beginGroup("Scaner");
-    iniFile.setValue("delay", QString::number(scaner->delay, 10));
-    iniFile.setValue("speed", QString::number(scaner->speed, 10));
-    iniFile.setValue("microStepDelay", QString::number(scaner->microStepDelay, 10));
-    iniFile.setValue("isXYExchange", QString::number(scaner->isXYExchange, 10));
-    iniFile.setValue("XScaner.ratio", QString::number(scaner->XScaner.ratio, 'f', 2));
-    iniFile.setValue("XScaner.adjust", QString::number(scaner->XScaner.adjust, 10));
-    iniFile.setValue("XScaner.fineTrim", QString::number(scaner->XScaner.fineTrim, 10));
-    iniFile.setValue("YScaner.ratio", QString::number(scaner->YScaner.ratio, 'f', 2));
-    iniFile.setValue("YScaner.adjust", QString::number(scaner->YScaner.adjust, 10));
-    iniFile.setValue("YScaner.fineTrim", QString::number(scaner->YScaner.fineTrim, 10));
-    iniFile.endGroup();
-    iniFile.beginGroup("Crystal");
-    iniFile.setValue("curvMode",QString::number(crystal->curvMode, 10));
-    iniFile.setValue("isAlarm",QString::number(crystal->isAlarm, 10));
-    iniFile.setValue("size.x",QString::number(crystal->size.x, 'f', 2));
-    iniFile.setValue("size.y",QString::number(crystal->size.y, 'f', 2));
-    iniFile.setValue("size.z",QString::number(crystal->size.z, 'f', 2));
-    iniFile.setValue("layMin",crystal->layMin);
-    iniFile.setValue("blockSet.angle",QString::number(crystal->blockSet.angle, 'f', 2));
-    iniFile.setValue("blockSet.width",QString::number(crystal->blockSet.width, 'f', 2));
-    iniFile.setValue("blockSet.fuzzyRatio",QString::number(crystal->blockSet.fuzzyRatio, 'f', 2));
-    iniFile.setValue("blockSet.stdDev",QString::number(crystal->blockSet.stdDev, 'f', 2));
-    iniFile.setValue("blockSet.blockType",QString::number(crystal->blockSet.blockType, 10));
-    iniFile.setValue("blockSet.borderType",QString::number(crystal->blockSet.borderType, 10));
-    iniFile.setValue("blockSet.size.x",QString::number(crystal->blockSet.size.x, 'f', 2));
-    iniFile.setValue("blockSet.size.y",QString::number(crystal->blockSet.size.y, 'f', 2));
-    iniFile.setValue("blockSet.size.z",QString::number(crystal->blockSet.size.z, 'f', 2));
-    iniFile.setValue("scanType",QString::number(crystal->scanType, 10));
-    iniFile.setValue("mov.x",QString::number(crystal->mov.x, 'f', 2));
-    iniFile.setValue("mov.y",QString::number(crystal->mov.y, 'f', 2));
-    iniFile.setValue("mov.z",QString::number(crystal->mov.z, 'f', 2));
-    iniFile.setValue("pointCloud.pointNum",QString::number(crystal->pointCloud.pointNum, 10));
-    iniFile.setValue("pointCloud.pointMax.x",QString::number(crystal->pointCloud.pointMax.x, 'f', 2));
-    iniFile.setValue("pointCloud.pointMax.y",QString::number(crystal->pointCloud.pointMax.y, 'f', 2));
-    iniFile.setValue("pointCloud.pointMax.z",QString::number(crystal->pointCloud.pointMax.z, 'f', 2));
-    iniFile.setValue("pointCloud.pointMin.x",QString::number(crystal->pointCloud.pointMin.x, 'f', 2));
-    iniFile.setValue("pointCloud.pointMin.y",QString::number(crystal->pointCloud.pointMin.y, 'f', 2));
-    iniFile.setValue("pointCloud.pointMin.z",QString::number(crystal->pointCloud.pointMin.z, 'f', 2));
-    iniFile.endGroup();
-    iniFile.beginGroup("Plat");
-    iniFile.setValue("size.x", QString::number(plat->size.x, 'f', 2));
-    iniFile.setValue("size.y", QString::number(plat->size.y, 'f', 2));
-    iniFile.setValue("size.z", QString::number(plat->size.z, 'f', 2));
-    iniFile.setValue("mechPos.x", QString::number(plat->mechPos.x, 'f', 2));
-    iniFile.setValue("mechPos.y", QString::number(plat->mechPos.y, 'f', 2));
-    iniFile.setValue("mechPos.z", QString::number(plat->mechPos.z, 'f', 2));
-    iniFile.setValue("relPos.x", QString::number(plat->relPos.x, 'f', 2));
-    iniFile.setValue("relPos.y", QString::number(plat->relPos.y, 'f', 2));
-    iniFile.setValue("relPos.z", QString::number(plat->relPos.z, 'f', 2));
-    iniFile.setValue("HomPos.x", QString::number(plat->HomPos.x, 'f', 2));
-    iniFile.setValue("HomPos.y", QString::number(plat->HomPos.y, 'f', 2));
-    iniFile.setValue("HomPos.z", QString::number(plat->HomPos.z, 'f', 2));
-    iniFile.endGroup();
-    return CUR_OK;
 }

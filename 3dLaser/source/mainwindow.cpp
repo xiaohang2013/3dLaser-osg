@@ -1,20 +1,19 @@
-﻿#include "QMessageBox"
+﻿#include <QMessageBox>
 #include <Windows.h>
 #include <qdebug>
 #include <QFileDialog>
+
 #include "macro.h"
 #include "mainwindow.h"
+
 using namespace std;
+
 #define TIMESPAN 20   //ms
 #define INMAX 22
 #define OUTMAX 9
 
 int inPut[INMAX];
 int outPut[OUTMAX];
-osg::ref_ptr<osg::Vec3Array> g_Points;
-const std::string domain_oriLayerMatrix = "oriLayerMatrix";//域名-层矩阵初始值域名
-const std::string domain_lastUsedLayerMatrix = "lastUsedLayerMatrix";//域名-最近更新的层矩阵域名
-const std::string domain_ordinaryLayerPrm = "ordinaryLayerPrm";//域名-普通层参数域名
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,607 +21,254 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    parameterWindow  = new ParaWindow();
-    markWindow  = new MarkWindow();
-    mCurvWindow = new McurvWindow();
-    ctrlCard = new CtrlCard();
+    QCoreApplication::setOrganizationName(organization);
+    QCoreApplication::setApplicationName(appName);
 
-    crystal = parameterWindow->getCrystalRef();
-    motor = parameterWindow->getMotorRef();
-    laser = parameterWindow->getLaserRef();
-    scaner = parameterWindow->getScanerRef();
-    plat = parameterWindow->getPlatRef();
+    ParamWindow::readParamFromRegistry(sharedPara.get());
 
-    isLaserOn = false;
-    initPara();
-    initMainWindow();
-    initCtrlBoard();
+    initOSG();
+    initActions();
+    updateRecentFileAndPathActions();
+    initStatusBar();
+    initTimer();
+    initSignalsAndSlots();
+
+//    initPara();
+//    initMainWindow();
+//    initCtrlBoard();
 }
 
 MainWindow::~MainWindow()
 {
+    // 结束计时
+    endTimer();
+
     delete ui;
-    if (timerRun)
-        delete timerRun;
-    if (ctrlCard)
-        delete ctrlCard;
 }
-#if 0
-void MainWindow::slot_FileOpen(QString fPath)
-{
-    QStringList fp;
-    if (fPath.isEmpty())
-    {
-        fp = QFileDialog::getOpenFileNames(this, tr("打开文件"), "", "", 0, 0);
-    }
-    else
-    {
-        fp.push_back(fPath);
-    }
-    if (!fp.isEmpty())
-    {
-        QString fName;
-        foreach(fName, fp)
-        {
-            string str = fName.toLocal8Bit().data();
-            osg::ref_ptr<osg::Node> fNode = osgDB::readNodeFile(str);
-            if(fNode)
-            {
-                osg::ref_ptr<osg::MatrixTransform> mTrans = new osg::MatrixTransform;
-                mTrans->addChild(fNode);
-                //mTrans->setMatrix(osg::Matrix::translate(osg::Vec3d(0,0,0)));
-                curViewer->getRoot()->addChild(mTrans);
-                fileList.push_back(fName);
-            }
-            else
-            {
-                QMessageBox::warning(this, tr("打开文件"), "文件打开错误", QMessageBox::Yes, QMessageBox::No);
-            }
-        }
-    }
-    else
-    {
-        QMessageBox::warning(this, tr("打开文件"), "文件打开错误", QMessageBox::Yes, QMessageBox::No);
-    }
 
-}
-#else
-// Open 3D mesh model or 2D image
-void MainWindow::slot_FileOpen()
+// Open points cloud file(.dxf)
+bool MainWindow::on_FileOpen(QString fileName)
 {
-    QStringList fl;
-    if(fileList.isEmpty())
-        fl = QFileDialog::getOpenFileNames(this,tr("打开文件"), "", MI.inputPointCloudFilters.join(";;"), 0, 0);
+    QStringList fileNameList;
+    if(fileName.isEmpty())
+        fileNameList = QFileDialog::getOpenFileNames(this,tr("导入点云"), lastUsedDirectory.path(), MI.inputPointCloudFilters.join(";;"));
     else
-        fl.push_back(fileList.first());
+        fileNameList.push_back(fileName);
 
-    if (fl.isEmpty())	return;
+    if (fileNameList.isEmpty())	return false;
     else
     {
         //Save path away so we can use it again
-        QString path = fl.first();
+        QString path = fileNameList.first();
         path.truncate(path.lastIndexOf("/"));
-        pathList.push_back(path);
+        lastUsedDirectory.setPath(path);
+
+        if(!lastUsedDirectory.path().isEmpty())
+            saveRecentPathList(lastUsedDirectory.path());
     }
-    openFile(fl.first());
+
+    QTime time;
+    time.start();
+    foreach(fileName,fileNameList)
+    {
+        QFileInfo fi(fileName);
+        QString extension = fi.suffix();
+        bool b;
+        b = MI.allKnowPointCloudInputFormats.contains(extension.toLower(),Qt::CaseSensitive);
+        if(!b)
+        {
+            QString errorMsgFormat(tr("无法打开文件:\n\"%1\"\n\n详细信息: 文件格式 ") + extension + tr(" 不支持."));
+            QMessageBox::critical(this,tr("文件打开错误"),errorMsgFormat.arg(fileName));
+            return false;
+        }
+        osg::ref_ptr<osg::Group> group = MI.openMesh(extension,fileName);
+        //以上各节点name均已不为空
+        if(group)
+        {
+            osg::ref_ptr<osg::Vec3Array> points=getVertexArray(group.get());
+            if(points->size()>0)//添加点云并切换至点云显示模式
+                addPointsToPointCloudGroup(pointCloudGroup.get(), points.get(),false);
+        }
+        else
+        {
+            QMessageBox::critical(this,tr("错误"), fileName + tr("  内容不被支持！"));
+            return false;
+        }
+
+        saveRecentFileList(fileName);
+    }
+
+    updateStatusBar(QString::number(time.elapsed()/1000.f)+"s");
+    return true;
 }
 
-void MainWindow::openFile(QString fileName)
+void MainWindow::on_ClearAll()
 {
+    pointCloudGroup->removeChildren(0, pointCloudGroup->getNumChildren());
+}
+
+void MainWindow::on_OpenRecentFile()
+{
+    QAction *action = (QAction *)(sender());
+    QString fileName = action->data().toString();
     QFileInfo fi(fileName);
-    QString extension = fi.suffix();
-    bool b;
-    b = MI.allKnowPointCloudInputFormats.contains(extension.toLower(),Qt::CaseSensitive);
-    if(!b)
+    if(fi.isFile())
+        on_FileOpen(fileName);
+    else
+        saveRecentFileList(fileName, true);
+}
+
+void MainWindow::on_OpenRecentPath()
+{
+    QAction *action = (QAction *)(sender());
+    QString path = action->data().toString();
+    QDir dir(path);
+    QFileInfo fi(path);
+    if(dir.exists() && fi.isDir())
     {
-        QString errorMsgFormat(tr("无法打开文件:\n\"%1\"\n\n详细信息: 文件格式 ") + extension + tr(" 不支持."));
-        QMessageBox::critical(this,tr("文件打开错误"),errorMsgFormat.arg(fileName));
-        return;
-    }
-
-    osg::ref_ptr<osg::Group> group = MI.openMesh(extension,fileName);
-    getPoints(fileName);
-    //以上各节点name均已不为空
-    if(group)
-    {
-        group->setName(qPrintable(fi.fileName()));
-        modelGroup->addChild(group);
-
-        for(unsigned int i=0;i < group->getNumChildren(); i++)
-        {
-            osg::ref_ptr<osg::Node> node=group->getChild(i);//mt
-
-            //保存用户自定义数据
-            osg::ref_ptr<osg::MatrixTransform> mt = dynamic_cast<osg::MatrixTransform *>(node.get());
-            mt->setUserValue(domain_oriLayerMatrix, mt->getMatrix());
-            mt->setUserValue(domain_lastUsedLayerMatrix, mt->getMatrix());
-        }
-
-        g_Points = getVertexArray(group);
-        int num=g_Points->size();
-        crystal->pointCloud.pointNum = num;
-        osg::Vec3 v3(g_Points->at(0));
-        QMessageBox::information(this,"提示","num = " + QString("%1  %2  %3  %4").arg(num).arg(v3.x()).arg(v3.y()).arg(v3.z()));
-        //显示模式：点云图
-        updateOSGDisplay(POINTCLOUD);
-        updateParam();
+        lastUsedDirectory.setPath(path);
+        on_FileOpen();
     }
     else
-    {
-        QMessageBox::critical(this,"Error", fileName + "  内容不被支持！");
-        return;
-    }
-}
-#endif
-
-void MainWindow::slot_FileSave()
-{
-
+        saveRecentPathList(path, true);
 }
 
-void MainWindow::slot_FileRecent()
+void MainWindow::on_quitApplication()
 {
-
+    this->close();
 }
 
-void MainWindow::slot_FileExit()
+void MainWindow::on_ParameterSetting()
 {
-
+    ParamWindow paraDialog(sharedPara.get());
+    paraDialog.exec();
 }
 
-void MainWindow::slot_FileClearPathList()
+void MainWindow::slot_TimerRefresh()
 {
-    fileList.clear();
+    tdRunningTime.incTick();
+    if(isLaserOn) tdEngravingTime.incTick();
+
+    QString str = QString("总运行时间: %1:%2:%3")
+            .arg(QString::number(tdRunningTime.hour))
+            .arg(tdRunningTime.minute,2,10,QChar('0'))
+            .arg(tdRunningTime.second,2,10,QChar('0'));
+    lb_totalRunTime->setText(str);
+
+    str = QString("总雕刻时间: %1:%2:%3")
+            .arg(QString::number(tdEngravingTime.hour))
+            .arg(tdEngravingTime.minute,2,10,QChar('0'))
+            .arg(tdEngravingTime.second,2,10,QChar('0'));
+    lb_totalEngravingTime->setText(str);
 }
 
-void MainWindow::slot_LaserPara()
+void MainWindow::on_setAxesVisible(bool visible)
 {
-    parameterWindow->updatePara();
-    parameterWindow->show();
+    curViewer->setAxesVisible(visible);
 }
 
-void MainWindow::slot_LaserRegImp()
+void MainWindow::initStatusBar()
 {
-
-}
-
-void MainWindow::slot_LaserRegExp()
-{
-
-}
-
-void MainWindow::slot_LaserBatchSet()
-{
-    mCurvWindow->show();
-}
-
-void MainWindow::slot_LaserTagGen()
-{
-    markWindow->show();
-}
-
-void MainWindow::slot_LaserCal()
-{
-
-}
-
-void MainWindow::slot_LaserPosTest()
-{
-
-}
-
-void MainWindow::slot_LaserPlatSetH()
-{
-
-}
-
-void MainWindow::slot_ViewTool()
-{
-
-}
-
-void MainWindow::slot_ViewStat()
-{
-
-}
-
-void MainWindow::slot_ViewCtrl()
-{
-
-}
-
-void MainWindow::slot_ViewForth()
-{
-    osg::ref_ptr<MyTrackballManipulator> manipulator =
-            dynamic_cast<MyTrackballManipulator *>(curViewer->getCameraManipulator());
-    osg::Vec3d eye,center,up;
-    manipulator->getHomePosition(eye,center,up);
-    eye = osg::Vec3d(0.0,0.0,350.0);
-    up = osg::Vec3d(0.0,1.0,0.0);
-
-    manipulator->setHomePosition(eye,center,up);
-    curViewer->home();//原点
-    if(manipulator->isOrthoProjection())
-        initProjectionAsOrtho();//若是正视投影，则将视图移至初始位（相当于该投影下的home点）
-}
-
-void MainWindow::slot_ViewTop()
-{
-    osg::ref_ptr<MyTrackballManipulator> manipulator =
-            dynamic_cast<MyTrackballManipulator *>(curViewer->getCameraManipulator());
-    osg::Vec3d eye,center,up;
-    manipulator->getHomePosition(eye,center,up);
-
-    eye = osg::Vec3d(0.0,350.0,0.0);
-    up = osg::Vec3d(0.0,0.0,-1.0);
-    manipulator->setHomePosition(eye,center,up);
-    curViewer->home();//原点
-    if(manipulator->isOrthoProjection())
-        initProjectionAsOrtho();//若是正视投影，则将视图移至初始位（相当于该投影下的home点）
-}
-
-void MainWindow::slot_ViewRight()
-{
-    osg::ref_ptr<MyTrackballManipulator> manipulator =
-            dynamic_cast<MyTrackballManipulator *>(curViewer->getCameraManipulator());
-    osg::Vec3d eye,center,up;
-    manipulator->getHomePosition(eye,center,up);
-    eye = osg::Vec3d(350.0,0.0,0.0);
-    up = osg::Vec3d(0.0,1.0,0.0);
-
-    manipulator->setHomePosition(eye,center,up);
-    curViewer->home();//原点
-    if(manipulator->isOrthoProjection())
-        initProjectionAsOrtho();//若是正视投影，则将视图移至初始位（相当于该投影下的home点）
-}
-
-void MainWindow::slot_ViewUpdate()
-{
-
-}
-
-void MainWindow::slot_ViewOriModel()
-{
-
-}
-
-void MainWindow::slot_ViewModModel()
-{
-
-}
-
-void MainWindow::slot_ViewApartModel()
-{
-
-}
-void MainWindow::slot_SortY2X(){}
-void MainWindow::slot_SortX2Y(){}
-void MainWindow::slot_SortOri(){}
-void MainWindow::slot_SortShort(){}
-void MainWindow::slot_BlockX2Y(){}
-void MainWindow::slot_BlockY2X(){}
-void MainWindow::slot_BlockShort(){}
-void MainWindow::slot_BlockPara(){}
-void MainWindow::slot_OperLaserOri(){}
-void MainWindow::slot_OperPlatHome(){}
-void MainWindow::slot_OperSetCurPos2LaserOri(){}
-void MainWindow::slot_OperSaveCurPos2LaserOri()
-{
-    plat->HomPos = plat->CurPos;
-}
-void MainWindow::slot_DebugAtchModel(){}
-void MainWindow::slot_DebugHotTest(){}
-void MainWindow::slot_DebugSplitModel(){}
-void MainWindow::slot_DebugStopFun(){}
-void MainWindow::slot_StdModCube(){}
-void MainWindow::slot_StdModLine(){}
-void MainWindow::slot_StdModPlat(){}
-void MainWindow::slot_StdModSphere(){}
-void MainWindow::slot_HelpAboutMe(){}
-void MainWindow::slot_LanCHN(){}
-
-//主窗口刷新timer，TIMESPAN间隔刷新一次
-void MainWindow::mwTimerRefresh()
-{
-    static int count = 0;
-    QString runText;
-    QString laserText;
-    //刷新IO
-    refreshIO();
-    //检查是否触发限位，触发则停止电机
-    checkIfStopMotor();
-
-    //刷新时间
-    count++;
-    if (count >= (1000/TIMESPAN))
-    {
-        tdRunningTime.count++;
-        getTime(&tdRunningTime);
-        runText = QString("总运行时间: %1:%2:%3")
-                .arg(QString::number(tdRunningTime.hour))
-                .arg(QString::number(tdRunningTime.minut))
-                .arg(QString::number(tdRunningTime.second));
-        lb_StRunTime->setText(runText);
-        if (isLaserOn)
-            tdLaserOnTime.count++;
-        getTime(&tdLaserOnTime);
-        laserText = QString("总雕刻时间: %1:%2:%3")
-                .arg(QString::number(tdLaserOnTime.hour))
-                .arg(QString::number(tdLaserOnTime.minut))
-                .arg(QString::number(tdLaserOnTime.second));
-        lb_StLaserTime->setText(laserText);
-
-        //刷新主窗口显示
-        if (parameterWindow->getIsUpdate())
-            updateParam();
-        count = 0;
-    }
-}
-void MainWindow::refreshIO()
-{
-    int i = 0;
-    int rtn = 1;
-    //输入
-    for (i = 0; i< INMAX; i++)
-    {
-        inPut[i] = ctrlCard->readInput(i);
-        if(-1 == inPut[i])
-            qDebug()<<"IN"<<i<<"输入失败";
-    }
-    //输出
-    for (i = 0; i< OUTMAX; i++)
-    {
-        rtn = ctrlCard->writeOutput(i, outPut[i]);
-        if(1 == rtn)
-            qDebug()<<"OUT"<<i<<"输出失败";
-    }
-}
-void MainWindow::checkIfStopMotor()
-{
-    if (INPUT_L == inPut[X_LIMIT_N] || INPUT_L == inPut[X_LIMIT_P])
-        ctrlCard->stopRun(motor->motorX.num, SUDDEN_STOP);
-    if (INPUT_L == inPut[Y_LIMIT_N] || INPUT_L == inPut[Y_LIMIT_P])
-        ctrlCard->stopRun(motor->motorY.num, SUDDEN_STOP);
-    if (INPUT_L == inPut[Z_LIMIT_N] || INPUT_L == inPut[Z_LIMIT_P])
-        ctrlCard->stopRun(motor->motorZ.num, SUDDEN_STOP);
-}
-
-void MainWindow::slot_MotorStop()
-{
-    for (int i = 0; i < MAXAXIS; i++)
-    {
-        ctrlCard->stopRun(i+1, SUDDEN_STOP);
-    }
-}
-
-void MainWindow::slot_CrvView()
-{
-
-}
-
-void MainWindow::slot_CrvApp()
-{
-    crystal->size.x = ui->le_CrvSizeX->text().toFloat();
-    crystal->size.y = ui->le_CrvSizeY->text().toFloat();
-    crystal->size.z = ui->le_CrvSizeZ->text().toFloat();
-    crystal->mov.x = ui->le_MovX->text().toFloat();
-    crystal->mov.y = ui->le_MovY->text().toFloat();
-    crystal->mov.z = ui->le_MovZ->text().toFloat();
-}
-
-
-void MainWindow::slot_CrvStart()
-{
-
-}
-
-void MainWindow::slot_CrvPause()
-{
-
-}
-
-void MainWindow::slot_CrvStop()
-{
-
-}
-
-void MainWindow::slot_PlatOrigin()
-{
-
-}
-
-void MainWindow::slot_PlatReset()
-{
-    int rtn = ADTDRV_OK;
-    int dir = 0;
-    S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
-    for (int i=0; i < MAXAXIS; i++)
-    {
-        if (0 == dir && m[i].limitP)
-            dir = 1;
-        else if (0 == dir && m[i].limitN)
-            dir = -1;
-        rtn += ctrlCard->setSpeed(m[i].num, dir*m[i].v0, dir*m[i].v, m[i].a);
-        if (ADTDRV_FAIL == rtn)
-        {
-            ctrlCard->stopRun(m[i].num, SUDDEN_STOP);
-            lb_StInfo->setText("初始化速度错误");
-            return;
-        }
-    }
-}
-
-void MainWindow::slot_PlatCtrl()
-{
-
-}
-
-void MainWindow::slot_MovMode()
-{
-
-}
-
-void MainWindow::slot_LaserCtrl()
-{
-    int rtn = ADTDRV_FAIL;
-    QPushButton *pt = qobject_cast <QPushButton*>(sender());
-    if ("开激光" == pt->text())
-    {
-        rtn = ctrlCard->setLaser(0, LASER_ON, laser->frequency, laser->ratio/100.0);
-        if (ADTDRV_OK == rtn)
-            ui->btn_CrvClsLas->setText("关激光");
-        else
-            lb_StInfo->setText("打开激光错误");
-    }
-    else if ("关激光" == pt->text())
-    {
-        rtn = ctrlCard->setLaser(0, LASER_OFF, laser->frequency, laser->ratio/100.0);
-        if (ADTDRV_OK == rtn)
-            ui->btn_CrvClsLas->setText("开激光");
-        else
-            lb_StInfo->setText("关闭激光错误");
-    }
-}
-
-void MainWindow::getTime(TimerData *t)
-{
-    if (!t)
-        qDebug()<<"null ptr";
-    int count = t->count;
-    t->second = count%60;
-    count = count/60;
-    t->minut = count%60;
-    count = count/60;
-    t->hour = count%60;
-}
-
-//################Private Function#############
-
-void MainWindow::initMainWindow()
-{
-    updateParam();
-    initStBar();
-    initOSG();
-}
-void MainWindow::initPara()
-{
-    QFileInfo fi(INI_PATH);
-    if (fi.isFile())
-    {
-        parameterWindow->readIniFile();
-    }
-    else
-    {
-        parameterWindow->initParam();
-    }
-    parameterWindow->updatePara();
-}
-
-void MainWindow::updateParam()
-{
-    //parameters crystal
-    ui->lb_PointNumVal->setText(QString::number(crystal->pointCloud.pointNum, 10));
-    ui->lb_PointMinValX->setText(QString::number(crystal->pointCloud.pointMin.x, 'f', 2));
-    ui->lb_PointMinValY->setText(QString::number(crystal->pointCloud.pointMin.y, 'f', 2));
-    ui->lb_PointMinValZ->setText(QString::number(crystal->pointCloud.pointMin.z, 'f', 2));
-    ui->lb_PointMaxValX->setText(QString::number(crystal->pointCloud.pointMax.x, 'f', 2));
-    ui->lb_PointMaxValY->setText(QString::number(crystal->pointCloud.pointMax.y, 'f', 2));
-    ui->lb_PointMaxValZ->setText(QString::number(crystal->pointCloud.pointMax.z, 'f', 2));
-    ui->lb_PointLenValX->setText(QString::number(crystal->pointCloud.pointMax.x-
-                                                 crystal->pointCloud.pointMin.x, 'f', 2));
-    ui->lb_PointLenValY->setText(QString::number(crystal->pointCloud.pointMax.y-
-                                                 crystal->pointCloud.pointMin.y, 'f', 2));
-    ui->lb_PointLenValZ->setText(QString::number(crystal->pointCloud.pointMax.z-
-                                                 crystal->pointCloud.pointMin.z, 'f', 2));
-    ui->lb_PointObjValX->setText(QString::number(crystal->size.x, 'f', 2));
-    ui->lb_PointObjValY->setText(QString::number(crystal->size.y, 'f', 2));
-    ui->lb_PointObjValZ->setText(QString::number(crystal->size.z, 'f', 2));
-
-    //parameters plat
-    ui->lb_PlatRelValX->setText(QString::number(plat->relPos.x, 'f', 2));
-    ui->lb_PlatRelValY->setText(QString::number(plat->relPos.y, 'f', 2));
-    ui->lb_PlatRelValZ->setText(QString::number(plat->relPos.z, 'f', 2));
-    ui->lb_PlatValX->setText(QString::number(plat->size.x, 'f', 2));
-    ui->lb_PlatValY->setText(QString::number(plat->size.y, 'f', 2));
-    ui->lb_PlatValZ->setText(QString::number(plat->size.z, 'f', 2));
-
-    ui->le_CrvSizeX->setText(QString::number(crystal->size.x, 'f', 2));
-    ui->le_CrvSizeY->setText(QString::number(crystal->size.y, 'f', 2));
-    ui->le_CrvSizeZ->setText(QString::number(crystal->size.z, 'f', 2));
-    ui->le_MovX->setText(QString::number(crystal->mov.x, 'f', 2));
-    ui->le_MovY->setText(QString::number(crystal->mov.y, 'f', 2));
-    ui->le_MovZ->setText(QString::number(crystal->mov.z, 'f', 2));
-}
-
-void MainWindow::initStBar()
-{
-    lb_StInfo = new QLabel(this);
-    lb_StInfo->setAlignment(Qt::AlignLeft);
-    lb_StInfo->setMaximumWidth(200);
-    lb_StInfo->setMinimumWidth(200);
-
-    lb_StRunTime = new QLabel(this);
-    lb_StRunTime->setAlignment(Qt::AlignLeft);
-    lb_StRunTime->setMaximumWidth(200);
-    lb_StRunTime->setMinimumWidth(200);
-
-    lb_StLaserTime = new QLabel(this);
-    lb_StLaserTime->setAlignment(Qt::AlignLeft);
-    lb_StLaserTime->setMaximumWidth(200);
-    lb_StLaserTime->setMinimumWidth(200);
-
-    statusBar()->addPermanentWidget(lb_StInfo);
-    statusBar()->addPermanentWidget(lb_StRunTime);
-    statusBar()->addPermanentWidget(lb_StLaserTime);
-    initTimer();
-
+    hSpacer1 = new QSpacerItem(90,25,QSizePolicy::Minimum,QSizePolicy::Expanding);
+    ui->statusBar->layout()->addItem(hSpacer1);
+
+    lb_totalRunTime = new QLabel(this);
+    lb_totalRunTime->setAlignment(Qt::AlignLeft);
+    lb_totalRunTime->setMaximumWidth(200);
+    lb_totalRunTime->setMinimumWidth(200);
+
+    lb_totalEngravingTime = new QLabel(this);
+    lb_totalEngravingTime->setAlignment(Qt::AlignLeft);
+    lb_totalEngravingTime->setMaximumWidth(200);
+    lb_totalEngravingTime->setMinimumWidth(200);
+
+    ui->statusBar->layout()->addWidget(lb_totalRunTime);
+    ui->statusBar->layout()->addWidget(lb_totalEngravingTime);
 }
 void MainWindow::initTimer()
 {
-    timerRun = new QTimer();
-    if (!timerRun)
+    connect(&runningTimer, SIGNAL(timeout()), this, SLOT(slot_TimerRefresh()));
+    runningTimer.setInterval(TIMESPAN);
+    runningTimer.start();
+
+    // 初始化时间计数器
+    QSettings settings;
+    settings.beginGroup(g_SoftwareInfo);
+    unsigned int runningSeconds = settings.value(sRunningTime, QVariant((unsigned int)0)).toUInt();
+    unsigned int engravingSeconds = settings.value(sEngravingTime, QVariant((unsigned int)0)).toUInt();
+    settings.endGroup();
+
+    tdRunningTime.hour = runningSeconds/3600;
+    tdRunningTime.minute = runningSeconds%3600/60;
+    tdRunningTime.second = runningSeconds%60;
+    tdEngravingTime.hour = engravingSeconds/3600;
+    tdEngravingTime.minute = engravingSeconds%3600/60;
+    tdEngravingTime.second = engravingSeconds%60;
+}
+
+void MainWindow::endTimer()
+{
+    runningTimer.stop();
+
+    // 运行时间保存至注册表
+    QSettings settings;
+    settings.beginGroup(g_SoftwareInfo);
+    settings.setValue(sRunningTime, QVariant((unsigned int)(tdRunningTime.hour*3600+tdRunningTime.minute*60+tdRunningTime.second)));
+    settings.setValue(sEngravingTime, QVariant((unsigned int)(tdEngravingTime.hour*3600+tdEngravingTime.minute*60+tdEngravingTime.second)));
+    settings.endGroup();
+    settings.sync();
+}
+
+void MainWindow::initSignalsAndSlots()
+{
+    connect(ui->action_FileOpen, SIGNAL(triggered()), this, SLOT(on_FileOpen()));
+    connect(ui->action_ClearAll, SIGNAL(triggered()), this, SLOT(on_ClearAll()));
+    connect(ui->action_QuitApp, SIGNAL(triggered()), this, SLOT(on_quitApplication()));
+
+    connect(ui->action_ParameterSettings, SIGNAL(triggered()), this, SLOT(on_ParameterSetting()));
+}
+
+void MainWindow::initActions()
+{
+    for(int i=0;i<MAX_NUMFILES;++i)
     {
-        qDebug()<<"Fail init timer!";
-        delete timerRun;
-        return;
+        recentFileActs[i]=new QAction(this);
+        recentFileActs[i]->setVisible(true);
+        recentFileActs[i]->setEnabled(true);
+
+        recentPathActs[i]=new QAction(this);
+        recentPathActs[i]->setVisible(true);
+        recentPathActs[i]->setEnabled(true);
+        connect(recentFileActs[i],SIGNAL(triggered()),this,SLOT(on_OpenRecentFile()));
+        connect(recentPathActs[i],SIGNAL(triggered()),this,SLOT(on_OpenRecentPath()));
+
+        ui->menu_RecentFileList->addAction(recentFileActs[i]);
+        ui->menu_RecentPathList->addAction(recentPathActs[i]);
     }
-    connect(timerRun, SIGNAL(timeout()), this, SLOT(mwTimerRefresh()));
-    //timer period
-    timerRun->setInterval(TIMESPAN);
-    timerRun->start();
 }
 
 void MainWindow::initOSG()
 {
     curViewer = new osgContainer();
     refShape=new osg::Geode;
-    modelGroup=new osg::Group;
     pointCloudGroup=new osg::Group;
-    ui->ly_viewWt->addWidget(curViewer);
+    this->setCentralWidget(curViewer.get());
 
     curRoot = curViewer->getRoot();
     curRoot->addChild(refShape.get());
-    curRoot->addChild(modelGroup.get());
     curRoot->addChild(pointCloudGroup.get());
 
-    pointCloudGroup->addChild(ordinaryPointsGroup.get());
-    pointCloudGroup->addChild(texturePointsGroup.get());
-    pointCloudGroup->addChild(picturePointsGroup.get());
-    pointCloudGroup->addChild(additionalPointsGroup.get());
-
-
     initProjectionAsOrtho();
-    setAxesVisible(true);
-    updateLighting(false);
-
-//    updateRefShape(createCrystalFrame(curCrystalType, curCrystalSize, curCrystalZRot, curCrystalHeight, curCrystalDiameter));
-
+    on_setAxesVisible(true);
+    updateRefShape(createCrystalFrame(sharedPara->crystalSize, 0.f));
+    updateLighting(true);
 }
+
 void MainWindow::initProjectionAsOrtho()
 {
     osg::ref_ptr<osg::Camera> camera = curViewer->getCamera();
     osg::ref_ptr<osg::Viewport> viewport=camera->getViewport();
-    double left = -viewport->width()*0.1;//正投影参数
+    double left = -viewport->width()*0.1;   //正投影参数
     double right = -left;
     double bottom = -viewport->height()*0.1;
     double top = -bottom;
@@ -632,134 +278,6 @@ void MainWindow::initProjectionAsOrtho()
     camera->setProjectionMatrixAsOrtho( left, right, bottom, top, znear, zfar);
 }
 
-int MainWindow::initCtrlBoard()
-{
-    int rtn = CTRL_ERROR;
-    int msgRtn = 0;
-    //*************初始化8940A1卡**************
-    rtn = ctrlCard->initBoard();
-    if (rtn <= 0)
-    {
-        msgRtn = QMessageBox::warning(this, "错误", "控制卡初始化失败!", QMessageBox::Ok);
-        if (QMessageBox::Ok == msgRtn)
-        {
-            lb_StInfo->setText("控制卡初始化失败!");
-        }
-        switch (rtn)
-        {
-        case CTRL_NO_CARD_ERROR:
-            msgRtn = QMessageBox::warning(this, "错误", "没有安装ADT8937卡!", QMessageBox::Ok);
-            if (QMessageBox::Ok == msgRtn)
-            {
-                lb_StInfo->setText("没有安装ADT8937卡!");
-            }
-            break;
-        case CTRL_NO_DRIVE_ERROR:
-            msgRtn = QMessageBox::warning(this, "错误", "没有安装端口驱动程序!", QMessageBox::Ok);
-            if (QMessageBox::Ok == msgRtn)
-            {
-                lb_StInfo->setText("没有安装端口驱动程序!");
-            }
-            break;
-        case CTRL_PCI_ERROR:
-
-            msgRtn = QMessageBox::warning(this, "错误", "PCI桥故障!", QMessageBox::Ok);
-            if (QMessageBox::Ok == msgRtn)
-            {
-                lb_StInfo->setText("PCI桥故障!");
-            }
-            break;
-         default:
-            break;
-        }
-    }
-    else
-    {
-        lb_StInfo->setText("运动控制卡可以使用!");
-    }
-    //*************获取版本号**************
-    int ver = ctrlCard->getHardWareVer();
-    QString str = "硬件版本:"+ QString::number(ver, 10);
-    lb_StInfo->setText(str);
-    //*************初始化限位**************
-    S_Motor m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
-    for (int i = 0; i< MAXAXIS; i++)
-    {
-        rtn += ctrlCard->setLimit(0, m[i].num, m[i].limitP, m[i].limitN, m[i].limitL);
-    }
-    if (ADTDRV_FAIL == rtn)
-    {
-        QMessageBox::warning(this, "错误", "初始化限位错误", QMessageBox::Ok);
-    }
-    //*************初始化速度**************
-    for (int i = 0; i< MAXAXIS; i++)
-    {
-        rtn += ctrlCard->setSpeed(m[i].num, m[i].v0, m[i].v, m[i].a);
-    }
-    if (ADTDRV_FAIL == rtn)
-    {
-        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
-        return rtn;
-    }
-    //*************初始化激光延时**************
-    ctrlCard->setLaserOutDelay(0, laser->lightOutDelay);
-
-    return rtn;
-}
-
-//为node设置用户自定义数据
-//这里主要是用来为模型或图片层设置 点云参数
-void MainWindow::setUserPrmForNode(osg::Node *node, Parameter *prm)
-{
-    node->setUserData(prm);
-}
-//更新显示模式（实体/线框/点云）
-void MainWindow::updateOSGDisplay(DisplayMode mode)
-{
-    osg::ref_ptr<osg::StateSet> stateset=modelGroup->getOrCreateStateSet();
-    osg::ref_ptr<osg::PolygonMode> pm=new osg::PolygonMode;
-    switch(mode)
-    {
-        case POINTCLOUD:
-            setPointCloudVisible(true);
-            updateLighting(true);
-            break;
-        default:
-            break;
-    }
-}
-
-void MainWindow::setPointCloudVisible(bool visible)
-{
-    curRoot->setChildValue(pointCloudGroup, visible);
-}
-/// 更新OSG环境光照
-void MainWindow::updateLighting(bool brightening)
-{
-    if(!curViewer) return;
-    if(brightening)//环境光增强
-    {
-        curViewer->getLight()->setDiffuse(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
-        curViewer->getLight()->setAmbient(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
-    }
-    else//不增强
-    {
-        curViewer->getLight()->setDiffuse(osg::Vec4(0.7f, 0.7f, 0.7f, 1.0f));
-        curViewer->getLight()->setAmbient(osg::Vec4(0.0f, 0.0f, 0.0f, 1.0f));
-    }
-}
-osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node)
-{
-    vertexExtractor ve;
-    node->accept(ve);
-    return ve.getAllVertexArrayInWorldCoord();
-}
-/// 设置坐标轴可见性
-void MainWindow::setAxesVisible(bool visible)
-{
-    curViewer->setAxesVisible(visible);
-}
-// 更新Ref shape
 void MainWindow::updateRefShape(osg::Geode *geode)
 {
     curRoot->removeChild(refShape);
@@ -767,71 +285,268 @@ void MainWindow::updateRefShape(osg::Geode *geode)
     curRoot->addChild(refShape);
 }
 
-void MainWindow::getPoints(const QString fileName)
+/// 更新OSG环境光照
+void MainWindow::updateLighting(bool brightening)
 {
-    QFile in(fileName);
-    QString line;
-    bool isMin = false;
-    bool isMax = false;
-    if (!in.open(QIODevice::ReadOnly)) return;
-        QTextStream f(&in);
-        line = f.readLine();
-        while(!line.isNull())
-        {
-            if ("$EXTMIN" == line)
-            {
-                while ("9" != line && "ENDSEC" != line && !line.isNull())
-                {
-                    line = f.readLine();
-                    if ("10" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMin.x = line.toFloat();
-                    }
-                    if ("20" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMin.y = line.toFloat();
-                    }
-                    if ("30" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMin.z = line.toFloat();
-                    }
-                }
-                isMin = true;
-            }
-            if ("$EXTMAX" == line)
-            {
-                while ("9" != line && "ENDSEC" != line && !line.isNull())
-                {
-                    line = f.readLine();
-                    if ("10" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMax.x = line.toFloat();
-                    }
-                    if ("20" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMax.y = line.toFloat();
-                    }
-                    if ("30" == line)
-                    {
-                        line = f.readLine();
-                        if (!line.isNull())
-                            crystal->pointCloud.pointMax.z = line.toFloat();
-                    }
-                }
-                isMax = true;
-            }
-            if (isMin && isMax)
-                return;
-            line = f.readLine();
-        }
+    if(!curViewer) return;
+    curViewer->updateLighting(brightening);
 }
+
+/// 保存最近打开的文件列表
+/// @param fileName:将要添加/移除的文件
+/// @param isRemove:是否是移除当前fileName项，是：则移除； 否：则为添加该项
+void MainWindow::saveRecentFileList(const QString &fileName, bool isRemove)
+{
+    QSettings settings;
+    settings.beginGroup(g_SoftwareInfo);
+    QStringList files = settings.value(sRecentFileList).toStringList();
+    files.removeAll(fileName);
+    if(!isRemove)   //不是移除该项，则即为添加该项
+        files.prepend(fileName);
+    while(files.size()>MAX_NUMFILES)
+        files.removeLast();
+
+    settings.setValue(sRecentFileList, QVariant(files));
+    settings.endGroup();
+
+    updateRecentFileAndPathActions();
+}
+
+/// 保存最近打开的文件夹
+/// @param path:将要添加/移除的文件夹
+/// @param isRemove:是否是移除当前path项，是：则移除； 否：则为添加该项
+void MainWindow::saveRecentPathList(const QString &path, bool isRemove)
+{
+    QSettings settings;
+    settings.beginGroup(g_SoftwareInfo);
+    QStringList paths = settings.value(sRecentPathList).toStringList();
+    paths.removeAll(path);
+    if(!isRemove)   //不是移除该项，则即为添加该项
+        paths.prepend(path);
+    while(paths.size()>MAX_NUMFILES)
+        paths.removeLast();
+
+    settings.setValue(sRecentPathList, QVariant(paths));
+    settings.endGroup();
+    updateRecentFileAndPathActions();
+}
+
+// 更新最近打开文件及路径列表
+void MainWindow::updateRecentFileAndPathActions()
+{
+    QSettings settings;
+    settings.beginGroup(g_SoftwareInfo);
+    QStringList files = settings.value(sRecentFileList).toStringList();
+    QStringList paths = settings.value(sRecentPathList).toStringList();
+    settings.endGroup();
+
+    int numRecentFiles = qMin(files.size(), (int)MAX_NUMFILES);
+
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
+        QString text = QString("&%1 %2").arg(i + 1).arg(QFileInfo(files[i]).fileName());
+        recentFileActs[i]->setText(text);
+        recentFileActs[i]->setData(files[i]);
+        recentFileActs[i]->setVisible(true);
+    }
+    for (int j = numRecentFiles; j < MAX_NUMFILES; ++j)
+        recentFileActs[j]->setVisible(false);
+
+
+    int numRecentPaths = qMin(paths.size(), (int)MAX_NUMFILES);
+
+    for(int i=0; i<numRecentPaths; ++i)
+    {
+        QString text = QString("&%1 %2").arg(i + 1).arg(paths[i]);
+        recentPathActs[i]->setText(text);
+        recentPathActs[i]->setData(paths[i]);
+        recentPathActs[i]->setVisible(true);
+    }
+    for (int j = numRecentPaths; j < MAX_NUMFILES; ++j)
+        recentPathActs[j]->setVisible(false);
+}
+
+osg::Geode *MainWindow::createCrystalFrame(osg::Vec3 size, float zRot)
+{
+    osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+    osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
+    osg::ref_ptr<osg::Vec3Array> v = new osg::Vec3Array;
+    osg::ref_ptr<osg::Vec4Array> colors=new osg::Vec4Array;
+    colors->push_back(osg::Vec4(1.f,1.f,0.f,1.f));
+    geom->setColorArray(colors);
+    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
+    geode->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+    geode->addDrawable(geom);
+
+    //    if(type==BasicSettingsDialog::BOX)
+    {
+        v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
+        v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), -0.5f*size.z()));
+        v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
+        v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), -0.5f*size.z()));
+
+        v->push_back(osg::Vec3(-0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
+        v->push_back(osg::Vec3(0.5f*size.x(), -0.5f*size.y(), 0.5f*size.z()));
+        v->push_back(osg::Vec3(0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
+        v->push_back(osg::Vec3(-0.5f*size.x(), 0.5f*size.y(), 0.5f*size.z()));
+
+        if(zRot != 0)
+        {
+            osg::Matrix m = osg::Matrix::rotate(osg::DegreesToRadians(zRot), osg::Vec3(0.f,0.f,1.f));
+            for(unsigned int i=0; i<v->size(); ++i)
+            {
+                osg::Vec4 vt4(v->at(i),1.0f);
+                vt4=vt4*m;
+                v->at(i) = osg::Vec3(vt4.x(),vt4.y(),vt4.z());
+            }
+        }
+        geom->setVertexArray(v.get());
+        osg::ref_ptr<osg::DrawElementsUInt> lines = new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
+        for(int i=0; i<8; ++i)
+        {
+            int j= i+1;
+            if(i==3) j=0;
+            else if(i==7) j=4;
+            lines->push_back(i);
+            lines->push_back(j);
+        }
+        for(int i=0; i<4; ++i)
+        {
+            lines->push_back(i);
+            lines->push_back(i+4);
+        }
+        geom->addPrimitiveSet(lines);
+    }
+//    else if(type==BasicSettingsDialog::CYLINDER)
+//    {
+//        float defaultAngleStep = 3.0f;//缺省步距角
+//        float r = 0.5f*diameter;
+//        float x,y,z;
+//        float rad;
+//        for(int i=0; i<2; ++i)
+//        {
+//            if(i==0) z=-0.5f*height;
+//            else z=0.5f*height;
+//            for(float agl=0.f; agl<=360.f; agl+=defaultAngleStep)
+//            {
+//                rad = osg::DegreesToRadians(agl);
+//                x = r*std::cos(rad);
+//                y = r*std::sin(rad);
+//                v->push_back(osg::Vec3(x,y,z));
+//            }
+//        }
+//        geom->setVertexArray(v.get());
+//        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, 0, v->size()/2)); // down
+//        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, v->size()/2, v->size()/2)); // up
+//    }
+    return geode.release();
+}
+
+osg::Vec3Array *MainWindow::getVertexArray(osg::Node *node)
+{
+    vertexExtractor ve;
+    node->accept(ve);
+    return ve.getAllVertexArrayInWorldCoord();
+}
+
+void MainWindow::addPointsToPointCloudGroup(osg::Group *pcGroup, osg::Vec3Array *points, bool removeOld)
+{
+    if(!points || points->size()<=0) return;
+    osg::ref_ptr<osg::Geode> geode=new osg::Geode;
+    osg::ref_ptr<osg::Geometry> geom=new osg::Geometry;
+    geom->setVertexArray(points);
+    osg::ref_ptr<osg::Vec4Array> ca = new osg::Vec4Array();
+    osg::Vec4 white = osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    ca->resize(points->size(), white);
+    geom->setColorArray(ca.get());
+    geom->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
+
+    geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::POINTS, 0, points->size()));
+    geode->addDrawable(geom);
+    osg::ref_ptr<osg::MatrixTransform> mt = new osg::MatrixTransform;
+    mt->addChild(geode.get());
+
+    if(removeOld)
+        pcGroup->removeChildren(0, pcGroup->getNumChildren());
+    pcGroup->addChild(mt.get());
+}
+
+void MainWindow::updateStatusBar(QString statusMsg)
+{
+    if(!statusMsg.isEmpty())
+        ui->statusBar->showMessage(statusMsg, 2000);
+}
+
+//int MainWindow::initCtrlBoard()
+//{
+//    int rtn = CTRL_ERROR;
+//    int msgRtn = 0;
+//    //*************初始化8940A1卡**************
+//    rtn = ctrlCard->Init_Board();
+//    if (rtn <= 0)
+//    {
+//        msgRtn = QMessageBox::warning(this, "错误", "控制卡初始化失败!", QMessageBox::Ok);
+//        if (QMessageBox::Ok == msgRtn)
+//        {
+//            lb_StInfo->setText("控制卡初始化失败!");
+//        }
+//        switch (rtn)
+//        {
+//        case CTRL_NO_CARD_ERROR:
+//            msgRtn = QMessageBox::warning(this, "错误", "没有安装ADT8937卡!", QMessageBox::Ok);
+//            if (QMessageBox::Ok == msgRtn)
+//            {
+//                lb_StInfo->setText("没有安装ADT8937卡!");
+//            }
+//            break;
+//        case CTRL_NO_DRIVE_ERROR:
+//            msgRtn = QMessageBox::warning(this, "错误", "没有安装端口驱动程序!", QMessageBox::Ok);
+//            if (QMessageBox::Ok == msgRtn)
+//            {
+//                lb_StInfo->setText("没有安装端口驱动程序!");
+//            }
+//            break;
+//        case CTRL_PCI_ERROR:
+
+//            msgRtn = QMessageBox::warning(this, "错误", "PCI桥故障!", QMessageBox::Ok);
+//            if (QMessageBox::Ok == msgRtn)
+//            {
+//                lb_StInfo->setText("PCI桥故障!");
+//            }
+//            break;
+//         default:
+//            break;
+//        }
+//    }
+//    else
+//    {
+//        lb_StInfo->setText("运动控制卡可以使用!");
+//    }
+//    //*************获取版本号**************
+//    int ver = ctrlCard->Get_HardWareVer();
+//    QString str = "硬件版本:"+ QString::number(ver, 10);
+//    lb_StInfo->setText(str);
+//    //*************初始化限位**************
+//    S_MotorParameter m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
+//    for (int i = 0; i< MAXAXIS; i++)
+//    {
+//        rtn += ctrlCard->set_limit(0, m[i].numPulse, m[i].limitP, m[i].limitN, m[i].limitL);
+//    }
+//    if (DRV_FAIL == rtn)
+//    {
+//        QMessageBox::warning(this, "错误", "初始化限位错误", QMessageBox::Ok);
+//    }
+//    //*************初始化速度**************
+//    for (int i = 0; i< MAXAXIS; i++)
+//    {
+//        rtn += ctrlCard->Setup_Speed(m[i].numPulse, m[i].v0, m[i].v, m[i].acc);
+//    }
+//    if (DRV_FAIL == rtn)
+//    {
+//        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
+//        return rtn;
+//    }
+
+//    return rtn;
+//}
+

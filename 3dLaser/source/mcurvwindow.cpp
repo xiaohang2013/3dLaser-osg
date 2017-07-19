@@ -6,7 +6,7 @@ using namespace std;
 /************************全局变量区****************************/
 
 /************************全局函数区****************************/
-McurvWindow::McurvWindow(QWidget *parent) :
+BatchEngravingDialog::BatchEngravingDialog(QWidget *parent) :
 QDialog(parent),
 ui(new Ui::McurvWindow)
 {
@@ -17,7 +17,7 @@ ui(new Ui::McurvWindow)
     setWindowFlags(flags);
 }
 
-McurvWindow::~McurvWindow()
+BatchEngravingDialog::~BatchEngravingDialog()
 {
     delete ui;
 }

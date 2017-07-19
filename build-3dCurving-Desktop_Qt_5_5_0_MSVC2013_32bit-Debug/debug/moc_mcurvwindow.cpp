@@ -18,25 +18,25 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_McurvWindow_t {
+struct qt_meta_stringdata_BatchEngravingDialog_t {
     QByteArrayData data[1];
-    char stringdata0[12];
+    char stringdata0[21];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_McurvWindow_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_BatchEngravingDialog_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_McurvWindow_t qt_meta_stringdata_McurvWindow = {
+static const qt_meta_stringdata_BatchEngravingDialog_t qt_meta_stringdata_BatchEngravingDialog = {
     {
-QT_MOC_LITERAL(0, 0, 11) // "McurvWindow"
+QT_MOC_LITERAL(0, 0, 20) // "BatchEngravingDialog"
 
     },
-    "McurvWindow"
+    "BatchEngravingDialog"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_McurvWindow[] = {
+static const uint qt_meta_data_BatchEngravingDialog[] = {
 
  // content:
        7,       // revision
@@ -52,7 +52,7 @@ static const uint qt_meta_data_McurvWindow[] = {
        0        // eod
 };
 
-void McurvWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void BatchEngravingDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -60,26 +60,26 @@ void McurvWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     Q_UNUSED(_a);
 }
 
-const QMetaObject McurvWindow::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_McurvWindow.data,
-      qt_meta_data_McurvWindow,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+const QMetaObject BatchEngravingDialog::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_BatchEngravingDialog.data,
+      qt_meta_data_BatchEngravingDialog,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *McurvWindow::metaObject() const
+const QMetaObject *BatchEngravingDialog::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *McurvWindow::qt_metacast(const char *_clname)
+void *BatchEngravingDialog::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_McurvWindow.stringdata0))
-        return static_cast<void*>(const_cast< McurvWindow*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_BatchEngravingDialog.stringdata0))
+        return static_cast<void*>(const_cast< BatchEngravingDialog*>(this));
     return QDialog::qt_metacast(_clname);
 }
 
-int McurvWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int BatchEngravingDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

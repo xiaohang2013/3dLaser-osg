@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>816</height>
+    <height>822</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -57,1378 +57,6 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item>
-     <widget class="QWidget" name="paraWidget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>300</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>300</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="spacing">
-        <number>5</number>
-       </property>
-       <property name="leftMargin">
-        <number>3</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>3</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="gb_ModInfo">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>模型信息</string>
-         </property>
-         <layout class="QGridLayout" name="ly_gbModInfo_2">
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <item row="4" column="1">
-           <widget class="QLabel" name="lb_PointMinValZ">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lb_PointNum">
-            <property name="text">
-             <string>总点数:</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="lb_PointY">
-            <property name="text">
-             <string>Y:</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="lb_PointX">
-            <property name="text">
-             <string>X:</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lb_PointZ">
-            <property name="text">
-             <string>Z:</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="lb_PointMinValY">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="lb_PointLen">
-            <property name="text">
-             <string>长度</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="lb_PointMin">
-            <property name="text">
-             <string>最小值</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="lb_PointMax">
-            <property name="text">
-             <string>最大值</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QLabel" name="lb_PointObj">
-            <property name="text">
-             <string>水晶</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="lb_PointNumVal">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="lb_PointMaxValX">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="lb_PointMinValX">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QLabel" name="lb_PointLenValX">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="4">
-           <widget class="QLabel" name="lb_PointObjValX">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="lb_PointMaxValY">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="lb_PointLenValY">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="4">
-           <widget class="QLabel" name="lb_PointObjValY">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLabel" name="lb_PointMaxValZ">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
-           <widget class="QLabel" name="lb_PointLenValZ">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="4">
-           <widget class="QLabel" name="lb_PointObjValZ">
-            <property name="text">
-             <string>0.0</string>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <spacer name="sp_Point4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="2">
-           <spacer name="sp_Point2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="3">
-           <spacer name="sp_Point3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="4">
-           <spacer name="sp_Point1">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_CrvCtrl">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>雕刻控制</string>
-         </property>
-         <layout class="QVBoxLayout" name="ly_gbCrvCtrl_2" stretch="0,0,0">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>3</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="ly_CrvTimer" stretch="0,0,0">
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="lb_CrvT">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>计时:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lb_CrvValT">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>0.0M0.0S</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="sp_Crv1">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QProgressBar" name="pb_Crv">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="whatsThis">
-             <string/>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="value">
-             <number>0</number>
-            </property>
-            <property name="textVisible">
-             <bool>true</bool>
-            </property>
-            <property name="textDirection">
-             <enum>QProgressBar::TopToBottom</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="ly_CrvBtn">
-            <property name="spacing">
-             <number>1</number>
-            </property>
-            <property name="sizeConstraint">
-             <enum>QLayout::SetDefaultConstraint</enum>
-            </property>
-            <item>
-             <widget class="QPushButton" name="btn_CrvStart">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>开始</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_CrvPause">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>暂停</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_CrvStop">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>停止</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_CrvClsLas">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>开激光</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-         <zorder>pb_Crv</zorder>
-         <zorder></zorder>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_PlatCtrl">
-         <property name="title">
-          <string>平台控制</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
-             <widget class="QPushButton" name="btn_PlatOrigin">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>初始(B)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QPushButton" name="btn_PlatReset">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>复位(R)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QPushButton" name="btn_Plat">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>机械复位</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="btn_PlatXP">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>右(X+)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btn_PlatYP">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>后(Y+)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="btn_PlatZP">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>上(Z+)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="btn_PlatXN">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>左(X-)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="btn_PlatYN">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>前(Y-)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QPushButton" name="btn_PlatZN">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>下(Z-)</string>
-              </property>
-              <property name="autoDefault">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QGroupBox" name="groupBox">
-              <property name="title">
-               <string>操作模式</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout">
-               <item row="0" column="0">
-                <widget class="QRadioButton" name="rbtn_PlatCo">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>连续</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QRadioButton" name="rbtn_PlatDe">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>增量</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QSpinBox" name="sb_PlatStep">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="lb_CrvSize_8">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>mm</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayout_2">
-              <item row="0" column="0">
-               <widget class="QLabel" name="lb_PlatAxis">
-                <property name="text">
-                 <string>轴</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="lb_PlatRel">
-                <property name="text">
-                 <string>相对</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="lb_PlatSize">
-                <property name="text">
-                 <string>幅面</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="lb_PlatX">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>X:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="lb_PlatRelValX">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="lb_PlatValX">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="lb_PlatY">
-                <property name="text">
-                 <string>Y:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLabel" name="lb_PlatRelValY">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="lb_PlatValY">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="lb_PlatZ">
-                <property name="text">
-                 <string>Z:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLabel" name="lb_PlatRelValZ">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QLabel" name="lb_PlatValZ">
-                <property name="text">
-                 <string>0.0</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gb_CrvEdit">
-         <property name="title">
-          <string>雕刻编辑</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <property name="spacing">
-           <number>1</number>
-          </property>
-          <property name="leftMargin">
-           <number>3</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>3</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="title">
-             <string>水晶大小(mm)</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>X:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_CrvSizeX">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Y:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_CrvSizeY">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Z:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_CrvSizeZ">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>模型偏移(mm)</string>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_7">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>X:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_MovX">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_6">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Y:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_MovY">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lb_CrvSize_5">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Z:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="le_MovZ">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QLabel" name="lb_BlkH_2">
-              <property name="text">
-               <string>垫板厚度(mm):</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="le_BlkValHeight_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>55</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <item>
-             <widget class="QPushButton" name="btn_CrvView">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>预览</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="sp_Point4_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn_CrvApp">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>应用</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QWidget" name="viewWidget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <layout class="QGridLayout" name="ly_viewWt">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <property name="horizontalSpacing">
-        <number>1</number>
-       </property>
-       <property name="verticalSpacing">
-        <number>3</number>
-       </property>
-      </layout>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -1437,141 +65,132 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>文件</string>
+     <string>文件(&amp;F)</string>
     </property>
-    <widget class="QMenu" name="menu_FileList">
+    <widget class="QMenu" name="menu_RecentFileList">
      <property name="title">
       <string>最近打开的文件</string>
      </property>
-     <addaction name="separator"/>
-     <addaction name="action_ClearFileList"/>
     </widget>
-    <widget class="QMenu" name="menu_PathList">
+    <widget class="QMenu" name="menu_RecentPathList">
      <property name="title">
       <string>最近打开目录</string>
      </property>
-     <addaction name="separator"/>
-     <addaction name="action_ClearPathList"/>
     </widget>
     <addaction name="action_FileOpen"/>
+    <addaction name="action_ClearAll"/>
     <addaction name="action_FileSave"/>
     <addaction name="separator"/>
-    <addaction name="menu_FileList"/>
-    <addaction name="menu_PathList"/>
+    <addaction name="menu_RecentFileList"/>
+    <addaction name="menu_RecentPathList"/>
     <addaction name="separator"/>
-    <addaction name="action_FileExit"/>
+    <addaction name="action_QuitApp"/>
    </widget>
    <widget class="QMenu" name="menuLaser">
     <property name="title">
-     <string>机器</string>
+     <string>机器(&amp;M)</string>
     </property>
-    <addaction name="action_LaserPara"/>
-    <addaction name="action_LaserRegImp"/>
-    <addaction name="action_LaserRegExp"/>
+    <addaction name="action_ParameterSettings"/>
+    <addaction name="action_ImportReg"/>
+    <addaction name="action_ExportReg"/>
     <addaction name="separator"/>
-    <addaction name="action_LaserBatchSet"/>
-    <addaction name="action_LaserTabGen"/>
+    <addaction name="action_BatchSettings"/>
+    <addaction name="action_TagGenerate"/>
     <addaction name="separator"/>
-    <addaction name="action_LaserCal"/>
-    <addaction name="action_LaserPosTest"/>
-    <addaction name="action_LaserPlatHor"/>
+    <addaction name="action_Calibration"/>
+    <addaction name="separator"/>
+    <addaction name="action_TestPosition"/>
+    <addaction name="action_PlatHorAdjust"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
-     <string>视图</string>
+     <string>视图(&amp;V)</string>
     </property>
-    <addaction name="action_ViewTool"/>
-    <addaction name="action_ViewState"/>
-    <addaction name="action_ViewCtrl"/>
+    <widget class="QMenu" name="menu_Language">
+     <property name="title">
+      <string>语言(&amp;L)</string>
+     </property>
+     <addaction name="action_Chinese"/>
+     <addaction name="action_English"/>
+    </widget>
+    <addaction name="action_FrontView"/>
+    <addaction name="action_TopView"/>
+    <addaction name="action_RightView"/>
+    <addaction name="action_UpdateView"/>
     <addaction name="separator"/>
-    <addaction name="action_ViewForth"/>
-    <addaction name="action_ViewTop"/>
-    <addaction name="action_ViewRight"/>
-    <addaction name="action_ViewUpdate"/>
+    <addaction name="action_RawModel"/>
+    <addaction name="action_AmendModel"/>
+    <addaction name="action_CutupModel"/>
     <addaction name="separator"/>
-    <addaction name="action_ViewOriModel"/>
-    <addaction name="action_ViewModModel"/>
-    <addaction name="action_ViewApartModel"/>
+    <addaction name="menu_Language"/>
    </widget>
-   <widget class="QMenu" name="menuSelect">
+   <widget class="QMenu" name="menuSorting">
     <property name="title">
-     <string>排序</string>
+     <string>排序(&amp;S)</string>
     </property>
-    <addaction name="action_SortOri"/>
+    <addaction name="action_OriginSorting"/>
     <addaction name="action_SortY2X"/>
     <addaction name="action_SortX2Y"/>
-    <addaction name="action_SlotShort"/>
+    <addaction name="action_SortByShortestPath"/>
    </widget>
    <widget class="QMenu" name="menuBlock">
     <property name="title">
-     <string>分块</string>
+     <string>分块(&amp;B)</string>
     </property>
     <addaction name="action_BlockX2Y"/>
     <addaction name="action_BlockY2X"/>
-    <addaction name="action_BlockShort"/>
-    <addaction name="action_BlockPara"/>
-   </widget>
-   <widget class="QMenu" name="menuOperate">
-    <property name="title">
-     <string>操作</string>
-    </property>
-    <widget class="QMenu" name="menu">
-     <property name="title">
-      <string>选取雕刻原点…</string>
-     </property>
-     <addaction name="action_OperLaserOri"/>
-    </widget>
-    <addaction name="action_OperSaveCurPos2LaserOri"/>
-    <addaction name="menu"/>
-    <addaction name="action_OperSetCurPos2LaserOri"/>
+    <addaction name="action_BlockByShortestPath"/>
     <addaction name="separator"/>
-    <addaction name="action_OperPlatHome"/>
+    <addaction name="action_NewBlock"/>
+    <addaction name="action_DeleteBlock"/>
+    <addaction name="action_DeleteAllBlock"/>
+    <addaction name="separator"/>
+    <addaction name="action_IncreaseArea"/>
+    <addaction name="action_ReduceArea"/>
+    <addaction name="action_ClearArea"/>
+    <addaction name="separator"/>
+    <addaction name="action_NoBorder"/>
+    <addaction name="action_LinearBorder"/>
+    <addaction name="action_RandomBorder"/>
+    <addaction name="separator"/>
+    <addaction name="action_LastBlock"/>
+    <addaction name="action_NextBlock"/>
    </widget>
    <widget class="QMenu" name="menuDebug">
     <property name="title">
-     <string>调试</string>
+     <string>调试(&amp;D)</string>
     </property>
     <widget class="QMenu" name="menu_StdMod">
      <property name="title">
-      <string>标准模型(S)</string>
+      <string>标准模型(&amp;S)</string>
      </property>
      <addaction name="action_StdModLine"/>
-     <addaction name="action_StdModPlat"/>
+     <addaction name="action_StdModPlane"/>
      <addaction name="action_StdModCube"/>
-     <addaction name="action_StdModSphere"/>
+     <addaction name="action_StdModBall"/>
+     <addaction name="action_StdModRightAngle"/>
     </widget>
     <addaction name="menu_StdMod"/>
-    <addaction name="action_DebugAtchModel"/>
-    <addaction name="action_DebugSplitModel"/>
-    <addaction name="action_DebugStopFun"/>
-    <addaction name="action_DebugHotTest"/>
+    <addaction name="action_HeatTest"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>帮助</string>
+     <string>帮助(&amp;H)</string>
     </property>
-    <addaction name="action_HelpAboutMe"/>
-   </widget>
-   <widget class="QMenu" name="menuLan">
-    <property name="title">
-     <string>语言</string>
-    </property>
-    <addaction name="action_LanCHN"/>
+    <addaction name="action_AboutThis"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaser"/>
    <addaction name="menuView"/>
-   <addaction name="menuSelect"/>
+   <addaction name="menuSorting"/>
    <addaction name="menuBlock"/>
-   <addaction name="menuOperate"/>
    <addaction name="menuDebug"/>
    <addaction name="menuHelp"/>
-   <addaction name="menuLan"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -1583,24 +202,25 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_ClearAll"/>
    <addaction name="action_FileOpen"/>
    <addaction name="separator"/>
-   <addaction name="action_ViewForth"/>
-   <addaction name="action_ViewTop"/>
-   <addaction name="action_ViewRight"/>
+   <addaction name="action_FrontView"/>
+   <addaction name="action_TopView"/>
+   <addaction name="action_RightView"/>
    <addaction name="separator"/>
-   <addaction name="action_ViewOriModel"/>
-   <addaction name="action_ViewUpdate"/>
+   <addaction name="action_RawModel"/>
+   <addaction name="action_UpdateView"/>
    <addaction name="separator"/>
    <addaction name="action_BlockX2Y"/>
    <addaction name="action_BlockY2X"/>
    <addaction name="separator"/>
-   <addaction name="action_BlockPara"/>
+   <addaction name="action_BlockParaGroup"/>
    <addaction name="separator"/>
    <addaction name="action_StdModLine"/>
-   <addaction name="action_StdModPlat"/>
+   <addaction name="action_StdModPlane"/>
    <addaction name="separator"/>
-   <addaction name="action_HelpAboutMe"/>
+   <addaction name="action_AboutThis"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="sizePolicy">
@@ -1622,13 +242,1388 @@
     </size>
    </property>
   </widget>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="minimumSize">
+    <size>
+     <width>350</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4">
+    <widget class="QWidget" name="paraWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>350</width>
+       <height>774</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>350</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>350</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="gb_ModInfo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>模型信息</string>
+        </property>
+        <layout class="QGridLayout" name="ly_gbModInfo_2">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <item row="4" column="1">
+          <widget class="QLabel" name="lb_PointMinValZ">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_PointNum">
+           <property name="text">
+            <string>总点数:</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lb_PointY">
+           <property name="text">
+            <string>Y:</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lb_PointX">
+           <property name="text">
+            <string>X:</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lb_PointZ">
+           <property name="text">
+            <string>Z:</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLabel" name="lb_PointMinValY">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLabel" name="lb_PointLen">
+           <property name="text">
+            <string>长度</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="lb_PointMin">
+           <property name="text">
+            <string>最小值</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="lb_PointMax">
+           <property name="text">
+            <string>最大值</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLabel" name="lb_CrystalSize">
+           <property name="text">
+            <string>水晶</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="lb_PointNumVal">
+           <property name="text">
+            <string>000000000</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="lb_PointMaxValX">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="lb_PointMinValX">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLabel" name="lb_PointLenValX">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLabel" name="lb_CrystalSizeValX">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="lb_PointMaxValY">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLabel" name="lb_PointLenValY">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QLabel" name="lb_CrystalSizeValY">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QLabel" name="lb_PointMaxValZ">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QLabel" name="lb_PointLenValZ">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QLabel" name="lb_CrystalSizeValZ">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <spacer name="sp_Point4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <spacer name="sp_Point2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="3">
+          <spacer name="sp_Point3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="4">
+          <spacer name="sp_Point1">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_CrvCtrl">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>雕刻控制</string>
+        </property>
+        <layout class="QVBoxLayout" name="ly_gbCrvCtrl_2" stretch="0,0,0">
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="ly_CrvTimer" stretch="0,0,0">
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lb_CrvTime">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>计时:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lb_CrvTimeVal">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0.0M0.0S</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="sp_Crv1">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="pb_Crv">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string/>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="textVisible">
+            <bool>true</bool>
+           </property>
+           <property name="textDirection">
+            <enum>QProgressBar::TopToBottom</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="ly_CrvBtn">
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pb_Start">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>开始</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_Pause">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>暂停</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_Stop">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>停止</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_LaserOnOff">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>开激光</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+        <zorder>pb_Crv</zorder>
+        <zorder></zorder>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_PlatCtrl">
+        <property name="title">
+         <string>平台控制</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="pb_MoveToHome">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>初始位(B)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="pb_ResetPos">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>复位(R)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QPushButton" name="pb_ResetMechPos">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>机械复位</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="pb_MoveXP">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>右(X+)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pb_MoveYP">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>后(Y+)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="pb_MoveZP">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>上(Z+)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pb_MoveXN">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>左(X-)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pb_MoveYN">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>前(Y-)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="pb_MoveZN">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>下(Z-)</string>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QGroupBox" name="gb_OperateMode">
+             <property name="title">
+              <string>操作模式</string>
+             </property>
+             <widget class="QRadioButton" name="rb_ContinousMove">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>20</y>
+                <width>53</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>连续</string>
+              </property>
+             </widget>
+             <widget class="QRadioButton" name="rb_IncrementalMove">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>53</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>增量</string>
+              </property>
+             </widget>
+             <widget class="QDoubleSpinBox" name="dsb_IncreDis">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>60</y>
+                <width>71</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QLabel" name="lb_IncreDis">
+              <property name="geometry">
+               <rect>
+                <x>80</x>
+                <y>60</y>
+                <width>31</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>mm</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="lb_PlatAxis">
+               <property name="text">
+                <string>轴</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="lb_PlatCurPos">
+               <property name="text">
+                <string>当前位置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="lb_PlatSize">
+               <property name="text">
+                <string>幅面</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lb_PlatX">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>X:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="lb_PlatCurPosValX">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="lb_PlatSizeValX">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="lb_PlatY">
+               <property name="text">
+                <string>Y:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="lb_PlatCurPosValY">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="lb_PlatSizeValY">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="lb_PlatZ">
+               <property name="text">
+                <string>Z:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="lb_PlatCurPosValZ">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="lb_PlatSizeValZ">
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_CrvEdit">
+        <property name="title">
+         <string>雕刻编辑</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QGroupBox" name="gb_CrystalSize">
+           <property name="title">
+            <string>水晶大小(mm)</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="lb_CrystalSizeX">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsb_CrystalSizeX">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_CrystalSizeY">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsb_CrystalSizeY">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_CrystalSizeZ">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsp_CrystalSizeZ">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="gb_ModelOffset">
+           <property name="title">
+            <string>模型偏移(mm)</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="lb_OffsetX">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsb_ModelOffsetX">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimum">
+               <double>-999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_OffsetY">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsb_ModelOffsetY">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimum">
+               <double>-999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lb_OffsetZ">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="dsb_ModelOffsetZ">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimum">
+               <double>-999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="lb_BoardThickness">
+             <property name="text">
+              <string>垫板厚度(mm):</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="dsb_BoardThickness">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>999999.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="sp_Point4_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QPushButton" name="pb_Preview">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>预览</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="sp_Point4_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_Apply">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>应用</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
   <action name="action_FileOpen">
    <property name="icon">
     <iconset resource="icon.qrc">
-     <normaloff>:/prefix/resource/fileOpen.ico</normaloff>:/prefix/resource/fileOpen.ico</iconset>
+     <normaloff>:/prefix/resource/fileOpen.png</normaloff>:/prefix/resource/fileOpen.png</iconset>
    </property>
    <property name="text">
-    <string>打开</string>
+    <string>打开(&amp;O)</string>
    </property>
    <property name="toolTip">
     <string>打开文件</string>
@@ -1643,12 +1638,8 @@
    </property>
   </action>
   <action name="action_FileSave">
-   <property name="icon">
-    <iconset resource="icon.qrc">
-     <normaloff>:/prefix/resource/fileSave.ico</normaloff>:/prefix/resource/fileSave.ico</iconset>
-   </property>
    <property name="text">
-    <string>保存</string>
+    <string>保存(&amp;S)</string>
    </property>
    <property name="toolTip">
     <string>保存文件</string>
@@ -1657,9 +1648,9 @@
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="action_FileExit">
+  <action name="action_QuitApp">
    <property name="text">
-    <string>退出</string>
+    <string>退出(&amp;Q)</string>
    </property>
    <property name="toolTip">
     <string>退出程序</string>
@@ -1668,9 +1659,9 @@
     <string>Alt+E</string>
    </property>
   </action>
-  <action name="action_LaserPara">
+  <action name="action_ParameterSettings">
    <property name="text">
-    <string>参数</string>
+    <string>参数(&amp;P)</string>
    </property>
    <property name="toolTip">
     <string>机器参数</string>
@@ -1679,9 +1670,9 @@
     <string>Alt+P</string>
    </property>
   </action>
-  <action name="action_LaserRegImp">
+  <action name="action_ImportReg">
    <property name="text">
-    <string>导入注册表</string>
+    <string>导入注册表(&amp;I)</string>
    </property>
    <property name="toolTip">
     <string>导入注册表</string>
@@ -1690,9 +1681,9 @@
     <string>Alt+I</string>
    </property>
   </action>
-  <action name="action_LaserRegExp">
+  <action name="action_ExportReg">
    <property name="text">
-    <string>导出注册表</string>
+    <string>导出注册表(&amp;E)</string>
    </property>
    <property name="toolTip">
     <string>导出注册表</string>
@@ -1701,47 +1692,62 @@
     <string>Alt+E</string>
    </property>
   </action>
-  <action name="action_LaserBatchSet">
+  <action name="action_BatchSettings">
    <property name="text">
-    <string>批量雕刻设置(S)</string>
+    <string>批量雕刻设置(&amp;S)</string>
+   </property>
+   <property name="toolTip">
+    <string>批量雕刻设置</string>
    </property>
    <property name="shortcut">
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="action_LaserTabGen">
+  <action name="action_TagGenerate">
    <property name="text">
+    <string>标记码生成(&amp;G)</string>
+   </property>
+   <property name="toolTip">
     <string>标记码生成</string>
    </property>
    <property name="shortcut">
     <string>Alt+G</string>
    </property>
   </action>
-  <action name="action_LaserCal">
+  <action name="action_Calibration">
    <property name="text">
+    <string>标定(&amp;C)</string>
+   </property>
+   <property name="toolTip">
     <string>标定</string>
    </property>
    <property name="shortcut">
     <string>Alt+C</string>
    </property>
   </action>
-  <action name="action_LaserPosTest">
+  <action name="action_TestPosition">
    <property name="text">
+    <string>位置测试(&amp;T)</string>
+   </property>
+   <property name="toolTip">
     <string>位置测试</string>
    </property>
    <property name="shortcut">
     <string>Alt+T</string>
    </property>
   </action>
-  <action name="action_LaserPlatHor">
+  <action name="action_PlatHorAdjust">
    <property name="text">
+    <string>台面水平调试(&amp;H)</string>
+   </property>
+   <property name="toolTip">
     <string>台面水平调试</string>
    </property>
    <property name="shortcut">
     <string>Alt+H</string>
    </property>
   </action>
-  <action name="action_ViewTool">
+  <action name="action_ToolBar">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1783,43 +1789,52 @@
     <string>Alt+C</string>
    </property>
   </action>
-  <action name="action_ViewForth">
+  <action name="action_FrontView">
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/prefix/resource/front-side.ico</normaloff>:/prefix/resource/front-side.ico</iconset>
    </property>
    <property name="text">
+    <string>前视图(&amp;F)</string>
+   </property>
+   <property name="toolTip">
     <string>前视图</string>
    </property>
    <property name="shortcut">
     <string>Alt+F</string>
    </property>
   </action>
-  <action name="action_ViewTop">
+  <action name="action_TopView">
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/prefix/resource/top-side.ico</normaloff>:/prefix/resource/top-side.ico</iconset>
    </property>
    <property name="text">
+    <string>顶视图(&amp;T)</string>
+   </property>
+   <property name="toolTip">
     <string>顶视图</string>
    </property>
    <property name="shortcut">
     <string>Alt+T</string>
    </property>
   </action>
-  <action name="action_ViewRight">
+  <action name="action_RightView">
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/prefix/resource/right-side.ico</normaloff>:/prefix/resource/right-side.ico</iconset>
    </property>
    <property name="text">
+    <string>右视图(&amp;R)</string>
+   </property>
+   <property name="toolTip">
     <string>右视图</string>
    </property>
    <property name="shortcut">
     <string>Alt+R</string>
    </property>
   </action>
-  <action name="action_ViewUpdate">
+  <action name="action_UpdateView">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -1831,7 +1846,7 @@
     <string>视图更新</string>
    </property>
   </action>
-  <action name="action_ViewOriModel">
+  <action name="action_RawModel">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1846,37 +1861,46 @@
      <normaloff>:/prefix/resource/center-side.ico</normaloff>:/prefix/resource/center-side.ico</iconset>
    </property>
    <property name="text">
+    <string>原始模型(&amp;O)</string>
+   </property>
+   <property name="toolTip">
     <string>原始模型</string>
    </property>
    <property name="shortcut">
     <string>Alt+M</string>
    </property>
   </action>
-  <action name="action_ViewModModel">
+  <action name="action_AmendModel">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
+    <string>修正模型(&amp;M)</string>
+   </property>
+   <property name="toolTip">
     <string>修正模型</string>
    </property>
    <property name="shortcut">
     <string>Alt+M</string>
    </property>
   </action>
-  <action name="action_ViewApartModel">
+  <action name="action_CutupModel">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
+    <string>分割模型(&amp;A)</string>
+   </property>
+   <property name="toolTip">
     <string>分割模型</string>
    </property>
    <property name="shortcut">
     <string>Alt+A</string>
    </property>
   </action>
-  <action name="action_SortOri">
+  <action name="action_OriginSorting">
    <property name="text">
-    <string>原始排序(O)</string>
+    <string>原始排序(&amp;O)</string>
    </property>
    <property name="shortcut">
     <string>Alt+O</string>
@@ -1884,7 +1908,7 @@
   </action>
   <action name="action_SortY2X">
    <property name="text">
-    <string>顺序扫描(Y-&gt;X)</string>
+    <string>顺序扫描(&amp;Y-&gt;X)</string>
    </property>
    <property name="toolTip">
     <string>顺序扫描(Y-&gt;X)</string>
@@ -1892,13 +1916,13 @@
   </action>
   <action name="action_SortX2Y">
    <property name="text">
-    <string>顺序扫描(X-&gt;Y)</string>
+    <string>顺序扫描(&amp;X-&gt;Y)</string>
    </property>
    <property name="toolTip">
     <string>顺序扫描(X-&gt;Y)</string>
    </property>
   </action>
-  <action name="action_SlotShort">
+  <action name="action_SortByShortestPath">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1909,7 +1933,10 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>最短路径(S)</string>
+    <string>最短路径(&amp;S)</string>
+   </property>
+   <property name="toolTip">
+    <string>最短路径</string>
    </property>
   </action>
   <action name="action_BlockX2Y">
@@ -1927,7 +1954,7 @@
      <normaloff>:/prefix/resource/b-X2Y.ico</normaloff>:/prefix/resource/b-X2Y.ico</iconset>
    </property>
    <property name="text">
-    <string>自动分块(X-&gt;Y)</string>
+    <string>自动分块(&amp;X-&gt;Y)</string>
    </property>
   </action>
   <action name="action_BlockY2X">
@@ -1939,18 +1966,18 @@
      <normaloff>:/prefix/resource/b-Y2X.ico</normaloff>:/prefix/resource/b-Y2X.ico</iconset>
    </property>
    <property name="text">
-    <string>自动分块(Y-&gt;X)</string>
+    <string>自动分块(&amp;Y-&gt;X)</string>
    </property>
   </action>
-  <action name="action_BlockShort">
+  <action name="action_BlockByShortestPath">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>自动分块(最短路径)</string>
+    <string>自动分块(&amp;Z.最短路径)</string>
    </property>
   </action>
-  <action name="action_BlockPara">
+  <action name="action_BlockParaGroup">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -1962,12 +1989,12 @@
     <string>参数组分块…</string>
    </property>
   </action>
-  <action name="action_OperSaveCurPos2LaserOri">
+  <action name="action_CurPosAsHomePos">
    <property name="text">
     <string>保存当前位置点为雕刻原点</string>
    </property>
   </action>
-  <action name="action_OperSetCurPos2LaserOri">
+  <action name="action_AlwaysSetCurPosAsHomePos">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1978,12 +2005,12 @@
     <string>始终以当前位置为雕刻原点</string>
    </property>
   </action>
-  <action name="action_OperPlatHome">
+  <action name="action_ResetMechPos">
    <property name="text">
     <string>机械原点复位</string>
    </property>
   </action>
-  <action name="action_OperLaserOri">
+  <action name="action_SelectHomePos1">
    <property name="text">
     <string>(0.0,0.0,0.0)</string>
    </property>
@@ -1991,28 +2018,34 @@
     <string>激光原点</string>
    </property>
   </action>
-  <action name="action_DebugAtchModel">
+  <action name="action_AttachModel">
    <property name="text">
-    <string>附加模型(A)</string>
+    <string>附加模型(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>附加模型</string>
    </property>
    <property name="shortcut">
     <string>Alt+A</string>
    </property>
   </action>
-  <action name="action_DebugSplitModel">
+  <action name="action_SplitModel">
    <property name="text">
-    <string>分离模型(U)</string>
+    <string>分离模型(&amp;S)</string>
+   </property>
+   <property name="toolTip">
+    <string>分离模型</string>
    </property>
    <property name="shortcut">
     <string>Alt+U</string>
    </property>
   </action>
-  <action name="action_DebugHotTest">
+  <action name="action_HeatTest">
    <property name="text">
     <string>烤机</string>
    </property>
   </action>
-  <action name="action_DebugStopFun">
+  <action name="action_DisableFunction">
    <property name="text">
     <string>停用功能</string>
    </property>
@@ -2023,35 +2056,35 @@
      <normaloff>:/prefix/resource/line.ico</normaloff>:/prefix/resource/line.ico</iconset>
    </property>
    <property name="text">
-    <string>直线(L)</string>
+    <string>直线(&amp;L)</string>
    </property>
   </action>
-  <action name="action_StdModPlat">
+  <action name="action_StdModPlane">
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/prefix/resource/parallel.ico</normaloff>:/prefix/resource/parallel.ico</iconset>
    </property>
    <property name="text">
-    <string>平面(P)</string>
+    <string>平面(&amp;P)</string>
    </property>
   </action>
   <action name="action_StdModCube">
    <property name="text">
-    <string>立方体(C)</string>
+    <string>立方体(&amp;C)</string>
    </property>
   </action>
-  <action name="action_StdModSphere">
+  <action name="action_StdModBall">
    <property name="text">
-    <string>圆球(S)</string>
+    <string>圆球(&amp;B)</string>
    </property>
   </action>
-  <action name="action_HelpAboutMe">
+  <action name="action_AboutThis">
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/prefix/resource/info.ico</normaloff>:/prefix/resource/info.ico</iconset>
    </property>
    <property name="text">
-    <string>关于(A)</string>
+    <string>关于(&amp;A)</string>
    </property>
    <property name="shortcut">
     <string>Alt+A</string>
@@ -2072,958 +2105,91 @@
     <string>清除菜单</string>
    </property>
   </action>
+  <action name="action_Chinese">
+   <property name="text">
+    <string>中文(&amp;C)</string>
+   </property>
+  </action>
+  <action name="action_English">
+   <property name="text">
+    <string>English(&amp;E)</string>
+   </property>
+  </action>
+  <action name="action_NewBlock">
+   <property name="text">
+    <string>新增(&amp;N)</string>
+   </property>
+  </action>
+  <action name="action_DeleteBlock">
+   <property name="text">
+    <string>删除(&amp;D)</string>
+   </property>
+  </action>
+  <action name="action_DeleteAllBlock">
+   <property name="text">
+    <string>全部删除(&amp;A)</string>
+   </property>
+  </action>
+  <action name="action_IncreaseArea">
+   <property name="text">
+    <string>增加区域(&amp;I)</string>
+   </property>
+  </action>
+  <action name="action_ReduceArea">
+   <property name="text">
+    <string>减少区域(&amp;R)</string>
+   </property>
+  </action>
+  <action name="action_ClearArea">
+   <property name="text">
+    <string>清除区域(&amp;C)</string>
+   </property>
+  </action>
+  <action name="action_NoBorder">
+   <property name="text">
+    <string>无边界(&amp;O)</string>
+   </property>
+  </action>
+  <action name="action_LinearBorder">
+   <property name="text">
+    <string>线性边界(&amp;L)</string>
+   </property>
+  </action>
+  <action name="action_RandomBorder">
+   <property name="text">
+    <string>随机边界(&amp;M)</string>
+   </property>
+  </action>
+  <action name="action_LastBlock">
+   <property name="text">
+    <string>上一块(&amp;U)</string>
+   </property>
+  </action>
+  <action name="action_NextBlock">
+   <property name="text">
+    <string>下一块(&amp;D)</string>
+   </property>
+  </action>
+  <action name="action_StdModRightAngle">
+   <property name="text">
+    <string>直角(&amp;R)</string>
+   </property>
+  </action>
+  <action name="action_ClearAll">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/prefix/resource/clear.png</normaloff>:/prefix/resource/clear.png</iconset>
+   </property>
+   <property name="text">
+    <string>清除所有(&amp;C)</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="icon.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>action_FileOpen</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_FileOpen()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_FileSave</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_FileSave()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_FileExit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_FileExit()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserPara</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserPara()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserCal</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserCal()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserBatchSet</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserBatchSet()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserPlatHor</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserPlatSetH()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserTabGen</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserTagGen()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserRegImp</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserRegImp()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserRegExp</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserRegExp()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LaserPosTest</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserPosTest()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewTool</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewTool()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewUpdate</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewUpdate()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewCtrl</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewApartModel</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewApartModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewModModel</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewModModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewOriModel</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewOriModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewRight</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewRight()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewState</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewState()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewTop</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewTop()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ViewForth</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ViewForth()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_SlotShort</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_SortShort()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_SortOri</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_SortOri()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_SortX2Y</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_SortX2Y()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_SortY2X</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockY2X()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_BlockPara</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockPara()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_BlockShort</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockShort()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_BlockX2Y</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockX2Y()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_BlockY2X</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_BlockY2X()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_OperPlatHome</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_OperPlatHome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_OperSaveCurPos2LaserOri</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_OperSaveCurPos2LaserOri()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_DebugAtchModel</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_DebugAtchModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_OperSetCurPos2LaserOri</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_OperSetCurPos2LaserOri()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_DebugHotTest</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_DebugHotTest()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_DebugSplitModel</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_DebugSplitModel()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_DebugStopFun</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_DebugStopFun()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StdModCube</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_StdModCube()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StdModLine</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_StdModLine()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StdModPlat</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_StdModPlat()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_StdModSphere</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_StdModSphere()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_HelpAboutMe</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_HelpAboutMe()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_LanCHN</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LanCHN()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>299</x>
-     <y>226</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_ClearFileList</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_ClearFileList()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvView</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_CrvView()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>265</x>
-     <y>498</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvApp</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_CrvApp()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>265</x>
-     <y>543</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatOrigin</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatOrigin()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>292</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatReset</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatReset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>125</x>
-     <y>292</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatXN</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>340</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatXP</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatYN</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>125</x>
-     <y>340</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatYP</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>125</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatZN</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>340</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_PlatZP</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_PlatCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_PlatCo</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_MovMode()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>262</x>
-     <y>291</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>rbtn_PlatDe</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_MovMode()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>262</x>
-     <y>315</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvClsLas</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_LaserCtrl()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>252</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvStart</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_CrvStart()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>43</x>
-     <y>225</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvStop</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_CrvStop()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>185</x>
-     <y>225</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_CrvPause</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot_CrvPause()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>114</x>
-     <y>225</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
+ <connections/>
   <slot>slot_FileOpen()</slot>
   <slot>slot_FileSave()</slot>
   <slot>slot_FileRecent()</slot>

@@ -2190,7 +2190,6 @@
   <include location="icon.qrc"/>
  </resources>
  <connections/>
- <slots>
   <slot>slot_FileOpen()</slot>
   <slot>slot_FileSave()</slot>
   <slot>slot_FileRecent()</slot>
@@ -2241,7 +2240,6 @@
   <slot>slot_CrvView()</slot>
   <slot>slot_CrvApp()</slot>
   <slot>slot_SetBlkPara()</slot>
-  <slot>slot_MovTo()</slot>
   <slot>slot_MotorStop()</slot>
   <slot>slot_CrvStart()</slot>
   <slot>slot_CrvPause()</slot>

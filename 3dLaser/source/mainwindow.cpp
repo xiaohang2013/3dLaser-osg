@@ -8,8 +8,12 @@
 
 using namespace std;
 
+#define TIMESPAN 20   //ms
+#define INMAX 22
+#define OUTMAX 9
 
-
+int inPut[INMAX];
+int outPut[OUTMAX];
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -77,7 +81,6 @@ bool MainWindow::on_FileOpen(QString fileName)
             QMessageBox::critical(this,tr("文件打开错误"),errorMsgFormat.arg(fileName));
             return false;
         }
-
         osg::ref_ptr<osg::Group> group = MI.openMesh(extension,fileName);
         //以上各节点name均已不为空
         if(group)
@@ -325,7 +328,6 @@ void MainWindow::saveRecentPathList(const QString &path, bool isRemove)
 
     settings.setValue(sRecentPathList, QVariant(paths));
     settings.endGroup();
-
     updateRecentFileAndPathActions();
 }
 
@@ -398,7 +400,6 @@ osg::Geode *MainWindow::createCrystalFrame(osg::Vec3 size, float zRot)
                 v->at(i) = osg::Vec3(vt4.x(),vt4.y(),vt4.z());
             }
         }
-
         geom->setVertexArray(v.get());
         osg::ref_ptr<osg::DrawElementsUInt> lines = new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
         for(int i=0; i<8; ++i)

@@ -20,7 +20,7 @@ CtrlCard::~CtrlCard()
     返回值<=0表示初始化失败，返回值>0表示初始化成功
 
 *****************************************************/
-int CtrlCard::initBoard()
+int CtrlCard::Init_Board()
 {
     Result = adt8933_initial() ;         //卡初始化函数
     if (Result <= 0) return Result;
@@ -39,7 +39,7 @@ int CtrlCard::initBoard()
 
     for (int i = 1; i<=MAXAXIS; i++)
     {
-       setLimit (0, i, 0, 0, 1);   //设定限位模式
+       set_limit (0, i, 0, 0, 1);   //设定限位模式
        set_command_pos (0, i, 0);        //清逻辑计数器
        //set_pulse_mode(0, i, 1, 0, 0);  //默认脉冲+方向 正逻辑脉冲 方向输出信号正逻辑
       // set_startv (0, i, 100);          //设定起始速度
@@ -52,7 +52,7 @@ int CtrlCard::initBoard()
     return 1;
 }
 
-int CtrlCard::getHardWareVer()
+int CtrlCard::Get_HardWareVer()
 {
     return g_HardwareVer;
 }
@@ -64,7 +64,7 @@ int CtrlCard::getHardWareVer()
     返回值=0正确，返回值=1错误
 
 *********************************************************/
-int CtrlCard::setSpeed(int axis, long startv, long speed, long add)
+int CtrlCard::Setup_Speed(int axis, long startv, long speed, long add)
 {
     if (startv - speed >= 0)
     {
@@ -152,7 +152,7 @@ int CtrlCard::Get_CurrentInf(int axis, long &LogPos, long &ActPos, long &Speed)
     返回值=0正确，返回值=1错误
 
 ************************************************************/
-int CtrlCard::stopRun(int axis, int mode)
+int CtrlCard::StopRun(int axis, int mode)
 {
     if (SUDDEN_STOP == mode)
         Result = sudden_stop(CARD_0, axis);
@@ -192,7 +192,7 @@ int CtrlCard::Get_Status(int axis, int &value, int mode)
 
 ****************************************************************/
 
-void CtrlCard::clearCount()
+void CtrlCard::Clear_Count()
 {
 
     for (int i = 1; i<4; i++)
@@ -212,7 +212,7 @@ void CtrlCard::clearCount()
     value(-32768--32767)
 
 ****************************************************************/
-void CtrlCard::setDA(int index, int value)
+void CtrlCard::Set_DA(int ch, int value)
 {
     if(g_HardwareVer == 2)
     {
@@ -220,13 +220,13 @@ void CtrlCard::setDA(int index, int value)
         read_fifo(0,&nNum);
         while(nNum >= FIFONUM)
         {
-            read_fifo(0,&nNum);
+            read_fifo(0,&nNum);///??
         }
-        fifo_set_daout(0,index,value);
+        fifo_set_daout(0,ch,value);
     }
     else
     {
-        set_daout(0,index,value);
+        set_daout(0,ch,value);
     }
 }
 /*******************PWM输出函数*******************************
@@ -236,7 +236,7 @@ void CtrlCard::setDA(int index, int value)
     value(0--1)
 
 ****************************************************************/
-void CtrlCard::setPwm(long freq, float value)
+void CtrlCard::Set_Pwm(long freq, float value)
 {
     fifo_set_laser_control(0,1);
     if(g_HardwareVer == 2)
@@ -256,7 +256,7 @@ void CtrlCard::setPwm(long freq, float value)
     }
 }
 
-int CtrlCard::writeOutput(int number, int value)
+int CtrlCard::Write_Output(int number, int value)
 {
     Result = write_bit(0, number, value);
 
@@ -264,43 +264,23 @@ int CtrlCard::writeOutput(int number, int value)
 
 }
 
-int CtrlCard::readInput(int number)
+int CtrlCard::Read_Input(int number)
 {
     Result = read_bit(0, number);
 
     return Result;
 }
 
-int CtrlCard::setLimit(int cardNo, int axis, int lmtP, int lmtN, int logic)
+int CtrlCard::set_limit(int cardno,int axis,int lmtP,int lmtN,int logic)
 {
-    int rtn = ADTDRV_OK;
-    rtn = set_limit_mode(cardNo, axis, lmtP, lmtN, logic);
+    int rtn = DRV_OK;
+    rtn = set_limit_mode(cardno, axis, lmtP, lmtN, logic);
     return rtn;
 }
 
-int CtrlCard::setLaser(int cardNo, int status, int freq, int ratio)
+int CtrlCard::Set_Laser(int cardno, int val)
 {
-    int rtn = ADTDRV_OK;
-    rtn = fifo_set_laser_control(cardNo, status);
-    if(g_HardwareVer == 2)
-    {
-        int nNum;
-        read_fifo(0,&nNum);
-        while(nNum >= FIFONUM - 1)
-        {
-            read_fifo(0,&nNum);
-        }
-        fifo_set_pwm_freq1(0,(int)1.0/freq*1000000*TIMEVAL);
-        fifo_set_pwm_freq2(0,(int)(1.0/freq*1000000*ratio*TIMEVAL));
-    }
-    else
-    {
-        set_pwm(0,freq,ratio);
-    }
+    int rtn = DRV_OK;
+    rtn = fifo_set_laser_control(cardno, val);
     return rtn;
-}
-
-int CtrlCard::setLaserOutDelay(int cardNo, int delay)
-{
-    return fifo_set_delay_time1(cardNo, delay*TIMEVAL);
 }

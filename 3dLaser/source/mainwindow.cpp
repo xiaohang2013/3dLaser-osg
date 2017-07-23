@@ -2,18 +2,14 @@
 #include <Windows.h>
 #include <qdebug>
 #include <QFileDialog>
-#include <time.h>
+
 #include "macro.h"
 #include "mainwindow.h"
 
 using namespace std;
 
-#define TIMESPAN 20   //ms
-#define INMAX 22
-#define OUTMAX 9
 
-int inPut[INMAX];
-int outPut[OUTMAX];
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -81,6 +77,7 @@ bool MainWindow::on_FileOpen(QString fileName)
             QMessageBox::critical(this,tr("文件打开错误"),errorMsgFormat.arg(fileName));
             return false;
         }
+
         osg::ref_ptr<osg::Group> group = MI.openMesh(extension,fileName);
         //以上各节点name均已不为空
         if(group)
@@ -95,7 +92,6 @@ bool MainWindow::on_FileOpen(QString fileName)
             return false;
         }
 
-        updateParam();
         saveRecentFileList(fileName);
     }
 
@@ -329,6 +325,7 @@ void MainWindow::saveRecentPathList(const QString &path, bool isRemove)
 
     settings.setValue(sRecentPathList, QVariant(paths));
     settings.endGroup();
+
     updateRecentFileAndPathActions();
 }
 
@@ -401,6 +398,7 @@ osg::Geode *MainWindow::createCrystalFrame(osg::Vec3 size, float zRot)
                 v->at(i) = osg::Vec3(vt4.x(),vt4.y(),vt4.z());
             }
         }
+
         geom->setVertexArray(v.get());
         osg::ref_ptr<osg::DrawElementsUInt> lines = new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
         for(int i=0; i<8; ++i)
@@ -418,28 +416,6 @@ osg::Geode *MainWindow::createCrystalFrame(osg::Vec3 size, float zRot)
         }
         geom->addPrimitiveSet(lines);
     }
-//    else if(type==BasicSettingsDialog::CYLINDER)
-//    {
-//        float defaultAngleStep = 3.0f;//缺省步距角
-//        float r = 0.5f*diameter;
-//        float x,y,z;
-//        float rad;
-//        for(int i=0; i<2; ++i)
-//        {
-//            if(i==0) z=-0.5f*height;
-//            else z=0.5f*height;
-//            for(float agl=0.f; agl<=360.f; agl+=defaultAngleStep)
-//            {
-//                rad = osg::DegreesToRadians(agl);
-//                x = r*std::cos(rad);
-//                y = r*std::sin(rad);
-//                v->push_back(osg::Vec3(x,y,z));
-//            }
-//        }
-//        geom->setVertexArray(v.get());
-//        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, 0, v->size()/2)); // down
-//        geom->addPrimitiveSet( new osg::DrawArrays(osg::PrimitiveSet::LINE_LOOP, v->size()/2, v->size()/2)); // up
-//    }
     return geode.release();
 }
 
@@ -477,77 +453,3 @@ void MainWindow::updateStatusBar(QString statusMsg)
     if(!statusMsg.isEmpty())
         ui->statusBar->showMessage(statusMsg, 2000);
 }
-
-//int MainWindow::initCtrlBoard()
-//{
-//    int rtn = CTRL_ERROR;
-//    int msgRtn = 0;
-//    //*************初始化8940A1卡**************
-//    rtn = ctrlCard->Init_Board();
-//    if (rtn <= 0)
-//    {
-//        msgRtn = QMessageBox::warning(this, "错误", "控制卡初始化失败!", QMessageBox::Ok);
-//        if (QMessageBox::Ok == msgRtn)
-//        {
-//            lb_StInfo->setText("控制卡初始化失败!");
-//        }
-//        switch (rtn)
-//        {
-//        case CTRL_NO_CARD_ERROR:
-//            msgRtn = QMessageBox::warning(this, "错误", "没有安装ADT8937卡!", QMessageBox::Ok);
-//            if (QMessageBox::Ok == msgRtn)
-//            {
-//                lb_StInfo->setText("没有安装ADT8937卡!");
-//            }
-//            break;
-//        case CTRL_NO_DRIVE_ERROR:
-//            msgRtn = QMessageBox::warning(this, "错误", "没有安装端口驱动程序!", QMessageBox::Ok);
-//            if (QMessageBox::Ok == msgRtn)
-//            {
-//                lb_StInfo->setText("没有安装端口驱动程序!");
-//            }
-//            break;
-//        case CTRL_PCI_ERROR:
-
-//            msgRtn = QMessageBox::warning(this, "错误", "PCI桥故障!", QMessageBox::Ok);
-//            if (QMessageBox::Ok == msgRtn)
-//            {
-//                lb_StInfo->setText("PCI桥故障!");
-//            }
-//            break;
-//         default:
-//            break;
-//        }
-//    }
-//    else
-//    {
-//        lb_StInfo->setText("运动控制卡可以使用!");
-//    }
-//    //*************获取版本号**************
-//    int ver = ctrlCard->Get_HardWareVer();
-//    QString str = "硬件版本:"+ QString::number(ver, 10);
-//    lb_StInfo->setText(str);
-//    //*************初始化限位**************
-//    S_MotorParameter m[MAXAXIS] = {motor->motorX, motor->motorY, motor->motorZ};
-//    for (int i = 0; i< MAXAXIS; i++)
-//    {
-//        rtn += ctrlCard->set_limit(0, m[i].numPulse, m[i].limitP, m[i].limitN, m[i].limitL);
-//    }
-//    if (DRV_FAIL == rtn)
-//    {
-//        QMessageBox::warning(this, "错误", "初始化限位错误", QMessageBox::Ok);
-//    }
-//    //*************初始化速度**************
-//    for (int i = 0; i< MAXAXIS; i++)
-//    {
-//        rtn += ctrlCard->Setup_Speed(m[i].numPulse, m[i].v0, m[i].v, m[i].acc);
-//    }
-//    if (DRV_FAIL == rtn)
-//    {
-//        QMessageBox::warning(this, "错误", "轴速度设置失败", QMessageBox::Ok);
-//        return rtn;
-//    }
-
-//    return rtn;
-//}
-

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QMainWindow>
 #include <QTimer>
+
 #include <osg/MatrixTransform>
 #include <osg/Vec3>
 #include <osgManipulator/TabBoxDragger>
@@ -190,6 +191,9 @@ private:
     osg::Vec3Array *getVertexArray(osg::Node *node);//获取顶点/点云
     void addPointsToPointCloudGroup(osg::Group *pcGroup, osg::Vec3Array *points, bool removeOld=true);
     void updateStatusBar(QString statusMsg=QString());
+
+
+
     // UI窗体/控件
 private:
 
@@ -227,6 +231,7 @@ private:
 
     osg::ref_ptr<sharedParameter> sharedPara = new sharedParameter;
     CtrlCard ctrlCard;
+
 };
 
 #endif // MAINWINDOW_H

@@ -11,7 +11,8 @@ ParamWindow::ParamWindow(sharedParameter *sharedPrm, QWidget *parent) :
     ui->setupUi(this);
 
     this->resize(634, 503);
-    setWindowFlags(Qt::Popup | Qt::Dialog | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint;
+    setWindowFlags(Qt::Popup | Qt::Dialog | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+
     QSizePolicy policy = this->sizePolicy();
     policy.setHorizontalPolicy(QSizePolicy::Fixed);
     policy.setVerticalPolicy(QSizePolicy::Fixed);

@@ -2190,6 +2190,7 @@
   <include location="icon.qrc"/>
  </resources>
  <connections/>
+ <slots>
   <slot>slot_FileOpen()</slot>
   <slot>slot_FileSave()</slot>
   <slot>slot_FileRecent()</slot>

@@ -24,6 +24,7 @@
 #include "parawindow.h"
 #include "markwindow.h"
 #include "mcurvwindow.h"
+#include "lasercalwindow.h"
 #include "ctrlcard.h"
 
 #if _MSC_VER >= 1600

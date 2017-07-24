@@ -38,7 +38,9 @@ SOURCES += \
     $$PWD/source/mytrackballmanipulator.cpp \
     $$PWD/source/quadtreenode.cpp \
     $$PWD/source/parameter.cpp \
-    source/ctrlcard.cpp
+    $$PWD/source/ctrlcard.cpp \
+    $$PWD/source/lasercalwindow.cpp \
+    $$PWD/source/postestwindow.cpp
 
 HEADERS  += \
     $$PWD/include/mainwindow.h\
@@ -58,14 +60,19 @@ HEADERS  += \
     $$PWD/include/mytrackballmanipulator.h \
     $$PWD/include/quadtreenode.h \
     $$PWD/include/adt8933.h \
-    $$PWD/include/ctrlcard.h
+    $$PWD/include/ctrlcard.h \
+    $$PWD/include/lasercalwindow.h \
+    $$PWD/include/postestwindow.h
 
 
 FORMS    += \
     $$PWD/ui/mainwindow.ui \
     $$PWD/ui/parawindow.ui \
     $$PWD/ui/mcurvwindow.ui\
-    $$PWD/ui/markwindow.ui
+    $$PWD/ui/markwindow.ui \
+    $$PWD/ui/lasercalwindow.ui \
+    $$PWD/ui/postestwindow.ui
+
 
 RESOURCES += \
     $$PWD/ui/icon.qrc

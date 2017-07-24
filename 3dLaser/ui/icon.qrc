@@ -25,5 +25,6 @@
         <file>resource/fileOpen.png</file>
         <file>resource/fopen.ico</file>
         <file>resource/front-side-b.ico</file>
+        <file>resource/laserCalibration.png</file>
     </qresource>
 </RCC>

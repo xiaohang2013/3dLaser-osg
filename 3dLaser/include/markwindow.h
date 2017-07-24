@@ -16,8 +16,7 @@ class MarkCodeWindow : public QDialog
 public:
     explicit MarkCodeWindow(QWidget *parent = 0);
     ~MarkCodeWindow();
-    
-    private slots:
+
 private:
     Ui::MarkWindow *ui;
 };
